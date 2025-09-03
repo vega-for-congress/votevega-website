@@ -1,0 +1,33 @@
+{
+  "name": "votevega-website",
+  "version": "1.0.0",
+  "description": "Custom website to replace votevega.nyc with full customizability while maintaining the same look and feel",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 3000",
+    "build": "echo 'Building static site...'",
+    "dev": "python -m http.server 8080",
+    "lint": "echo 'Linting files...'"
+  },
+  "keywords": [
+    "political-campaign",
+    "jose-vega",
+    "congress",
+    "static-site",
+    "bootstrap"
+  ],
+  "author": "VoteVega Campaign",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-username/votevega-website.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/votevega-website/issues"
+  },
+  "homepage": "https://github.com/your-username/votevega-website#readme"
+}
