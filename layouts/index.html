@@ -1,0 +1,153 @@
+{{ define "main" }}
+<!-- Alternative Hero Section -->
+<!-- Desktop Version -->
+<div id="alt-hero" class="position-relative d-none d-md-block">
+    <img src="{{ "images/minty_hero_image.jpg" | relURL }}" alt="Jose Vega" class="alt-hero-img">
+
+    <!-- Logo Overlay -->
+    <div class="alt-hero-logo">
+        <img src="{{ "images/logo_red_black.png" | relURL }}" alt="Jose Vega for Congress Logo">
+    </div>
+
+    <!-- Desktop: Buttons in right side overlay -->
+    <div class="alt-buttons-desktop">
+        <h2 class="alt-hero-text">Let's Save the Bronx</h2>
+        <a href="{{ .Site.Params.donateUrl }}" class="btn btn-lg btn-primary alt-btn">Donate</a>
+        <a href="#volunteer" class="btn btn-lg btn-gold alt-btn">Volunteer</a>
+    </div>
+</div>
+
+<!-- Mobile Version - Stacked Layout -->
+<div id="alt-hero-mobile" class="d-block d-md-none">
+    <div class="mobile-hero-image position-relative">
+        <img src="{{ "images/minty_hero_image.jpg" | relURL }}" alt="Jose Vega" class="mobile-hero-img">
+        <!-- Logo Overlay on Mobile -->
+        <div class="mobile-hero-logo">
+            <img src="{{ "images/logo_red_black.png" | relURL }}" alt="Jose Vega for Congress Logo">
+        </div>
+    </div>
+
+    <!-- Mobile: Content Below Image -->
+    <div class="mobile-content-below">
+        <h2 class="mobile-hero-text">Power, not force.</h2>
+        <div class="mobile-button-stack">
+            <a href="{{ .Site.Params.donateUrl }}" class="btn btn-lg btn-primary mobile-btn">Donate</a>
+            <a href="#volunteer" class="btn btn-lg btn-gold mobile-btn">Volunteer</a>
+        </div>
+    </div>
+</div>
+
+<!-- Quote Section -->
+<div id="quote" class="container py-5 px-4">
+    <div class="row p-5 justify-content-center">
+        <div class="col-md-8 text-center pt-4">
+            <p class="featured-quote">
+                <span class="red">&ldquo;</span> I am running to break down the barriers that silence the
+                people's voices. We must empower citizens to reclaim their stake in government, restore
+                trust,
+                and dismantle corruption. Together, we can restore faith in a government that truly serves
+                its
+                people.<span class="red">&rdquo;</span>
+            </p>
+            <p class="featured-quote-author fs-5">Jose Vega</p>
+        </div>
+    </div>
+</div>
+
+<!-- Issues Section -->
+<div class="issues p-5 yellow-bg text-center">
+    <div class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-md-4 px-5 py-2">
+                <i class="fas fa-hand-peace mb-4" style="font-size: 4rem; color: #dc3545;"></i>
+                <h2>Stop the Genocide</h2>
+            </div>
+            <div class="col-md-4 px-5 py-2">
+                <i class="fas fa-globe mb-4" style="font-size: 4rem; color: #0d6efd;"></i>
+                <h2>Peace Through Development</h2>
+            </div>
+            <div class="col-md-4 px-5 py-2">
+                <i class="fas fa-hammer mb-4" style="font-size: 4rem; color: #198754;"></i>
+                <h2>Rebuild the Bronx</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- About Section -->
+<div class="about-home container-fluid p-0">
+    <div class="row align-items-center g-0 p-0">
+        <div class="col-lg-6">
+            <img src="{{ "images/hero-image-2.jpg" | relURL }}" alt="Jose Vega" class="img-fluid" />
+        </div>
+        <div class="col-lg-6 p-5">
+            <div class="container">
+                <div class="col-xxl-9">
+                    <h2>Meet Jose, Bronx Warrior</h2>
+                    <p>Bronx warrior, US patriot, and world citizen. Jose Vega is a 26-year-old political
+                        organizer and leader in the international youth movement for peace through
+                        development founded by the late Lyndon LaRouche and Helga Zepp-LaRouche. Hundreds of
+                        millions of people across the planet have watched Jose and his associates challenge
+                        the war-mongering US political elite. Jose has courageously intervened at events by
+                        Joe Biden, Mike Pompeo, Kamala Harris, Hakeem Jeffries, Nancy Pelosi, Alexandria
+                        Ocasio-Cortez, the New York Times, Washington Post, and NY-15's own AIPAC airhead
+                        Rep. Ritchie Torres.</p>
+                    <p>Our government's policy of genocide is pushing the world toward thermonuclear war.
+                        You personally can make all the difference. Join our campaign.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- News Section -->
+<div id="news" class="container py-5 px-4">
+    <h2 class="text-center py-2 mx-2 display-4 text-uppercase">News <span class="red">&amp;</span> Events
+    </h2>
+    <div class="row news pt-5 justify-content-center">
+        <!-- News items will be dynamically loaded here -->
+        <div class="col-lg-6">
+            <h3 class="pt-2 pb-0 mb-0">
+                <a href="#">Sample News Article Title</a>
+            </h3>
+            <p class="post-meta mb-2">Dec 12, 2024</p>
+            <p class="mb-2">Sample news article excerpt goes here...</p>
+            <p><strong><a class="text-uppercase mt-3" href="#">Keep Reading</a></strong></p>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mb-5">
+        <div class="col-lg-3">
+            <div class="d-grid">
+                <a href="#news" type="button" class="btn btn-lg btn-primary">All News</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Statements Section -->
+<div id="statements" class="new-section py-5">
+    <div class="container">
+        <h2 class="text-center py-2 mx-2 display-4 text-uppercase">Statements</h2>
+        <div class="row statements pt-5 justify-content-center">
+            <!-- Statements will be dynamically loaded here -->
+            <div class="col-lg-6">
+                <h3 class="pt-2 pb-0 mb-0">
+                    <a href="#">Sample Statement Title</a>
+                </h3>
+                <p class="post-meta mb-2">Dec 12, 2024</p>
+                <p class="mb-2">Sample statement excerpt goes here...</p>
+                <p><strong><a class="text-uppercase mt-3" href="#">Keep Reading</a></strong></p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-3">
+                <div class="d-grid">
+                    <a href="{{ "/statements/" | relURL }}" type="button" class="btn btn-lg btn-primary">All Statements</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{ end }}

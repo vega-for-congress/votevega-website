@@ -1,0 +1,29 @@
+<!-- Footer -->
+<footer id="colophon" class="site-footer p-5">
+    <div class="site-info container my-4">
+        <div class="row justify-content-center align-items-center g-4">
+            <div class="col-md-6">
+                <a class="logo" href="{{ "/" | relURL }}">
+                    <img src="{{ "images/logo-alt.jpg" | relURL }}" width="200" alt="Jose Vega for Congress" />
+                </a>
+            </div>
+
+            <div class="col-md-6">
+                <p class="mb-0 fs-3">
+                    <strong><a href="mailto:{{ .Site.Params.email }}" target="_blank">{{ .Site.Params.email }}</a></strong>
+                </p>
+                <p class="mb-1"><strong>{{ .Site.Params.address }}</strong></p>
+                <p class="mb-3" style="font-size: 13px;">
+                    <a href="#privacy">Privacy Policy</a> | Paid for by Vega for Congress
+                </p>
+                <div class="social-icons">
+                    {{ range .Site.Params.social }}
+                    <a href="{{ .url }}" target="_blank">
+                        <i class="{{ .icon }}"></i>
+                    </a>
+                    {{ end }}
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
