@@ -46,11 +46,13 @@
         <a class="skip-link screen-reader-text" href="#primary">Skip to content</a>
         
         <!-- Header -->
-        <header id="masthead" class="site-header">
+        <header id="masthead" class="site-header" style="position: relative; transform: none; background-color: #000000;">
             <nav class="navbar navbar-expand-lg navbar-dark">
                 <div class="container-fluid px-4">
                     <div class="site-branding navbar-brand">
-                        <!-- Logo will go here -->
+                        <a href="/">
+                            <img src="images/main_logo_2.png" alt="Jose Vega for Congress" style="max-width: 180px;">
+                        </a>
                     </div>
                     
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,7 +65,7 @@
                                 <a href="#news" class="nav-link">News</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#statements" class="nav-link">Statements</a>
+                                <a href="statements.html" class="nav-link">Statements</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a href="#policy" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Policy Proposals</a>
@@ -89,11 +91,14 @@
         <main id="primary" class="site-main container-fluid px-0">
             <!-- Hero Section -->
             <div id="home-hero" class="row align-items-center">
-                <div class="col-md-6 p-0 align-self-start">
+                <div class="col-md-6 p-0 align-self-start position-relative">
                     <img class="hero-sm" src="images/hero-image.jpg" alt="Jose Vega"/>
+                    <div class="hero-logo-overlay">
+                        <img src="images/main_logo_2.png" alt="Jose Vega for Congress Logo" class="img-fluid hero-logo-overlay-img">
+                    </div>
                 </div>
                 <div class="col-md-6 p-5 hero-cta">
-                    <h3 class="site-description">Power, not force.</h3>
+                    <h3 class="site-description">Vote Vega, Elect yourself</h3>
                     
                     <div class="row justify-content-center g-4 mb-4">
                         <div class="col-md-8">
@@ -103,12 +108,17 @@
                         </div>
                         <div class="col-md-8">
                             <div class="d-grid">
-                                <a href="#volunteer" type="button" class="btn btn-lg btn-secondary">Volunteer</a>
+                                <a href="#volunteer" type="button" class="btn btn-lg btn-gold">Volunteer</a>
                             </div>
                         </div>
                         <div class="col-md-8">
                             <div class="d-grid">
-                                <a href="#policy" type="button" class="btn btn-lg btn-secondary">Policy</a>
+                                <a href="#policy" type="button" class="btn btn-lg btn-green">Policy</a>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="d-grid">
+                                <a href="#news" type="button" class="btn btn-lg btn-dark-blue">News & Statements</a>
                             </div>
                         </div>
                     </div>
@@ -130,15 +140,15 @@
                 <div class="container py-4">
                     <div class="row justify-content-center">
                         <div class="col-md-4 px-5 py-2">
-                            <img class="mb-4 issue-icon" src="images/stop-genocide.png" alt="" />
+                            <i class="fas fa-hand-peace mb-4" style="font-size: 4rem; color: #dc3545;"></i>
                             <h2>Stop the Genocide</h2>
                         </div>
                         <div class="col-md-4 px-5 py-2">
-                            <img class="mb-4 issue-icon" src="images/peace-development.png" alt="" />
+                            <i class="fas fa-globe mb-4" style="font-size: 4rem; color: #0d6efd;"></i>
                             <h2>Peace Through Development</h2>
                         </div>
                         <div class="col-md-4 px-5 py-2">
-                            <img class="mb-4 issue-icon" src="images/rebuild-bronx.png" alt="" />
+                            <i class="fas fa-hammer mb-4" style="font-size: 4rem; color: #198754;"></i>
                             <h2>Rebuild the Bronx</h2>
                         </div>
                     </div>
@@ -149,7 +159,7 @@
             <div class="about-home container-fluid p-0">
                 <div class="row align-items-center g-0 p-0">
                     <div class="col-lg-6">
-                        <img src="images/jose-vega-portrait.jpg" alt="Jose Vega" />
+                        <img src="images/hero-image-2.jpg" alt="Jose Vega" class="img-fluid" />
                     </div>
                     <div class="col-lg-6 p-5">
                         <div class="container">
@@ -164,7 +174,7 @@
             </div>
             
             <!-- News Section -->
-            <div class="container py-5 px-4">
+            <div id="news" class="container py-5 px-4">
                 <h2 class="text-center py-2 mx-2 display-4 text-uppercase">News <span class="red">&amp;</span> Events</h2>
                 <div class="row news pt-5 justify-content-center">
                     <!-- News items will be dynamically loaded here -->
@@ -206,7 +216,7 @@
                     <div class="row justify-content-center mb-5">
                         <div class="col-lg-3">
                             <div class="d-grid">
-                                <a href="#statements" type="button" class="btn btn-lg btn-primary">All Statements</a>
+                                <a href="statements.html" type="button" class="btn btn-lg btn-primary">All Statements</a>
                             </div>
                         </div>
                     </div>

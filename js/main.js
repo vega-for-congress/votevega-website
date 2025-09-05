@@ -94,23 +94,45 @@
 
     // Navbar behavior enhancements
     function initNavbarBehavior() {
-        const navbar = document.querySelector('.navbar');
+        const navbar = document.querySelector('.site-header');
         
-        // Add scroll behavior
-        let lastScrollTop = 0;
+        if (!navbar) {
+            console.log('Navbar element not found!');
+            return;
+        }
         
-        window.addEventListener('scroll', function() {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        // Throttle scroll events for better performance
+        let ticking = false;
+        
+        function updateNavbar() {
+            const scrollTop = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
             
-            // Add background when scrolled
-            if (scrollTop > 50) {
-                navbar.classList.add('scrolled');
+            if (scrollTop > 100) {
+                if (!navbar.classList.contains('show')) {
+                    navbar.classList.add('show');
+                }
             } else {
-                navbar.classList.remove('scrolled');
+                if (navbar.classList.contains('show')) {
+                    navbar.classList.remove('show');
+                }
             }
             
-            lastScrollTop = scrollTop;
-        });
+            ticking = false;
+        }
+        
+        function requestTick() {
+            if (!ticking) {
+                requestAnimationFrame(updateNavbar);
+                ticking = true;
+            }
+        }
+        
+        // Add scroll listener
+        window.addEventListener('scroll', requestTick, { passive: true });
+        
+        // Also try on window load and resize
+        window.addEventListener('load', updateNavbar);
+        window.addEventListener('resize', updateNavbar);
 
         // Close mobile menu when clicking on a link
         const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
