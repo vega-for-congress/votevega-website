@@ -10,4 +10,4 @@ package.json
 package-lock.json
 
 # Exclude uncompressed image files
-images/
+images_fullquality/
