@@ -171,14 +171,29 @@ body {
 .dropdown-menu {
     background-color: var(--dark-nav);
     border: none;
+    min-width: 300px;
+    max-width: 400px;
+    word-wrap: break-word;
+    white-space: normal;
+    padding: 0.5rem 0;
 }
 
 .dropdown-item {
     color: var(--text-light);
     transition: background-color 0.3s ease;
+    padding: 0.75rem 1.25rem;
+    white-space: normal;
+    word-wrap: break-word;
+    line-height: 1.4;
+    font-size: 0.95rem;
 }
 
 .dropdown-item:hover {
+    background-color: var(--primary-red);
+    color: var(--text-light);
+}
+
+.dropdown-item:focus {
     background-color: var(--primary-red);
     color: var(--text-light);
 }
@@ -911,6 +926,17 @@ body {
     
     .footer-signup h3 {
         font-size: 1.5rem;
+    }
+    
+    /* Responsive dropdown menu */
+    .dropdown-menu {
+        min-width: 250px;
+        max-width: 320px;
+    }
+    
+    .dropdown-item {
+        font-size: 0.9rem;
+        padding: 0.6rem 1rem;
     }
 }
 

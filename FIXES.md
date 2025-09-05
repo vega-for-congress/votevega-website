@@ -10,7 +10,7 @@ When you uploaded the website, the assets weren't loading properly. Here's what 
 
 ### 2. Missing Logo in Navigation
 **Problem**: The main `index.html` had a placeholder comment instead of the actual logo.
-**Fix**: Added the logo image (`images/main_logo_2.png`) to the navigation header.
+**Fix**: Added the logo image (`images/main_logo_cropped.png`) to the navigation header.
 
 ### 3. Broken Image References
 **Problem**: Several images referenced in `index.html` didn't exist:
