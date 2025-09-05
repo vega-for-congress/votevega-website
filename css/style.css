@@ -393,6 +393,204 @@ body {
     }
 }
 
+/* ====== POLICY PAGE STYLES ====== */
+
+.policy-page {
+    background-color: #f8f9fa;
+}
+
+.policy-header {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-bottom: 3px solid var(--primary-red);
+}
+
+.policy-header h1 {
+    color: var(--text-dark);
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.policy-header .lead {
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--secondary-blue);
+}
+
+.policy-content {
+    background-color: #f8f9fa;
+}
+
+.policy-article {
+    background-color: #ffffff;
+    padding: 3rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.policy-article .lead {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: var(--text-dark);
+    margin-bottom: 2rem;
+}
+
+.policy-article h3 {
+    color: var(--primary-red);
+    font-weight: 700;
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.policy-article h4 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.policy-article p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #555;
+    margin-bottom: 1.25rem;
+}
+
+.policy-article ul {
+    padding-left: 2rem;
+}
+
+.policy-article li {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #555;
+    margin-bottom: 0.75rem;
+}
+
+/* Law Cards for Economics Page */
+.law-card {
+    transition: all 0.3s ease;
+    background: #ffffff;
+}
+
+.law-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.law-card h4 {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+}
+
+/* Feature Cards for Other Policy Pages */
+.feature-card {
+    border: 1px solid #e9ecef;
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.feature-card h5 {
+    color: var(--text-dark);
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+/* Component Sections */
+.component-section {
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-left: 4px solid var(--primary-blue);
+    margin-bottom: 2rem;
+    border-radius: 0 8px 8px 0;
+}
+
+.component-section h4 {
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+/* Blockquotes */
+.policy-article blockquote {
+    border-left: 4px solid var(--primary-red);
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 0 8px 8px 0;
+    margin: 2rem 0;
+}
+
+.policy-article blockquote p {
+    font-size: 1.2rem;
+    font-style: italic;
+    margin-bottom: 0;
+    color: var(--text-dark);
+}
+
+.policy-article .blockquote-footer {
+    color: var(--secondary-blue);
+    font-weight: 600;
+}
+
+/* Alert Boxes */
+.policy-article .alert {
+    border: none;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+}
+
+.policy-article .alert p {
+    margin-bottom: 0;
+    font-weight: 500;
+}
+
+/* Navigation Buttons */
+.policy-article .btn-lg {
+    padding: 0.875rem 2rem;
+    font-weight: 600;
+    border-radius: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .policy-article {
+        padding: 2rem 1.5rem;
+    }
+    
+    .policy-header h1 {
+        font-size: 2.5rem;
+    }
+    
+    .policy-article .lead {
+        font-size: 1.15rem;
+    }
+    
+    .policy-article p,
+    .policy-article li {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .policy-article {
+        padding: 1.5rem 1rem;
+    }
+    
+    .policy-header h1 {
+        font-size: 2rem;
+    }
+    
+    .law-card,
+    .component-section {
+        padding: 1rem;
+    }
+}
+
 .btn-green {
     background: linear-gradient(135deg, #198754, #157347);
     border-color: #198754;
