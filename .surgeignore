@@ -1,0 +1,13 @@
+# Exclude development files and documentation from Surge deployment
+.git/
+node_modules/
+.gitignore
+README.md
+WARP.md
+DEPLOYMENT.md
+FIXES.md
+package.json
+package-lock.json
+
+# Exclude uncompressed image files
+images_fullquality/
