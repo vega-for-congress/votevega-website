@@ -1,3 +1,6 @@
+# Full size images
+images_fullquality/*
+
 # Deployment packages
 *.zip
 
