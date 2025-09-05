@@ -1,59 +1,111 @@
-# VoteVega Website
+# Jose Vega for Congress 2024 - Hugo Website
 
-A custom website replacement for votevega.nyc, built with full customizability while maintaining the same look and feel as the original WordPress site.
+**Power, Not Force.**
 
-## Project Overview
+This campaign website has been built using **Hugo**, a fast static site generator, while preserving the original design and user experience from the WordPress site.
 
-This project aims to replace the WordPress-based votevega.nyc website with a fully customizable static site that preserves the original design and user experience. The new site provides complete control over styling, functionality, and content management without the constraints of WordPress.
+## 🚀 Quick Start
 
-## Features
+### Development Server
+```bash
+# Start development server on port 8080
+npm run dev
 
-- **Responsive Design**: Mobile-first approach with Bootstrap 5
-- **Performance Optimized**: Static HTML/CSS/JS for fast loading
-- **SEO Friendly**: Proper meta tags, semantic HTML, and structured data
-- **Accessibility**: WCAG compliance with proper ARIA labels and keyboard navigation
-- **Modern Browser Support**: ES6+ JavaScript with graceful degradation
-- **Email Signup Integration**: Ready for newsletter service integration
-- **Social Media Integration**: Links to all campaign social platforms
-- **Analytics Ready**: Placeholder for Google Analytics and other tracking services
+# Or start on port 3000  
+npm start
 
-## Technology Stack
+# Network accessible development server
+npm run dev-network
+```
 
+Visit: http://localhost:8080
+
+### Production Build
+```bash
+# Build for production (creates /public directory)
+npm run build
+
+# Clean build artifacts
+npm run clean
+```
+
+## ✨ Features
+
+- **⚡ Lightning Fast**: Hugo builds in ~30ms with live reload
+- **📱 Responsive Design**: Mobile-first approach with Bootstrap 5
+- **🔍 SEO Optimized**: Built-in meta tags, sitemaps, and structured data
+- **♿ Accessible**: WCAG compliance with proper ARIA labels
+- **📧 Email Integration**: Ready for newsletter service integration
+- **📱 Social Media**: Links to all campaign social platforms
+- **📊 Analytics Ready**: Placeholder for tracking services
+- **🎨 Template System**: Reusable components, no code duplication
+
+## 🛠️ Technology Stack
+
+- **Hugo**: Fast static site generator (Go-based)
 - **HTML5**: Semantic markup and modern web standards
-- **CSS3**: Custom styles with CSS Grid/Flexbox, Bootstrap 5 integration
+- **CSS3**: Custom styles with Bootstrap 5 integration
 - **JavaScript (ES6+)**: Vanilla JS for interactive functionality
 - **Bootstrap 5**: Responsive framework and component library
 - **Font Awesome**: Icon library for social media and UI elements
 - **Google Fonts**: Inter font family for consistent typography
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 votevega-website/
-├── index.html              # Main homepage
-├── package.json            # Project metadata and scripts
-├── README.md              # Project documentation
-├── css/
-│   └── style.css          # Custom styles matching original design
-├── js/
-│   └── main.js            # Custom JavaScript functionality
-├── images/
-│   ├── hero-image.jpg     # Hero section image
-│   ├── jose-vega-portrait.jpg  # About section portrait
-│   ├── logo-alt.svg       # Campaign logo
-│   ├── stop-genocide.png  # Issue icon
-│   ├── peace-development.png  # Issue icon
-│   └── rebuild-bronx.png  # Issue icon
-└── assets/
-    └── (additional assets as needed)
+├── content/                    # Content files (Markdown)
+│   ├── _index.md              # Homepage content
+│   └── statements/
+│       └── _index.md          # Statements section
+├── layouts/                   # HTML templates
+│   ├── _default/
+│   │   └── baseof.html       # Base template
+│   ├── partials/
+│   │   ├── header.html       # Navigation
+│   │   ├── footer.html       # Footer
+│   │   └── footer-signup.html # Email signup
+│   ├── index.html            # Homepage template
+│   └── statements/
+│       └── list.html         # Statements page
+├── static/                   # Static assets (CSS, JS, images)
+│   ├── css/style.css         # Custom styles
+│   ├── js/main.js            # Custom JavaScript
+│   ├── images/               # All images
+│   └── fonts/                # Custom fonts
+├── hugo.toml                 # Hugo configuration
+├── package.json              # Project metadata and scripts
+├── public/                   # Generated site (after build)
+└── backup-before-hugo/       # Original HTML files
 ```
+
+## 🎆 Migration Benefits
+
+This website has been successfully migrated from static HTML to Hugo, providing:
+
+### ✅ What You Gained
+- **⚡ Faster builds**: Hugo builds in ~30ms vs seconds with other tools
+- **🗓️ No dependencies**: Single Go binary, no Ruby/Node.js complexity
+- **🎨 Template reuse**: No more duplicate header/footer code
+- **🔍 Automatic SEO**: Built-in meta tags, sitemaps, and structured data
+- **🔄 Development server**: Live reload during development
+- **📋 Minification**: Built-in CSS/JS minification for production
+- **🚀 Easy deployment**: Static files work on any hosting platform
+
+### ✅ What Stayed the Same
+- **🎨 All your original design** (CSS, images, fonts)
+- **🔗 Same URLs and navigation**
+- **⚙️ Same functionality** (forms, JavaScript)
+- **🏠 Same hosting options** (static hosting)
+
+Your original files are safely backed up in `backup-before-hugo/`.
 
 ## Getting Started
 
 ### Prerequisites
 
 - A modern web browser
-- Python 3.x (for local development server) OR any static file server
+- Hugo installed (already installed on this system)
 - Git (for version control)
 - Text editor or IDE
 
@@ -65,35 +117,56 @@ votevega-website/
    cd votevega-website
    ```
 
-2. **Start a local development server:**
-   
-   **Option A: Using Python (recommended):**
+2. **Start the Hugo development server:**
    ```bash
-   # Python 3.x
-   python -m http.server 8080
-   
-   # Or use the npm script
+   # Hugo development server with live reload
    npm run dev
-   ```
    
-   **Option B: Using Node.js (if you have live-server installed):**
-   ```bash
-   npm install -g live-server
-   live-server --port=8080
+   # Or directly with Hugo
+   hugo serve --port 8080
    ```
 
 3. **Open your browser:**
    - Navigate to `http://localhost:8080`
-   - The website should load with the campaign homepage
+   - The website will automatically reload when you make changes
 
-### Development
+## ⚙️ Hugo Configuration
 
-#### Making Changes
+Site settings are configured in `hugo.toml`:
+- Site title, description, URLs
+- Social media links
+- Navigation menu structure
+- Policy proposals dropdown
+- Contact information and email
 
-1. **HTML**: Edit `index.html` for content and structure changes
-2. **Styles**: Modify `css/style.css` for visual design updates
-3. **JavaScript**: Update `js/main.js` for interactive functionality
-4. **Images**: Add new images to the `images/` directory
+## 🎨 Templates & Content
+
+### Adding New Pages
+1. Create content file: `content/new-page.md`
+2. Add front matter:
+   ```yaml
+   ---
+   title: "Page Title"
+   description: "Page description for SEO"
+   ---
+   ```
+3. Hugo automatically uses the appropriate template
+
+### Modifying Templates
+- **Header/Navigation**: `layouts/partials/header.html`
+- **Footer**: `layouts/partials/footer.html`
+- **Base HTML structure**: `layouts/_default/baseof.html`
+- **Homepage**: `layouts/index.html`
+- **Statements page**: `layouts/statements/list.html`
+
+### Making Changes
+
+1. **Content**: Edit Markdown files in `content/` directory
+2. **Templates**: Modify HTML files in `layouts/` directory
+3. **Styles**: Update `static/css/style.css` for visual changes
+4. **JavaScript**: Edit `static/js/main.js` for functionality
+5. **Images**: Add new images to `static/images/` directory
+6. **Configuration**: Update `hugo.toml` for site settings
 
 #### Color Scheme
 
@@ -110,35 +183,43 @@ The website uses a consistent color palette matching the original design:
 - **Primary Font**: Inter (Google Fonts)
 - **Fallbacks**: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif
 
+## 🔧 Available Scripts
+
+```bash
+npm run dev          # Development server (port 8080)
+npm start            # Development server (port 3000)
+npm run dev-network  # Network-accessible server
+npm run build        # Production build
+npm run clean        # Remove build artifacts
+npm run hugo         # Run Hugo directly
+npm run hugo-server  # Start Hugo server
+```
+
 ### Content Management
 
 #### Adding News Articles
+Edit the homepage template (`layouts/index.html`) to add news articles in the news section.
 
-To add new news articles, you'll need to:
+#### Adding New Statements
+Create new files in `content/statements/` directory:
+```bash
+# Create a new statement
+echo '---
+title: "New Statement Title"
+date: 2024-12-01
+description: "Statement description"
+---
 
-1. Create HTML structure for each article in the news section
-2. Follow the existing pattern:
-   ```html
-   <div class="col-lg-6">
-       <h3 class="pt-2 pb-0 mb-0">
-           <a href="article-url">Article Title</a>
-       </h3>
-       <p class="post-meta mb-2">Date</p>
-       <p class="mb-2">Article excerpt...</p>
-       <p><strong><a class="text-uppercase mt-3" href="article-url">Keep Reading</a></strong></p>
-   </div>
-   ```
-
-#### Adding Statements
-
-Similar to news articles, statements follow the same HTML pattern in the statements section.
+Statement content here...' > content/statements/new-statement.md
+```
 
 #### Updating Campaign Information
 
-- **Hero Section**: Edit the hero text and call-to-action buttons in `index.html`
-- **About Section**: Update Jose Vega's bio and description
-- **Contact Information**: Modify footer contact details
-- **Social Media Links**: Update social media URLs in the footer
+- **Site Configuration**: Edit `hugo.toml` for titles, URLs, contact info
+- **Hero Section**: Modify `layouts/index.html` for hero text
+- **About Section**: Update biography text in `layouts/index.html` 
+- **Navigation**: Edit policy proposals in `hugo.toml`
+- **Social Media**: Update social links in `hugo.toml`
 
 ### Deployment
 

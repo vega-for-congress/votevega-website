@@ -1,0 +1,63 @@
+<!doctype html>
+<html dir="ltr" lang="en-US" prefix="og: https://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="profile" href="https://gmpg.org/xfn/11">
+
+    <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+    <meta name="robots" content="max-image-preview:large">
+    <link rel="canonical" href="{{ .Permalink }}">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="{{ .Site.Title }}">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}">
+    <meta property="og:description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+    <meta property="og:url" content="{{ .Permalink }}">
+    <meta property="og:image" content="{{ .Site.BaseURL }}{{ .Site.Params.ogImage }}">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="{{ .Site.Params.twitter.site }}">
+    <meta name="twitter:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}">
+    <meta name="twitter:description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+    <meta name="twitter:creator" content="{{ .Site.Params.twitter.creator }}">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+</head>
+
+<body class="{{ if .IsHome }}home wp-singular page-template-default page page-id-6 wp-theme-vega_2024 no-sidebar{{ else }}{{ .Section }}-page wp-singular page-template-default page no-sidebar{{ end }}">
+    <div id="page" class="site">
+        <a class="skip-link screen-reader-text" href="#primary">Skip to content</a>
+
+        {{- partial "header.html" . -}}
+
+        <main id="primary" class="site-main{{ if not .IsHome }} container-fluid px-0{{ end }}">
+            {{- block "main" . }}{{- end }}
+        </main>
+
+        {{- partial "footer-signup.html" . -}}
+        {{- partial "footer.html" . -}}
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="{{ "js/main.js" | relURL }}"></script>
+</body>
+</html>
