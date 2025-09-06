@@ -1,0 +1,22 @@
+---
+title: "REJECT AIPAC, AND REJECT WAR!!"
+description: "A Statement from Jose Vega, LaRouche Independent Candidate, 15th CD in the Bronx “The Bronx is burning”—remember that phrase from the 1970s? The Bronx is burning once again, but this time, the smoke is coming from the behind of the American Israel Public Affairs Committee The horrific butchery of tens of thousands of Palestinian women"
+date: 2024-06-16
+---
+
+***A Statement from Jose Vega, LaRouche Independent Candidate, 15th CD in the Bronx***
+
+“The Bronx is burning”—remember that phrase from the 1970s? The Bronx is burning once again, but this time, the smoke is coming from the behind of the American Israel Public Affairs Committee 
+
+The horrific butchery of tens of thousands of Palestinian women and children in Gaza in the last several months shocked the world, and the United States, so much, that students, young people, and even strong supporters of Israel, including Israeli citizens, have called for the war to stop, and for American funding of Israel to stop, until the war stops. In response, according to Amy Goodman of Democracy Now! “The pro-Israel lobby group reportedly plans to spend as much as $25 million to defeat (Jamaal) Bowman, who was one of the first lawmakers to call for a permanent ceasefire after October 7th.”   
+
+If AIPAC is prepared to spend $25 million in only one Congressional district, what is it prepared to spend nationally? And before you assume this is only against “progressive Democrats,” consider what they just tried—but failed—to do against Kentucky Republican conservative Congressman Thomas Massie. “I’m not against Israel. I’ve never voted to sanction Israel. I’ve never said anything particularly, you know,critical of Israel, other than that, for instance, right now,…they’ve killed 1% of the civilian population in Gaza…I vote my conscience, which they won’t tolerate.” 
+
+Massie just beat AIPAC’s attempt to prevent him from returning to Congress by throwing a wall of money up against him. AIPAC is an equal-opportunity manipulator of elections. But what will happen in the Bronx? Is the Bronx, is New York City, is the nation being sold on the auction block of the military-monetary complex, because war is the only industry that the bloodthirsty policies of the uniparty will allow to grow and flourish? Did you know that the House of Representatives just passed a version of the National Defense Authorization Act (NDAA) that includes a provision that, if passed by the Senate, will automatically enroll all males from the ages of 18 to 26 for military service? While discussed as “simply a routine streamlining measure, ””the other, unspoken effect would be removing young men’s choice to engage in civil disobedience.”  According to http://Reason.com. And moves of the same nature are now happening in France, Great Britain and other nations, as Ukraine runs out of soldiers, and a new war is planned with Iran, with China, and who knows where else? 
+
+I, Jose Vega, suggest to you, that AIPAC is not only doing this for Israel. How many tens of millions, how many hundreds of millions are being spent by AIPAC and other lobbies to promote the cause of war, to turn a blind eye to present and future campaigns of genocide, or if you prefer, deliberate, intentional mass murder of children and women of child-bearing age, {for depopulation purposes, as opposed to any military objectives whatsoever?} As an independent congressional candidate for the Bronx (NY-15), I am directly opposed to the idea that certain financial forces believe they can simply buy a congressional district. Is AIPAC doing  its “Congress shopping” with the approval of the people in Bowman’s district? How many of them know that their vote doesn’t actually matter in the face of ‘big money’ lobbyists acting for foreign interests? 
+
+Maybe I’m wrong. Maybe voters, or non-voters like you, are actually ok with having your Congressional district purchased by the same people that take your money to fight mass-murderous wars, and that, soon, will take your sons—and probably daughters—to fight. Is that what you support? Are you for sale to AIPAC, or to some other would-be political slave-owner? I’m not. 
+
+Let’s not be political prostitutes. Let’s not be for sale. Let’s be independent. Let’s be un-bought, and un-bossed, like Brooklyn’s late Congresswoman Shirley Chisholm. Let’s form a Committee for An Un-Bought and Un-Bossed Bronx. Reject AIPAC, Reject War!!!
+

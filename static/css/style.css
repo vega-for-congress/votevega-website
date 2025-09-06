@@ -1130,3 +1130,143 @@ body {
     margin-top: 4rem !important;
     margin-bottom: 4rem !important;
 }
+
+/* ====== STATEMENT CONTENT STYLES ====== */
+
+/* Image constraints for statement content */
+.statement-article img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 2rem auto 0.5rem auto;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.statement-article img:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Image captions styling */
+.statement-article img + em {
+    display: block;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #6c757d;
+    font-style: italic;
+    margin: 0.5rem auto 2rem auto;
+    max-width: 90%;
+    line-height: 1.4;
+}
+
+/* Policy content similar styling */
+.policy-article img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 2rem auto 0.5rem auto;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.policy-article img:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.policy-article img + em {
+    display: block;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #6c757d;
+    font-style: italic;
+    margin: 0.5rem auto 2rem auto;
+    max-width: 90%;
+    line-height: 1.4;
+}
+
+/* Responsive image adjustments */
+@media (max-width: 768px) {
+    .statement-article img,
+    .policy-article img {
+        margin: 1.5rem auto 0.5rem auto;
+        border-radius: 0.375rem;
+    }
+    
+    .statement-article img + em,
+    .policy-article img + em {
+        font-size: 0.85rem;
+        margin: 0.5rem auto 1.5rem auto;
+    }
+}
+
+/* ====== PDF DOWNLOAD BUTTON STYLES ====== */
+
+.pdf-download-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #dc3545, #c82333);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+    transition: all 0.3s ease;
+    margin: 1rem 0;
+    border: 2px solid transparent;
+}
+
+.pdf-download-btn:hover {
+    background: linear-gradient(135deg, #c82333, #a71e2a);
+    color: white;
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.pdf-download-btn:focus {
+    color: white;
+    text-decoration: none;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.25);
+}
+
+.pdf-download-btn i {
+    margin-right: 8px;
+    font-size: 1.1em;
+}
+
+/* Alternative PDF button style */
+.pdf-download-btn.btn-outline {
+    background: transparent;
+    color: #dc3545;
+    border: 2px solid #dc3545;
+    box-shadow: none;
+}
+
+.pdf-download-btn.btn-outline:hover {
+    background: #dc3545;
+    color: white;
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+}
+
+/* Responsive PDF button */
+@media (max-width: 768px) {
+    .pdf-download-btn {
+        font-size: 0.9rem;
+        padding: 10px 20px;
+        width: 100%;
+        max-width: 280px;
+        margin: 1rem auto;
+        display: flex;
+    }
+}

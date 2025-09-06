@@ -15,88 +15,69 @@
 <div class="statements-content py-5">
     <div class="container">
         <div class="row">
-            <!-- Featured Statement -->
-            <div class="col-12 mb-5">
-                <div class="featured-statement card border-0 shadow-lg">
-                    <div class="card-body p-5">
-                        <div class="statement-meta mb-3">
-                            <span class="badge bg-primary me-2">Featured Statement</span>
-                            <small class="text-muted">December 15, 2024</small>
+            {{ $statements := .Pages }}
+            {{ if $statements }}
+                {{ range $index, $page := $statements }}
+                    {{ if eq $index 0 }}
+                    <!-- Featured Statement (First Statement) -->
+                    <div class="col-12 mb-5">
+                        <div class="featured-statement card border-0 shadow-lg">
+                            <div class="card-body p-5">
+                                <div class="statement-meta mb-3">
+                                    <span class="badge bg-primary me-2">Featured Statement</span>
+                                    {{ if .Date }}
+                                    <small class="text-muted">{{ .Date.Format "January 2, 2006" }}</small>
+                                    {{ end }}
+                                </div>
+                                <h2 class="card-title h3 fw-bold mb-4">{{ .Title }}</h2>
+                                {{ if .Description }}
+                                <p class="card-text lead mb-4">{{ .Description }}</p>
+                                {{ else }}
+                                <p class="card-text lead mb-4">{{ .Summary | truncate 200 }}</p>
+                                {{ end }}
+                                <a href="{{ .RelPermalink }}" class="btn btn-outline-primary btn-lg">Read Full Statement</a>
+                            </div>
                         </div>
-                        <h2 class="card-title h3 fw-bold mb-4">Breaking Down Barriers: Restoring Trust in Government</h2>
-                        <p class="card-text lead mb-4">I am running to break down the barriers that silence the people's voices. We must empower citizens to reclaim their stake in government, restore trust, and dismantle corruption. Together, we can restore faith in a government that truly serves its people.</p>
-                        <p class="card-text">Our government's current trajectory has left too many Americans feeling voiceless and forgotten. The time has come for a new generation of leadership that prioritizes the needs of working families over special interests. This campaign represents more than just another congressional race—it represents a movement to rebuild democracy from the ground up.</p>
-                        <a href="#" class="btn btn-outline-primary btn-lg">Read Full Statement</a>
+                    </div>
+
+                    <!-- Recent Statements Header -->
+                    {{ if gt (len $statements) 1 }}
+                    <div class="col-12 mb-4">
+                        <h3 class="h4 fw-bold text-uppercase mb-4">Recent Statements</h3>
+                    </div>
+                    {{ end }}
+                    {{ else }}
+                    <!-- Statement Cards (For statements 2 and onwards) -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="statement-card card h-100 border-0 shadow">
+                            <div class="card-body p-4">
+                                <div class="statement-meta mb-3">
+                                    <span class="badge bg-secondary me-2">Statement</span>
+                                    {{ if .Date }}
+                                    <small class="text-muted">{{ .Date.Format "January 2, 2006" }}</small>
+                                    {{ end }}
+                                </div>
+                                <h4 class="card-title h5 fw-bold mb-3">{{ .Title }}</h4>
+                                {{ if .Description }}
+                                <p class="card-text">{{ .Description | truncate 150 }}...</p>
+                                {{ else }}
+                                <p class="card-text">{{ .Summary | truncate 150 }}...</p>
+                                {{ end }}
+                                <a href="{{ .RelPermalink }}" class="btn btn-outline-primary">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    {{ end }}
+                {{ end }}
+            {{ else }}
+                <!-- No statements fallback -->
+                <div class="col-12 text-center">
+                    <div class="alert alert-info" role="alert">
+                        <h4 class="alert-heading">No Statements Available</h4>
+                        <p class="mb-0">Campaign statements will be posted here as they become available.</p>
                     </div>
                 </div>
-            </div>
-
-            <!-- Recent Statements -->
-            <div class="col-12 mb-4">
-                <h3 class="h4 fw-bold text-uppercase mb-4">Recent Statements</h3>
-            </div>
-
-            <!-- Statement Cards -->
-            <div class="col-lg-6 mb-4">
-                <div class="statement-card card h-100 border-0 shadow">
-                    <div class="card-body p-4">
-                        <div class="statement-meta mb-3">
-                            <span class="badge bg-secondary me-2">Policy</span>
-                            <small class="text-muted">December 10, 2024</small>
-                        </div>
-                        <h4 class="card-title h5 fw-bold mb-3">Stop the Genocide: A Moral Imperative</h4>
-                        <p class="card-text">Our foreign policy must be guided by moral principles, not special interests. The ongoing genocide in Gaza demands immediate action from Congress...</p>
-                        <a href="#" class="btn btn-outline-primary">Read More <i class="fas fa-arrow-right ms-1"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-6 mb-4">
-                <div class="statement-card card h-100 border-0 shadow">
-                    <div class="card-body p-4">
-                        <div class="statement-meta mb-3">
-                            <span class="badge bg-warning text-dark me-2">Economic Policy</span>
-                            <small class="text-muted">December 8, 2024</small>
-                        </div>
-                        <h4 class="card-title h5 fw-bold mb-3">Rebuilding the Bronx Through Development</h4>
-                        <p class="card-text">The Bronx deserves investment in infrastructure, education, and economic opportunity. My Space CCC proposal will create thousands of jobs...</p>
-                        <a href="#" class="btn btn-outline-primary">Read More <i class="fas fa-arrow-right ms-1"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-6 mb-4">
-                <div class="statement-card card h-100 border-0 shadow">
-                    <div class="card-body p-4">
-                        <div class="statement-meta mb-3">
-                            <span class="badge bg-info text-white me-2">International Relations</span>
-                            <small class="text-muted">December 5, 2024</small>
-                        </div>
-                        <h4 class="card-title h5 fw-bold mb-3">Peace Through Development: The Oasis Plan</h4>
-                        <p class="card-text">True peace in the Middle East requires economic development and cooperation. The Oasis Plan offers a path forward through infrastructure investment...</p>
-                        <a href="#" class="btn btn-outline-primary">Read More <i class="fas fa-arrow-right ms-1"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-6 mb-4">
-                <div class="statement-card card h-100 border-0 shadow">
-                    <div class="card-body p-4">
-                        <div class="statement-meta mb-3">
-                            <span class="badge bg-success me-2">Community</span>
-                            <small class="text-muted">December 1, 2024</small>
-                        </div>
-                        <h4 class="card-title h5 fw-bold mb-3">Youth Leadership in the Bronx</h4>
-                        <p class="card-text">Young people are the future of our district. We must invest in education, mentorship programs, and create pathways to leadership...</p>
-                        <a href="#" class="btn btn-outline-primary">Read More <i class="fas fa-arrow-right ms-1"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Load More Button -->
-            <div class="col-12 text-center mt-4">
-                <button class="btn btn-primary btn-lg">Load More Statements</button>
-            </div>
+            {{ end }}
         </div>
     </div>
 </div>
