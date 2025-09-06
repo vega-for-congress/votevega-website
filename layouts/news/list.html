@@ -29,7 +29,7 @@
                                     <small class="text-muted">{{ .Date.Format "January 2, 2006" }}</small>
                                     {{ end }}
                                 </div>
-                                <h2 class="card-title h3 fw-bold mb-4">{{ .Title }}</h2>
+                                <h2 class="card-title h3 fw-bold mb-4"><a href="{{ .RelPermalink }}" class="text-decoration-none">{{ .Title }}</a></h2>
                                 {{ if .Description }}
                                 <p class="card-text lead mb-4">{{ .Description }}</p>
                                 {{ else }}
@@ -57,7 +57,7 @@
                                     <small class="text-muted">{{ .Date.Format "January 2, 2006" }}</small>
                                     {{ end }}
                                 </div>
-                                <h4 class="card-title h5 fw-bold mb-3">{{ .Title }}</h4>
+                                <h4 class="card-title h5 fw-bold mb-3"><a href="{{ .RelPermalink }}" class="text-decoration-none">{{ .Title }}</a></h4>
                                 {{ if .Description }}
                                 <p class="card-text">{{ .Description | truncate 150 }}...</p>
                                 {{ else }}

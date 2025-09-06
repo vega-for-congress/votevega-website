@@ -74,6 +74,7 @@
 
 body {
     font-family: var(--font-primary);
+    font-size: 1.2em;
     line-height: 1.6;
     color: var(--text-dark);
     margin: 0;
@@ -88,6 +89,16 @@ h1, h2, h3, h4, h5, h6 {
 /* Featured quote uses Vanguardia */
 .featured-quote {
     font-family: var(--font-headings);
+}
+
+/* Clickable header links */
+.card-title a {
+    color: inherit;
+    transition: color 0.3s ease;
+}
+
+.card-title a:hover {
+    color: var(--primary-red);
 }
 
 /* Buttons and navigation use Vanguardia bold */
