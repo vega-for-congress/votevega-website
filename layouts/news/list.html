@@ -1,0 +1,98 @@
+{{ define "main" }}
+<!-- Page Header -->
+<div class="news-header py-5 mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="display-3 fw-bold text-uppercase mb-3">News & Media</h1>
+                <p class="lead text-muted">Latest news, media appearances, and campaign updates from Jose Vega's congressional race in the Bronx</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- News Content -->
+<div class="news-content py-5">
+    <div class="container">
+        <div class="row">
+            {{ $news := .Pages }}
+            {{ if $news }}
+                {{ range $index, $page := $news }}
+                    {{ if eq $index 0 }}
+                    <!-- Featured News Item (Most Recent) -->
+                    <div class="col-12 mb-5">
+                        <div class="featured-news card border-0 shadow-lg">
+                            <div class="card-body p-5">
+                                <div class="news-meta mb-3">
+                                    <span class="badge bg-success me-2">Latest News</span>
+                                    {{ if .Date }}
+                                    <small class="text-muted">{{ .Date.Format "January 2, 2006" }}</small>
+                                    {{ end }}
+                                </div>
+                                <h2 class="card-title h3 fw-bold mb-4">{{ .Title }}</h2>
+                                {{ if .Description }}
+                                <p class="card-text lead mb-4">{{ .Description }}</p>
+                                {{ else }}
+                                <p class="card-text lead mb-4">{{ .Summary | truncate 200 }}</p>
+                                {{ end }}
+                                <a href="{{ .RelPermalink }}" class="btn btn-outline-success btn-lg">Read Full Article</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent News Header -->
+                    {{ if gt (len $news) 1 }}
+                    <div class="col-12 mb-4">
+                        <h3 class="h4 fw-bold text-uppercase mb-4">Recent News</h3>
+                    </div>
+                    {{ end }}
+                    {{ else }}
+                    <!-- News Cards (For items 2 and onwards) -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="news-card card h-100 border-0 shadow">
+                            <div class="card-body p-4">
+                                <div class="news-meta mb-3">
+                                    <span class="badge bg-info me-2">News</span>
+                                    {{ if .Date }}
+                                    <small class="text-muted">{{ .Date.Format "January 2, 2006" }}</small>
+                                    {{ end }}
+                                </div>
+                                <h4 class="card-title h5 fw-bold mb-3">{{ .Title }}</h4>
+                                {{ if .Description }}
+                                <p class="card-text">{{ .Description | truncate 150 }}...</p>
+                                {{ else }}
+                                <p class="card-text">{{ .Summary | truncate 150 }}...</p>
+                                {{ end }}
+                                <a href="{{ .RelPermalink }}" class="btn btn-outline-info">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    {{ end }}
+                {{ end }}
+            {{ else }}
+                <!-- No news fallback -->
+                <div class="col-12 text-center">
+                    <div class="alert alert-info" role="alert">
+                        <h4 class="alert-heading">No News Available</h4>
+                        <p class="mb-0">Campaign news and media coverage will be posted here as they become available.</p>
+                    </div>
+                </div>
+            {{ end }}
+        </div>
+
+        <!-- News Archive -->
+        {{ if gt (len $news) 8 }}
+        <div class="row">
+            <div class="col-12 text-center mt-5">
+                <h4 class="fw-bold text-uppercase mb-4">Archive</h4>
+                <div class="archive-links">
+                    {{ range (.Site.Taxonomies.tags.ByCount) }}
+                    <a href="{{ .Page.Permalink }}" class="btn btn-sm btn-outline-secondary me-2 mb-2">{{ .Page.Title }} ({{ .Count }})</a>
+                    {{ end }}
+                </div>
+            </div>
+        </div>
+        {{ end }}
+    </div>
+</div>
+{{ end }}

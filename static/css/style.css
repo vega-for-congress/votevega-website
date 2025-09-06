@@ -198,6 +198,44 @@ body {
     color: var(--text-light);
 }
 
+/* Twitter embed styling */
+.tweet-embed {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.twitter-tweet {
+    margin: 1.5rem auto !important;
+    max-width: 550px !important;
+    min-height: 200px;
+    display: inline-block;
+    font-family: "Helvetica Neue", Roboto, "Segoe UI", Calibri, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 16px;
+    border-color: #eee #ddd #bbb;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    color: #000;
+    padding: 0;
+    text-align: left;
+}
+
+/* Ensure Twitter embeds are responsive */
+@media (max-width: 767px) {
+    .twitter-tweet {
+        margin: 1rem auto !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+    
+    .tweet-embed {
+        margin: 1.5rem 0;
+    }
+}
+
 /* Professional Button Styles */
 .hero-cta .btn {
     border: 1px solid rgba(255, 255, 255, 0.3);

@@ -21,7 +21,7 @@
                     </li>
                     {{ end }}
                     <li class="nav-item">
-                        <a href="{{ if .IsHome }}#news{{ else }}{{ "/" | relURL }}#news{{ end }}" class="nav-link">News</a>
+                        <a href="{{ "/news/" | relURL }}" class="nav-link{{ if eq .Section "news" }} active{{ end }}">News</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ "/statements/" | relURL }}" class="nav-link{{ if eq .Section "statements" }} active{{ end }}">Statements</a>

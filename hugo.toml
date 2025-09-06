@@ -75,7 +75,7 @@ enableEmoji = true
 
   [[menu.main]]
     name = "News"
-    url = "#news"
+    url = "/news/"
     weight = 20
 
   [[menu.main]]
