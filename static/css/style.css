@@ -43,7 +43,9 @@
     --dark-nav: #000000;
     --text-dark: #212529;
     --text-light: #ffffff;
-    --font-primary: 'Vanguardia', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-headings: 'Vanguardia', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-body: 'Source Sans Pro', sans-serif;
+    --font-primary: var(--font-body); /* Default to body font */
 }
 
 /* Global Styles */
@@ -76,6 +78,32 @@ body {
     color: var(--text-dark);
     margin: 0;
     padding: 0;
+}
+
+/* Typography - Headings use Vanguardia */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-headings);
+}
+
+/* Featured quote uses Vanguardia */
+.featured-quote {
+    font-family: var(--font-headings);
+}
+
+/* Buttons and navigation use Vanguardia bold */
+.btn {
+    font-family: var(--font-headings);
+    font-weight: 700;
+}
+
+.navbar-nav .nav-link {
+    font-family: var(--font-headings);
+    font-weight: 700;
+}
+
+.dropdown-item {
+    font-family: var(--font-headings);
+    font-weight: 500;
 }
 
 /* Skip link for accessibility */
@@ -151,7 +179,6 @@ body {
 
 .navbar-nav .nav-link {
     color: var(--text-light) !important;
-    font-weight: 500;
     transition: color 0.3s ease;
     padding: 0.5rem 0.75rem !important; /* More compact link padding */
     font-size: 0.9rem; /* Slightly smaller font */
@@ -596,7 +623,7 @@ body {
 
 .featured-quote .red {
     color: var(--primary-red);
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: bold;
 }
 
