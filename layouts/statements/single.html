@@ -1,0 +1,40 @@
+{{ define "main" }}
+<!-- Page Header -->
+<div class="statement-header py-5 mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="display-4 fw-bold text-uppercase mb-3">{{ .Title }}</h1>
+                {{ if .Params.subtitle }}
+                <p class="lead text-muted">{{ .Params.subtitle }}</p>
+                {{ end }}
+                {{ if .Date }}
+                <p class="text-muted">
+                    <small><i class="far fa-calendar-alt me-2"></i>{{ .Date.Format "January 2, 2006" }}</small>
+                </p>
+                {{ end }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Statement Content -->
+<div class="statement-content py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="statement-article">
+                    {{ .Content }}
+                </div>
+                
+                <!-- Back to Statements -->
+                <div class="text-center mt-5">
+                    <a href="/statements/" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Back to All Statements
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{ end }}
