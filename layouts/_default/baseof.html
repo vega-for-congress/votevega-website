@@ -41,13 +41,13 @@
     <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
 </head>
 
-<body class="{{ if .IsHome }}home wp-singular page-template-default page page-id-6 wp-theme-vega_2024 no-sidebar{{ else }}{{ .Section }}-page wp-singular page-template-default page no-sidebar{{ end }}">
+<body class="{{ if .IsHome }}home wp-singular page-template-default page page-id-6 wp-theme-vega_2024 no-sidebar{{ else if eq .Section "policy" }}policy-page wp-singular page-template-default page no-sidebar{{ else }}{{ .Section }}-page wp-singular page-template-default page no-sidebar{{ end }}">
     <div id="page" class="site">
         <a class="skip-link screen-reader-text" href="#primary">Skip to content</a>
 
         {{- partial "header.html" . -}}
 
-        <main id="primary" class="site-main{{ if not .IsHome }} container-fluid px-0{{ end }}">
+        <main id="primary" class="site-main{{ if not .IsHome }}{{ if ne .Section "policy" }} container-fluid px-0{{ end }}{{ end }}">
             {{- block "main" . }}{{- end }}
         </main>
 

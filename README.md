@@ -56,6 +56,11 @@ npm run clean
 votevega-website/
 ├── content/                    # Content files (Markdown)
 │   ├── _index.md              # Homepage content
+│   ├── policy/                # Policy pages
+│   │   ├── preamble.md        # Policy preamble
+│   │   ├── economics.md       # Economic policy
+│   │   ├── oasis-plan.md      # Oasis Plan policy
+│   │   └── space-ccc.md       # Space CCC policy
 │   └── statements/
 │       └── _index.md          # Statements section
 ├── layouts/                   # HTML templates
@@ -66,6 +71,8 @@ votevega-website/
 │   │   ├── footer.html       # Footer
 │   │   └── footer-signup.html # Email signup
 │   ├── index.html            # Homepage template
+│   ├── policy/
+│   │   └── single.html       # Policy page template
 │   └── statements/
 │       └── list.html         # Statements page
 ├── static/                   # Static assets (CSS, JS, images)
@@ -157,6 +164,7 @@ Site settings are configured in `hugo.toml`:
 - **Footer**: `layouts/partials/footer.html`
 - **Base HTML structure**: `layouts/_default/baseof.html`
 - **Homepage**: `layouts/index.html`
+- **Policy pages**: `layouts/policy/single.html`
 - **Statements page**: `layouts/statements/list.html`
 
 ### Making Changes
@@ -212,6 +220,62 @@ description: "Statement description"
 
 Statement content here...' > content/statements/new-statement.md
 ```
+
+#### Adding New Policy Pages
+
+To add a new policy page (e.g., "Healthcare Reform"):
+
+1. **Create the content file:**
+   ```bash
+   # Create new policy page
+   cat > content/policy/healthcare-reform.md << 'EOF'
+   ---
+   title: "Healthcare Reform for All Americans"
+   description: "Jose Vega's comprehensive healthcare reform proposal"
+   date: 2024-12-01
+   type: "policy"
+   ---
+   
+   Your policy content goes here in Markdown format.
+   
+   You can use HTML for complex formatting:
+   
+   <blockquote class="blockquote text-center mb-5">
+       <p>"Healthcare is a human right, not a privilege."</p>
+       <footer class="blockquote-footer">Jose Vega</footer>
+   </blockquote>
+   
+   Continue with your policy details...
+   EOF
+   ```
+
+2. **Add to navigation dropdown** in `hugo.toml`:
+   ```toml
+   [[params.policyProposals]]
+     title = "Healthcare Reform for All Americans"
+     url = "/policy/healthcare-reform/"
+   ```
+
+3. **Build and test:**
+   ```bash
+   npm run build  # Generate the new page
+   npm run dev    # Test locally
+   ```
+
+The new policy page will be available at `/policy/healthcare-reform/` and automatically appear in the Policy Proposals dropdown menu.
+
+**Policy Page Front Matter Options:**
+- `title`: Page title (required)
+- `subtitle`: Optional subtitle shown under the title
+- `description`: SEO description (required)
+- `date`: Publication date
+- `type: "policy"`: Must be set to "policy" (required)
+
+**Existing Policy Pages:**
+- 📄 **Preamble** (`/policy/preamble/`) - How to create "good" policy
+- 💰 **Economics** (`/policy/economics/`) - LaRouche's Four Laws approach
+- 🕊️ **Oasis Plan** (`/policy/oasis-plan/`) - Palestine peace through development
+- 🚀 **Space CCC** (`/policy/space-ccc/`) - Rebuilding the Bronx through space technology
 
 #### Updating Campaign Information
 
