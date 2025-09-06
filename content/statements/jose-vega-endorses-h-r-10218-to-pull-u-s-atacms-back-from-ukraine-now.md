@@ -6,9 +6,9 @@ date: 2024-12-12
 
 ***As an independent candidate&nbsp;for U.S. Congress (14th CD), Bronx, NY in 2024, I fully&nbsp;endorse House Resolution 10218 to prohibit the transfer of Army Tactical Missile&nbsp;Systems (ATACMS) to Ukraine and for other purposes.&nbsp; It is critical now that the American people mobilize to prevent the escalation to nuclear war before, or after January&nbsp;20, 2025.&nbsp; This is especially urgent since military and foreign&nbsp;policy figures such as Statcom's&nbsp;Admiral Thomas Buchanan are now brazenly and recklessly discussing the possible use of nuclear weapons.&nbsp; Please join me in putting a stop to this insanity.&nbsp; Read and circulate the statement below from the LaRouche Organization.&nbsp;&nbsp;***
 
-# Stratcom’s Adm. Buchanan Spills the Beans: U.S. preparing for Nuclear War!
+# **Stratcom’s Adm. Buchanan Spills the Beans: U.S. preparing for Nuclear War!**
 
-**Use H.R. 10218 To Pull U.S. ATACMS Back from Ukraine Now!**
+## **Use H.R. 10218 To Pull U.S. ATACMS Back from Ukraine Now!**
 
 It is urgent that the American people mobilize to urge Congress to immediately **enact H.R. 10218, "To Prohibit the Transfer of Army Tactical Missile Systems to Ukraine (ATACMS) and for other Purposes"**, introduced by Rep. Clay Higgins (R-LA), and now before the House Committee on Foreign Affairs. This is a matter of the utmost urgency, to turn the country from its current course of baiting Russia into nuclear brinkmanship and possible U.S. pre-emptive nuclear strike.
 
