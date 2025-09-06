@@ -1,0 +1,90 @@
+baseURL = "https://votevega.nyc"
+languageCode = "en-US"
+title = "Jose Vega for Congress 2024 | Power, Not Force."
+
+# Content settings
+[pagination]
+  pagerSize = 10
+enableRobotsTXT = true
+enableEmoji = true
+
+# Markup settings
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+# Site parameters
+[params]
+  description = "Bronx warrior, US patriot, and world citizen. Jose Vega is a 25-year-old political organizer and leader in the international youth movement for peace."
+  author = "Jose Vega"
+  email = "info@votevega.nyc"
+  address = "Bronx, NY 10459"
+  donateUrl = "https://secure.votevega.nyc/donate"
+  ogImage = "wp-content/uploads/2024/02/vega-twitter.png"
+
+  # Twitter settings
+  [params.twitter]
+    site = "@josBtrigga"
+    creator = "@josBtrigga"
+
+  # Social media links
+  [[params.social]]
+    name = "Twitter/X"
+    url = "https://twitter.com/JosBtrigga"
+    icon = "fa-brands fa-x-twitter"
+
+  [[params.social]]
+    name = "TikTok"
+    url = "https://tiktok.com"
+    icon = "fa-brands fa-tiktok"
+
+  [[params.social]]
+    name = "YouTube"
+    url = "https://www.youtube.com/@DeclaringIndependence"
+    icon = "fa-brands fa-youtube"
+
+  [[params.social]]
+    name = "Facebook"
+    url = "https://facebook.com"
+    icon = "fa-brands fa-facebook-f"
+
+  # Policy proposals for navigation dropdown
+  [[params.policyProposals]]
+    title = "How to create \"Good policy\"; A preamble to our policy outlook"
+    url = "/policy/preamble/"
+
+  [[params.policyProposals]]
+    title = "My approach to economics"
+    url = "/policy/economics/"
+
+  [[params.policyProposals]]
+    title = "Create A Truly Free Palestine Through The Oasis Plan"
+    url = "/policy/oasis-plan/"
+
+  [[params.policyProposals]]
+    title = "Create a \"Space CCC\" to Rebuild the Bronx and the U.S."
+    url = "/policy/space-ccc/"
+
+# Menu configuration
+[menu]
+  [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 10
+
+  [[menu.main]]
+    name = "News"
+    url = "#news"
+    weight = 20
+
+  [[menu.main]]
+    name = "Statements"
+    url = "/statements/"
+    weight = 30
+
+# Output formats
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+  page = ["HTML"]
+  section = ["HTML", "RSS"]
