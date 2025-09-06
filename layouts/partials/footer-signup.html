@@ -1,0 +1,37 @@
+<!-- Footer Signup Section -->
+<div class="row footer-signup justify-content-center">
+    <div class="col-md-6 yellow-bg p-5">
+        <h3 class="text-center py-3 text-uppercase text-white fs-1">Contribute</h3>
+        <p class="text-center">
+            Your support is crucial to our cause. Join hands with us today and make a meaningful impact by
+            contributing what you can.
+        </p>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="d-grid">
+                    <a href="{{ .Site.Params.donateUrl }}" type="button" class="btn btn-lg btn-primary">Donate</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 blue-bg p-5">
+        <div id="mc_embed_signup">
+            <h3 class="text-center py-3 text-uppercase text-white fs-1">Join</h3>
+            <p class="text-center text-white">
+                Help us by staying informed. Join our mailing list to stay in the know about all of our upcoming
+                events and news.
+            </p>
+            <div class="row justify-content-center py-2">
+                <div class="col-lg-8">
+                    <form id="email-signup" method="post">
+                        <div class="input-group input-group-lg mb-3">
+                            <input type="email" name="email" class="form-control" placeholder="Email Address"
+                                aria-label="Email Address" required>
+                            <input type="submit" value="Submit" class="btn btn-secondary">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

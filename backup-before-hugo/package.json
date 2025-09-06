@@ -4,14 +4,11 @@
   "description": "Custom website to replace votevega.nyc with full customizability while maintaining the same look and feel",
   "main": "index.html",
   "scripts": {
-    "start": "hugo serve --port 3000",
-    "build": "hugo --minify",
-    "dev": "hugo serve --port 8080",
-    "dev-network": "hugo serve --bind 0.0.0.0 --port 8080",
-    "lint": "echo 'Linting files...'",
-    "hugo": "hugo",
-    "hugo-server": "hugo serve",
-    "clean": "rm -rf public resources"
+    "start": "python -m http.server 3000",
+    "build": "echo 'Building static site...'",
+    "dev": "python -m http.server 8080",
+    "dev-network": "python -m http.server 8080 --bind 0.0.0.0",
+    "lint": "echo 'Linting files...'"
   },
   "keywords": [
     "political-campaign",
