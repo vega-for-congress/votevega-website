@@ -1,0 +1,58 @@
+backend:
+  name: git-gateway
+  branch: main # Branch to update (optional; defaults to master)
+
+# Uncomment below to enable drafts
+# publish_mode: editorial_workflow
+
+media_folder: static/images/uploads # Media files will be stored in the repo under static/images/uploads
+public_folder: /images/uploads # The src attribute for uploaded media will begin with /images/uploads
+
+collections:
+  - name: "news" # Used in routes, e.g., /admin/collections/news
+    label: "News Articles" # Used in the UI
+    folder: "content/news" # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
+    fields: # The fields for each document, usually in front matter
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Featured Image", name: "image", widget: "image", required: false}
+      - {label: "Body", name: "body", widget: "markdown"}
+
+  - name: "statements" # Used in routes, e.g., /admin/collections/statements
+    label: "Statements" # Used in the UI
+    folder: "content/statements" # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
+    fields: # The fields for each document, usually in front matter
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Body", name: "body", widget: "markdown"}
+
+  - name: "policy" # Used in routes, e.g., /admin/collections/policy
+    label: "Policy Pages" # Used in the UI
+    folder: "content/policy" # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    slug: "{{slug}}" # Filename template, e.g., title.md
+    fields: # The fields for each document, usually in front matter
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Subtitle", name: "subtitle", widget: "string", required: false}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Type", name: "type", widget: "hidden", default: "policy"}
+      - {label: "Body", name: "body", widget: "markdown"}
+
+  - name: "pages"
+    label: "Pages"
+    files:
+      - label: "Privacy Policy"
+        name: "privacy-policy"
+        file: "content/privacy-policy.md"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Date", name: "date", widget: "datetime"}
+          - {label: "Type", name: "type", widget: "hidden", default: "page"}
+          - {label: "Body", name: "body", widget: "markdown"}
