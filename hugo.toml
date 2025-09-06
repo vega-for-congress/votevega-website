@@ -3,7 +3,8 @@ languageCode = "en-US"
 title = "Jose Vega for Congress 2024 | Power, Not Force."
 
 # Content settings
-paginate = 10
+[pagination]
+  pagerSize = 10
 enableRobotsTXT = true
 enableEmoji = true
 
@@ -51,19 +52,19 @@ enableEmoji = true
   # Policy proposals for navigation dropdown
   [[params.policyProposals]]
     title = "How to create \"Good policy\"; A preamble to our policy outlook"
-    url = "#preamble"
+    url = "/policy/preamble/"
 
   [[params.policyProposals]]
     title = "My approach to economics"
-    url = "#economics"
+    url = "/policy/economics/"
 
   [[params.policyProposals]]
     title = "Create A Truly Free Palestine Through The Oasis Plan"
-    url = "#oasis-plan"
+    url = "/policy/oasis-plan/"
 
   [[params.policyProposals]]
     title = "Create a \"Space CCC\" to Rebuild the Bronx and the U.S."
-    url = "#space-ccc"
+    url = "/policy/space-ccc/"
 
 # Menu configuration
 [menu]

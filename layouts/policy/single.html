@@ -1,0 +1,28 @@
+{{ define "main" }}
+<!-- Page Header -->
+<div class="policy-header py-5 mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="display-4 fw-bold text-uppercase mb-3">{{ .Title }}</h1>
+                {{ if .Params.subtitle }}
+                <p class="lead text-muted">{{ .Params.subtitle }}</p>
+                {{ end }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Policy Content -->
+<div class="policy-content py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="policy-article">
+                    {{ .Content }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{ end }}
