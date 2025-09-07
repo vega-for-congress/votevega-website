@@ -170,6 +170,95 @@ h1, h2, h3, h4, h5, h6 {
     padding-bottom: 0.25rem !important;
 }
 
+/* Fix mobile navbar jumping with absolute positioning approach */
+@media (max-width: 991.98px) {
+    .navbar {
+        position: relative;
+        padding: 0;
+    }
+    
+    /* Create fixed header area that never moves */
+    .navbar .container-fluid {
+        height: 60px;
+        padding: 0.5rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        z-index: 10;
+        background-color: inherit;
+    }
+    
+    .navbar-brand {
+        margin: 0;
+        padding: 0;
+        line-height: 1;
+    }
+    
+    .navbar-toggler {
+        margin: 0;
+        padding: 0.375rem 0.5rem;
+        border: none;
+    }
+    
+    /* Position collapse absolutely so it doesn't affect header */
+    .navbar-collapse {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        width: 100vw;
+        background-color: var(--dark-nav);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 1rem 1rem 2rem 1rem; /* Extra bottom padding for buttons */
+        z-index: 9;
+        
+        /* Dynamic height with scrolling */
+        max-height: 0;
+        overflow-y: auto;
+        overflow-x: hidden;
+        opacity: 0;
+        transition: max-height 0.3s ease-in-out, opacity 0.2s ease-in-out;
+        
+        /* Ensure it covers full width */
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    .navbar-collapse.show {
+        max-height: calc(100vh - 60px); /* Full viewport height minus navbar */
+        opacity: 1;
+    }
+    
+    /* Style the nav items */
+    .navbar-nav {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .nav-item {
+        margin: 0;
+    }
+    
+    .nav-link {
+        padding: 0.75rem 0;
+        margin: 0;
+    }
+    
+    /* Fix button container on mobile */
+    .d-grid.gap-2.d-sm-flex {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        padding: 0;
+    }
+    
+    /* Improve button styling in mobile menu */
+    .navbar-collapse .btn {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+}
+
 .navbar .container-fluid {
     padding-left: 1rem !important;
     padding-right: 1rem !important;
@@ -199,7 +288,6 @@ h1, h2, h3, h4, h5, h6 {
 .navbar .btn {
     padding: 0.375rem 0.75rem !important;
     font-size: 0.875rem !important;
-    margin-left: 0.25rem;
 }
 
 .navbar-nav .nav-link:hover {
@@ -234,6 +322,76 @@ h1, h2, h3, h4, h5, h6 {
 .dropdown-item:focus {
     background-color: var(--primary-red);
     color: var(--text-light);
+}
+
+/* Mobile dropdown improvements */
+@media (max-width: 991.98px) {
+    .dropdown-menu {
+        position: static;
+        float: none;
+        width: auto;
+        margin-top: 0;
+        background-color: rgba(0, 0, 0, 0.9);
+        border: none;
+        border-radius: 0;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        
+        /* Add smooth slide animation */
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: max-height 0.3s ease-in-out, opacity 0.2s ease-in-out;
+    }
+    
+    .dropdown-menu.show {
+        max-height: 500px; /* Adjust based on your content */
+        opacity: 1;
+    }
+    
+    .dropdown-item {
+        padding: 0.75rem 2rem;
+        color: rgba(255, 255, 255, 0.8);
+        transform: translateX(-10px);
+        opacity: 0;
+        transition: all 0.2s ease;
+    }
+    
+    .show > .dropdown-menu .dropdown-item {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    
+    /* Stagger animation for dropdown items */
+    .show > .dropdown-menu .dropdown-item:nth-child(1) {
+        transition-delay: 0.1s;
+    }
+    
+    .show > .dropdown-menu .dropdown-item:nth-child(2) {
+        transition-delay: 0.15s;
+    }
+    
+    .show > .dropdown-menu .dropdown-item:nth-child(3) {
+        transition-delay: 0.2s;
+    }
+    
+    .show > .dropdown-menu .dropdown-item:nth-child(4) {
+        transition-delay: 0.25s;
+    }
+    
+    .dropdown-item:hover,
+    .dropdown-item:focus {
+        background-color: var(--primary-red);
+        color: var(--text-light);
+        transform: translateX(5px);
+    }
+    
+    .dropdown-toggle::after {
+        transition: transform 0.3s ease;
+    }
+    
+    .show > .dropdown-toggle::after {
+        transform: rotate(180deg);
+    }
 }
 
 /* Twitter embed styling */
