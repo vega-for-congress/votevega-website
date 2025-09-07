@@ -1,0 +1,56 @@
+[build]
+  command = "npm run build"
+  publish = "public"
+
+[build.environment]
+  HUGO_VERSION = "0.119.0"
+  NODE_VERSION = "18"
+
+# Security headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-XSS-Protection = "1; mode=block"
+
+# Cache static assets for 1 year
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Cache HTML files for 1 hour (allows for quick updates during campaign)
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+# Form handling for campaign contact forms (if needed)
+# Uncomment and configure if you add contact forms later
+# [[redirects]]
+#   from = "/contact"
+#   to = "/.netlify/functions/contact"
+#   status = 200
+
+# 404 page handling
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404
