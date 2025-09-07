@@ -5,6 +5,9 @@
 [build.environment]
   HUGO_VERSION = "0.119.0"
   NODE_VERSION = "18"
+  # TinaCMS configuration (set these in Netlify dashboard after creating TinaCMS project)
+  # NEXT_PUBLIC_TINA_CLIENT_ID = "your-tina-client-id"
+  # TINA_TOKEN = "your-tina-token"
 
 # Security headers
 [[headers]]
