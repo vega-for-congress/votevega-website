@@ -7,7 +7,7 @@
     "start": "hugo serve --port 3000",
     "build": "hugo --minify",
     "dev": "hugo serve --port 8080",
-    "dev-network": "hugo serve --bind 0.0.0.0 --port 8080",
+    "dev-network": "echo \"Starting network-accessible server...\" && echo \"Local IP: $(hostname -I | awk '{print $1}')\" && echo \"Access from other devices: http://$(hostname -I | awk '{print $1}'):8080\" && hugo serve --bind 0.0.0.0 --port 8080",
     "lint": "echo 'Linting files...'",
     "hugo": "hugo",
     "hugo-server": "hugo serve",

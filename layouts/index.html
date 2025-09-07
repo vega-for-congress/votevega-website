@@ -127,27 +127,25 @@
 </div>
 
 <!-- Statements Section -->
-<div id="statements" class="new-section py-5">
-    <div class="container">
-        <h2 class="text-center py-2 mx-2 display-4 text-uppercase">Statements</h2>
-        <div class="row statements pt-5 justify-content-center">
-            {{ range first 3 (where .Site.RegularPages "Section" "statements").ByDate.Reverse }}
-            <div class="col-lg-4">
-                <h3 class="pt-2 pb-0 mb-0">
-                    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-                </h3>
-                <p class="post-meta mb-2">{{ .Date.Format "January 2, 2006" }}</p>
-                <p class="mb-2">{{ if .Description }}{{ .Description | truncate 120 }}{{ else }}{{ .Summary | truncate 120 }}{{ end }}</p>
-                <p><strong><a class="text-uppercase mt-3" href="{{ .RelPermalink }}">Keep Reading</a></strong></p>
-            </div>
-            {{ end }}
+<div id="statements" class="container py-5 px-4">
+    <h2 class="text-center py-2 mx-2 display-4 text-uppercase">Statements</h2>
+    <div class="row statements pt-5 justify-content-center">
+        {{ range first 3 (where .Site.RegularPages "Section" "statements").ByDate.Reverse }}
+        <div class="col-lg-4">
+            <h3 class="pt-2 pb-0 mb-0">
+                <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+            </h3>
+            <p class="post-meta mb-2">{{ .Date.Format "January 2, 2006" }}</p>
+            <p class="mb-2">{{ if .Description }}{{ .Description | truncate 120 }}{{ else }}{{ .Summary | truncate 120 }}{{ end }}</p>
+            <p><strong><a class="text-uppercase mt-3" href="{{ .RelPermalink }}">Keep Reading</a></strong></p>
         </div>
+        {{ end }}
+    </div>
 
-        <div class="row justify-content-center mb-5">
-            <div class="col-lg-3">
-                <div class="d-grid">
-                    <a href="{{ "/statements/" | relURL }}" type="button" class="btn btn-lg btn-primary">All Statements</a>
-                </div>
+    <div class="row justify-content-center mb-5">
+        <div class="col-lg-3">
+            <div class="d-grid">
+                <a href="{{ "/statements/" | relURL }}" type="button" class="btn btn-lg btn-primary">All Statements</a>
             </div>
         </div>
     </div>

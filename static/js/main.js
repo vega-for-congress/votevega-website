@@ -134,17 +134,90 @@
         window.addEventListener('load', updateNavbar);
         window.addEventListener('resize', updateNavbar);
 
-        // Close mobile menu when clicking on a link
-        const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+        // Close mobile menu when clicking on regular nav links (but not dropdowns)
+        const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+        const dropdownItems = document.querySelectorAll('.dropdown-item');
         const navbarCollapse = document.querySelector('.navbar-collapse');
         const navbarToggler = document.querySelector('.navbar-toggler');
         
+        // Close menu for regular nav links
         navLinks.forEach(function(link) {
             link.addEventListener('click', function() {
                 if (navbarCollapse.classList.contains('show')) {
                     navbarToggler.click();
                 }
             });
+        });
+        
+        // Close menu for dropdown items
+        dropdownItems.forEach(function(item) {
+            item.addEventListener('click', function() {
+                if (navbarCollapse.classList.contains('show')) {
+                    navbarToggler.click();
+                }
+            });
+        });
+        
+        // Handle mobile dropdown behavior
+        const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+        
+        dropdownToggles.forEach(function(toggle) {
+            toggle.addEventListener('click', function(e) {
+                if (window.innerWidth < 992) {
+                    // On mobile, manually handle the dropdown
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const dropdown = this.parentElement;
+                    const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+                    const isOpen = dropdown.classList.contains('show');
+                    
+                    // Close any other open dropdowns first
+                    document.querySelectorAll('.dropdown.show').forEach(function(openDropdown) {
+                        if (openDropdown !== dropdown) {
+                            openDropdown.classList.remove('show');
+                            openDropdown.querySelector('.dropdown-menu').classList.remove('show');
+                            openDropdown.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
+                        }
+                    });
+                    
+                    // Toggle current dropdown with smooth animation
+                    if (isOpen) {
+                        // Close dropdown
+                        dropdown.classList.remove('show');
+                        dropdownMenu.classList.remove('show');
+                        this.setAttribute('aria-expanded', 'false');
+                    } else {
+                        // Open dropdown
+                        dropdown.classList.add('show');
+                        // Small delay to ensure the show class is applied before menu shows
+                        setTimeout(function() {
+                            dropdownMenu.classList.add('show');
+                        }, 10);
+                        this.setAttribute('aria-expanded', 'true');
+                    }
+                    
+                    // Ensure the navbar-collapse has enough height for the content
+                    setTimeout(function() {
+                        const navbarCollapse = document.querySelector('.navbar-collapse');
+                        if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+                            // Let CSS handle the max-height with calc(100vh - 60px)
+                            // The overflow-y: auto will handle scrolling if needed
+                        }
+                    }, 50);
+                }
+            });
+        });
+        
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(e) {
+            if (window.innerWidth < 992 && !e.target.closest('.dropdown')) {
+                document.querySelectorAll('.dropdown.show').forEach(function(dropdown) {
+                    dropdown.classList.remove('show');
+                    dropdown.querySelector('.dropdown-menu').classList.remove('show');
+                    dropdown.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
+                });
+            }
         });
     }
 
