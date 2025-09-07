@@ -5,13 +5,15 @@
   "main": "index.html",
   "scripts": {
     "start": "hugo serve --port 3000",
-    "build": "hugo --minify",
+    "build": "tinacms build && hugo --minify",
     "dev": "hugo serve --port 8080",
     "dev-network": "hugo serve --bind 0.0.0.0 --port 8080",
+    "dev-cms": "tinacms dev -c \"hugo serve --port 8080\"",
     "lint": "echo 'Linting files...'",
     "hugo": "hugo",
     "hugo-server": "hugo serve",
-    "clean": "rm -rf public resources"
+    "clean": "rm -rf public resources .tina/__generated__",
+    "tina-init": "tinacms init"
   },
   "keywords": [
     "political-campaign",
@@ -23,9 +25,13 @@
   "author": "VoteVega Campaign",
   "license": "MIT",
   "devDependencies": {
-    "live-server": "^1.2.2"
+    "live-server": "^1.2.2",
+    "@tinacms/cli": "^1.5.30",
+    "tinacms": "^1.5.30"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@tinacms/datalayer": "^1.2.30"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/your-username/votevega-website.git"
