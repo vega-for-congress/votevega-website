@@ -35,6 +35,11 @@ enableEmoji = true
     icon = "fa-brands fa-x-twitter"
 
   [[params.social]]
+    name = "Instagram"
+    url = "https://www.instagram.com/josbtrigga/"
+    icon = "fa-brands fa-instagram"
+
+  [[params.social]]
     name = "TikTok"
     url = "https://tiktok.com"
     icon = "fa-brands fa-tiktok"
