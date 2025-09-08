@@ -1216,10 +1216,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Statements Page Styles */
-.statements-page .site-header {
-    position: relative;
-    transform: translateY(0) !important;
-}
 
 .statements-header {
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
