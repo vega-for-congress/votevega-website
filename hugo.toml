@@ -41,7 +41,7 @@ enableEmoji = true
 
   [[params.social]]
     name = "TikTok"
-    url = "https://tiktok.com"
+    url = "https://www.tiktok.com/@vegaistic"
     icon = "fa-brands fa-tiktok"
 
   [[params.social]]
