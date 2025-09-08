@@ -53,6 +53,11 @@
     box-sizing: border-box;
 }
 
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
 /* Hide scrollbars on mobile for seamless design */
 @media (max-width: 767px) {
     body {
