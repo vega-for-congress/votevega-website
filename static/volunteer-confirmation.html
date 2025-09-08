@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to the Movement! - Jose Vega for Congress</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .confirmation-container {
+            max-width: 800px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header-section {
+            background: linear-gradient(135deg, #dc3545, #c82333);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: scale(1.1);
+                opacity: 0.3;
+            }
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.9);
+            animation: bounce 1s ease-out 0.3s both;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            transition: all 0.5s ease;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-10px);
+            }
+
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .header-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-subtitle {
+            font-size: 1.2rem;
+            font-weight: 500;
+            opacity: 0.95;
+            margin-bottom: 0;
+        }
+
+        .content-section {
+            padding: 50px 40px;
+            text-align: center;
+        }
+
+        .main-message {
+            font-size: 1.3rem;
+            color: #495057;
+            line-height: 1.7;
+            margin-bottom: 40px;
+            font-weight: 500;
+        }
+
+        .next-steps {
+            background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .next-steps::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                left: -100%;
+            }
+
+            100% {
+                left: 100%;
+            }
+        }
+
+        .next-steps h4 {
+            font-weight: 700;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .next-steps p {
+            margin-bottom: 0;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-action {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-donate {
+            background: linear-gradient(135deg, #dc3545, #c82333);
+            color: white;
+            box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+        }
+
+        .btn-donate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(220, 53, 69, 0.4);
+            color: white;
+        }
+
+        .btn-back {
+            background: white;
+            color: #0d6efd;
+            border: 2px solid #0d6efd;
+            box-shadow: 0 4px 15px rgba(13, 110, 253, 0.2);
+        }
+
+        .btn-back:hover {
+            background: #0d6efd;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(13, 110, 253, 0.3);
+        }
+
+        .campaign-info {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid #e9ecef;
+        }
+
+        .campaign-logo {
+            max-width: 200px;
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: #f8f9fa;
+            border-radius: 50%;
+            color: #495057;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: #dc3545;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .confirmation-container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+
+            .header-section {
+                padding: 30px 20px;
+            }
+
+            .header-title {
+                font-size: 2rem;
+            }
+
+            .content-section {
+                padding: 30px 25px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn-action {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="confirmation-container">
+        <!-- Header Section -->
+        <div class="header-section">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h1 class="header-title">Welcome to the Movement!</h1>
+            <p class="header-subtitle">You're now part of the fight to transform the Bronx</p>
+        </div>
+
+        <!-- Content Section -->
+        <div class="content-section">
+            <p class="main-message">
+                Thank you for joining our campaign! We're building a powerful grassroots movement for
+                <strong>reindustrialization</strong>, <strong>peace through development</strong>, and a <strong>real
+                    medicare for all policy</strong>.
+                Your voice and action will help us bring real change to NY-15 and beyond.
+            </p>
+
+            <div class="next-steps">
+                <h4><i class="fas fa-info-circle me-2"></i>What's Next?</h4>
+                <p>
+                    Check your email for a welcome message with volunteer opportunities.
+                    Follow us on social media for campaign updates, and get ready to make history together!
+                </p>
+            </div>
+
+            <div class="action-buttons">
+                <a href="https://secure.votevega.nyc/donate" class="btn-action btn-donate" target="_blank">
+                    <i class="fas fa-heart me-2"></i>Support Our Campaign
+                </a>
+                <a href="javascript:history.back()" class="btn-action btn-back">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Site
+                </a>
+            </div>
+
+            <div class="campaign-info">
+                <h5 style="color: #495057; font-weight: 700; margin-bottom: 15px;">Jose Vega for Congress</h5>
+                <p style="color: #6c757d; margin-bottom: 0;">Fighting for the people of NY-15, the Bronx</p>
+
+                <div class="social-links">
+                    <a href="https://twitter.com/JosBtrigga" class="social-link" title="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://www.instagram.com/josbtrigga/" class="social-link" title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.youtube.com/@DeclaringIndependence" class="social-link" title="YouTube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="https://www.tiktok.com/@vegaistic" class="social-link" title="TikTok">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auto-close script for popup behavior -->
+    <script>
+        // If this page was opened in a popup, add close button functionality
+        if (window.opener) {
+            const backButton = document.querySelector('.btn-back');
+            backButton.innerHTML = '<i class="fas fa-times me-2"></i>Close';
+            backButton.onclick = function (e) {
+                e.preventDefault();
+                window.close();
+            };
+        }
+
+        // Smooth animations on load
+        document.addEventListener('DOMContentLoaded', function () {
+            // Add staggered animation to social links
+            const socialLinks = document.querySelectorAll('.social-link');
+            socialLinks.forEach((link, index) => {
+                link.style.animationDelay = (index * 100) + 'ms';
+                link.style.animation = 'slideUp 0.5s ease-out forwards';
+                link.style.opacity = '0';
+            });
+
+            // Add success glow animation
+            setTimeout(() => {
+                const icon = document.querySelector('.success-icon');
+                icon.style.textShadow = '0 0 20px rgba(255, 255, 255, 0.8), 0 2px 8px rgba(0, 0, 0, 0.3)';
+                icon.style.transform = 'scale(1.05)';
+            }, 1000);
+        });
+    </script>
+</body>
+
+</html>
