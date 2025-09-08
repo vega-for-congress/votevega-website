@@ -71,6 +71,10 @@ enableEmoji = true
     title = "Create a \"Space CCC\" to Rebuild the Bronx and the U.S."
     url = "/policy/space-ccc/"
 
+  [[params.policyProposals]]
+    title = "All Policies"
+    url = "/policy/"
+
 # Menu configuration
 [menu]
   [[menu.main]]
