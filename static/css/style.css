@@ -79,6 +79,11 @@ body {
     color: var(--text-dark);
     margin: 0;
     padding: 0;
+    background-color: black;
+}
+
+.site-main {
+    background-color: white;
 }
 
 /* Typography - Headings use Vanguardia */
