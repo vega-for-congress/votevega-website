@@ -348,16 +348,35 @@ Analyze the issue now and provide your response:"""
             json_end = json_match.end()
             remaining_response = response[json_end:]
             
-            # Find all diff blocks (lines starting with --- or +++)
-            diff_pattern = re.compile(r'(^--- .*?\n\+\+\+ .*?\n(?:@@.*?@@\n(?:.*\n)*?))', re.MULTILINE)
+            print(f"Looking for diff blocks in remaining response: {remaining_response[:200]}...")
+            
+            # More flexible diff pattern - look for lines starting with --- followed by +++
+            # This handles both bare diffs and diffs in code blocks
+            diff_pattern = re.compile(r'(^---\s+.*?\n^\+\+\+\s+.*?\n(?:^@@.*?@@\n(?:^.*\n)*?)*)', re.MULTILINE)
             
             for diff_match in diff_pattern.finditer(remaining_response):
                 diff_block = diff_match.group(1)
+                print(f"Found diff block: {diff_block[:100]}...")
                 diff_blocks.append(diff_block)
+            
+            # Also try to extract diff blocks from code blocks
+            code_block_pattern = re.compile(r'```[^\n]*\n(---\s+.*?\n\+\+\+\s+.*?\n(?:@@.*?@@\n(?:.*\n)*?)*)```', re.MULTILINE | re.DOTALL)
+            
+            for code_match in code_block_pattern.finditer(remaining_response):
+                diff_content = code_match.group(1)
+                print(f"Found diff in code block: {diff_content[:100]}...")
+                diff_blocks.append(diff_content)
             
             # Add diff blocks to metadata
             metadata['diff_blocks'] = diff_blocks
             metadata['has_diffs'] = len(diff_blocks) > 0
+            
+            # If no diffs found, print the full response for debugging
+            if len(diff_blocks) == 0:
+                print("No diff blocks found. Full LLM response:")
+                print("=" * 50)
+                print(response)
+                print("=" * 50)
             
             return metadata
             
