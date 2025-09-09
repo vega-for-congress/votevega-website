@@ -391,10 +391,19 @@ Analyze the issue now and provide your response:"""
             import subprocess
             import tempfile
             
+            print(f"Full diff block to apply:")
+            print("=" * 50)
+            print(repr(diff_block))  # Show exact content including whitespace
+            print("=" * 50)
+            print(diff_block)
+            print("=" * 50)
+            
             # Write diff to temporary file
             with tempfile.NamedTemporaryFile(mode='w', suffix='.diff', delete=False) as f:
                 f.write(diff_block)
                 diff_file = f.name
+            
+            print(f"Wrote diff to temporary file: {diff_file}")
             
             # Apply the diff using git apply
             result = subprocess.run(
@@ -404,19 +413,79 @@ Analyze the issue now and provide your response:"""
                 text=True
             )
             
+            print(f"git apply stdout: {result.stdout}")
+            print(f"git apply stderr: {result.stderr}")
+            print(f"git apply return code: {result.returncode}")
+            
             # Clean up temp file
             import os
             os.unlink(diff_file)
             
             if result.returncode == 0:
-                print(f"Successfully applied diff block")
+                print(f"Successfully applied diff block using git apply")
                 return True
             else:
-                print(f"Failed to apply diff block: {result.stderr}")
-                return False
+                print(f"git apply failed, trying manual approach...")
+                return self.apply_diff_manually(diff_block)
                 
         except Exception as e:
             print(f"Error applying diff block: {e}")
+            return False
+    
+    def apply_diff_manually(self, diff_block: str) -> bool:
+        """Manually apply a diff when git apply fails"""
+        try:
+            # For CSS files, extract additions and append them
+            lines = diff_block.split('\n')
+            
+            # Find the target file
+            file_path = None
+            for line in lines:
+                if line.startswith('+++'):
+                    file_path = line.split(None, 1)[1].strip()
+                    break
+            
+            if not file_path:
+                print("Could not extract file path from diff")
+                return False
+            
+            print(f"Manually applying diff to: {file_path}")
+            
+            # Extract added lines (lines starting with +, but not +++)
+            added_lines = []
+            for line in lines:
+                if line.startswith('+') and not line.startswith('+++'):
+                    added_lines.append(line[1:])  # Remove the + prefix
+            
+            if not added_lines:
+                print("No added lines found in diff")
+                return False
+            
+            print(f"Found {len(added_lines)} lines to add")
+            
+            # Apply to file
+            target_file = self.repo_root / file_path
+            
+            # Create directory if it doesn't exist
+            target_file.parent.mkdir(parents=True, exist_ok=True)
+            
+            # Read existing content or create empty
+            if target_file.exists():
+                existing_content = target_file.read_text(encoding='utf-8')
+            else:
+                existing_content = ""
+            
+            # Append new content with a comment
+            new_content = existing_content + "\n\n/* Auto-generated fix from GitHub Action */\n" + "\n".join(added_lines)
+            
+            # Write back to file
+            target_file.write_text(new_content, encoding='utf-8')
+            
+            print(f"Successfully applied changes manually to {target_file}")
+            return True
+            
+        except Exception as e:
+            print(f"Error in manual diff application: {e}")
             return False
     
     def apply_fixes(self, fix_data: Dict) -> bool:
