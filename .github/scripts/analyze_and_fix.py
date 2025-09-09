@@ -265,31 +265,36 @@ Analyze this GitHub issue and determine if you can propose a specific code fix. 
 
 # CRITICAL: Response Format Requirements
 
-**YOU MUST RESPOND ONLY WITH VALID JSON. DO NOT INCLUDE ANY TEXT OUTSIDE THE JSON RESPONSE.**
+**RESPOND WITH JSON METADATA FOLLOWED BY DIFF BLOCKS**
 
-If you can propose a fix, respond ONLY with this JSON format (no markdown code blocks, no explanatory text):
-
-{{
+First, provide a JSON summary:
+```json
+{
   "can_fix": true,
   "fix_type": "bug_fix|feature_addition|content_update|style_fix",
   "summary": "Brief description of what you're fixing",
-  "files_to_change": [
-    {{
-      "path": "relative/path/to/file",
-      "action": "create|modify",
-      "content": "complete new file content OR modified content",
-      "description": "what changes are being made to this file"
-    }}
-  ],
   "explanation": "Detailed explanation of the fix and why this approach was chosen"
-}}
+}
+```
 
-If you cannot propose a fix, respond ONLY with this JSON (no markdown code blocks, no explanatory text):
+Then, provide the changes as standard diff format blocks:
+```
+--- path/to/file.ext
++++ path/to/file.ext
+@@ -start,count +start,count @@
+ context line
+-removed line
++added line
+ context line
+```
 
-{{
+If you cannot propose a fix, respond with only:
+```json
+{
   "can_fix": false,
   "reason": "explanation of why this cannot be automatically fixed"
-}}
+}
+```
 
 Important constraints:
 - Only propose changes you're confident about
@@ -302,77 +307,126 @@ Important constraints:
 - Focus on the actual issue described - if it's about mobile/responsive design, modify CSS or HTML templates
 - If it's a styling issue, look at static/css/style.css and layout files in layouts/
 
-REMEMBER: Your response must be ONLY valid JSON, nothing else. No explanations, no markdown formatting, just the JSON object.
+DIFF FORMAT NOTES:
+- Use standard unified diff format
+- Include enough context lines (before and after changes) to ensure uniqueness
+- For new files, use /dev/null as the source
+- Be precise with line numbers and context
 
-Analyze the issue now and provide your JSON response:"""
+Analyze the issue now and provide your response:"""
         
         return prompt
     
     def parse_llm_response(self, response: str) -> Dict:
-        """Parse the LLM response and extract JSON"""
+        """Parse the LLM response with JSON metadata and diff blocks"""
         try:
             import re
             
-            # Clean up the response - remove extra whitespace
+            # Clean up the response
             response = response.strip()
             
-            # Method 1: Try to find JSON block in markdown
+            # Extract JSON metadata
             json_match = re.search(r'```json\s*(\{.*?\})\s*```', response, re.DOTALL)
-            if json_match:
-                json_str = json_match.group(1)
-                return json.loads(json_str)
+            if not json_match:
+                # Try without language specifier
+                json_match = re.search(r'```\s*(\{.*?\})\s*```', response, re.DOTALL)
             
-            # Method 2: Try to find JSON block without language specifier
-            json_match = re.search(r'```\s*(\{.*?\})\s*```', response, re.DOTALL)
-            if json_match:
-                json_str = json_match.group(1)
-                return json.loads(json_str)
+            if not json_match:
+                print("No JSON metadata found in response")
+                return {"can_fix": False, "reason": "No JSON metadata found in LLM response"}
             
-            # Method 3: Look for JSON object anywhere in the response
-            json_match = re.search(r'(\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\})', response, re.DOTALL)
-            if json_match:
-                json_str = json_match.group(1)
-                try:
-                    return json.loads(json_str)
-                except json.JSONDecodeError:
-                    # If single-line match failed, try multiline approach
-                    pass
+            json_str = json_match.group(1)
+            metadata = json.loads(json_str)
             
-            # Method 4: Try to parse the entire response as JSON
-            return json.loads(response)
+            # If can't fix, return just the metadata
+            if not metadata.get("can_fix", False):
+                return metadata
+            
+            # Extract diff blocks
+            diff_blocks = []
+            # Look for diff blocks after the JSON
+            json_end = json_match.end()
+            remaining_response = response[json_end:]
+            
+            # Find all diff blocks (lines starting with --- or +++)
+            diff_pattern = re.compile(r'(^--- .*?\n\+\+\+ .*?\n(?:@@.*?@@\n(?:.*\n)*?))', re.MULTILINE)
+            
+            for diff_match in diff_pattern.finditer(remaining_response):
+                diff_block = diff_match.group(1)
+                diff_blocks.append(diff_block)
+            
+            # Add diff blocks to metadata
+            metadata['diff_blocks'] = diff_blocks
+            metadata['has_diffs'] = len(diff_blocks) > 0
+            
+            return metadata
             
         except Exception as e:
             print(f"Error parsing LLM response: {e}")
             print(f"Response was: {response[:500]}...")
-            # If parsing completely fails, check if it looks like the LLM gave a text response
-            if response and not response.strip().startswith('{'):
-                return {
-                    "can_fix": False, 
-                    "reason": "LLM provided text response instead of required JSON format. Response was not parseable as JSON."
-                }
-            return {"can_fix": False, "reason": "Failed to parse LLM response as JSON"}
+            return {"can_fix": False, "reason": f"Failed to parse LLM response: {str(e)}"}
+    
+    def apply_diff_block(self, diff_block: str) -> bool:
+        """Apply a single diff block to the repository"""
+        try:
+            import subprocess
+            import tempfile
+            
+            # Write diff to temporary file
+            with tempfile.NamedTemporaryFile(mode='w', suffix='.diff', delete=False) as f:
+                f.write(diff_block)
+                diff_file = f.name
+            
+            # Apply the diff using git apply
+            result = subprocess.run(
+                ['git', 'apply', '--verbose', diff_file],
+                cwd=self.repo_root,
+                capture_output=True,
+                text=True
+            )
+            
+            # Clean up temp file
+            import os
+            os.unlink(diff_file)
+            
+            if result.returncode == 0:
+                print(f"Successfully applied diff block")
+                return True
+            else:
+                print(f"Failed to apply diff block: {result.stderr}")
+                return False
+                
+        except Exception as e:
+            print(f"Error applying diff block: {e}")
+            return False
     
     def apply_fixes(self, fix_data: Dict) -> bool:
-        """Apply the proposed fixes to the repository"""
+        """Apply the proposed fixes using diff blocks"""
         if not fix_data.get("can_fix", False):
+            return False
+        
+        if not fix_data.get("has_diffs", False):
+            print("No diff blocks found to apply")
             return False
             
         try:
-            files_changed = 0
-            for file_change in fix_data.get("files_to_change", []):
-                file_path = self.repo_root / file_change["path"]
-                
-                # Create directory if it doesn't exist
-                file_path.parent.mkdir(parents=True, exist_ok=True)
-                
-                # Write the new content
-                file_path.write_text(file_change["content"], encoding='utf-8')
-                files_changed += 1
-                print(f"Modified: {file_change['path']}")
-                
-            print(f"Applied fixes to {files_changed} files")
-            return files_changed > 0
+            diff_blocks = fix_data.get('diff_blocks', [])
+            successful_applies = 0
             
+            for i, diff_block in enumerate(diff_blocks):
+                print(f"Applying diff block {i+1}/{len(diff_blocks)}...")
+                if self.apply_diff_block(diff_block):
+                    successful_applies += 1
+                else:
+                    print(f"Failed to apply diff block {i+1}")
+            
+            if successful_applies > 0:
+                print(f"Successfully applied {successful_applies}/{len(diff_blocks)} diff blocks")
+                return True
+            else:
+                print("Failed to apply any diff blocks")
+                return False
+                
         except Exception as e:
             print(f"Error applying fixes: {e}")
             return False
