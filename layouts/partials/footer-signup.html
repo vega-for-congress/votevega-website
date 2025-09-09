@@ -37,7 +37,7 @@
                     <div class="col-lg-10">
                         <form id="email-signup" method="post">
                             <div class="input-group mb-3" style="border-radius: 50px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                                <input type="email" name="email" class="form-control border-0" 
+                                <input type="email" name="email" id="footer-email" class="form-control border-0" 
                                        placeholder="Enter your email address"
                                        aria-label="Email Address" required 
                                        style="padding: 15px 20px; font-size: 1rem; background: white;">
@@ -47,6 +47,48 @@
                                         onmouseout="this.style.background='white';">Join Now</button>
                             </div>
                         </form>
+                        
+                        <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            const footerForm = document.getElementById('email-signup');
+                            const footerEmailInput = document.getElementById('footer-email');
+                            
+                            footerForm.addEventListener('submit', function(e) {
+                                e.preventDefault();
+                                
+                                // Get the email value from the footer form
+                                const emailValue = footerEmailInput.value.trim();
+                                
+                                if (emailValue && emailValue.includes('@')) {
+                                    // Scroll to the volunteer section with navbar offset
+                                    const volunteerSection = document.getElementById('volunteer');
+                                    if (volunteerSection) {
+                                        // Calculate position with offset for navbar (approximately 80px)
+                                        const sectionTop = volunteerSection.offsetTop - 80;
+                                        window.scrollTo({
+                                            top: sectionTop,
+                                            behavior: 'smooth'
+                                        });
+                                        
+                                        // Wait for scroll animation to complete, then populate the email field
+                                        setTimeout(function() {
+                                            const mainEmailField = document.getElementById('email');
+                                            if (mainEmailField) {
+                                                mainEmailField.value = emailValue;
+                                                mainEmailField.focus();
+                                                
+                                                // Add a subtle highlight effect
+                                                mainEmailField.style.boxShadow = '0 0 10px rgba(220, 53, 69, 0.3)';
+                                                setTimeout(function() {
+                                                    mainEmailField.style.boxShadow = '';
+                                                }, 2000);
+                                            }
+                                        }, 800);
+                                    }
+                                }
+                            });
+                        });
+                        </script>
                     </div>
                 </div>
             </div>
