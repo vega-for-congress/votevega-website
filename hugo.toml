@@ -59,20 +59,20 @@ enableEmoji = true
 
   # Policy proposals for navigation dropdown
   [[params.policyProposals]]
-    title = "How to create \"Good policy\"; A preamble to our policy outlook"
-    url = "/policy/preamble/"
+    title = "A real medicare for all policy"
+    url = "/policy/real-medicare-for-all/"
 
   [[params.policyProposals]]
-    title = "My approach to economics"
-    url = "/policy/economics/"
-
-  [[params.policyProposals]]
-    title = "A Revolutionary Approach to Foreign Policy — Peace Through Development"
-    url = "/policy/peace-through-development/"
-
-  [[params.policyProposals]]
-    title = "Create a \"Space CCC\" to Rebuild the Bronx and the U.S."
+    title = "Make the Bronx the center for reindustrialization of the United States"
     url = "/policy/space-ccc/"
+
+  [[params.policyProposals]]
+    title = "A robust immigration reform"
+    url = "/policy/robust-immigration-reform/"
+
+  [[params.policyProposals]]
+    title = "A revolutionary approach to foreign policy: Peace through Development"
+    url = "/policy/peace-through-development/"
 
   [[params.policyProposals]]
     title = "All Policies"
