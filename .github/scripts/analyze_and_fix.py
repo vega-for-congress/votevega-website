@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
-LLM-powered issue analysis and code fix generation script.
+LLM-powered issue analysis and code fix generation script v2.
 This script analyzes GitHub issues and generates potential code fixes.
+Updated: 2025-09-09 - Fixed model caching issue
 """
 
 import os

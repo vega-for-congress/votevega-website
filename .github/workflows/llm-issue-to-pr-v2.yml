@@ -1,4 +1,4 @@
-name: LLM-Powered Issue to PR
+name: LLM-Powered Issue to PR v2
 
 on:
   issues:
