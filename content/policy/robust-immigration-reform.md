@@ -1,0 +1,9 @@
+---
+title: "A Robust Immigration Reform"
+date: 2025-09-08
+type: "policy"
+---
+
+Millions of immigrants, who have lived in this nation for perhaps as long as 50 years, are now being threatened with forced deportation, simply for leaving their country of birth in search of a better life. The U.S. Immigration and Customs Enforcement agency (ICE) is now taking immigrants right off the street and denying people their First Amendment rights. They are also offering new recruits a $45,000 paycheck to join, which is about the same as a starting teacher’s salary in the U.S. I abhor this current policy.
+
+The core issue with immigration is economic. Our objective should be to create an immigration policy which goes to the core issue, and is beneficial for both our nation and others. Mexico, for example, a nation which has been destroyed through NAFTA and other related “free trade” arrangements, should be given access to new types of residency agreements which make it easier for incoming immigrants to gain residency status in the U.S., and further, temporary work visas, from two to four years, can be provided to people who want to provide for their families and learn useful skills. If we are to rebuild the U.S. through a national industrialization policy, we will need a lot more people, including immigrants. They can then work in rebuilding our national infrastructure, and if they choose, go back to their countries of birth and apply what they have learned here. This is the only long-term, practical solution to the migrant crisis — an international program for immigration, which promotes economic development of all nations.

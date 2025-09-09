@@ -26,6 +26,9 @@
                     <li class="nav-item">
                         <a href="{{ "/statements/" | relURL }}" class="nav-link{{ if eq .Section "statements" }} active{{ end }}">Statements</a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ "/denouncements/" | relURL }}" class="nav-link{{ if eq .Title "Denouncements" }} active{{ end }}">Denouncements</a>
+                    </li>
                     <li style="display: none;" class="nav-item">
                         <a href="{{ "/events/" | relURL }}" class="nav-link{{ if eq .Section "events" }} active{{ end }}">Events</a>
                     </li>
@@ -42,7 +45,7 @@
 
                 <div class="d-grid gap-2 d-sm-flex text-uppercase py-2">
                     <a class="btn btn-primary" href="{{ .Site.Params.donateUrl }}" type="button">Donate</a>
-                    <a class="btn btn-secondary" href="#volunteer" role="button">Sign Up</a>
+                    <a class="btn btn-secondary" href="{{ "/" | relURL }}#volunteer" role="button">Sign Up</a>
                 </div>
             </div>
         </div>

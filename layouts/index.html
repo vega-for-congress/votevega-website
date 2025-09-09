@@ -60,9 +60,9 @@
         <div class="row justify-content-center">
             <div class="col-lg-8 text-center">
                 <div class="mb-5">
-                    <i class="fas fa-fist-raised mb-3" style="font-size: 3.5rem; color: #dc3545;"></i>
-                    <h2 class="display-5 fw-bold text-uppercase mb-3" style="color: #212529; letter-spacing: 1px;">Join the Fight</h2>
-                    <p class="lead mb-4" style="font-size: 1.2rem; color: #495057; line-height: 1.6;">
+                    <img width="50" src={{ "images/favicon.png" | relURL }} />
+                    <h2 class="display-5 fw-bold text-uppercase my-3" style="color: #212529; letter-spacing: 1px;">Declare Your Independence</h2>
+                    <p class="mb-4" style="font-size: 1.2rem; color: #495057; line-height: 1.6;">
                         Ready to transform the Bronx? Sign up to volunteer and help us build a movement for 
                         Medicare for All, reindustrialization, and peace through development.
                     </p>
@@ -151,47 +151,139 @@
 <!-- Issues Section -->
 <div class="issues p-5 text-center" style="background-color: #f8f9fa;">
     <div class="container py-4">
-        <div class="row justify-content-center">
-            <div class="col-lg-3 col-md-6 px-4 py-3">
-                <i class="fas fa-heartbeat mb-4" style="font-size: 4rem; color: #dc3545;"></i>
-                <h3>A real medicare for all policy</h3>
+        <div class="row justify-content-center align-items-stretch">
+            <!-- Medicare for All (dummy link for future policy) -->
+            <div class="col-lg-3 col-md-6 px-1 py-3 d-flex">
+                <a href="{{ "/policy/real-medicare-for-all/" | relURL }}" class="text-decoration-none text-reset d-block h-100 w-100">
+                    <div class="issue-item issue-link h-100 d-flex flex-column align-items-center" style="padding: 1rem; border-radius: 10px; transition: all 0.3s ease; cursor: pointer;">
+                        <div class="icon-container d-flex align-items-center justify-content-center" style="height: 120px; width: 100%;">
+                            <i class="fas fa-heartbeat" style="font-size: 4rem; color: #dc3545; transition: all 0.3s ease;"></i>
+                        </div>
+                        <div class="flex-grow-1 d-flex flex-column justify-content-between text-center">
+                            <h3 style="transition: all 0.3s ease; margin-bottom: 1rem;">A real medicare for all policy</h3>
+                            <small class="text-muted mt-auto opacity-0" style="transition: opacity 0.3s ease; font-weight: 600;">
+                                <i class="fas fa-external-link-alt me-1"></i>Read Policy
+                            </small>
+                        </div>
+                    </div>
+                </a>
             </div>
-            <div class="col-lg-3 col-md-6 px-4 py-3">
-                <i class="fas fa-industry mb-4" style="font-size: 4rem; color: #0d6efd;"></i>
-                <h3>Make the Bronx the center for reindustrialization of the United States</h3>
+            
+            <!-- Reindustrialization (Space CCC) -->
+            <div class="col-lg-3 col-md-6 px-1 py-3 d-flex">
+                <a href="{{ "/policy/space-ccc/" | relURL }}" class="text-decoration-none text-reset d-block h-100 w-100">
+                    <div class="issue-item issue-link h-100 d-flex flex-column align-items-center" style="padding: 1rem; border-radius: 10px; transition: all 0.3s ease; cursor: pointer;">
+                        <div class="icon-container d-flex align-items-center justify-content-center" style="height: 120px; width: 100%;">
+                            <i class="fas fa-industry" style="font-size: 4rem; color: #0d6efd; transition: all 0.3s ease;"></i>
+                        </div>
+                        <div class="flex-grow-1 d-flex flex-column justify-content-between text-center">
+                            <h3 style="transition: all 0.3s ease; margin-bottom: 1rem;">Make the Bronx the center for reindustrialization of the United States</h3>
+                            <small class="text-muted mt-auto opacity-0" style="transition: opacity 0.3s ease; font-weight: 600;">
+                                <i class="fas fa-external-link-alt me-1"></i>Read Policy
+                            </small>
+                        </div>
+                    </div>
+                </a>
             </div>
-            <div class="col-lg-3 col-md-6 px-4 py-3">
-                <i class="fas fa-passport mb-4" style="font-size: 4rem; color: #198754;"></i>
-                <h3>A robust immigration reform</h3>
+            
+            <!-- Immigration Reform (dummy link for future policy) -->
+            <div class="col-lg-3 col-md-6 px-1 py-3 d-flex">
+                <a href="{{ "/policy/robust-immigration-reform/" | relURL }}" class="text-decoration-none text-reset d-block h-100 w-100">
+                    <div class="issue-item issue-link h-100 d-flex flex-column align-items-center" style="padding: 1rem; border-radius: 10px; transition: all 0.3s ease; cursor: pointer;">
+                        <div class="icon-container d-flex align-items-center justify-content-center" style="height: 120px; width: 100%;">
+                            <i class="fas fa-passport" style="font-size: 4rem; color: #198754; transition: all 0.3s ease;"></i>
+                        </div>
+                        <div class="flex-grow-1 d-flex flex-column justify-content-between text-center">
+                            <h3 style="transition: all 0.3s ease; margin-bottom: 1rem;">A robust immigration reform</h3>
+                            <small class="text-muted mt-auto opacity-0" style="transition: opacity 0.3s ease; font-weight: 600;">
+                                <i class="fas fa-external-link-alt me-1"></i>Read Policy
+                            </small>
+                        </div>
+                    </div>
+                </a>
             </div>
-            <div class="col-lg-3 col-md-6 px-4 py-3">
-                <i class="fas fa-globe-americas mb-4" style="font-size: 4rem; color: #fd7e14;"></i>
-                <h3>A revolutionary approach to foreign policy: Peace through Development</h3>
+            
+            <!-- Peace through Development -->
+            <div class="col-lg-3 col-md-6 px-1 py-3 d-flex">
+                <a href="{{ "/policy/peace-through-development/" | relURL }}" class="text-decoration-none text-reset d-block h-100 w-100">
+                    <div class="issue-item issue-link h-100 d-flex flex-column align-items-center" style="padding: 1rem; border-radius: 10px; transition: all 0.3s ease; cursor: pointer;">
+                        <div class="icon-container d-flex align-items-center justify-content-center" style="height: 120px; width: 100%;">
+                            <i class="fas fa-globe-americas" style="font-size: 4rem; color: #fd7e14; transition: all 0.3s ease;"></i>
+                        </div>
+                        <div class="flex-grow-1 d-flex flex-column justify-content-between text-center">
+                            <h3 style="transition: all 0.3s ease; margin-bottom: 1rem;">A revolutionary approach to foreign policy: Peace through Development</h3>
+                            <small class="text-muted mt-auto opacity-0" style="transition: opacity 0.3s ease; font-weight: 600;">
+                                <i class="fas fa-external-link-alt me-1"></i>Read Policy
+                            </small>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Issues Section Hover Effects -->
+<style>
+    .issue-link:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        background-color: #ffffff !important;
+    }
+    
+    .issue-link:hover i {
+        transform: scale(1.1);
+    }
+    
+    .issue-link:hover h3 {
+        color: #dc3545 !important;
+    }
+    
+    .issue-link:hover small {
+        opacity: 1 !important;
+    }
+    
+    /* Responsive typography for issue cards */
+    @media (min-width: 992px) and (max-width: 1199px) {
+        .issue-item h3 {
+            font-size: 1.1rem !important;
+            line-height: 1.3 !important;
+        }
+    }
+    
+    @media (min-width: 1200px) and (max-width: 1399px) {
+        .issue-item h3 {
+            font-size: 1.2rem !important;
+            line-height: 1.4 !important;
+        }
+    }
+</style>
+
 <!-- About Section -->
 <div class="about-home container-fluid p-0">
     <div class="row align-items-center g-0 p-0">
         <div class="col-lg-6">
-            <img src="{{ "images/hero-image-2.jpg" | relURL }}" alt="Jose Vega" class="img-fluid" />
+            <img src="{{ "images/campaign-volunteers-compressed.jpg" | relURL }}" alt="Jose Vega with campaign volunteers" class="img-fluid" />
         </div>
         <div class="col-lg-6 p-5">
             <div class="container">
                 <div class="col-xxl-9">
-                    <h2>Meet Jose, Bronx Warrior</h2>
-                    <p>Bronx warrior, US patriot, and world citizen. Jose Vega is a 26-year-old political
-                        organizer and leader in the international youth movement for peace through
-                        development founded by the late Lyndon LaRouche and Helga Zepp-LaRouche. Hundreds of
-                        millions of people across the planet have watched Jose and his associates challenge
-                        the war-mongering US political elite. Jose has courageously intervened at events by
-                        Joe Biden, Mike Pompeo, Kamala Harris, Hakeem Jeffries, Nancy Pelosi, Alexandria
-                        Ocasio-Cortez, the New York Times, Washington Post, and NY-15's own AIPAC airhead
-                        Rep. Ritchie Torres.</p>
-                    <p>Our government's policy of genocide is pushing the world toward thermonuclear war.
-                        You personally can make all the difference. Join our campaign.</p>
+                    <h2>Meet Jose, A Fighter For The Bronx, A Fighter For The World</h2>
+                    <p>Jose Vega, born in 1998, is a 26-year-old political organizer and associate of the LaRouche
+                        Movement. Jose worked with the LaRouche Movement from the time he was 16 years-old, and helped
+                        organize concerts, youth choruses, and science programs where young people between the ages of
+                        12-18 were taught the ideas of Johannes Kepler, Albert Einstein, and Bernard Riemann. Since
+                        then, Jose has intervened against a number of political figures, economists, and think-tank
+                        leaders, such as Alexandria Ocasio-Cortez, Mike Pompeo, Kamala Harris, Ritchie Torres, Hakeem
+                        Jeffries, and the editors of the New York Times, Reuters, and the Washington Post.</p>
+
+                    <p>Jose ran against Ritchie Torres in the 2024 election as an independent candidate in NY-15. He is
+                        running again to bring an end to the two-party system in the U.S. which has brought us nothing but
+                        forever wars and financial bailouts. Jose was raised in the South Bronx, and believes that true
+                        change can come from people realizing the better traditions of the U.S. Republic. Jose believes the
+                        United States must once again become a beacon of hope and temple of liberty to the world, and join
+                        hands with the Global Majority represented by the BRICS+, SCO, ASEAN, and other global institutions
+                        which are promoting true economic development for their nations.</p>
                 </div>
             </div>
         </div>
