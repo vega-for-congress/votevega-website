@@ -15,6 +15,7 @@
         initEmailForm();
         initNavbarBehavior();
         initAnimations();
+        initEmailParameterHandling();
     }
 
     // Smooth scrolling for anchor links
@@ -284,6 +285,49 @@
             });
         }
     });
+
+    // Handle email parameter from footer signup on other pages
+    function initEmailParameterHandling() {
+        // Check if we're on the homepage and have an email parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const emailParam = urlParams.get('email');
+        
+        if (emailParam && emailParam.includes('@')) {
+            // Wait for DOM to be ready
+            setTimeout(function() {
+                const emailField = document.getElementById('email');
+                const volunteerSection = document.getElementById('volunteer');
+                
+                if (emailField && volunteerSection) {
+                    // Pre-fill the email field
+                    emailField.value = emailParam;
+                    
+                    // Scroll to volunteer section with navbar offset
+                    const sectionTop = volunteerSection.offsetTop - 80;
+                    window.scrollTo({
+                        top: sectionTop,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Add highlight effect and focus
+                    setTimeout(function() {
+                        emailField.focus();
+                        emailField.style.boxShadow = '0 0 15px rgba(220, 53, 69, 0.4)';
+                        
+                        // Remove the URL parameter for cleaner URL
+                        const newUrl = new URL(window.location);
+                        newUrl.searchParams.delete('email');
+                        window.history.replaceState({}, '', newUrl.toString());
+                        
+                        // Remove highlight after 3 seconds
+                        setTimeout(function() {
+                            emailField.style.boxShadow = '';
+                        }, 3000);
+                    }, 800);
+                }
+            }, 100);
+        }
+    }
 
     // Expose some functions globally if needed
     window.VoteVega = {
