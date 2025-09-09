@@ -175,16 +175,20 @@ class GitHubIssueAnalyzer:
         keyword_mappings = {
             'css': ['static/css/', 'assets/css/'],
             'style': ['static/css/', 'assets/css/'],
-            'layout': ['layouts/'],
+            'styling': ['static/css/', 'assets/css/'],
+            'responsive': ['static/css/', 'assets/css/'],
+            'mobile': ['static/css/', 'assets/css/'],
+            'overflow': ['static/css/', 'assets/css/'],
+            'layout': ['layouts/', 'static/css/'],
             'template': ['layouts/'],
             'content': ['content/'],
             'policy': ['content/policy/'],
             'config': ['hugo.toml', 'config.toml'],
             'navigation': ['hugo.toml', 'layouts/partials/'],
             'menu': ['hugo.toml', 'layouts/partials/'],
-            'footer': ['layouts/partials/footer.html'],
-            'header': ['layouts/partials/header.html'],
-            'homepage': ['layouts/index.html'],
+            'footer': ['layouts/partials/footer.html', 'static/css/'],
+            'header': ['layouts/partials/header.html', 'static/css/'],
+            'homepage': ['layouts/index.html', 'static/css/'],
             'build': ['package.json', 'netlify.toml']
         }
         
@@ -203,12 +207,20 @@ class GitHubIssueAnalyzer:
                                 if file_path.is_file() and file_path.suffix in ['.html', '.css', '.js', '.md', '.toml']:
                                     relevant_files.append(str(file_path.relative_to(self.repo_root)))
         
-        # Always include key configuration files
-        always_include = ['hugo.toml', 'package.json', 'layouts/index.html']
+        # Always include key files
+        always_include = ['hugo.toml', 'static/css/style.css']
         for file_path in always_include:
             full_path = self.repo_root / file_path
             if full_path.exists() and str(full_path.relative_to(self.repo_root)) not in relevant_files:
                 relevant_files.append(str(full_path.relative_to(self.repo_root)))
+                
+        # Always include layout files (they're crucial for most issues)
+        layouts_dir = self.repo_root / 'layouts'
+        if layouts_dir.exists():
+            for layout_file in layouts_dir.rglob('*.html'):
+                layout_path = str(layout_file.relative_to(self.repo_root))
+                if layout_path not in relevant_files:
+                    relevant_files.append(layout_path)
                 
         return list(set(relevant_files))[:10]  # Limit to 10 files
     
@@ -287,6 +299,9 @@ Important constraints:
 - Test that your proposed changes would not break the build
 - Keep the campaign's political messaging and branding in mind
 - Don't modify core campaign messaging without explicit instruction
+- DO NOT create or modify build artifacts like package-lock.json, node_modules, or public/ directory
+- Focus on the actual issue described - if it's about mobile/responsive design, modify CSS or HTML templates
+- If it's a styling issue, look at static/css/style.css and layout files in layouts/
 
 Analyze the issue now and provide your response:"""
         
