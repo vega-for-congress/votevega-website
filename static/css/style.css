@@ -58,6 +58,11 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Scroll offset for fixed navbar - applies to all anchor targets */
+#volunteer {
+    scroll-margin-top: 80px;
+}
+
 /* Hide scrollbars on mobile for seamless design */
 @media (max-width: 767px) {
     body {
