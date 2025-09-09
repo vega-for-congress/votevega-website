@@ -1,0 +1,126 @@
+{{ define "main" }}
+<!-- Page Header -->
+<div class="section-header py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="display-4 fw-bold text-uppercase mb-3">{{ .Title }}</h1>
+                {{ with .Description }}
+                <p class="lead text-muted">{{ . }}</p>
+                {{ end }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Featured Policy Section -->
+{{ $featuredPolicy := .Site.GetPage .Site.Params.featuredPolicy }}
+{{ if $featuredPolicy }}
+<div class="featured-policy-section py-1">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mb-5">
+                <div class="featured-policy card border-0 shadow-lg">
+                    <div class="card-body p-5">
+                        <div class="policy-meta mb-3">
+                            <span class="badge bg-primary me-2">Policy Introduction</span>
+                            {{ if $featuredPolicy.Date }}
+                            <small class="text-muted">{{ $featuredPolicy.Date.Format "January 2, 2006" }}</small>
+                            {{ end }}
+                        </div>
+                        <h2 class="card-title h3 fw-bold mb-4">
+                            <a href="{{ $featuredPolicy.RelPermalink }}" class="text-decoration-none">{{ $featuredPolicy.Title }}</a>
+                        </h2>
+                        {{ if $featuredPolicy.Description }}
+                        <p class="card-text lead mb-4">{{ $featuredPolicy.Description }}</p>
+                        {{ else }}
+                        <p class="card-text lead mb-4">{{ $featuredPolicy.Summary | truncate 200 }}</p>
+                        {{ end }}
+                        <a href="{{ $featuredPolicy.RelPermalink }}" class="btn btn-outline-primary btn-lg">Read Full Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{ end }}
+
+<!-- Section Content -->
+<div class="section-content py-5">
+    <div class="container">
+        {{ if .Content }}
+        <!-- Section Description -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="section-description">
+                    {{ .Content }}
+                </div>
+            </div>
+        </div>
+        {{ end }}
+
+        <div class="row">
+            {{ $pages := .Pages }}
+            {{ $featuredPolicyPath := .Site.Params.featuredPolicy }}
+            {{ if $pages }}
+            <!-- Other Policies Header -->
+            {{ if gt (len $pages) 1 }}
+            <div class="col-12 mb-4">
+                <h2 class="h3 fw-bold text-uppercase mb-3" style="color: #dc3545; border-bottom: 2px solid #dc3545; padding-bottom: 10px;">
+                    <i class="fas fa-list me-2"></i>Policy Proposals
+                </h2>
+            </div>
+            {{ end }}
+            
+            <!-- Policies List (excluding featured policy) -->
+            {{ range $pages }}
+            {{ if ne .RelPermalink $featuredPolicyPath }}
+            <div class="col-lg-6 mb-4">
+                <div class="page-card card h-100 border-0 shadow-sm" style="transition: all 0.3s ease; border-radius: 15px;">
+                    <div class="card-body p-4">
+                        <h3 class="card-title h5 fw-bold mb-3">
+                            <a href="{{ .Permalink }}" class="text-decoration-none" style="color: #dc3545;">{{ .Title }}</a>
+                        </h3>
+                        {{ with .Params.subtitle }}
+                        <p class="text-muted mb-3" style="font-style: italic;">{{ . }}</p>
+                        {{ end }}
+                        {{ with .Description }}
+                        <p class="card-text mb-3" style="line-height: 1.6;">{{ . | truncate 150 }}</p>
+                        {{ else }}{{ with .Summary }}
+                        <p class="card-text mb-3" style="line-height: 1.6;">{{ . | truncate 150 }}</p>
+                        {{ end }}{{ end }}
+                        
+                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                            <a href="{{ .Permalink }}" class="btn btn-outline-primary fw-bold" style="border-radius: 20px;">
+                                Read Policy <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                            <small class="text-muted">
+                                {{ .Date.Format "Jan 2, 2006" }}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{ end }}
+            {{ end }}
+            {{ else }}
+            <div class="col-12 text-center">
+                <p class="lead text-muted">No policies available yet.</p>
+            </div>
+            {{ end }}
+        </div>
+    </div>
+</div>
+
+<style>
+.page-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+}
+
+.page-card .card-title a:hover {
+    color: #c82333 !important;
+}
+</style>
+
+{{ end }}
