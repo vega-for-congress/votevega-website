@@ -90,7 +90,7 @@ class LLMClient:
             import anthropic
             client = anthropic.Anthropic(api_key=self.anthropic_api_key)
             
-            model_name = "claude-3-5-haiku-20241022"
+            model_name = "claude-sonnet-4-20250514"
             print(f"Using Anthropic model: {model_name}")
             
             response = client.messages.create(
