@@ -45,9 +45,6 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
-    
-    <!-- Netlify Identity Widget -->
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 
 <body class="{{ if .IsHome }}home wp-singular page-template-default page page-id-6 wp-theme-vega_2024 no-sidebar{{ else if eq .Section "policy" }}policy-page wp-singular page-template-default page no-sidebar{{ else }}{{ .Section }}-page wp-singular page-template-default page no-sidebar{{ end }}">

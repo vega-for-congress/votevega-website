@@ -41,7 +41,7 @@ enableEmoji = true
 
   [[params.social]]
     name = "TikTok"
-    url = "https://tiktok.com"
+    url = "https://www.tiktok.com/@vegaistic"
     icon = "fa-brands fa-tiktok"
 
   [[params.social]]
@@ -70,6 +70,10 @@ enableEmoji = true
   [[params.policyProposals]]
     title = "Create a \"Space CCC\" to Rebuild the Bronx and the U.S."
     url = "/policy/space-ccc/"
+
+  [[params.policyProposals]]
+    title = "All Policies"
+    url = "/policy/"
 
 # Menu configuration
 [menu]
