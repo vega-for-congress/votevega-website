@@ -42,6 +42,12 @@
   [headers.values]
     Cache-Control = "public, max-age=3600"
 
+# Donation redirect to secure platform
+[[redirects]]
+  from = "/donate"
+  to = "https://secure.votevega.nyc/donate"
+  status = 301
+
 # Form handling for campaign contact forms (if needed)
 # Uncomment and configure if you add contact forms later
 # [[redirects]]
