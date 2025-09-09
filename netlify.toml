@@ -3,7 +3,7 @@
   publish = "public"
 
 [build.environment]
-  HUGO_VERSION = "0.119.0"
+  HUGO_VERSION = "0.142.0"
   NODE_VERSION = "18"
 
 # Security headers
@@ -41,6 +41,12 @@
   for = "/*.html"
   [headers.values]
     Cache-Control = "public, max-age=3600"
+
+# Donation redirect to secure platform
+[[redirects]]
+  from = "/donate"
+  to = "https://secure.votevega.nyc/donate"
+  status = 301
 
 # Form handling for campaign contact forms (if needed)
 # Uncomment and configure if you add contact forms later
