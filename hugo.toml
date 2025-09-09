@@ -64,8 +64,8 @@ enableEmoji = true
     url = "/policy/economics/"
 
   [[params.policyProposals]]
-    title = "Create A Truly Free Palestine Through The Oasis Plan"
-    url = "/policy/oasis-plan/"
+    title = "A Revolutionary Approach to Foreign Policy — Peace Through Development"
+    url = "/policy/peace-through-development/"
 
   [[params.policyProposals]]
     title = "Create a \"Space CCC\" to Rebuild the Bronx and the U.S."

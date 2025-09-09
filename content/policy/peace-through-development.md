@@ -1,0 +1,9 @@
+---
+title: "A Revolutionary Approach to Foreign Policy — Peace Through Development"
+date: 2025-09-08
+type: "policy"
+---
+
+The post-9/11 policies of the U.S. government, which has given us endless debacles such as Afghanistan, Iraq, Libya, and Syria, must be put to an end. We have spent trillions of dollars on these wars, and we have destroyed many nations in the process, not to mention our own culture. Is it a wonder why we have so many school shootings, killings, and acts of violence in our nation, when we have over 800 military bases in other parts of the world, and have made war a systemic part of our foreign policy? The genocide taking place in the Gaza Strip and the West Bank is perhaps the most satanic manifestation of our foreign policy today, which regards Palestinians as just another roadblock to attaining strategic dominance in an area. 
+
+We must renew and expand our foreign policy outlook today. To do this effectively, we must choose as our historical standpoint, the history of the United States during our republic’s greatest periods. John Quincy Adams, former Secretary of State and President, had issued famously, on July 4th, 1821, that the U.S. “should not go abroad in search of monsters to destroy,” and that the young republic “would not be degraded into an American cock-boat in the wake of a British man O’war.” Instead of acting like an empire in the fashion of Great Britain, Rome, or Babylon, we should form a pact of friendship among a community of sovereign nation-states, including those in the Global South. The BRICS+, the Shanghai Cooperation Organization (SCO), ASEAN, the Eurasian Economic Union, and others, are building economic blocs of partnership, and seeking true peace through economic development. The U.S. shouldn’t treat these nations as enemies, but as potential partners in a new world economic order. 
