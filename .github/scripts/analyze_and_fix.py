@@ -269,12 +269,12 @@ Analyze this GitHub issue and determine if you can propose a specific code fix. 
 
 First, provide a JSON summary:
 ```json
-{
+{{
   "can_fix": true,
   "fix_type": "bug_fix|feature_addition|content_update|style_fix",
   "summary": "Brief description of what you're fixing",
   "explanation": "Detailed explanation of the fix and why this approach was chosen"
-}
+}}
 ```
 
 Then, provide the changes as standard diff format blocks:
@@ -290,10 +290,10 @@ Then, provide the changes as standard diff format blocks:
 
 If you cannot propose a fix, respond with only:
 ```json
-{
+{{
   "can_fix": false,
   "reason": "explanation of why this cannot be automatically fixed"
-}
+}}
 ```
 
 Important constraints:
