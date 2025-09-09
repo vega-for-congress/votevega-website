@@ -22,6 +22,9 @@ enableEmoji = true
   address = "Bronx, NY 10459"
   donateUrl = "https://secure.votevega.nyc/donate"
   ogImage = "wp-content/uploads/2024/02/vega-twitter.png"
+  
+  # Featured Policy (customizable - set which policy to highlight on homepage)
+  featuredPolicy = "/policy/preamble/"
 
   # Twitter settings
   [params.twitter]
