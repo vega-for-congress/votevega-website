@@ -263,10 +263,12 @@ Analyze this GitHub issue and determine if you can propose a specific code fix. 
 3. **Hugo Knowledge**: This is a Hugo static site - consider Hugo-specific patterns and best practices
 4. **Campaign Website**: This is for Jose Vega's congressional campaign - keep political context in mind
 
-# Response Format
-If you can propose a fix, respond with JSON in this exact format:
+# CRITICAL: Response Format Requirements
 
-```json
+**YOU MUST RESPOND ONLY WITH VALID JSON. DO NOT INCLUDE ANY TEXT OUTSIDE THE JSON RESPONSE.**
+
+If you can propose a fix, respond ONLY with this JSON format (no markdown code blocks, no explanatory text):
+
 {{
   "can_fix": true,
   "fix_type": "bug_fix|feature_addition|content_update|style_fix",
@@ -281,16 +283,13 @@ If you can propose a fix, respond with JSON in this exact format:
   ],
   "explanation": "Detailed explanation of the fix and why this approach was chosen"
 }}
-```
 
-If you cannot propose a fix, respond with:
+If you cannot propose a fix, respond ONLY with this JSON (no markdown code blocks, no explanatory text):
 
-```json
 {{
   "can_fix": false,
   "reason": "explanation of why this cannot be automatically fixed"
 }}
-```
 
 Important constraints:
 - Only propose changes you're confident about
@@ -303,26 +302,55 @@ Important constraints:
 - Focus on the actual issue described - if it's about mobile/responsive design, modify CSS or HTML templates
 - If it's a styling issue, look at static/css/style.css and layout files in layouts/
 
-Analyze the issue now and provide your response:"""
+REMEMBER: Your response must be ONLY valid JSON, nothing else. No explanations, no markdown formatting, just the JSON object.
+
+Analyze the issue now and provide your JSON response:"""
         
         return prompt
     
     def parse_llm_response(self, response: str) -> Dict:
         """Parse the LLM response and extract JSON"""
         try:
-            # Find JSON block in the response
             import re
+            
+            # Clean up the response - remove extra whitespace
+            response = response.strip()
+            
+            # Method 1: Try to find JSON block in markdown
             json_match = re.search(r'```json\s*(\{.*?\})\s*```', response, re.DOTALL)
             if json_match:
                 json_str = json_match.group(1)
                 return json.loads(json_str)
             
-            # Try to parse the entire response as JSON
+            # Method 2: Try to find JSON block without language specifier
+            json_match = re.search(r'```\s*(\{.*?\})\s*```', response, re.DOTALL)
+            if json_match:
+                json_str = json_match.group(1)
+                return json.loads(json_str)
+            
+            # Method 3: Look for JSON object anywhere in the response
+            json_match = re.search(r'(\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\})', response, re.DOTALL)
+            if json_match:
+                json_str = json_match.group(1)
+                try:
+                    return json.loads(json_str)
+                except json.JSONDecodeError:
+                    # If single-line match failed, try multiline approach
+                    pass
+            
+            # Method 4: Try to parse the entire response as JSON
             return json.loads(response)
+            
         except Exception as e:
             print(f"Error parsing LLM response: {e}")
             print(f"Response was: {response[:500]}...")
-            return {"can_fix": False, "reason": "Failed to parse LLM response"}
+            # If parsing completely fails, check if it looks like the LLM gave a text response
+            if response and not response.strip().startswith('{'):
+                return {
+                    "can_fix": False, 
+                    "reason": "LLM provided text response instead of required JSON format. Response was not parseable as JSON."
+                }
+            return {"can_fix": False, "reason": "Failed to parse LLM response as JSON"}
     
     def apply_fixes(self, fix_data: Dict) -> bool:
         """Apply the proposed fixes to the repository"""
