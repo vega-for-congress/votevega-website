@@ -37,3 +37,6 @@ Dr Chandra Muzaffar,
 
 President, International Movement for a Just World (JUST)
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTExNjE0OTc1OF19
+-->
