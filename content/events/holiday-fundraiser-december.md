@@ -15,7 +15,7 @@ ticketPrice: "$25 suggested donation"
 
 # Holiday Fundraiser: A Celebration of Our Movement
 
-As 2024 draws to a close, we want to celebrate the incredible progress our grassroots campaign has made and prepare for the crucial months ahead. Join Jose Vega and our entire campaign family for an evening of community, culture, and commitment to change.
+As 2024 draws to a close, we want to celebrate the amazing progress our grassroots campaign has made and prepare for the crucial months ahead. Join Jose Vega and our entire campaign family for an evening of community, culture, and commitment to change.
 
 ## An Evening of Community
 
