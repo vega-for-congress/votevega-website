@@ -9,7 +9,7 @@ defaultContentLanguage = "en"
     weight = 1
   [languages.es]
     languageCode = "es-US"
-    title = "Jose Vega para el Congreso 2026 | Salvemos el Bronx"
+    title = "Jose Vega para el Congreso 2026 | Rescatemos el Bronx!"
     weight = 2
 
 # Content settings

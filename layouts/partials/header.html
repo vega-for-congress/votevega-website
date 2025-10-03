@@ -41,6 +41,19 @@
                             {{ end }}
                         </ul>
                     </li>
+                    
+                    <!-- Language Switcher -->
+                    <li class="nav-item">
+                        {{ if eq .Site.Language.Lang "es" }}
+                            <a class="nav-link" href="/" hreflang="en" style="font-size: 0.85rem; opacity: 0.8;">
+                                <i class="fas fa-globe me-1"></i>{{ i18n "nav_language_en" }}
+                            </a>
+                        {{ else }}
+                            <a class="nav-link" href="/es/" hreflang="es" style="font-size: 0.85rem; opacity: 0.8;">
+                                <i class="fas fa-globe me-1"></i>{{ i18n "nav_language_es" }}
+                            </a>
+                        {{ end }}
+                    </li>
                 </ul>
 
                 <div class="d-grid gap-2 d-sm-flex text-uppercase py-2">

@@ -7,9 +7,11 @@ nav_events = "Eventos"
 nav_policy_proposals = "Propuestas de Política"
 nav_donate = "Donar"
 nav_signup = "Registrarse"
+nav_language_es = "Esp"
+nav_language_en = "Eng"
 
 # Homepage
-hero_title = "Salvemos el Bronx"
+hero_title = "Rescatemos el Bronx!"
 hero_donate = "Donar"
 hero_volunteer = "Voluntario"
 quote_text = "Me postulo para derribar las barreras que silencian las voces del pueblo. Debemos empoderar a los ciudadanos para que recuperen su participación en el gobierno, restaurar la confianza, y desmantelar la corrupción. Juntos, podemos restaurar la fe en un gobierno que realmente sirve a su pueblo."
