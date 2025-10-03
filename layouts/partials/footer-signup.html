@@ -4,10 +4,9 @@
         <div class="p-5">
             <div class="text-center mb-4">
                 <i class="fas fa-hand-holding-heart mb-3" style="font-size: 3rem; color: rgba(255,255,255,0.9);"></i>
-                <h3 class="text-uppercase fw-bold mb-3">Support Our Movement</h3>
+                <h3 class="text-uppercase fw-bold mb-3">{{ i18n "footer_support_title" }}</h3>
                 <p class="mb-4" style="font-size: 1.1rem; line-height: 1.6;">
-                    Your contribution powers real change in the Bronx. Every donation helps us fight for Medicare for All, 
-                    reindustrialization, and peace through development.
+                    {{ i18n "footer_support_description" }}
                 </p>
             </div>
             <div class="row justify-content-center">
@@ -16,7 +15,7 @@
                         <a href="{{ .Site.Params.donateUrl }}" class="btn btn-light btn-lg fw-bold text-uppercase" 
                            style="border-radius: 50px; padding: 15px 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: all 0.3s ease;" 
                            onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)';" 
-                           onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.2)';">Donate Now</a>
+                           onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.2)';">{{ i18n "footer_donate_button" }}</a>
                     </div>
                 </div>
             </div>
@@ -27,10 +26,9 @@
             <div id="mc_embed_signup">
                 <div class="text-center mb-4">
                     <i class="fas fa-users mb-3" style="font-size: 3rem; color: rgba(255,255,255,0.9);"></i>
-                    <h3 class="text-uppercase fw-bold mb-3">Join Our Campaign</h3>
+                    <h3 class="text-uppercase fw-bold mb-3">{{ i18n "footer_join_title" }}</h3>
                     <p class="mb-4" style="font-size: 1.1rem; line-height: 1.6;">
-                        Stay informed about our fight to transform the Bronx. Get updates on events, 
-                        policy announcements, and campaign news.
+                        {{ i18n "footer_join_description" }}
                     </p>
                 </div>
                 <div class="row justify-content-center">
@@ -38,13 +36,13 @@
                         <form id="email-signup" method="post">
                             <div class="input-group mb-3" style="border-radius: 50px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
                                 <input type="email" name="email" id="footer-email" class="form-control border-0" 
-                                       placeholder="Enter your email address"
+                                       placeholder="{{ i18n "footer_email_placeholder" }}"
                                        aria-label="Email Address" required 
                                        style="padding: 15px 20px; font-size: 1rem; background: white;">
                                 <button type="submit" class="btn btn-light fw-bold text-uppercase px-4" 
                                         style="background: white; color: #0d6efd; border: none; padding: 15px 25px; transition: all 0.3s ease;"
                                         onmouseover="this.style.background='#f8f9fa';" 
-                                        onmouseout="this.style.background='white';">Join Now</button>
+                                        onmouseout="this.style.background='white';">{{ i18n "footer_join_button" }}</button>
                             </div>
                         </form>
                         
@@ -60,8 +58,8 @@
                                 const emailValue = footerEmailInput.value.trim();
                                 
                                 if (emailValue && emailValue.includes('@')) {
-                                    // Check if we're on the homepage
-                                    const isHomepage = window.location.pathname === '/' || window.location.pathname === '';
+                                    // Check if we're on the homepage (English or Spanish)
+                                    const isHomepage = window.location.pathname === '/' || window.location.pathname === '' || window.location.pathname === '/es/' || window.location.pathname === '/es';
                                     
                                     if (isHomepage) {
                                         // On homepage - scroll to volunteer section
@@ -90,8 +88,14 @@
                                             }, 800);
                                         }
                                     } else {
-                                        // On other pages - redirect to homepage with email parameter
+                                        // On other pages - redirect to homepage with email parameter (maintain language)
                                         const homeUrl = new URL(window.location.origin);
+                                        // Check if we're on Spanish pages and redirect to Spanish homepage
+                                        if (window.location.pathname.startsWith('/es')) {
+                                            homeUrl.pathname = '/es/';
+                                        } else {
+                                            homeUrl.pathname = '/';
+                                        }
                                         homeUrl.searchParams.set('email', emailValue);
                                         homeUrl.hash = 'volunteer';
                                         window.location.href = homeUrl.toString();

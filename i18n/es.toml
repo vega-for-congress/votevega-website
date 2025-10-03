@@ -1,0 +1,58 @@
+# Navigation
+nav_home = "Inicio"
+nav_news = "Noticias"
+nav_statements = "Declaraciones"
+nav_denouncements = "Denuncias"
+nav_events = "Eventos"
+nav_policy_proposals = "Propuestas de Política"
+nav_donate = "Donar"
+nav_signup = "Registrarse"
+nav_language_es = "Esp"
+nav_language_en = "Eng"
+
+# Homepage
+hero_title = "Rescatemos el Bronx!"
+hero_donate = "Donar"
+hero_volunteer = "Voluntario"
+quote_text = "Me postulo para derribar las barreras que silencian las voces del pueblo. Debemos empoderar a los ciudadanos para que recuperen su participación en el gobierno, restaurar la confianza, y desmantelar la corrupción. Juntos, podemos restaurar la fe en un gobierno que realmente sirve a su pueblo."
+volunteer_title = "Declara Tu Independencia"
+volunteer_description = "¿Listo para transformar el Bronx? Regístrate como voluntario y ayúdanos a construir un movimiento por Medicare para Todos, reindustrialización y paz a través del desarrollo."
+volunteer_name_placeholder = "Ingresa tu nombre completo"
+volunteer_zip_placeholder = "Ingresa tu código postal"
+volunteer_email_placeholder = "Ingresa tu correo electrónico"
+volunteer_phone_placeholder = "Ingresa tu número de teléfono"
+volunteer_submit = "¡Cuenta Conmigo!"
+volunteer_disclaimer = "Al registrarte, aceptas recibir actualizaciones de campaña y oportunidades de voluntariado."
+
+# Policy Issues
+policy_medicare_title = "Una verdadera política de Medicare para Todos"
+policy_reindustrialization_title = "Hacer del Bronx el centro de reindustrialización de Estados Unidos"
+policy_immigration_title = "Una reforma migratoria robusta"
+policy_peace_title = "Un enfoque revolucionario de política exterior: Paz a través del Desarrollo"
+policy_read_link = "Leer Política"
+
+# About Section
+about_title = "Conoce a Jose, Un Luchador por el Bronx, Un Luchador por el Mundo"
+about_paragraph1 = "Jose Vega, nacido en 1998, es un organizador político de 27 años y asociado del Movimiento LaRouche. Jose trabajó con el Movimiento LaRouche desde que tenía 16 años, y ayudó a organizar conciertos, coros juveniles y programas científicos donde jóvenes entre las edades de 12-18 años aprendieron las ideas de Johannes Kepler, Albert Einstein y Bernard Riemann. Desde entonces, Jose ha intervenido contra varios políticos, economistas y líderes de grupos de expertos, como Alexandria Ocasio-Cortez, Mike Pompeo, Kamala Harris, Ritchie Torres, Hakeem Jeffries, y los editores del New York Times, Reuters y el Washington Post."
+about_paragraph2 = "Jose se postuló contra Ritchie Torres en las elecciones de 2024 como candidato independiente en NY-15. Se postula nuevamente para poner fin al sistema bipartidista en EE.UU. que no nos ha traído más que guerras infinitas y rescates financieros. Jose se crió en el South Bronx y cree que el verdadero cambio puede venir de la gente que se da cuenta de las mejores tradiciones de la República de EE.UU. Jose cree que Estados Unidos debe volver a ser un faro de esperanza y templo de libertad para el mundo, y unir fuerzas con la Mayoría Global representada por BRICS+, SCO, ASEAN, y otras instituciones globales que están promoviendo el verdadero desarrollo económico para sus naciones."
+
+# News & Events
+news_title = "Noticias y Eventos"
+news_all = "Todas las Noticias"
+news_continue_reading = "Continuar Leyendo"
+statements_title = "Declaraciones"
+statements_all = "Todas las Declaraciones"
+statements_continue_reading = "Continuar Leyendo"
+
+# Footer
+footer_privacy = "Política de Privacidad"
+footer_paid_for = "Pagado por Vega para el Congreso"
+
+# Footer Signup Section
+footer_support_title = "Apoya Nuestro Movimiento"
+footer_support_description = "Tu contribución impulsa un cambio real en el Bronx. Cada donación nos ayuda a luchar por Medicare para Todos, reindustrialización y paz a través del desarrollo."
+footer_donate_button = "Donar Ahora"
+footer_join_title = "Únete a Nuestra Campaña"
+footer_join_description = "Manténete informado sobre nuestra lucha para transformar el Bronx. Recibe actualizaciones sobre eventos, anuncios de políticas y noticias de campaña."
+footer_email_placeholder = "Ingresa tu correo electrónico"
+footer_join_button = "Únete Ahora"
