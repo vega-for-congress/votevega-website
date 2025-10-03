@@ -1,0 +1,56 @@
+# Navigation
+nav_home = "Home"
+nav_news = "News"
+nav_statements = "Statements"
+nav_denouncements = "Denouncements"
+nav_events = "Events"
+nav_policy_proposals = "Policy Proposals"
+nav_donate = "Donate"
+nav_signup = "Sign Up"
+
+# Homepage
+hero_title = "Let's Save the Bronx"
+hero_donate = "Donate"
+hero_volunteer = "Volunteer"
+quote_text = "I am running to break down the barriers that silence the people's voices. We must empower citizens to reclaim their stake in government, restore trust, and dismantle corruption. Together, we can restore faith in a government that truly serves its people."
+volunteer_title = "Declare Your Independence"
+volunteer_description = "Ready to transform the Bronx? Sign up to volunteer and help us build a movement for Medicare for All, reindustrialization, and peace through development."
+volunteer_name_placeholder = "Enter your full name"
+volunteer_zip_placeholder = "Enter your zipcode"
+volunteer_email_placeholder = "Enter your email address"
+volunteer_phone_placeholder = "Enter your phone number"
+volunteer_submit = "Count Me In!"
+volunteer_disclaimer = "By signing up, you agree to receive campaign updates and volunteer opportunities."
+
+# Policy Issues
+policy_medicare_title = "A real medicare for all policy"
+policy_reindustrialization_title = "Make the Bronx the center for reindustrialization of the United States"
+policy_immigration_title = "A robust immigration reform"
+policy_peace_title = "A revolutionary approach to foreign policy: Peace through Development"
+policy_read_link = "Read Policy"
+
+# About Section
+about_title = "Meet Jose, A Fighter For The Bronx, A Fighter For The World"
+about_paragraph1 = "Jose Vega, born in 1998, is a 27-year-old political organizer and associate of the LaRouche Movement. Jose worked with the LaRouche Movement from the time he was 16 years-old, and helped organize concerts, youth choruses, and science programs where young people between the ages of 12-18 were taught the ideas of Johannes Kepler, Albert Einstein, and Bernard Riemann. Since then, Jose has intervened against a number of political figures, economists, and think-tank leaders, such as Alexandria Ocasio-Cortez, Mike Pompeo, Kamala Harris, Ritchie Torres, Hakeem Jeffries, and the editors of the New York Times, Reuters, and the Washington Post."
+about_paragraph2 = "Jose ran against Ritchie Torres in the 2024 election as an independent candidate in NY-15. He is running again to bring an end to the two-party system in the U.S. which has brought us nothing but forever wars and financial bailouts. Jose was raised in the South Bronx, and believes that true change can come from people realizing the better traditions of the U.S. Republic. Jose believes the United States must once again become a beacon of hope and temple of liberty to the world, and join hands with the Global Majority represented by the BRICS+, SCO, ASEAN, and other global institutions which are promoting true economic development for their nations."
+
+# News & Events
+news_title = "News & Events"
+news_all = "All News"
+news_continue_reading = "Keep Reading"
+statements_title = "Statements"
+statements_all = "All Statements"
+statements_continue_reading = "Keep Reading"
+
+# Footer
+footer_privacy = "Privacy Policy"
+footer_paid_for = "Paid for by Vega for Congress"
+
+# Footer Signup Section
+footer_support_title = "Support Our Movement"
+footer_support_description = "Your contribution powers real change in the Bronx. Every donation helps us fight for Medicare for All, reindustrialization, and peace through development."
+footer_donate_button = "Donate Now"
+footer_join_title = "Join Our Campaign"
+footer_join_description = "Stay informed about our fight to transform the Bronx. Get updates on events, policy announcements, and campaign news."
+footer_email_placeholder = "Enter your email address"
+footer_join_button = "Join Now"

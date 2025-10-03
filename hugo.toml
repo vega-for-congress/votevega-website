@@ -1,6 +1,16 @@
 baseURL = "https://votevega.nyc"
-languageCode = "en-US"
-title = "Jose Vega for Congress 2026 | Let's Save the Bronx"
+defaultContentLanguage = "en"
+
+# Language configurations
+[languages]
+  [languages.en]
+    languageCode = "en-US"
+    title = "Jose Vega for Congress 2026 | Let's Save the Bronx"
+    weight = 1
+  [languages.es]
+    languageCode = "es-US"
+    title = "Jose Vega para el Congreso 2026 | Salvemos el Bronx"
+    weight = 2
 
 # Content settings
 [pagination]
@@ -25,6 +35,31 @@ enableEmoji = true
   
   # Featured Policy (customizable - set which policy to highlight on homepage)
   featuredPolicy = "/policy/preamble/"
+
+# Spanish language specific parameters (only overrides)
+[languages.es.params]
+  description = "Guerrero del Bronx, patriota estadounidense y ciudadano del mundo. Jose Vega es un organizador político de 25 años y líder en el movimiento juvenil internacional por la paz."
+
+  # Spanish Policy proposals for navigation dropdown (linking to English pages for now)
+  [[languages.es.params.policyProposals]]
+    title = "Una verdadera política de Medicare para Todos"
+    url = "/policy/real-medicare-for-all/"
+
+  [[languages.es.params.policyProposals]]
+    title = "Hacer del Bronx el centro de reindustrialización de Estados Unidos"
+    url = "/policy/space-ccc/"
+
+  [[languages.es.params.policyProposals]]
+    title = "Una reforma migratoria robusta"
+    url = "/policy/robust-immigration-reform/"
+
+  [[languages.es.params.policyProposals]]
+    title = "Un enfoque revolucionario de política exterior: Paz a través del Desarrollo"
+    url = "/policy/peace-through-development/"
+
+  [[languages.es.params.policyProposals]]
+    title = "Todas las Políticas"
+    url = "/policy/"
 
   # Twitter settings
   [params.twitter]
@@ -93,6 +128,23 @@ enableEmoji = true
   [[menu.main]]
     name = "Statements"
     url = "/statements/"
+    weight = 30
+
+# Spanish menu configuration
+[languages.es.menu]
+  [[languages.es.menu.main]]
+    name = "Inicio"
+    url = "/es/"
+    weight = 10
+
+  [[languages.es.menu.main]]
+    name = "Noticias"
+    url = "/es/news/"
+    weight = 20
+
+  [[languages.es.menu.main]]
+    name = "Declaraciones"
+    url = "/es/statements/"
     weight = 30
 
 # Output formats

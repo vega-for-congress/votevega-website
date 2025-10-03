@@ -11,9 +11,9 @@
 
     <!-- Desktop: Buttons in right side overlay -->
     <div class="alt-buttons-desktop">
-        <h2 class="alt-hero-text">Let's Save the Bronx</h2>
-        <a href="{{ .Site.Params.donateUrl }}" class="btn btn-lg btn-primary alt-btn">Donate</a>
-        <a href="#volunteer" class="btn btn-lg btn-gold alt-btn">Volunteer</a>
+        <h2 class="alt-hero-text">{{ i18n "hero_title" }}</h2>
+        <a href="{{ .Site.Params.donateUrl }}" class="btn btn-lg btn-primary alt-btn">{{ i18n "hero_donate" }}</a>
+        <a href="#volunteer" class="btn btn-lg btn-gold alt-btn">{{ i18n "hero_volunteer" }}</a>
     </div>
 </div>
 
@@ -29,10 +29,10 @@
 
     <!-- Mobile: Content Below Image -->
     <div class="mobile-content-below">
-        <h2 class="mobile-hero-text">Let's Save the Bronx</h2>
+        <h2 class="mobile-hero-text">{{ i18n "hero_title" }}</h2>
         <div class="mobile-button-stack">
-            <a href="{{ .Site.Params.donateUrl }}" class="btn btn-lg btn-primary mobile-btn">Donate</a>
-            <a href="#volunteer" class="btn btn-lg btn-gold mobile-btn">Volunteer</a>
+            <a href="{{ .Site.Params.donateUrl }}" class="btn btn-lg btn-primary mobile-btn">{{ i18n "hero_donate" }}</a>
+            <a href="#volunteer" class="btn btn-lg btn-gold mobile-btn">{{ i18n "hero_volunteer" }}</a>
         </div>
     </div>
 </div>
@@ -42,12 +42,7 @@
     <div class="row p-5 justify-content-center">
         <div class="col-md-8 text-center pt-4">
             <p class="featured-quote">
-                <span class="red">&ldquo;</span> I am running to break down the barriers that silence the
-                people's voices. We must empower citizens to reclaim their stake in government, restore
-                trust,
-                and dismantle corruption. Together, we can restore faith in a government that truly serves
-                its
-                people.<span class="red">&rdquo;</span>
+                <span class="red">&ldquo;</span> {{ i18n "quote_text" }}<span class="red">&rdquo;</span>
             </p>
             <p class="featured-quote-author fs-5">Jose Vega</p>
         </div>
@@ -61,10 +56,9 @@
             <div class="col-lg-8 text-center">
                 <div class="mb-5">
                     <img width="50" src={{ "images/favicon.png" | relURL }} />
-                    <h2 class="display-5 fw-bold text-uppercase my-3" style="color: #212529; letter-spacing: 1px;">Declare Your Independence</h2>
+                    <h2 class="display-5 fw-bold text-uppercase my-3" style="color: #212529; letter-spacing: 1px;">{{ i18n "volunteer_title" }}</h2>
                     <p class="mb-4" style="font-size: 1.2rem; color: #495057; line-height: 1.6;">
-                        Ready to transform the Bronx? Sign up to volunteer and help us build a movement for 
-                        Medicare for All, reindustrialization, and peace through development.
+                        {{ i18n "volunteer_description" }}
                     </p>
                 </div>
                 
@@ -77,7 +71,7 @@
                                         <span class="input-group-text border-0 shadow-sm" style="background: #ffffff; border-radius: 10px 0 0 10px; padding: 1rem;">
                                             <i class="fas fa-user" style="color: #dc3545;"></i>
                                         </span>
-                                        <input type="text" class="form-control border-0 shadow-sm" id="name" name="name" placeholder="Enter your full name" required 
+                                        <input type="text" class="form-control border-0 shadow-sm" id="name" name="name" placeholder="{{ i18n "volunteer_name_placeholder" }}" required
                                                style="border-radius: 0 10px 10px 0; padding: 1rem; font-size: 1.1rem; height: 3.5rem; color: #212529; font-weight: 500; background: #ffffff;">
                                     </div>
                                 </div>
@@ -87,7 +81,7 @@
                                         <span class="input-group-text border-0 shadow-sm" style="background: #ffffff; border-radius: 10px 0 0 10px; padding: 1rem;">
                                             <i class="fas fa-map-marker-alt" style="color: #dc3545;"></i>
                                         </span>
-                                        <input type="text" class="form-control border-0 shadow-sm" id="zip" name="zip" placeholder="Enter your zipcode" required 
+                                        <input type="text" class="form-control border-0 shadow-sm" id="zip" name="zip" placeholder="{{ i18n "volunteer_zip_placeholder" }}" required
                                                style="border-radius: 0 10px 10px 0; padding: 1rem; font-size: 1.1rem; height: 3.5rem; color: #212529; font-weight: 500; background: #ffffff;">
                                     </div>
                                 </div>
@@ -97,7 +91,7 @@
                                         <span class="input-group-text border-0 shadow-sm" style="background: #ffffff; border-radius: 10px 0 0 10px; padding: 1rem;">
                                             <i class="fas fa-envelope" style="color: #dc3545;"></i>
                                         </span>
-                                        <input type="email" class="form-control border-0 shadow-sm" id="email" name="email" placeholder="Enter your email address" required 
+                                        <input type="email" class="form-control border-0 shadow-sm" id="email" name="email" placeholder="{{ i18n "volunteer_email_placeholder" }}" required
                                                style="border-radius: 0 10px 10px 0; padding: 1rem; font-size: 1.1rem; height: 3.5rem; color: #212529; font-weight: 500; background: #ffffff;">
                                     </div>
                                 </div>
@@ -107,7 +101,7 @@
                                         <span class="input-group-text border-0 shadow-sm" style="background: #ffffff; border-radius: 10px 0 0 10px; padding: 1rem;">
                                             <i class="fas fa-phone" style="color: #dc3545;"></i>
                                         </span>
-                                        <input type="tel" class="form-control border-0 shadow-sm" id="phone" name="phone" placeholder="Enter your phone number" required 
+                                        <input type="tel" class="form-control border-0 shadow-sm" id="phone" name="phone" placeholder="{{ i18n "volunteer_phone_placeholder" }}" required
                                                style="border-radius: 0 10px 10px 0; padding: 1rem; font-size: 1.1rem; height: 3.5rem; color: #212529; font-weight: 500; background: #ffffff;">
                                     </div>
                                 </div>
@@ -128,7 +122,7 @@
                                             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(220, 53, 69, 0.3)';"
                                             onmousedown="this.style.transform='translateY(1px)';" 
                                             onmouseup="this.style.transform='translateY(-2px)';">
-                                        <i class="fas fa-handshake me-2"></i>Count Me In!
+                                        <i class="fas fa-handshake me-2"></i>{{ i18n "volunteer_submit" }}
                                     </button>
                                 </div>
                             </div>
@@ -136,7 +130,7 @@
                             <div class="row mt-3">
                                 <div class="col-12 text-center">
                                     <small class="text-muted" style="font-size: 0.9rem;">
-                                        By signing up, you agree to receive campaign updates and volunteer opportunities.
+                                        {{ i18n "volunteer_disclaimer" }}
                                     </small>
                                 </div>
                             </div>
@@ -160,9 +154,9 @@
                             <i class="fas fa-heartbeat" style="font-size: 4rem; color: #dc3545; transition: all 0.3s ease;"></i>
                         </div>
                         <div class="flex-grow-1 d-flex flex-column justify-content-between text-center">
-                            <h3 style="transition: all 0.3s ease; margin-bottom: 1rem;">A real medicare for all policy</h3>
+                            <h3 style="transition: all 0.3s ease; margin-bottom: 1rem;">{{ i18n "policy_medicare_title" }}</h3>
                             <small class="text-muted mt-auto opacity-0" style="transition: opacity 0.3s ease; font-weight: 600;">
-                                <i class="fas fa-external-link-alt me-1"></i>Read Policy
+                                <i class="fas fa-external-link-alt me-1"></i>{{ i18n "policy_read_link" }}
                             </small>
                         </div>
                     </div>
@@ -177,9 +171,9 @@
                             <i class="fas fa-industry" style="font-size: 4rem; color: #0d6efd; transition: all 0.3s ease;"></i>
                         </div>
                         <div class="flex-grow-1 d-flex flex-column justify-content-between text-center">
-                            <h3 style="transition: all 0.3s ease; margin-bottom: 1rem;">Make the Bronx the center for reindustrialization of the United States</h3>
+                            <h3 style="transition: all 0.3s ease; margin-bottom: 1rem;">{{ i18n "policy_reindustrialization_title" }}</h3>
                             <small class="text-muted mt-auto opacity-0" style="transition: opacity 0.3s ease; font-weight: 600;">
-                                <i class="fas fa-external-link-alt me-1"></i>Read Policy
+                                <i class="fas fa-external-link-alt me-1"></i>{{ i18n "policy_read_link" }}
                             </small>
                         </div>
                     </div>
@@ -194,9 +188,9 @@
                             <i class="fas fa-passport" style="font-size: 4rem; color: #198754; transition: all 0.3s ease;"></i>
                         </div>
                         <div class="flex-grow-1 d-flex flex-column justify-content-between text-center">
-                            <h3 style="transition: all 0.3s ease; margin-bottom: 1rem;">A robust immigration reform</h3>
+                            <h3 style="transition: all 0.3s ease; margin-bottom: 1rem;">{{ i18n "policy_immigration_title" }}</h3>
                             <small class="text-muted mt-auto opacity-0" style="transition: opacity 0.3s ease; font-weight: 600;">
-                                <i class="fas fa-external-link-alt me-1"></i>Read Policy
+                                <i class="fas fa-external-link-alt me-1"></i>{{ i18n "policy_read_link" }}
                             </small>
                         </div>
                     </div>
@@ -211,9 +205,9 @@
                             <i class="fas fa-globe-americas" style="font-size: 4rem; color: #fd7e14; transition: all 0.3s ease;"></i>
                         </div>
                         <div class="flex-grow-1 d-flex flex-column justify-content-between text-center">
-                            <h3 style="transition: all 0.3s ease; margin-bottom: 1rem;">A revolutionary approach to foreign policy: Peace through Development</h3>
+                            <h3 style="transition: all 0.3s ease; margin-bottom: 1rem;">{{ i18n "policy_peace_title" }}</h3>
                             <small class="text-muted mt-auto opacity-0" style="transition: opacity 0.3s ease; font-weight: 600;">
-                                <i class="fas fa-external-link-alt me-1"></i>Read Policy
+                                <i class="fas fa-external-link-alt me-1"></i>{{ i18n "policy_read_link" }}
                             </small>
                         </div>
                     </div>
@@ -268,22 +262,10 @@
         <div class="col-lg-6 p-5">
             <div class="container">
                 <div class="col-xxl-9">
-                    <h2>Meet Jose, A Fighter For The Bronx, A Fighter For The World</h2>
-                    <p>Jose Vega, born in 1998, is a 27-year-old political organizer and associate of the LaRouche
-                        Movement. Jose worked with the LaRouche Movement from the time he was 16 years-old, and helped
-                        organize concerts, youth choruses, and science programs where young people between the ages of
-                        12-18 were taught the ideas of Johannes Kepler, Albert Einstein, and Bernard Riemann. Since
-                        then, Jose has intervened against a number of political figures, economists, and think-tank
-                        leaders, such as Alexandria Ocasio-Cortez, Mike Pompeo, Kamala Harris, Ritchie Torres, Hakeem
-                        Jeffries, and the editors of the New York Times, Reuters, and the Washington Post.</p>
+                    <h2>{{ i18n "about_title" }}</h2>
+                    <p>{{ i18n "about_paragraph1" }}</p>
 
-                    <p>Jose ran against Ritchie Torres in the 2024 election as an independent candidate in NY-15. He is
-                        running again to bring an end to the two-party system in the U.S. which has brought us nothing but
-                        forever wars and financial bailouts. Jose was raised in the South Bronx, and believes that true
-                        change can come from people realizing the better traditions of the U.S. Republic. Jose believes the
-                        United States must once again become a beacon of hope and temple of liberty to the world, and join
-                        hands with the Global Majority represented by the BRICS+, SCO, ASEAN, and other global institutions
-                        which are promoting true economic development for their nations.</p>
+                    <p>{{ i18n "about_paragraph2" }}</p>
                 </div>
             </div>
         </div>
@@ -292,7 +274,7 @@
 
 <!-- News Section -->
 <div id="news" class="container py-5 px-4">
-    <h2 class="text-center py-2 mx-2 display-4 text-uppercase">News <span class="red">&amp;</span> Events
+    <h2 class="text-center py-2 mx-2 display-4 text-uppercase">{{ i18n "news_title" }}
     </h2>
     <div class="row news pt-5 justify-content-center">
         {{ range first 3 (where .Site.RegularPages "Section" "news").ByDate.Reverse }}
@@ -302,7 +284,7 @@
             </h3>
             <p class="post-meta mb-2">{{ .Date.Format "January 2, 2006" }}</p>
             <p class="mb-2">{{ if .Description }}{{ .Description | truncate 120 }}{{ else }}{{ .Summary | truncate 120 }}{{ end }}</p>
-            <p><strong><a class="text-uppercase mt-3" href="{{ .RelPermalink }}">Keep Reading</a></strong></p>
+            <p><strong><a class="text-uppercase mt-3" href="{{ .RelPermalink }}">{{ i18n "news_continue_reading" }}</a></strong></p>
         </div>
         {{ end }}
     </div>
@@ -310,7 +292,7 @@
     <div class="row justify-content-center mb-5">
         <div class="col-lg-3">
             <div class="d-grid">
-                <a href="{{ "/news/" | relURL }}" type="button" class="btn btn-lg btn-primary">All News</a>
+                <a href="{{ "/news/" | relURL }}" type="button" class="btn btn-lg btn-primary">{{ i18n "news_all" }}</a>
             </div>
         </div>
     </div>
@@ -318,7 +300,7 @@
 
 <!-- Statements Section -->
 <div id="statements" class="container py-5 px-4">
-    <h2 class="text-center py-2 mx-2 display-4 text-uppercase">Statements</h2>
+    <h2 class="text-center py-2 mx-2 display-4 text-uppercase">{{ i18n "statements_title" }}</h2>
     <div class="row statements pt-5 justify-content-center">
         {{ range first 3 (where .Site.RegularPages "Section" "statements").ByDate.Reverse }}
         <div class="col-lg-4">
@@ -327,7 +309,7 @@
             </h3>
             <p class="post-meta mb-2">{{ .Date.Format "January 2, 2006" }}</p>
             <p class="mb-2">{{ if .Description }}{{ .Description | truncate 120 }}{{ else }}{{ .Summary | truncate 120 }}{{ end }}</p>
-            <p><strong><a class="text-uppercase mt-3" href="{{ .RelPermalink }}">Keep Reading</a></strong></p>
+            <p><strong><a class="text-uppercase mt-3" href="{{ .RelPermalink }}">{{ i18n "statements_continue_reading" }}</a></strong></p>
         </div>
         {{ end }}
     </div>
@@ -335,7 +317,7 @@
     <div class="row justify-content-center mb-5">
         <div class="col-lg-3">
             <div class="d-grid">
-                <a href="{{ "/statements/" | relURL }}" type="button" class="btn btn-lg btn-primary">All Statements</a>
+                <a href="{{ "/statements/" | relURL }}" type="button" class="btn btn-lg btn-primary">{{ i18n "statements_all" }}</a>
             </div>
         </div>
     </div>

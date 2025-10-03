@@ -17,24 +17,24 @@
                 <ul class="navbar-nav justify-content-center">
                     {{ if not .IsHome }}
                     <li class="nav-item">
-                        <a href="{{ "/" | relURL }}" class="nav-link">Home</a>
+                        <a href="{{ "/" | relURL }}" class="nav-link">{{ i18n "nav_home" }}</a>
                     </li>
                     {{ end }}
                     <li class="nav-item">
-                        <a href="{{ "/news/" | relURL }}" class="nav-link{{ if eq .Section "news" }} active{{ end }}">News</a>
+                        <a href="{{ "/news/" | relURL }}" class="nav-link{{ if eq .Section "news" }} active{{ end }}">{{ i18n "nav_news" }}</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ "/statements/" | relURL }}" class="nav-link{{ if eq .Section "statements" }} active{{ end }}">Statements</a>
+                        <a href="{{ "/statements/" | relURL }}" class="nav-link{{ if eq .Section "statements" }} active{{ end }}">{{ i18n "nav_statements" }}</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ "/denouncements/" | relURL }}" class="nav-link{{ if eq .Title "Denouncements" }} active{{ end }}">Denouncements</a>
+                        <a href="{{ "/denouncements/" | relURL }}" class="nav-link{{ if eq .Title "Denouncements" }} active{{ end }}">{{ i18n "nav_denouncements" }}</a>
                     </li>
                     <li style="display: none;" class="nav-item">
-                        <a href="{{ "/events/" | relURL }}" class="nav-link{{ if eq .Section "events" }} active{{ end }}">Events</a>
+                        <a href="{{ "/events/" | relURL }}" class="nav-link{{ if eq .Section "events" }} active{{ end }}">{{ i18n "nav_events" }}</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a href="#policy" class="nav-link dropdown-toggle{{ if eq .Section "policy" }} active{{ end }}" data-bs-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">Policy Proposals</a>
+                            aria-haspopup="true" aria-expanded="false">{{ i18n "nav_policy_proposals" }}</a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             {{ range .Site.Params.policyProposals }}
                             <li><a href="{{ .url }}" class="dropdown-item">{{ .title }}</a></li>
@@ -44,8 +44,8 @@
                 </ul>
 
                 <div class="d-grid gap-2 d-sm-flex text-uppercase py-2">
-                    <a class="btn btn-primary" href="{{ .Site.Params.donateUrl }}" type="button">Donate</a>
-                    <a class="btn btn-secondary" href="{{ "/" | relURL }}#volunteer" role="button">Sign Up</a>
+                    <a class="btn btn-primary" href="{{ .Site.Params.donateUrl }}" type="button">{{ i18n "nav_donate" }}</a>
+                    <a class="btn btn-secondary" href="{{ .Site.Home.RelPermalink }}#volunteer" role="button">{{ i18n "nav_signup" }}</a>
                 </div>
             </div>
         </div>
