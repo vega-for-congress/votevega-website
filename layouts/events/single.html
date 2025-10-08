@@ -28,7 +28,7 @@
                         <div class="col-md-4">
                             <div class="event-detail-card text-center p-3 border rounded">
                                 <i class="fas fa-clock text-primary mb-2"></i>
-                                <h6 class="fw-bold mb-1">Date & Time</h6>
+                                <h6 class="fw-bold mb-1">{{ i18n "event_date_time" }}</h6>
                                 <p class="mb-0 small">
                                     {{ $eventTime := time .Params.eventDate }}
                                     {{ $eventTime.Format "January 2, 2006" }}<br>
@@ -41,7 +41,7 @@
                         <div class="col-md-4">
                             <div class="event-detail-card text-center p-3 border rounded">
                                 <i class="fas fa-map-marker-alt text-primary mb-2"></i>
-                                <h6 class="fw-bold mb-1">Location</h6>
+                                <h6 class="fw-bold mb-1">{{ i18n "event_location" }}</h6>
                                 <p class="mb-0 small">{{ .Params.location }}
                                 {{ if .Params.address }}<br><span class="text-muted">{{ .Params.address }}</span>{{ end }}
                                 </p>
@@ -52,7 +52,7 @@
                         <div class="col-md-4">
                             <div class="event-detail-card text-center p-3 border rounded">
                                 <i class="fas fa-ticket-alt text-primary mb-2"></i>
-                                <h6 class="fw-bold mb-1">Cost</h6>
+                                <h6 class="fw-bold mb-1">{{ i18n "event_cost" }}</h6>
                                 <p class="mb-0 small text-success fw-bold">{{ .Params.ticketPrice }}</p>
                             </div>
                         </div>
@@ -65,8 +65,8 @@
                             <div class="card-body p-4">
                                 <div class="text-center mb-4">
                                     <i class="fas fa-calendar-check mb-3" style="font-size: 2rem; color: #dc3545;"></i>
-                                    <h4 class="fw-bold text-uppercase mb-3" style="color: #212529; letter-spacing: 1px;">RSVP for This Event</h4>
-                                    <p class="mb-0" style="color: #495057;">Join us and help build the movement for change in the Bronx.</p>
+                                    <h4 class="fw-bold text-uppercase mb-3" style="color: #212529; letter-spacing: 1px;">{{ i18n "event_rsvp_title" }}</h4>
+                                    <p class="mb-0" style="color: #495057;">{{ i18n "event_rsvp_description" }}</p>
                                 </div>
                                 
                                 <form target="_blank" action="https://script.google.com/macros/s/AKfycbww0kRL3iP2S8VFM7e8f-3DXnweyFzKuCK1RqWIiZsZ1RO9_VO08LUbMVuAia34m3vh/exec" method="POST" class="event-rsvp-form">
@@ -81,7 +81,7 @@
                                                 <span class="input-group-text border-0 shadow-sm" style="background: #ffffff; border-radius: 8px 0 0 8px; padding: 0.75rem;">
                                                     <i class="fas fa-user" style="color: #dc3545;"></i>
                                                 </span>
-                                                <input type="text" class="form-control border-0 shadow-sm" name="name" placeholder="Your Full Name" required
+                                                <input type="text" class="form-control border-0 shadow-sm" name="name" placeholder="{{ i18n "event_rsvp_name" }}" required
                                                        style="border-radius: 0 8px 8px 0; padding: 0.75rem; font-size: 1rem; color: #212529; background: #ffffff;">
                                             </div>
                                         </div>
@@ -91,7 +91,7 @@
                                                 <span class="input-group-text border-0 shadow-sm" style="background: #ffffff; border-radius: 8px 0 0 8px; padding: 0.75rem;">
                                                     <i class="fas fa-envelope" style="color: #dc3545;"></i>
                                                 </span>
-                                                <input type="email" class="form-control border-0 shadow-sm" name="email" placeholder="Your Email Address" required
+                                                <input type="email" class="form-control border-0 shadow-sm" name="email" placeholder="{{ i18n "event_rsvp_email" }}" required
                                                        style="border-radius: 0 8px 8px 0; padding: 0.75rem; font-size: 1rem; color: #212529; background: #ffffff;">
                                             </div>
                                         </div>
@@ -101,7 +101,7 @@
                                                 <span class="input-group-text border-0 shadow-sm" style="background: #ffffff; border-radius: 8px 0 0 8px; padding: 0.75rem;">
                                                     <i class="fas fa-phone" style="color: #dc3545;"></i>
                                                 </span>
-                                                <input type="tel" class="form-control border-0 shadow-sm" name="phone" placeholder="Phone Number (Optional)"
+                                                <input type="tel" class="form-control border-0 shadow-sm" name="phone" placeholder="{{ i18n "event_rsvp_phone" }}"
                                                        style="border-radius: 0 8px 8px 0; padding: 0.75rem; font-size: 1rem; color: #212529; background: #ffffff;">
                                             </div>
                                         </div>
@@ -111,7 +111,7 @@
                                                 <span class="input-group-text border-0 shadow-sm" style="background: #ffffff; border-radius: 8px 0 0 8px; padding: 0.75rem;">
                                                     <i class="fas fa-map-marker-alt" style="color: #dc3545;"></i>
                                                 </span>
-                                                <input type="text" class="form-control border-0 shadow-sm" name="zip" placeholder="Zip Code"
+                                                <input type="text" class="form-control border-0 shadow-sm" name="zip" placeholder="{{ i18n "event_rsvp_zip" }}"
                                                        style="border-radius: 0 8px 8px 0; padding: 0.75rem; font-size: 1rem; color: #212529; background: #ffffff;">
                                             </div>
                                         </div>
@@ -130,13 +130,13 @@
                                                            transition: all 0.3s ease;" 
                                                     onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(220, 53, 69, 0.4)';" 
                                                     onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(220, 53, 69, 0.3)';">
-                                                <i class="fas fa-check me-2"></i>RSVP Now
+                                                <i class="fas fa-check me-2"></i>{{ i18n "event_rsvp_button" }}
                                             </button>
                                         </div>
                                         <div class="col-md-4">
                                             <a href="javascript:void(0)" onclick="shareEvent()" class="btn btn-outline-primary btn-lg w-100"
                                                style="border-radius: 8px; font-size: 1rem; letter-spacing: 0.5px;">
-                                                <i class="fas fa-share me-2"></i>Share Event
+                                                <i class="fas fa-share me-2"></i>{{ i18n "event_share_button" }}
                                             </a>
                                         </div>
                                     </div>
@@ -144,7 +144,7 @@
                                     <div class="row mt-3">
                                         <div class="col-12 text-center">
                                             <small class="text-muted" style="font-size: 0.85rem;">
-                                                By RSVPing, you agree to receive event updates and campaign information.
+                                                {{ i18n "event_rsvp_disclaimer" }}
                                             </small>
                                         </div>
                                     </div>
@@ -174,12 +174,12 @@
                     <!-- Quick Info -->
                     <div class="card mb-4">
                         <div class="card-header bg-primary text-white">
-                            <h5 class="card-title mb-0"><i class="fas fa-info-circle me-2"></i>Event Info</h5>
+                            <h5 class="card-title mb-0"><i class="fas fa-info-circle me-2"></i>{{ i18n "event_info" }}</h5>
                         </div>
                         <div class="card-body">
                             {{ if .Params.eventDate }}
                             <div class="mb-3">
-                                <strong><i class="far fa-calendar-alt me-2 text-primary"></i>When:</strong><br>
+                                <strong><i class="far fa-calendar-alt me-2 text-primary"></i>{{ i18n "event_when" }}</strong><br>
                                 {{ $eventTime := time .Params.eventDate }}
                                 <span class="ms-4">{{ $eventTime.Format "Monday, January 2, 2006" }}</span><br>
                                 <span class="ms-4">{{ $eventTime.Format "3:04 PM" }}{{ if .Params.endDate }}{{ $endTime := time .Params.endDate }} - {{ $endTime.Format "3:04 PM" }}{{ end }}</span>
@@ -187,14 +187,14 @@
                             {{ end }}
                             {{ if .Params.location }}
                             <div class="mb-3">
-                                <strong><i class="fas fa-map-marker-alt me-2 text-primary"></i>Where:</strong><br>
+                                <strong><i class="fas fa-map-marker-alt me-2 text-primary"></i>{{ i18n "event_where" }}</strong><br>
                                 <span class="ms-4">{{ .Params.location }}</span>
                                 {{ if .Params.address }}<br><span class="ms-4 text-muted">{{ .Params.address }}</span>{{ end }}
                             </div>
                             {{ end }}
                             {{ if .Params.ticketPrice }}
                             <div class="mb-3">
-                                <strong><i class="fas fa-dollar-sign me-2 text-primary"></i>Cost:</strong><br>
+                                <strong><i class="fas fa-dollar-sign me-2 text-primary"></i>{{ i18n "event_cost" }}:</strong><br>
                                 <span class="ms-4 text-success fw-bold">{{ .Params.ticketPrice }}</span>
                             </div>
                             {{ end }}
@@ -204,31 +204,31 @@
                     <!-- Contact Info -->
                     <div class="card mb-4">
                         <div class="card-header bg-secondary text-white">
-                            <h5 class="card-title mb-0"><i class="fas fa-phone me-2"></i>Contact</h5>
+                            <h5 class="card-title mb-0"><i class="fas fa-phone me-2"></i>{{ i18n "event_contact" }}</h5>
                         </div>
                         <div class="card-body">
-                            <p class="mb-2">Questions about this event?</p>
-                            <p class="mb-1"><strong>Email:</strong> <a href="mailto:info@votevega.nyc">info@votevega.nyc</a></p>
-                            <p class="mb-1"><strong>Phone:</strong> (800) 498-8561</p>
-                        </div>
+                            <p class="mb-2">{{ i18n "event_contact_description" }}</p>
+                            <p class="mb-1"><strong>{{ i18n "event_email_label" }}</strong> <a href="mailto:events@votevega.nyc">events@votevega.nyc</a></p>
+                            <p class="mb-1"><strong>{{ i18n "event_phone_label" }}</strong> (718) 555-0127</p>
+                            <p class="mb-0"><strong>{{ i18n "event_text_label" }}</strong> "EVENT" to (718) 555-0100</p>
                     </div>
                     
                     <!-- Share Options -->
                     <div class="card">
                         <div class="card-header bg-success text-white">
-                            <h5 class="card-title mb-0"><i class="fas fa-share-alt me-2"></i>Share This Event</h5>
+                            <h5 class="card-title mb-0"><i class="fas fa-share-alt me-2"></i>{{ i18n "event_share_title" }}</h5>
                         </div>
                         <div class="card-body">
-                            <p class="mb-3">Help spread the word!</p>
+                            <p class="mb-3">{{ i18n "event_share_description" }}</p>
                             <div class="d-grid gap-2">
                                 <a href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink }}" target="_blank" class="btn btn-outline-primary btn-sm">
-                                    <i class="fab fa-facebook me-2"></i>Share on Facebook
+                                    <i class="fab fa-facebook me-2"></i>{{ i18n "event_share_facebook" }}
                                 </a>
                                 <a href="https://twitter.com/intent/tweet?url={{ .Permalink }}&text={{ .Title | urlquery }}" target="_blank" class="btn btn-outline-info btn-sm">
-                                    <i class="fab fa-twitter me-2"></i>Share on Twitter
+                                    <i class="fab fa-twitter me-2"></i>{{ i18n "event_share_twitter" }}
                                 </a>
                                 <a href="mailto:?subject={{ .Title | urlquery }}&body=Join me at this event: {{ .Permalink }}" class="btn btn-outline-secondary btn-sm">
-                                    <i class="fas fa-envelope me-2"></i>Share via Email
+                                    <i class="fas fa-envelope me-2"></i>{{ i18n "event_share_email" }}
                                 </a>
                             </div>
                         </div>
@@ -241,7 +241,7 @@
         <div class="row justify-content-center mt-5">
             <div class="col-12 text-center">
                 <a href="/events/" class="btn btn-outline-primary btn-lg">
-                    <i class="fas fa-arrow-left me-2"></i>Back to All Events
+                    <i class="fas fa-arrow-left me-2"></i>{{ i18n "event_back_to_events" }}
                 </a>
             </div>
         </div>
@@ -252,14 +252,14 @@
 {{ if .Params.eventDate }}
 <div class="add-to-calendar py-4 bg-light">
     <div class="container text-center">
-        <h4 class="mb-3">Add This Event to Your Calendar</h4>
+        <h4 class="mb-3">{{ i18n "event_add_calendar" }}</h4>
         <div class="d-flex flex-wrap justify-content-center gap-2">
             {{ $eventTime := time .Params.eventDate }}
             <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text={{ .Title | urlquery }}&dates={{ $eventTime.Format "20060102T150405Z" }}/{{ if .Params.endDate }}{{ $endTime := time .Params.endDate }}{{ $endTime.Format "20060102T150405Z" }}{{ else }}{{ $eventTime.Add (time.ParseDuration "2h") | dateFormat "20060102T150405Z" }}{{ end }}&details={{ .Description | urlquery }}&location={{ .Params.address | urlquery }}" target="_blank" class="btn btn-outline-primary btn-sm">
-                <i class="fab fa-google me-2"></i>Google Calendar
+                <i class="fab fa-google me-2"></i>{{ i18n "event_google_calendar" }}
             </a>
             <a href="https://outlook.live.com/calendar/0/deeplink/compose?subject={{ .Title | urlquery }}&startdt={{ $eventTime.Format "2006-01-02T15:04:05" }}&enddt={{ if .Params.endDate }}{{ $endTime := time .Params.endDate }}{{ $endTime.Format "2006-01-02T15:04:05" }}{{ else }}{{ $eventTime.Add (time.ParseDuration "2h") | dateFormat "2006-01-02T15:04:05" }}{{ end }}&body={{ .Description | urlquery }}&location={{ .Params.address | urlquery }}" target="_blank" class="btn btn-outline-primary btn-sm">
-                <i class="fab fa-microsoft me-2"></i>Outlook
+                <i class="fab fa-microsoft me-2"></i>{{ i18n "event_outlook" }}
             </a>
         </div>
     </div>

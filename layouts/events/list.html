@@ -4,8 +4,8 @@
     <div class="container">
         <div class="row">
             <div class="col-12 text-center">
-                <h1 class="display-3 fw-bold text-uppercase mb-3">Campaign Events</h1>
-                <p class="lead text-muted">Join Jose Vega at upcoming events across the Bronx. Get involved in our grassroots movement for change.</p>
+                <h1 class="display-3 fw-bold text-uppercase mb-3">{{ i18n "events_title" }}</h1>
+                <p class="lead text-muted">{{ i18n "events_description" }}</p>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
                         <div class="featured-event card border-0 shadow-lg">
                             <div class="card-body p-5">
                                 <div class="event-meta mb-3 d-flex flex-wrap align-items-center">
-                                    <span class="badge bg-primary me-2">{{ .Params.eventType | default "Featured Event" }}</span>
+                                    <span class="badge bg-primary me-2">{{ .Params.eventType | default (i18n "events_featured_event") }}</span>
                                     {{ if .Params.eventDate }}
                                     <small class="text-muted me-3">
                                         <i class="far fa-calendar-alt me-1"></i>
@@ -52,7 +52,7 @@
                                 {{ end }}
                                 <div class="d-flex flex-wrap gap-2">
                                     <a href="{{ .RelPermalink }}" class="btn btn-primary btn-lg">
-                                        <i class="fas fa-calendar-check me-2"></i>View & RSVP
+                                        <i class="fas fa-calendar-check me-2"></i>{{ i18n "events_view_rsvp" }}
                                     </a>
                                 </div>
                             </div>
@@ -63,7 +63,7 @@
                     {{ if gt (len $events) 1 }}
                     <div class="col-12 mb-4">
                         <h3 class="h4 fw-bold text-uppercase mb-4">
-                            <i class="far fa-calendar-alt me-2"></i>All Events
+                            <i class="far fa-calendar-alt me-2"></i>{{ i18n "events_all_events" }}
                         </h3>
                     </div>
                     {{ end }}
@@ -100,7 +100,7 @@
                                 {{ end }}
                                 <div class="d-flex flex-wrap gap-2 mt-3">
                                     <a href="{{ .RelPermalink }}" class="btn btn-outline-primary btn-sm">
-                                        Learn More <i class="fas fa-arrow-right ms-1"></i>
+                                        {{ i18n "events_learn_more" }} <i class="fas fa-arrow-right ms-1"></i>
                                     </a>
                                     {{ if .Params.ticketPrice }}
                                     <small class="text-success align-self-center">{{ .Params.ticketPrice }}</small>
@@ -115,9 +115,9 @@
                 <!-- No events fallback -->
                 <div class="col-12 text-center mb-5">
                     <div class="alert alert-info" role="alert">
-                        <h4 class="alert-heading"><i class="far fa-calendar-alt me-2"></i>No Events Available</h4>
-                        <p class="mb-2">We're planning exciting events for the community. Check back soon!</p>
-                        <p class="mb-0">Want to stay updated? <a href="#join" class="alert-link">Sign up for our newsletter</a> or follow us on social media.</p>
+                        <h4 class="alert-heading"><i class="far fa-calendar-alt me-2"></i>{{ i18n "events_no_events" }}</h4>
+                        <p class="mb-2">{{ i18n "events_no_events_description" }}</p>
+                        <p class="mb-0">{{ i18n "events_stay_updated" | safeHTML }}</p>
                     </div>
                 </div>
             {{ end }}
@@ -130,14 +130,14 @@
     <div class="container text-center">
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <h3 class="h4 fw-bold mb-3">Want to Help Organize Events?</h3>
-                <p class="lead mb-4">Our grassroots movement depends on volunteers like you. Help us plan and execute events that bring our community together.</p>
+                <h3 class="h4 fw-bold mb-3">{{ i18n "events_help_organize" }}</h3>
+                <p class="lead mb-4">{{ i18n "events_help_description" }}</p>
                 <div class="d-flex flex-wrap justify-content-center gap-3">
                     <a href="mailto:events@votevega.nyc" class="btn btn-primary">
-                        <i class="fas fa-envelope me-2"></i>Contact Event Team
+                        <i class="fas fa-envelope me-2"></i>{{ i18n "events_contact_team" }}
                     </a>
                     <a href="#join" class="btn btn-outline-primary">
-                        <i class="fas fa-users me-2"></i>Join Our Team
+                        <i class="fas fa-users me-2"></i>{{ i18n "events_join_team" }}
                     </a>
                 </div>
             </div>
