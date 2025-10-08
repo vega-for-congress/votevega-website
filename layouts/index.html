@@ -18,7 +18,7 @@
 </div>
 
 <!-- Mobile Version - Stacked Layout -->
-<div id="alt-hero-mobile" class="d-block d-md-none">
+<div id="alt-hero-mobile" class="d-md-none">
     <div class="mobile-hero-image position-relative">
         <img src="{{ "images/minty_hero_image.jpg" | relURL }}" alt="Jose Vega" class="mobile-hero-img">
         <!-- Logo Overlay on Mobile -->
@@ -33,6 +33,28 @@
         <div class="mobile-button-stack">
             <a href="{{ .Site.Params.donateUrl }}" class="btn btn-lg btn-primary mobile-btn">{{ i18n "hero_donate" }}</a>
             <a href="#volunteer" class="btn btn-lg btn-gold mobile-btn">{{ i18n "hero_volunteer" }}</a>
+        </div>
+    </div>
+</div>
+
+<!-- Event Banner -->
+<div class="event-banner bg-primary text-white py-3">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-calendar-alt me-3" style="font-size: 1.5rem;"></i>
+                    <div>
+                        <strong class="d-block">Upcoming Event: Intro to LaRouche Economics</strong>
+                        <small class="opacity-75">October 12, 2025 • Join Jose Vega and learn about Economics from the standpoint of Lyndon LaRouche</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 text-md-end mt-2 mt-md-0">
+                <a href="/events/political-education-class-series/" class="btn btn-light btn-sm fw-bold text-uppercase">
+                    <i class="fas fa-info-circle me-1"></i>Learn More & RSVP
+                </a>
+            </div>
         </div>
     </div>
 </div>
@@ -64,7 +86,10 @@
                 
                 <div class="card border-0 shadow-lg" style="border-radius: 15px; overflow: hidden;">
                     <div class="card-body p-5">
-                        <form target="_blank" action="https://script.google.com/macros/s/AKfycbyvxRVEWDWG5NiIcyOjHVgQ9Yy8V2nOZ8HX3FBLvjM7UPVLB6c4lGSp62PWR8cRdDbf/exec" method="POST" class="volunteer-form">
+                        <form target="_blank" action="https://script.google.com/macros/s/AKfycbww0kRL3iP2S8VFM7e8f-3DXnweyFzKuCK1RqWIiZsZ1RO9_VO08LUbMVuAia34m3vh/exec" method="POST" class="volunteer-form">
+                            <!-- Hidden field to track form source -->
+                            <input type="hidden" name="whichform" value="homepage">
+                            
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <div class="input-group mb-3">

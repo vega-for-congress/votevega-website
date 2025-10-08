@@ -10,7 +10,10 @@
                         {{ if .Params.eventDate }}
                         <span class="text-muted">
                             <i class="far fa-calendar-alt me-1"></i>
-                            {{ .Params.eventDate.Format "Monday, January 2, 2006" }}
+                            {{ if .Params.eventDate }}
+                                {{ $eventTime := time .Params.eventDate }}
+                                {{ $eventTime.Format "Monday, January 2, 2006" }}
+                            {{ end }}
                         </span>
                         {{ end }}
                     </div>
@@ -27,8 +30,9 @@
                                 <i class="fas fa-clock text-primary mb-2"></i>
                                 <h6 class="fw-bold mb-1">Date & Time</h6>
                                 <p class="mb-0 small">
-                                    {{ .Params.eventDate.Format "January 2, 2006" }}<br>
-                                    {{ .Params.eventDate.Format "3:04 PM" }}{{ if .Params.endDate }} - {{ .Params.endDate.Format "3:04 PM" }}{{ end }}
+                                    {{ $eventTime := time .Params.eventDate }}
+                                    {{ $eventTime.Format "January 2, 2006" }}<br>
+                                    {{ $eventTime.Format "3:04 PM" }}{{ if .Params.endDate }}{{ $endTime := time .Params.endDate }} - {{ $endTime.Format "3:04 PM" }}{{ end }}
                                 </p>
                             </div>
                         </div>
@@ -55,19 +59,98 @@
                         {{ end }}
                     </div>
                     
-                    <!-- Action Buttons -->
-                    <div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
-                        <a href="mailto:events@votevega.nyc?subject=RSVP: {{ .Title }}" class="btn btn-primary btn-lg">
-                            <i class="fas fa-check me-2"></i>RSVP Now
-                        </a>
-                        {{ if .Params.address }}
-                        <a href="https://maps.google.com/?q={{ .Params.address | urlquery }}" target="_blank" class="btn btn-outline-secondary btn-lg">
-                            <i class="fas fa-map-marker-alt me-2"></i>Get Directions
-                        </a>
-                        {{ end }}
-                        <a href="javascript:void(0)" onclick="shareEvent()" class="btn btn-outline-primary btn-lg">
-                            <i class="fas fa-share me-2"></i>Share Event
-                        </a>
+                    <!-- RSVP Form -->
+                    <div class="mt-4">
+                        <div class="card border-0 shadow" style="border-radius: 15px; overflow: hidden; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
+                            <div class="card-body p-4">
+                                <div class="text-center mb-4">
+                                    <i class="fas fa-calendar-check mb-3" style="font-size: 2rem; color: #dc3545;"></i>
+                                    <h4 class="fw-bold text-uppercase mb-3" style="color: #212529; letter-spacing: 1px;">RSVP for This Event</h4>
+                                    <p class="mb-0" style="color: #495057;">Join us and help build the movement for change in the Bronx.</p>
+                                </div>
+                                
+                                <form target="_blank" action="https://script.google.com/macros/s/AKfycbww0kRL3iP2S8VFM7e8f-3DXnweyFzKuCK1RqWIiZsZ1RO9_VO08LUbMVuAia34m3vh/exec" method="POST" class="event-rsvp-form">
+                                    <!-- Hidden field for event name -->
+                                    <input type="hidden" name="event" value="{{ .Title }}">
+                                    <!-- Hidden field to track form source -->
+                                    <input type="hidden" name="whichform" value="oct25class">
+                                    
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <div class="input-group">
+                                                <span class="input-group-text border-0 shadow-sm" style="background: #ffffff; border-radius: 8px 0 0 8px; padding: 0.75rem;">
+                                                    <i class="fas fa-user" style="color: #dc3545;"></i>
+                                                </span>
+                                                <input type="text" class="form-control border-0 shadow-sm" name="name" placeholder="Your Full Name" required
+                                                       style="border-radius: 0 8px 8px 0; padding: 0.75rem; font-size: 1rem; color: #212529; background: #ffffff;">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-6">
+                                            <div class="input-group">
+                                                <span class="input-group-text border-0 shadow-sm" style="background: #ffffff; border-radius: 8px 0 0 8px; padding: 0.75rem;">
+                                                    <i class="fas fa-envelope" style="color: #dc3545;"></i>
+                                                </span>
+                                                <input type="email" class="form-control border-0 shadow-sm" name="email" placeholder="Your Email Address" required
+                                                       style="border-radius: 0 8px 8px 0; padding: 0.75rem; font-size: 1rem; color: #212529; background: #ffffff;">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-6">
+                                            <div class="input-group">
+                                                <span class="input-group-text border-0 shadow-sm" style="background: #ffffff; border-radius: 8px 0 0 8px; padding: 0.75rem;">
+                                                    <i class="fas fa-phone" style="color: #dc3545;"></i>
+                                                </span>
+                                                <input type="tel" class="form-control border-0 shadow-sm" name="phone" placeholder="Phone Number (Optional)"
+                                                       style="border-radius: 0 8px 8px 0; padding: 0.75rem; font-size: 1rem; color: #212529; background: #ffffff;">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-6">
+                                            <div class="input-group">
+                                                <span class="input-group-text border-0 shadow-sm" style="background: #ffffff; border-radius: 8px 0 0 8px; padding: 0.75rem;">
+                                                    <i class="fas fa-map-marker-alt" style="color: #dc3545;"></i>
+                                                </span>
+                                                <input type="text" class="form-control border-0 shadow-sm" name="zip" placeholder="Zip Code"
+                                                       style="border-radius: 0 8px 8px 0; padding: 0.75rem; font-size: 1rem; color: #212529; background: #ffffff;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row mt-4">
+                                        <div class="col-md-8">
+                                            <button type="submit" class="btn btn-lg fw-bold text-uppercase w-100" 
+                                                    style="background: linear-gradient(135deg, #dc3545, #c82333); 
+                                                           color: white; 
+                                                           border: none; 
+                                                           border-radius: 8px; 
+                                                           font-size: 1rem; 
+                                                           letter-spacing: 0.5px;
+                                                           box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+                                                           transition: all 0.3s ease;" 
+                                                    onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(220, 53, 69, 0.4)';" 
+                                                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(220, 53, 69, 0.3)';">
+                                                <i class="fas fa-check me-2"></i>RSVP Now
+                                            </button>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a href="javascript:void(0)" onclick="shareEvent()" class="btn btn-outline-primary btn-lg w-100"
+                                               style="border-radius: 8px; font-size: 1rem; letter-spacing: 0.5px;">
+                                                <i class="fas fa-share me-2"></i>Share Event
+                                            </a>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row mt-3">
+                                        <div class="col-12 text-center">
+                                            <small class="text-muted" style="font-size: 0.85rem;">
+                                                By RSVPing, you agree to receive event updates and campaign information.
+                                            </small>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -97,8 +180,9 @@
                             {{ if .Params.eventDate }}
                             <div class="mb-3">
                                 <strong><i class="far fa-calendar-alt me-2 text-primary"></i>When:</strong><br>
-                                <span class="ms-4">{{ .Params.eventDate.Format "Monday, January 2, 2006" }}</span><br>
-                                <span class="ms-4">{{ .Params.eventDate.Format "3:04 PM" }}{{ if .Params.endDate }} - {{ .Params.endDate.Format "3:04 PM" }}{{ end }}</span>
+                                {{ $eventTime := time .Params.eventDate }}
+                                <span class="ms-4">{{ $eventTime.Format "Monday, January 2, 2006" }}</span><br>
+                                <span class="ms-4">{{ $eventTime.Format "3:04 PM" }}{{ if .Params.endDate }}{{ $endTime := time .Params.endDate }} - {{ $endTime.Format "3:04 PM" }}{{ end }}</span>
                             </div>
                             {{ end }}
                             {{ if .Params.location }}
@@ -124,9 +208,8 @@
                         </div>
                         <div class="card-body">
                             <p class="mb-2">Questions about this event?</p>
-                            <p class="mb-1"><strong>Email:</strong> <a href="mailto:events@votevega.nyc">events@votevega.nyc</a></p>
-                            <p class="mb-1"><strong>Phone:</strong> (718) 555-0127</p>
-                            <p class="mb-0"><strong>Text:</strong> "EVENT" to (718) 555-0100</p>
+                            <p class="mb-1"><strong>Email:</strong> <a href="mailto:info@votevega.nyc">info@votevega.nyc</a></p>
+                            <p class="mb-1"><strong>Phone:</strong> (800) 498-8561</p>
                         </div>
                     </div>
                     
@@ -171,10 +254,11 @@
     <div class="container text-center">
         <h4 class="mb-3">Add This Event to Your Calendar</h4>
         <div class="d-flex flex-wrap justify-content-center gap-2">
-            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text={{ .Title | urlquery }}&dates={{ .Params.eventDate.Format "20060102T150405Z" }}/{{ if .Params.endDate }}{{ .Params.endDate.Format "20060102T150405Z" }}{{ else }}{{ .Params.eventDate.Add (time.ParseDuration "2h") | dateFormat "20060102T150405Z" }}{{ end }}&details={{ .Description | urlquery }}&location={{ .Params.address | urlquery }}" target="_blank" class="btn btn-outline-primary btn-sm">
+            {{ $eventTime := time .Params.eventDate }}
+            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text={{ .Title | urlquery }}&dates={{ $eventTime.Format "20060102T150405Z" }}/{{ if .Params.endDate }}{{ $endTime := time .Params.endDate }}{{ $endTime.Format "20060102T150405Z" }}{{ else }}{{ $eventTime.Add (time.ParseDuration "2h") | dateFormat "20060102T150405Z" }}{{ end }}&details={{ .Description | urlquery }}&location={{ .Params.address | urlquery }}" target="_blank" class="btn btn-outline-primary btn-sm">
                 <i class="fab fa-google me-2"></i>Google Calendar
             </a>
-            <a href="https://outlook.live.com/calendar/0/deeplink/compose?subject={{ .Title | urlquery }}&startdt={{ .Params.eventDate.Format "2006-01-02T15:04:05" }}&enddt={{ if .Params.endDate }}{{ .Params.endDate.Format "2006-01-02T15:04:05" }}{{ else }}{{ .Params.eventDate.Add (time.ParseDuration "2h") | dateFormat "2006-01-02T15:04:05" }}{{ end }}&body={{ .Description | urlquery }}&location={{ .Params.address | urlquery }}" target="_blank" class="btn btn-outline-primary btn-sm">
+            <a href="https://outlook.live.com/calendar/0/deeplink/compose?subject={{ .Title | urlquery }}&startdt={{ $eventTime.Format "2006-01-02T15:04:05" }}&enddt={{ if .Params.endDate }}{{ $endTime := time .Params.endDate }}{{ $endTime.Format "2006-01-02T15:04:05" }}{{ else }}{{ $eventTime.Add (time.ParseDuration "2h") | dateFormat "2006-01-02T15:04:05" }}{{ end }}&body={{ .Description | urlquery }}&location={{ .Params.address | urlquery }}" target="_blank" class="btn btn-outline-primary btn-sm">
                 <i class="fab fa-microsoft me-2"></i>Outlook
             </a>
         </div>

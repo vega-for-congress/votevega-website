@@ -16,15 +16,10 @@
     <div class="container">
         <div class="row">
             {{ $events := .Pages }}
-            {{ $upcomingEvents := where $events ".Params.eventDate" "ge" now }}
-            {{ $pastEvents := where $events ".Params.eventDate" "lt" now }}
-            {{ $featuredEvents := where $upcomingEvents ".Params.featured" true }}
-            {{ $regularEvents := where $upcomingEvents ".Params.featured" "ne" true }}
-            
-            {{ if $upcomingEvents }}
-                <!-- Featured Events -->
-                {{ if $featuredEvents }}
-                    {{ range $featuredEvents }}
+            {{ if $events }}
+                {{ range $index, $page := $events }}
+                    {{ if and .Params.featured (eq $index 0) }}
+                    <!-- Featured Event -->
                     <div class="col-12 mb-5">
                         <div class="featured-event card border-0 shadow-lg">
                             <div class="card-body p-5">
@@ -33,7 +28,8 @@
                                     {{ if .Params.eventDate }}
                                     <small class="text-muted me-3">
                                         <i class="far fa-calendar-alt me-1"></i>
-                                        {{ .Params.eventDate.Format "January 2, 2006 at 3:04 PM" }}
+                                        {{ $eventTime := time .Params.eventDate }}
+                                        {{ $eventTime.Format "January 2, 2006" }}
                                     </small>
                                     {{ end }}
                                     {{ if .Params.location }}
@@ -55,11 +51,59 @@
                                 <p class="card-text lead mb-4">{{ .Summary | truncate 200 }}</p>
                                 {{ end }}
                                 <div class="d-flex flex-wrap gap-2">
-                                    <a href="{{ .RelPermalink }}" class="btn btn-primary btn-lg">Learn More & RSVP</a>
-                                    {{ if .Params.address }}
-                                    <a href="https://maps.google.com/?q={{ .Params.address | urlquery }}" target="_blank" class="btn btn-outline-secondary">
-                                        <i class="fas fa-map-marker-alt me-2"></i>Get Directions
+                                    <a href="{{ .RelPermalink }}" class="btn btn-primary btn-lg">
+                                        <i class="fas fa-calendar-check me-2"></i>View & RSVP
                                     </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Other Events Header -->
+                    {{ if gt (len $events) 1 }}
+                    <div class="col-12 mb-4">
+                        <h3 class="h4 fw-bold text-uppercase mb-4">
+                            <i class="far fa-calendar-alt me-2"></i>All Events
+                        </h3>
+                    </div>
+                    {{ end }}
+                    {{ else }}
+                    <!-- Regular Event Cards -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="event-card card h-100 border-0 shadow">
+                            <div class="card-body p-4">
+                                <div class="event-meta mb-3 d-flex flex-wrap align-items-center">
+                                    <span class="badge bg-secondary me-2">{{ .Params.eventType | default "Event" }}</span>
+                                    {{ if .Params.eventDate }}
+                                    <small class="text-muted">
+                                        <i class="far fa-clock me-1"></i>
+                                        {{ $eventTime := time .Params.eventDate }}
+                                        {{ $eventTime.Format "Jan 2, 3:04 PM" }}
+                                    </small>
+                                    {{ end }}
+                                </div>
+                                <h4 class="card-title h5 fw-bold mb-3">
+                                    <a href="{{ .RelPermalink }}" class="text-decoration-none">{{ .Title }}</a>
+                                </h4>
+                                {{ if .Params.subtitle }}
+                                <p class="text-muted mb-2">{{ .Params.subtitle }}</p>
+                                {{ end }}
+                                {{ if .Params.location }}
+                                <p class="text-muted mb-2">
+                                    <i class="fas fa-map-marker-alt me-2"></i>{{ .Params.location }}
+                                </p>
+                                {{ end }}
+                                {{ if .Description }}
+                                <p class="card-text">{{ .Description | truncate 120 }}</p>
+                                {{ else }}
+                                <p class="card-text">{{ .Summary | truncate 120 }}</p>
+                                {{ end }}
+                                <div class="d-flex flex-wrap gap-2 mt-3">
+                                    <a href="{{ .RelPermalink }}" class="btn btn-outline-primary btn-sm">
+                                        Learn More <i class="fas fa-arrow-right ms-1"></i>
+                                    </a>
+                                    {{ if .Params.ticketPrice }}
+                                    <small class="text-success align-self-center">{{ .Params.ticketPrice }}</small>
                                     {{ end }}
                                 </div>
                             </div>
@@ -67,97 +111,15 @@
                     </div>
                     {{ end }}
                 {{ end }}
-                
-                <!-- Upcoming Events Header -->
-                {{ if $regularEvents }}
-                <div class="col-12 mb-4">
-                    <h3 class="h4 fw-bold text-uppercase mb-4">
-                        <i class="far fa-calendar-alt me-2"></i>Upcoming Events
-                    </h3>
-                </div>
-                
-                {{ range $regularEvents }}
-                <div class="col-lg-6 mb-4">
-                    <div class="event-card card h-100 border-0 shadow">
-                        <div class="card-body p-4">
-                            <div class="event-meta mb-3 d-flex flex-wrap align-items-center">
-                                <span class="badge bg-secondary me-2">{{ .Params.eventType | default "Event" }}</span>
-                                {{ if .Params.eventDate }}
-                                <small class="text-muted">
-                                    <i class="far fa-clock me-1"></i>
-                                    {{ .Params.eventDate.Format "Jan 2, 3:04 PM" }}
-                                </small>
-                                {{ end }}
-                            </div>
-                            <h4 class="card-title h5 fw-bold mb-3">
-                                <a href="{{ .RelPermalink }}" class="text-decoration-none">{{ .Title }}</a>
-                            </h4>
-                            {{ if .Params.location }}
-                            <p class="text-muted mb-2">
-                                <i class="fas fa-map-marker-alt me-2"></i>{{ .Params.location }}
-                            </p>
-                            {{ end }}
-                            {{ if .Description }}
-                            <p class="card-text">{{ .Description | truncate 120 }}</p>
-                            {{ else }}
-                            <p class="card-text">{{ .Summary | truncate 120 }}</p>
-                            {{ end }}
-                            <div class="d-flex flex-wrap gap-2 mt-3">
-                                <a href="{{ .RelPermalink }}" class="btn btn-outline-primary btn-sm">
-                                    Learn More <i class="fas fa-arrow-right ms-1"></i>
-                                </a>
-                                {{ if .Params.ticketPrice }}
-                                <small class="text-success align-self-center">{{ .Params.ticketPrice }}</small>
-                                {{ end }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {{ end }}
-                {{ end }}
-                
             {{ else }}
-                <!-- No upcoming events -->
+                <!-- No events fallback -->
                 <div class="col-12 text-center mb-5">
                     <div class="alert alert-info" role="alert">
-                        <h4 class="alert-heading"><i class="far fa-calendar-alt me-2"></i>No Upcoming Events</h4>
+                        <h4 class="alert-heading"><i class="far fa-calendar-alt me-2"></i>No Events Available</h4>
                         <p class="mb-2">We're planning exciting events for the community. Check back soon!</p>
                         <p class="mb-0">Want to stay updated? <a href="#join" class="alert-link">Sign up for our newsletter</a> or follow us on social media.</p>
                     </div>
                 </div>
-            {{ end }}
-            
-            <!-- Past Events Section -->
-            {{ if $pastEvents }}
-            <div class="col-12 mt-5 pt-5 border-top">
-                <h3 class="h4 fw-bold text-uppercase mb-4 text-muted">
-                    <i class="fas fa-history me-2"></i>Recent Events
-                </h3>
-                <div class="row">
-                    {{ range first 4 $pastEvents }}
-                    <div class="col-lg-6 mb-3">
-                        <div class="past-event-card card border-0">
-                            <div class="card-body p-3">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-grow-1">
-                                        <h5 class="card-title mb-1">
-                                            <a href="{{ .RelPermalink }}" class="text-decoration-none text-muted">{{ .Title }}</a>
-                                        </h5>
-                                        {{ if .Params.eventDate }}
-                                        <small class="text-muted">
-                                            <i class="far fa-calendar-alt me-1"></i>
-                                            {{ .Params.eventDate.Format "January 2, 2006" }}
-                                        </small>
-                                        {{ end }}
-                                    </div>
-                                    <span class="badge bg-light text-dark">Past</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {{ end }}
-                </div>
-            </div>
             {{ end }}
         </div>
     </div>

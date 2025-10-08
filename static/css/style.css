@@ -1135,7 +1135,8 @@ h1, h2, h3, h4, h5, h6 {
 /* Mobile Stacked Layout */
 #alt-hero-mobile {
     min-height: 100vh;
-    display: block;
+    display: flex;
+    flex-direction: column;
     margin: 0 !important;
     padding: 0 !important;
     width: 100vw;
@@ -1186,6 +1187,7 @@ h1, h2, h3, h4, h5, h6 {
     text-align: center;
     margin: 0;
     display: block;
+    flex-grow: 1;
 }
 
 .mobile-hero-text {
@@ -1649,7 +1651,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .event-article h1, .event-article h2, .event-article h3 {
-    color: var(--primary-blue);
     font-weight: 700;
     margin-top: 2rem;
     margin-bottom: 1rem;

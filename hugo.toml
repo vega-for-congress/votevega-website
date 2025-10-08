@@ -1,5 +1,6 @@
 baseURL = "https://votevega.nyc"
 defaultContentLanguage = "en"
+buildFuture = true
 
 # Language configurations
 [languages]
@@ -121,6 +122,11 @@ enableEmoji = true
     weight = 10
 
   [[menu.main]]
+    name = "Events"
+    url = "/events/"
+    weight = 15
+
+  [[menu.main]]
     name = "News"
     url = "/news/"
     weight = 20
@@ -136,6 +142,11 @@ enableEmoji = true
     name = "Inicio"
     url = "/es/"
     weight = 10
+
+  [[languages.es.menu.main]]
+    name = "Eventos"
+    url = "/es/events/"
+    weight = 15
 
   [[languages.es.menu.main]]
     name = "Noticias"
