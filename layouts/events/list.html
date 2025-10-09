@@ -15,7 +15,7 @@
 <div class="events-content py-5">
     <div class="container">
         <div class="row">
-            {{ $events := .Pages }}
+            {{ $events := where .Pages "Params.unlisted" "!=" true }}
             {{ $featuredEvents := where $events "Params.featured" true }}
             {{ $regularEvents := where $events "Params.featured" "!=" true }}
             
