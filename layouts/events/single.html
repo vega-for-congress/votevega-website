@@ -73,7 +73,7 @@
                                     <!-- Hidden field for event name -->
                                     <input type="hidden" name="event" value="{{ .Title }}">
                                     <!-- Hidden field to track form source -->
-                                    <input type="hidden" name="whichform" value="oct25class">
+                                    <input type="hidden" name="whichform" value="{{ .File.TranslationBaseName }}">
                                     
                                     <div class="row g-3">
                                         <div class="col-md-6">
@@ -208,9 +208,8 @@
                         </div>
                         <div class="card-body">
                             <p class="mb-2">{{ i18n "event_contact_description" }}</p>
-                            <p class="mb-1"><strong>{{ i18n "event_email_label" }}</strong> <a href="mailto:events@votevega.nyc">events@votevega.nyc</a></p>
-                            <p class="mb-1"><strong>{{ i18n "event_phone_label" }}</strong> (718) 555-0127</p>
-                            <p class="mb-0"><strong>{{ i18n "event_text_label" }}</strong> "EVENT" to (718) 555-0100</p>
+                            <p class="mb-1"><strong>{{ i18n "event_email_label" }}</strong> <a href="mailto:info@votevega.nyc">info@votevega.nyc</a></p>
+                            <p class="mb-1"><strong>{{ i18n "event_phone_label" }}</strong> (800) 498-8561</p>
                     </div>
                     
                     <!-- Share Options -->

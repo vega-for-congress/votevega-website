@@ -32,6 +32,6 @@ A series of three classes (and potentially mid-week discussions) will introduce 
 ## Series Details
 
 **Duration:** 3 weeks, every Sunday  
-**Time:** 11:00 AM - 1:00 PM
-**Location:** Campaign office (RSVP for details) 
+**Time:** 11:00 AM - 1:00 PM  
+**Location:** Campaign office (RSVP for details)  
 **Cost:** Free (donations welcomed to support organizing efforts)  

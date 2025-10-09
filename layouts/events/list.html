@@ -16,100 +16,103 @@
     <div class="container">
         <div class="row">
             {{ $events := .Pages }}
+            {{ $featuredEvents := where $events "Params.featured" true }}
+            {{ $regularEvents := where $events "Params.featured" "!=" true }}
+            
             {{ if $events }}
-                {{ range $index, $page := $events }}
-                    {{ if and .Params.featured (eq $index 0) }}
-                    <!-- Featured Event -->
-                    <div class="col-12 mb-5">
-                        <div class="featured-event card border-0 shadow-lg">
-                            <div class="card-body p-5">
-                                <div class="event-meta mb-3 d-flex flex-wrap align-items-center">
-                                    <span class="badge bg-primary me-2">{{ .Params.eventType | default (i18n "events_featured_event") }}</span>
-                                    {{ if .Params.eventDate }}
-                                    <small class="text-muted me-3">
-                                        <i class="far fa-calendar-alt me-1"></i>
-                                        {{ $eventTime := time .Params.eventDate }}
-                                        {{ $eventTime.Format "January 2, 2006" }}
-                                    </small>
-                                    {{ end }}
-                                    {{ if .Params.location }}
-                                    <small class="text-muted">
-                                        <i class="fas fa-map-marker-alt me-1"></i>
-                                        {{ .Params.location }}
-                                    </small>
-                                    {{ end }}
-                                </div>
-                                <h2 class="card-title h3 fw-bold mb-3">
-                                    <a href="{{ .RelPermalink }}" class="text-decoration-none">{{ .Title }}</a>
-                                </h2>
-                                {{ if .Params.subtitle }}
-                                <h3 class="h5 text-muted mb-4">{{ .Params.subtitle }}</h3>
-                                {{ end }}
-                                {{ if .Description }}
-                                <p class="card-text lead mb-4">{{ .Description }}</p>
-                                {{ else }}
-                                <p class="card-text lead mb-4">{{ .Summary | truncate 200 }}</p>
-                                {{ end }}
-                                <div class="d-flex flex-wrap gap-2">
-                                    <a href="{{ .RelPermalink }}" class="btn btn-primary btn-lg">
-                                        <i class="fas fa-calendar-check me-2"></i>{{ i18n "events_view_rsvp" }}
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Other Events Header -->
-                    {{ if gt (len $events) 1 }}
-                    <div class="col-12 mb-4">
-                        <h3 class="h4 fw-bold text-uppercase mb-4">
-                            <i class="far fa-calendar-alt me-2"></i>{{ i18n "events_all_events" }}
-                        </h3>
-                    </div>
-                    {{ end }}
-                    {{ else }}
-                    <!-- Regular Event Cards -->
-                    <div class="col-lg-6 mb-4">
-                        <div class="event-card card h-100 border-0 shadow">
-                            <div class="card-body p-4">
-                                <div class="event-meta mb-3 d-flex flex-wrap align-items-center">
-                                    <span class="badge bg-secondary me-2">{{ .Params.eventType | default "Event" }}</span>
-                                    {{ if .Params.eventDate }}
-                                    <small class="text-muted">
-                                        <i class="far fa-clock me-1"></i>
-                                        {{ $eventTime := time .Params.eventDate }}
-                                        {{ $eventTime.Format "Jan 2, 3:04 PM" }}
-                                    </small>
-                                    {{ end }}
-                                </div>
-                                <h4 class="card-title h5 fw-bold mb-3">
-                                    <a href="{{ .RelPermalink }}" class="text-decoration-none">{{ .Title }}</a>
-                                </h4>
-                                {{ if .Params.subtitle }}
-                                <p class="text-muted mb-2">{{ .Params.subtitle }}</p>
+                <!-- Featured Events Section -->
+                {{ range $featuredEvents }}
+                <div class="col-12 mb-5">
+                    <div class="featured-event card border-0 shadow-lg">
+                        <div class="card-body p-5">
+                            <div class="event-meta mb-3 d-flex flex-wrap align-items-center">
+                                <span class="badge bg-primary me-2">{{ .Params.eventType | default (i18n "events_featured_event") }}</span>
+                                {{ if .Params.eventDate }}
+                                <small class="text-muted me-3">
+                                    <i class="far fa-calendar-alt me-1"></i>
+                                    {{ $eventTime := time .Params.eventDate }}
+                                    {{ $eventTime.Format "January 2, 2006" }}
+                                </small>
                                 {{ end }}
                                 {{ if .Params.location }}
-                                <p class="text-muted mb-2">
-                                    <i class="fas fa-map-marker-alt me-2"></i>{{ .Params.location }}
-                                </p>
+                                <small class="text-muted">
+                                    <i class="fas fa-map-marker-alt me-1"></i>
+                                    {{ .Params.location }}
+                                </small>
                                 {{ end }}
-                                {{ if .Description }}
-                                <p class="card-text">{{ .Description | truncate 120 }}</p>
-                                {{ else }}
-                                <p class="card-text">{{ .Summary | truncate 120 }}</p>
-                                {{ end }}
-                                <div class="d-flex flex-wrap gap-2 mt-3">
-                                    <a href="{{ .RelPermalink }}" class="btn btn-outline-primary btn-sm">
-                                        {{ i18n "events_learn_more" }} <i class="fas fa-arrow-right ms-1"></i>
-                                    </a>
-                                    {{ if .Params.ticketPrice }}
-                                    <small class="text-success align-self-center">{{ .Params.ticketPrice }}</small>
-                                    {{ end }}
-                                </div>
+                            </div>
+                            <h2 class="card-title h3 fw-bold mb-3">
+                                <a href="{{ .RelPermalink }}" class="text-decoration-none">{{ .Title }}</a>
+                            </h2>
+                            {{ if .Params.subtitle }}
+                            <h3 class="h5 text-muted mb-4">{{ .Params.subtitle }}</h3>
+                            {{ end }}
+                            {{ if .Description }}
+                            <p class="card-text lead mb-4">{{ .Description }}</p>
+                            {{ else }}
+                            <p class="card-text lead mb-4">{{ .Summary | truncate 200 }}</p>
+                            {{ end }}
+                            <div class="d-flex flex-wrap gap-2">
+                                <a href="{{ .RelPermalink }}" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-calendar-check me-2"></i>{{ i18n "events_view_rsvp" }}
+                                </a>
                             </div>
                         </div>
                     </div>
-                    {{ end }}
+                </div>
+                {{ end }}
+                
+                <!-- Other Events Header -->
+                {{ if and $featuredEvents $regularEvents }}
+                <div class="col-12 mb-4">
+                    <h3 class="h4 fw-bold text-uppercase mb-4">
+                        <i class="far fa-calendar-alt me-2"></i>{{ i18n "events_all_events" }}
+                    </h3>
+                </div>
+                {{ end }}
+                
+                <!-- Regular Event Cards -->
+                {{ range $regularEvents }}
+                <div class="col-lg-6 mb-4">
+                    <div class="event-card card h-100 border-0 shadow">
+                        <div class="card-body p-4">
+                            <div class="event-meta mb-3 d-flex flex-wrap align-items-center">
+                                <span class="badge bg-secondary me-2">{{ .Params.eventType | default "Event" }}</span>
+                                {{ if .Params.eventDate }}
+                                <small class="text-muted">
+                                    <i class="far fa-clock me-1"></i>
+                                    {{ $eventTime := time .Params.eventDate }}
+                                    {{ $eventTime.Format "Jan 2, 3:04 PM" }}
+                                </small>
+                                {{ end }}
+                            </div>
+                            <h4 class="card-title h5 fw-bold mb-3">
+                                <a href="{{ .RelPermalink }}" class="text-decoration-none">{{ .Title }}</a>
+                            </h4>
+                            {{ if .Params.subtitle }}
+                            <p class="text-muted mb-2">{{ .Params.subtitle }}</p>
+                            {{ end }}
+                            {{ if .Params.location }}
+                            <p class="text-muted mb-2">
+                                <i class="fas fa-map-marker-alt me-2"></i>{{ .Params.location }}
+                            </p>
+                            {{ end }}
+                            {{ if .Description }}
+                            <p class="card-text">{{ .Description | truncate 120 }}</p>
+                            {{ else }}
+                            <p class="card-text">{{ .Summary | truncate 120 }}</p>
+                            {{ end }}
+                            <div class="d-flex flex-wrap gap-2 mt-3">
+                                <a href="{{ .RelPermalink }}" class="btn btn-outline-primary btn-sm">
+                                    {{ i18n "events_learn_more" }} <i class="fas fa-arrow-right ms-1"></i>
+                                </a>
+                                {{ if .Params.ticketPrice }}
+                                <small class="text-success align-self-center">{{ .Params.ticketPrice }}</small>
+                                {{ end }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 {{ end }}
             {{ else }}
                 <!-- No events fallback -->
@@ -133,11 +136,8 @@
                 <h3 class="h4 fw-bold mb-3">{{ i18n "events_help_organize" }}</h3>
                 <p class="lead mb-4">{{ i18n "events_help_description" }}</p>
                 <div class="d-flex flex-wrap justify-content-center gap-3">
-                    <a href="mailto:events@votevega.nyc" class="btn btn-primary">
+                    <a href="mailto:info@votevega.nyc" class="btn btn-primary">
                         <i class="fas fa-envelope me-2"></i>{{ i18n "events_contact_team" }}
-                    </a>
-                    <a href="#join" class="btn btn-outline-primary">
-                        <i class="fas fa-users me-2"></i>{{ i18n "events_join_team" }}
                     </a>
                 </div>
             </div>
