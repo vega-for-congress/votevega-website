@@ -10,6 +10,7 @@ address: "Signup for details"
 featured: false
 eventType: "Town Hall"
 ticketPrice: "Free (Donation Suggested)"
+draft: true
 ---
 
 # Join Jose Vega for a Bronx Town Hall
