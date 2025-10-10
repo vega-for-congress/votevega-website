@@ -237,7 +237,7 @@
         </div>
         
         <!-- Back to Events -->
-        <div class="row justify-content-center mt-5">
+        <div class="row justify-content-center my-5">
             <div class="col-12 text-center">
                 <a href="/events/" class="btn btn-outline-primary btn-lg">
                     <i class="fas fa-arrow-left me-2"></i>{{ i18n "event_back_to_events" }}
@@ -254,7 +254,7 @@
         <h4 class="mb-3">{{ i18n "event_add_calendar" }}</h4>
         <div class="d-flex flex-wrap justify-content-center gap-2">
             {{ $eventTime := time .Params.eventDate }}
-            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text={{ .Title | urlquery }}&dates={{ $eventTime.Format "20060102T150405Z" }}/{{ if .Params.endDate }}{{ $endTime := time .Params.endDate }}{{ $endTime.Format "20060102T150405Z" }}{{ else }}{{ $eventTime.Add (time.ParseDuration "2h") | dateFormat "20060102T150405Z" }}{{ end }}&details={{ .Description | urlquery }}&location={{ .Params.address | urlquery }}" target="_blank" class="btn btn-outline-primary btn-sm">
+            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text={{ .Title | urlquery }}&dates={{ $eventTime.Format "20060102T150405" }}/{{ if .Params.endDate }}{{ $endTime := time .Params.endDate }}{{ $endTime.Format "20060102T150405" }}{{ else }}{{ $eventTime.Add (time.ParseDuration "2h") | dateFormat "20060102T150405" }}{{ end }}&details={{ .Description | urlquery }}&location={{ .Params.address | urlquery }}" target="_blank" class="btn btn-outline-primary btn-sm">
                 <i class="fab fa-google me-2"></i>{{ i18n "event_google_calendar" }}
             </a>
             <a href="https://outlook.live.com/calendar/0/deeplink/compose?subject={{ .Title | urlquery }}&startdt={{ $eventTime.Format "2006-01-02T15:04:05" }}&enddt={{ if .Params.endDate }}{{ $endTime := time .Params.endDate }}{{ $endTime.Format "2006-01-02T15:04:05" }}{{ else }}{{ $eventTime.Add (time.ParseDuration "2h") | dateFormat "2006-01-02T15:04:05" }}{{ end }}&body={{ .Description | urlquery }}&location={{ .Params.address | urlquery }}" target="_blank" class="btn btn-outline-primary btn-sm">
