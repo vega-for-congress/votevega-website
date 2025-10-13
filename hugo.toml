@@ -31,6 +31,7 @@ enableEmoji = true
   author = "Jose Vega"
   email = "info@votevega.nyc"
   address = "Bronx, NY 10459"
+  phone = "(800) 498-8561"
   donateUrl = "https://secure.votevega.nyc/donate"
   ogImage = "wp-content/uploads/2024/02/vega-twitter.png"
   
