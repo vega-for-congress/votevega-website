@@ -3,8 +3,8 @@ date: '2025-10-12T11:00:00'
 title: "Introducción a la Economía de LaRouche"
 subtitle: "Una Introducción a la Economía desde la Perspectiva de Lyndon LaRouche"
 description: "Únete a Jose Vega para una introducción a la Economía desde la perspectiva de Lyndon LaRouche."
-eventDate: '2025-10-12T11:00:00'
-endDate: '2025-10-12T13:00:00'
+eventDate: '2025-10-19T11:00:00'
+endDate: '2025-10-19T13:00:00'
 location: "Oficina de Campaña"
 address: "Regístrate para obtener detalles"
 featured: true
