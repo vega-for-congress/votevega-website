@@ -63,6 +63,19 @@ html {
     scroll-margin-top: 80px;
 }
 
+/* Global scroll offset for all anchor targets (footnotes, headings, etc.) */
+*[id] {
+    scroll-margin-top: 80px;
+}
+
+/* Specific targeting for footnotes and footnote references */
+.footnote-ref,
+.footnote-backref,
+sup[id],
+li[id] {
+    scroll-margin-top: 80px;
+}
+
 /* Hide scrollbars on mobile for seamless design */
 @media (max-width: 767px) {
     body {
@@ -1448,6 +1461,22 @@ h1, h2, h3, h4, h5, h6 {
         font-size: 0.85rem;
         margin: 0.5rem auto 1.5rem auto;
     }
+}
+
+/* ====== BLOCKQUOTE STYLES ====== */
+
+blockquote {
+    border-left: 4px solid var(--primary-red);
+    background: rgba(248, 249, 250, 0.8);
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+    font-style: italic;
+    color: var(--text-dark);
+    border-radius: 0 0.5rem 0.5rem 0;
+}
+
+blockquote p:last-child {
+    margin-bottom: 0;
 }
 
 /* ====== PDF DOWNLOAD BUTTON STYLES ====== */

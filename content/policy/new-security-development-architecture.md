@@ -1,0 +1,29 @@
+---
+title: "We Missed the Chance to Abolish NATO Thirty Years Ago. Let’s Do It Now!"
+date: 2025-10-15
+type: "policy"
+---
+
+Following the collapse of the Berlin Wall, the subsequent German unification, and the disintegration of the Soviet Union, the need for a trans-Atlantic military alliance to prevent the ills of Communism from taking over seemed no longer needed. Preceding this, the Reagan Administration had promised to Mikhail Gorbachev, the last leader of the Soviet Union, that NATO would not move “one inch eastward” if Russia were to allow the peaceful unification of Germany. The Soviets happily obliged us, while we proceeded to then break the promise time after time, with the final red-line being crossed in 2008 when NATO membership was promised to Ukraine and Georgia at the Bucharest Summit.
+
+Most people do not know this history, especially concerning its context in the background leading up to the war in Ukraine. Most people assume that the war started in 2022, when Russia decided to invade Ukraine without provocation, in order to expand its reach and reestablish the glorious days of the Soviet Empire. In September, 2023, then NATO Secretary-General Jens Stoltenberg blurted out the inconvenient truth:
+ 
+> The background was that President Putin declared in the autumn of 2021, and actually sent a draft treaty that they wanted NATO to sign, to promise no more NATO enlargement. That was what he sent us. And was a pre-condition to not invade Ukraine. Of course, we didn’t sign that.
+>
+> The opposite happened. He wanted us to sign that promise, never to enlarge NATO. He wanted us to remove our military infrastructure in all Allies that have joined NATO since 1997, meaning half of NATO, all the Central and Eastern Europe, we should remove NATO from that part of our Alliance, introducing some kind of B, or second-class membership. We rejected that.
+>
+> So, he went to war to prevent NATO, more NATO, close to his borders. He has got the exact opposite.[^1]
+
+[^1]: Source: <a href="https://www.nato.int/cps/en/natohq/opinions_218172.htm" target="_blank">NATO</a>
+
+What’s important in Stoltenberg’s confession is also the point that prior to the conflict, Russian President Vladimir Putin had demanded written security guarantees from the U.S. and NATO, even after thirty years of broken promises. First, no further eastward motion of NATO. Second, no membership in NATO for Ukraine. Third, a guarantee that no offensive weapons would be placed in Ukraine on the Russian border, where within 5-7 minutes of launch, they would be able to hit Russian territory. The Biden Administration’s response at the time was to tell Putin that he had no right to infringe upon the legitimate rights of Ukraine, and that the security of NATO would be increased at the expense of Russia.
+
+What has this expansionist policy given us? In Ukraine, there are 1,000,000 dead servicemen. Young people are being pulled off the streets to go to the frontlines, with little to no military training, making it absolutely certain that they will get killed. Over $180 billion has been spent by the U.S. in military and financial aid to Ukraine, with the intention of inflicting a strategic defeat on Russia. That certainly hasn’t happened, and it is clear that Ukraine is losing on the battlefield and resorting to terror attacks deep inside Russian territory, using drones and other means of warfare which will only put the world closer to a thermonuclear war, which will end all life on Earth.
+
+Since the end of the Cold War, NATO has also acted as a global militaristic alliance, with the introduction of “humanitarian interventionist wars” and the “Right to Protect” (R2P) policy introduced by former British Prime Minister Tony Blair. There have been trillions spent and millions of lives lost in “endless wars” in Afghanistan, Iraq, Libya, Syria, and other nations. Now, the so-called “Coalition of the Willing” in Europe, which consists of Germany, France, and the United Kingdom, are prepared to spend billions of euros in remilitarizing their nations, while their own populations suffer from cuts in social services.
+
+I believe we have to correct the mistakes of the last century, and put an end to NATO for good. We are transitioning into a polycentric world, where no longer can one nation rule over others. Russian President Vladimir Putin put it best at the Oct. 2 Valdai Club meeting, where he put forward that new ideas of statecraft are needed to realize the tectonic changes that are shaping the globe. “What is needed here,” Putin said, “is a philosophy of complexity—something akin to quantum mechanics, which is wiser and, in some ways, more complex than classical physics.... After all, linear unilateral  solutions are impossible, while nonlinear and multilateral solutions require very serious, professional, impartial, creative, and at times unconventional diplomacy.”[^2]
+
+[^2]: Source: <a href="http://en.kremlin.ru/events/president/news/78134" target="_blank">Kremlin</a>
+
+Is this advice being grasped by the leaders of Washington, Brussels, or London? No nation’s security can be ensured at the expense of another. We should design a new security and development architecture, which partners with the nations of Russia, China, Iran and our so-called adversaries. We should pursue win-win cooperation and economic development that will benefit both of our nations. The billions of dollars spent annually on NATO should instead go to global economic development. Let us rest easy knowing that we won’t have a global war, which will incinerate the entire planet, and instead pursue the common aims of humanity together, instead of against one another. 
