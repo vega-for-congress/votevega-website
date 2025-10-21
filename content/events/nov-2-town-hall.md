@@ -1,13 +1,13 @@
 ---
-date: '2025-11-02'
+date: '2025-11-02T15:00:00'
 title: "November 2nd Town Hall"
 subtitle: ""
 description: "Join us for our first of many townhalls in the Bronx."
-eventDate: '2025-11-02'
-endDate: '2025-11-02'
+eventDate: '2025-11-02T15:00:00'
+endDate: '2025-11-02T17:00:00'
 location: "Bronx (Crotona Park East neighborhood)"
 address: "Signup for details"
-featured: false
+featured: true
 eventType: "Town Hall"
 ticketPrice: "Free (Donation Suggested)"
 ---
