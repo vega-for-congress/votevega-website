@@ -60,9 +60,9 @@ events_all_events = "All Events"
 events_featured_event = "Featured Event"
 
 # Event Banner
-event_banner_upcoming = "Upcoming Event: Intro to LaRouche Economics, Lecture 2 of 3"
-event_banner_date = "October 19, 2025"
-event_banner_subtitle = "What is the value of your labor? Come and learn the real American System of economics through LaRouche's perspective!"
+event_banner_upcoming = "Upcoming Event: Bronx Town Hall"
+event_banner_date = "November 2nd, 2025"
+event_banner_subtitle = "The Bronx is ‘Gaza West’. Rebuilding Starts Here — and There"
 event_banner_button = "Learn More & RSVP"
 
 # Event Single Page

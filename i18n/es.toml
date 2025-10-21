@@ -60,9 +60,9 @@ events_all_events = "Todos los Eventos"
 events_featured_event = "Evento Destacado"
 
 # Event Banner
-event_banner_upcoming = "Próximo Evento: Introducción a la Economía de LaRouche, Lección 2 de 3"
-event_banner_date = "19 de octubre, 2025"
-event_banner_subtitle = "¿Cuál es el valor de tu trabajo? Ven y aprende el verdadero Sistema Americano de economía a través de la perspectiva de LaRouche!"
+event_banner_upcoming = "Próximo Evento: Ayuntamiento en el Bronx"
+event_banner_date = "2 de Noviembre, 2025"
+event_banner_subtitle = "El Bronx es 'Gaza Oeste'. La reconstrucción empieza aquí y allá."
 event_banner_button = "Aprender Más y Confirmar"
 
 # Event Single Page
