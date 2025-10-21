@@ -38,10 +38,36 @@
 </div>
 
 <!-- Event Banner -->
-<div clas="position-relative d-none d-md-block">
-    <a href="{{ "/events/nov-2-town-hall" | relURL }}">
-        <img src="{{ "images/nov-2-townhall.jpg" | relURL }}" style="width: 100%;" />
+<div class="position-relative d-none d-md-block sub-hero-container">
+    <a href="{{ "/events/nov-2-town-hall" | relURL }}" class="sub-hero-link">
+        <img src="{{ "images/nov-2-townhall.jpg" | relURL }}" class="sub-hero-img" />
+        <div class="sub-hero-overlay">
+            <button class="btn btn-lg sub-hero-btn">
+                <i class="fas fa-calendar-plus me-2"></i>
+                Learn more & RSVP
+            </button>
+        </div>
     </a>
+</div>
+<div class="event-banner bg-primary text-white py-3">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-calendar-alt me-3" style="font-size: 1.5rem;"></i>
+                    <div>
+                        <strong class="d-block">{{ i18n "event_banner_upcoming" }}</strong>
+                        <small class="opacity-75">{{ i18n "event_banner_date" }} • {{ i18n "event_banner_subtitle" }}</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 text-md-end mt-2 mt-md-0">
+                <a href="{{ "/events/nov-2-town-hall/" }}" class="btn btn-light btn-sm fw-bold text-uppercase">
+                    <i class="fas fa-info-circle me-1"></i>{{ i18n "event_banner_button" }}
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Quote Section -->
