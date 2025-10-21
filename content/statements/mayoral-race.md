@@ -1,0 +1,11 @@
+---
+title: New York City is Not For Sale! We Cannot Be Bought or Bossed
+date: 2025-10-21
+description: My thoughts on the Mayoral race
+---
+
+The NYC mayoral race exposes just how obscene New York politics is. Billionaire Democrats/Republicans which control the city are doing everything they can to sideline voters who have had enough with Wall Street and the City of London’s austerity policies, which have shut down schools, hospitals, and vital infrastructure. The wealth gap in NYC has consistently been widening, especially since the technocrat Mayor Bloomberg’s 12-year reign which saw the closure of 20 hospitals. Just today, it was announced that NYC bus firms planned on firing their workers in a contract dispute, denying service to over 150k students. This is the result of benign neglect and financial dictatorship. 
+
+In order to secure the ever unlikely victory of Andrew Cuomo against Zohran Mamdani, corrupt billionaires are pressuring Curtis Sliwa to drop out of the mayoral race. Billionaire investor Bill Ackman, who has played a high-profile role in attempting to censor any criticism of Israel’s genocide on college campuses, has publicly asked Sliwa to drop out. I find it interesting that Ackman, a rabid Zionist, had also invited Charlie Kirk in early August to his Long Island Hamptons estate to make sure he didn’t veer too far away from the pro-Israel line. 
+
+We should not allow these AIPAC lobbyists to determine our elections, nor threaten anyone they consider a detriment to their interests. We have to be unbought and unbossed. That’s why I’m running in the South Bronx, the poorest congressional district in the U.S., which is being torn down by real estate interests and their Zionist backers, while underfunded public housing units are collapsing. We have to shut down Wall Street with Glass-Steagall, end the funding of foreign wars, and rebuild the infrastructure of New York City with Hamiltonian credit that will go towards transportation, housing, energy, and improving the productive powers of labor.
