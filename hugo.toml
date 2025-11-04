@@ -137,6 +137,16 @@ enableEmoji = true
     url = "/statements/"
     weight = 30
 
+  [[menu.main]]
+    name = "Meet Jose"
+    url = "/meet-jose/"
+    weight = 40
+
+  [[menu.main]]
+    name = "Endorsements"
+    url = "/endorsements/"
+    weight = 50
+
 # Spanish menu configuration
 [languages.es.menu]
   [[languages.es.menu.main]]
@@ -158,6 +168,16 @@ enableEmoji = true
     name = "Declaraciones"
     url = "/es/statements/"
     weight = 30
+
+  [[languages.es.menu.main]]
+    name = "Conoce a Jose"
+    url = "/es/meet-jose/"
+    weight = 40
+
+  [[languages.es.menu.main]]
+    name = "Endorsos"
+    url = "/es/endorsements/"
+    weight = 50
 
 # Output formats
 [outputs]
