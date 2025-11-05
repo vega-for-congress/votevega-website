@@ -16,6 +16,12 @@
             <div class="collapse navbar-collapse justify-content-end" id="main-menu">
                 <ul class="navbar-nav justify-content-center">
                     <li class="nav-item">
+                        <a href="{{ "/meet-jose/" | relURL }}" class="nav-link">{{ i18n "nav_meet_jose" }}</a>
+                    </li>
+                    <!-- <li class="nav-item"> Add when complete
+                        <a href="{{ "/endorsements/" | relURL }}" class="nav-link">{{ i18n "nav_endorsements" }}</a>
+                    </li> -->
+                    <li class="nav-item">
                         <a href="{{ "/news/" | relURL }}" class="nav-link{{ if eq .Section "news" }} active{{ end }}">{{ i18n "nav_news" }}</a>
                     </li>
                     <li class="nav-item">
