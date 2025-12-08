@@ -1,8 +1,8 @@
 # Navigation
 nav_home = "Home"
 nav_news = "Press"
-nav_news_item = "News"
-nav_statements = "Statements"
+nav_news_item = "News & Media"
+nav_statements = "Campaign Statements"
 nav_denouncements = "Denouncements"
 nav_events = "Events"
 nav_policy_proposals = "Policy"
