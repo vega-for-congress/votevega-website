@@ -21,12 +21,14 @@
                     <!-- <li class="nav-item"> Add when complete
                         <a href="{{ "/endorsements/" | relURL }}" class="nav-link">{{ i18n "nav_endorsements" }}</a>
                     </li> -->
-                    <li class="nav-item">
-                        <a href="{{ "/news/" | relURL }}" class="nav-link{{ if eq .Section "news" }} active{{ end }}">{{ i18n "nav_news" }}</a>
+                    <li class="nav-item dropdown">
+                        <a href="#press" class="nav-link dropdown-toggle{{ if or (eq .Section "news") (eq .Section "statements") }} active{{ end }}" data-bs-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">{{ i18n "nav_news" }}</a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a href="{{ "/news/" | relURL }}" class="dropdown-item">{{ i18n "nav_news_item" }}</a></li>
+                            <li><a href="{{ "/statements/" | relURL }}" class="dropdown-item">{{ i18n "nav_statements" }}</a></li>
+                        </ul>
                     </li>
-                    <!-- <li class="nav-item">
-                        <a href="{{ "/statements/" | relURL }}" class="nav-link{{ if eq .Section "statements" }} active{{ end }}">{{ i18n "nav_statements" }}</a>
-                    </li> -->
                     <!-- <li class="nav-item">
                         <a href="{{ "/denouncements/" | relURL }}" class="nav-link{{ if eq .Title "Denouncements" }} active{{ end }}">{{ i18n "nav_denouncements" }}</a>
                     </li> -->

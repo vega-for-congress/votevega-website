@@ -1,6 +1,7 @@
 # Navigation
 nav_home = "Inicio"
-nav_news = "Noticias"
+nav_news = "Prensa"
+nav_news_item = "Noticias"
 nav_statements = "Declaraciones"
 nav_denouncements = "Denuncias"
 nav_events = "Eventos"
