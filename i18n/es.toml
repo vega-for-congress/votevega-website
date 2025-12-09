@@ -1,12 +1,15 @@
 # Navigation
 nav_home = "Inicio"
-nav_news = "Noticias"
+nav_news = "Prensa"
+nav_news_item = "Noticias"
 nav_statements = "Declaraciones"
 nav_denouncements = "Denuncias"
 nav_events = "Eventos"
 nav_policy_proposals = "Propuestas de Política"
 nav_donate = "Donar"
 nav_signup = "Registrarse"
+nav_meet_jose = "Conoce a Jose"
+nav_endorsements = "Endorsos"
 nav_language_es = "Esp"
 nav_language_en = "Eng"
 

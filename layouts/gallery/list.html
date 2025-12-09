@@ -1,0 +1,63 @@
+{{ define "main" }}
+<main id="main" class="site-main">
+  <article class="page type-page">
+    <header class="entry-header text-center py-5" style="background: linear-gradient(135deg, #dc3545 0%, #0d6efd 100%);">
+      <div class="container">
+        <h1 class="entry-title text-white display-4 mb-3">{{ .Title }}</h1>
+        <p class="text-white lead">{{ .Description }}</p>
+      </div>
+    </header>
+
+    <div class="entry-content container py-5">
+      {{ .Content }}
+
+      {{/* Build file lists from static/images/gallery */}}
+      {{ $files := readDir "static/images/gallery" }}
+      {{ $s := newScratch }}
+      {{ $s.Set "featured" (slice) }}
+      {{ $s.Set "others" (slice) }}
+      {{ range $files }}
+        {{ $lname := lower .Name }}
+        {{ if and (in $lname "serious") (in $lname "headshot") }}
+          {{ $s.Add "featured" .Name }}
+        {{ else }}
+          {{ $s.Add "others" .Name }}
+        {{ end }}
+      {{ end }}
+
+      {{ with index ($s.Get "featured") 0 }}
+        {{ $basename := path.BaseName . }}
+        {{ $displayName := $basename | replace "_" " " | replace "-" " " | default "Photo" }}
+        {{ $alt := printf "Jose Vega - %s" $displayName }}
+        <section class="mb-5">
+          <div class="row g-4 align-items-center">
+            <div class="col-12">
+              <div class="card border-0 shadow">
+                <img src="{{ (printf "images/gallery/%s" .) | relURL }}" class="card-img-top" alt="{{ $alt }}" loading="eager">
+                <div class="card-body">
+                  <h5 class="card-title mb-0">Featured</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      {{ end }}
+
+      <section>
+        <div class="row g-4" id="gallery-container">
+          {{ range ($s.Get "others") }}
+            {{ $basename := path.BaseName . }}
+            {{ $displayName := $basename | replace "_" " " | replace "-" " " | default "Photo" }}
+            {{ $alt := printf "Jose Vega - %s" $displayName }}
+            <div class="col-12 col-sm-6 col-md-4">
+              <div class="card h-100">
+                <img src="{{ (printf "images/gallery/%s" .) | relURL }}" class="card-img-top" alt="{{ $alt }}" loading="lazy">
+              </div>
+            </div>
+          {{ end }}
+        </div>
+      </section>
+    </div>
+  </article>
+</main>
+{{ end }}

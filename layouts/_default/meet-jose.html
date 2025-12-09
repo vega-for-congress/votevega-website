@@ -1,0 +1,335 @@
+{{ define "main" }}
+<div class="meet-jose-page">
+    <!-- Hero Section with Main Image -->
+    <div class="meet-jose-hero position-relative">
+        <img src="{{ "images/gallery/Jose_serious_headshot.jpeg" | relURL }}" alt="Jose Vega" class="img-fluid w-100" style="max-height: 600px; object-fit: cover; object-position: center;">
+        <div class="hero-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-end" style="background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);">
+            <div class="container pb-5">
+                <h1 class="display-3 fw-bold text-white mb-2">{{ .Title }}</h1>
+                <p class="lead text-white">Bronx warrior, US patriot, and world citizen</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bio Content Section -->
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="bio-content">
+                    {{ .Content }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Endorsements Section -->
+    <div class="endorsements-section bg-light py-5">
+        <div class="container">
+            <h2 class="text-center mb-5 display-4 text-uppercase">Endorsements</h2>
+            <div class="row g-4 justify-content-center">
+                <!-- AZAPAC -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="endorsement-card bg-white rounded shadow-sm overflow-hidden h-100">
+                        <img src="{{ "images/endorsements/AZAPAC.jpg" | relURL }}" 
+                             alt="AZAPAC Endorsement" 
+                             class="img-fluid w-100">
+                    </div>
+                </div>
+
+                <!-- Due Dissidence -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="endorsement-card bg-white rounded shadow-sm overflow-hidden h-100">
+                        <img src="{{ "images/endorsements/DueDissidence.jpg" | relURL }}" 
+                             alt="Due Dissidence Endorsement" 
+                             class="img-fluid w-100">
+                    </div>
+                </div>
+
+                <!-- Feroze -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="endorsement-card bg-white rounded shadow-sm overflow-hidden h-100">
+                        <img src="{{ "images/endorsements/FEROZE.jpg" | relURL }}" 
+                             alt="Feroze Endorsement" 
+                             class="img-fluid w-100">
+                    </div>
+                </div>
+
+                <!-- IPAC -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="endorsement-card bg-white rounded shadow-sm overflow-hidden h-100">
+                        <img src="{{ "images/endorsements/IPAC.jpg" | relURL }}" 
+                             alt="IPAC Endorsement" 
+                             class="img-fluid w-100">
+                    </div>
+                </div>
+
+                <!-- Jimmy Dore -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="endorsement-card bg-white rounded shadow-sm overflow-hidden h-100">
+                        <img src="{{ "images/endorsements/JimmyDore.jpg" | relURL }}" 
+                             alt="Jimmy Dore Endorsement" 
+                             class="img-fluid w-100">
+                    </div>
+                </div>
+
+                <!-- Perlmutter -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="endorsement-card bg-white rounded shadow-sm overflow-hidden h-100">
+                        <img src="{{ "images/endorsements/PERLMUTTER.jpg" | relURL }}" 
+                             alt="Perlmutter Endorsement" 
+                             class="img-fluid w-100">
+                    </div>
+                </div>
+
+                <!-- Ray McGovern -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="endorsement-card bg-white rounded shadow-sm overflow-hidden h-100">
+                        <img src="{{ "images/endorsements/RayMcGovern.jpg" | relURL }}" 
+                             alt="Ray McGovern Endorsement" 
+                             class="img-fluid w-100">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Photo Gallery Section -->
+    <div class="photo-gallery bg-light py-5">
+        <div class="container">
+            <h2 class="text-center mb-5 display-4 text-uppercase">Jose In Action</h2>
+            <div class="row g-4">
+                <!-- Photo 1 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="gallery-item position-relative overflow-hidden rounded shadow-sm" style="height: 400px;">
+                        <img src="{{ "images/gallery/Jose_laughing_with_team.jpg" | relURL }}" 
+                             alt="Jose laughing with campaign team" 
+                             class="img-fluid w-100 h-100" 
+                             style="object-fit: cover; transition: transform 0.3s ease;"
+                             onmouseover="this.style.transform='scale(1.05)'"
+                             onmouseout="this.style.transform='scale(1)'">
+                        <div class="photo-caption position-absolute bottom-0 start-0 w-100 p-3 text-white" style="background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);">
+                            <p class="mb-0 fw-bold">Building the Movement</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo 2 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="gallery-item position-relative overflow-hidden rounded shadow-sm" style="height: 400px;">
+                        <img src="{{ "images/gallery/jose_listening_to_constituent.jpg" | relURL }}" 
+                             alt="Jose listening to a constituent" 
+                             class="img-fluid w-100 h-100" 
+                             style="object-fit: cover; transition: transform 0.3s ease;"
+                             onmouseover="this.style.transform='scale(1.05)'"
+                             onmouseout="this.style.transform='scale(1)'">
+                        <div class="photo-caption position-absolute bottom-0 start-0 w-100 p-3 text-white" style="background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);">
+                            <p class="mb-0 fw-bold">Listening to the People</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo 3 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="gallery-item position-relative overflow-hidden rounded shadow-sm" style="height: 400px;">
+                        <img src="{{ "images/gallery/jose_looking_serious.jpg" | relURL }}" 
+                             alt="Jose at a campaign event" 
+                             class="img-fluid w-100 h-100" 
+                             style="object-fit: cover; transition: transform 0.3s ease;"
+                             onmouseover="this.style.transform='scale(1.05)'"
+                             onmouseout="this.style.transform='scale(1)'">
+                        <div class="photo-caption position-absolute bottom-0 start-0 w-100 p-3 text-white" style="background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);">
+                            <p class="mb-0 fw-bold">Fighting for Change</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo 4 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="gallery-item position-relative overflow-hidden rounded shadow-sm" style="height: 400px;">
+                        <img src="{{ "images/gallery/jose_looking_silly.jpg" | relURL }}" 
+                             alt="Jose having fun on the campaign trail" 
+                             class="img-fluid w-100 h-100" 
+                             style="object-fit: cover; transition: transform 0.3s ease;"
+                             onmouseover="this.style.transform='scale(1.05)'"
+                             onmouseout="this.style.transform='scale(1)'">
+                        <div class="photo-caption position-absolute bottom-0 start-0 w-100 p-3 text-white" style="background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);">
+                            <p class="mb-0 fw-bold">Keeping It Real</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo 5 - Campaign Volunteers -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="gallery-item position-relative overflow-hidden rounded shadow-sm" style="height: 400px;">
+                        <img src="{{ "images/campaign-volunteers-compressed.jpg" | relURL }}" 
+                             alt="Jose with campaign volunteers" 
+                             class="img-fluid w-100 h-100" 
+                             style="object-fit: cover; transition: transform 0.3s ease;"
+                             onmouseover="this.style.transform='scale(1.05)'"
+                             onmouseout="this.style.transform='scale(1)'">
+                        <div class="photo-caption position-absolute bottom-0 start-0 w-100 p-3 text-white" style="background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);">
+                            <p class="mb-0 fw-bold">Our Grassroots Team</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo 6 - Hero Image -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="gallery-item position-relative overflow-hidden rounded shadow-sm" style="height: 400px;">
+                        <img src="{{ "images/minty_hero_image.jpg" | relURL }}" 
+                             alt="Jose Vega for Congress" 
+                             class="img-fluid w-100 h-100" 
+                             style="object-fit: cover; transition: transform 0.3s ease;"
+                             onmouseover="this.style.transform='scale(1.05)'"
+                             onmouseout="this.style.transform='scale(1)'">
+                        <div class="photo-caption position-absolute bottom-0 start-0 w-100 p-3 text-white" style="background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);">
+                            <p class="mb-0 fw-bold">Ready to Lead</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Twitter Highlights Section -->
+    <div class="twitter-highlights py-5">
+        <div class="container">
+            <h2 class="text-center mb-3 display-4 text-uppercase">Jose's Most Viral Moments</h2>
+            <p class="text-center lead mb-5">You definitely have seen Jose in action. Check out his most viral moments from the past few years of holding elected officials accountable!</p>
+            
+            <div class="row g-4">
+                <!-- Tweet 1 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="tweet-container">
+                        <blockquote class="twitter-tweet" data-theme="light"><a href="https://twitter.com/JosBtrigga/status/1451917686053740547"></a></blockquote>
+                    </div>
+                </div>
+
+                <!-- Tweet 2 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="tweet-container">
+                        <blockquote class="twitter-tweet" data-theme="light"><a href="https://twitter.com/JosBtrigga/status/1580364662419312641"></a></blockquote>
+                    </div>
+                </div>
+
+                <!-- Tweet 3 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="tweet-container">
+                        <blockquote class="twitter-tweet" data-theme="light"><a href="https://twitter.com/JosBtrigga/status/1625843170511577088"></a></blockquote>
+                    </div>
+                </div>
+
+                <!-- Tweet 4 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="tweet-container">
+                        <blockquote class="twitter-tweet" data-theme="light"><a href="https://twitter.com/JosBtrigga/status/1628551725660442624"></a></blockquote>
+                    </div>
+                </div>
+
+                <!-- Tweet 5 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="tweet-container">
+                        <blockquote class="twitter-tweet" data-theme="light"><a href="https://twitter.com/JosBtrigga/status/1643289867600683029"></a></blockquote>
+                    </div>
+                </div>
+
+                <!-- Tweet 6 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="tweet-container">
+                        <blockquote class="twitter-tweet" data-theme="light"><a href="https://twitter.com/JosBtrigga/status/1650978643567423494"></a></blockquote>
+                    </div>
+                </div>
+
+                <!-- Tweet 7 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="tweet-container">
+                        <blockquote class="twitter-tweet" data-theme="light"><a href="https://twitter.com/JosBtrigga/status/1714440146312126656"></a></blockquote>
+                    </div>
+                </div>
+
+                <!-- Tweet 8 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="tweet-container">
+                        <blockquote class="twitter-tweet" data-theme="light"><a href="https://twitter.com/JosBtrigga/status/1768427664736449005"></a></blockquote>
+                    </div>
+                </div>
+
+                <!-- Tweet 9 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="tweet-container">
+                        <blockquote class="twitter-tweet" data-theme="light"><a href="https://twitter.com/JosBtrigga/status/1808145163102879990"></a></blockquote>
+                    </div>
+                </div>
+
+                <!-- Tweet 10 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="tweet-container">
+                        <blockquote class="twitter-tweet" data-theme="light"><a href="https://twitter.com/JosBtrigga/status/1841268766983745538"></a></blockquote>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Twitter Widget Script -->
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+</div>
+
+<!-- Custom Styles -->
+<style>
+    .bio-content h2 {
+        color: #dc3545;
+        font-weight: bold;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .bio-content h3 {
+        color: #212529;
+        font-weight: bold;
+        margin-top: 1.5rem;
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+    }
+
+    .bio-content p {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: #495057;
+        margin-bottom: 1.5rem;
+    }
+
+    .gallery-item {
+        transition: all 0.3s ease;
+    }
+
+    .gallery-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+    }
+
+    .photo-caption {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .gallery-item:hover .photo-caption {
+        opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+        .meet-jose-hero img {
+            max-height: 400px !important;
+        }
+
+        .bio-content p {
+            font-size: 1rem;
+        }
+
+        .gallery-item {
+            height: 300px !important;
+        }
+    }
+</style>
+{{ end }}

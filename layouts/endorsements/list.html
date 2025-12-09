@@ -1,0 +1,33 @@
+{{ define "main" }}
+<main id="main" class="site-main">
+    <article class="page type-page">
+        <header class="entry-header text-center py-5" style="background: linear-gradient(135deg, #dc3545 0%, #0d6efd 100%);">
+            <div class="container">
+                <h1 class="entry-title text-white display-4 mb-3">{{ .Title }}</h1>
+                <p class="text-white lead">{{ .Description }}</p>
+            </div>
+        </header>
+
+        <div class="entry-content container py-5">
+            <div class="row">
+                {{ .Content }}
+                
+                <!-- Endorsements will be added here -->
+                <div class="col-12">
+                    <div class="row g-4" id="endorsements-container">
+                        <!-- Endorsement cards will be added here -->
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">Sample Endorsement</h5>
+                                    <p class="card-text">Add endorsements content here</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+</main>
+{{ end }}
