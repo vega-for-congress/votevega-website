@@ -78,8 +78,9 @@ li[id] {
 
 /* Hide scrollbars on mobile for seamless design */
 @media (max-width: 767px) {
-    body {
+    html, body {
         overflow-x: hidden;
+        max-width: 100%;
         -webkit-overflow-scrolling: touch;
     }
     
@@ -1152,12 +1153,8 @@ h1, h2, h3, h4, h5, h6 {
     flex-direction: column;
     margin: 0 !important;
     padding: 0 !important;
-    width: 100vw;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw !important;
-    margin-right: -50vw !important;
+    width: 100%;
+    max-width: 100%;
     overflow-x: hidden;
 }
 
