@@ -3,7 +3,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid px-4">
             <div class="site-branding navbar-brand">
-                <a href="{{ "/" | relURL }}">
+                <a href="{{ "/" | relLangURL }}">
                     <img src="{{ "images/main_logo_cropped.png" | relURL }}" alt="Jose Vega for Congress" style="max-width: 140px; height: auto;">
                 </a>
             </div>
@@ -16,7 +16,7 @@
             <div class="collapse navbar-collapse justify-content-end" id="main-menu">
                 <ul class="navbar-nav justify-content-center">
                     <li class="nav-item">
-                        <a href="{{ "/meet-jose/" | relURL }}" class="nav-link">{{ i18n "nav_meet_jose" }}</a>
+                        <a href="{{ "/meet-jose/" | relLangURL }}" class="nav-link">{{ i18n "nav_meet_jose" }}</a>
                     </li>
                     <!-- <li class="nav-item"> Add when complete
                         <a href="{{ "/endorsements/" | relURL }}" class="nav-link">{{ i18n "nav_endorsements" }}</a>
@@ -48,11 +48,11 @@
                     <!-- Language Switcher -->
                     <li class="nav-item">
                         {{ if eq .Site.Language.Lang "es" }}
-                            <a class="nav-link" href="/" hreflang="en" style="font-size: 0.85rem; opacity: 0.8;">
+                            <a class="nav-link" href="{{ .RelPermalink | replaceRE "^/es/" "/" }}" hreflang="en" style="font-size: 0.85rem; opacity: 0.8;">
                                 <i class="fas fa-globe me-1"></i>{{ i18n "nav_language_en" }}
                             </a>
                         {{ else }}
-                            <a class="nav-link" href="/es/" hreflang="es" style="font-size: 0.85rem; opacity: 0.8;">
+                            <a class="nav-link" href="/es{{ .RelPermalink }}" hreflang="es" style="font-size: 0.85rem; opacity: 0.8;">
                                 <i class="fas fa-globe me-1"></i>{{ i18n "nav_language_es" }}
                             </a>
                         {{ end }}

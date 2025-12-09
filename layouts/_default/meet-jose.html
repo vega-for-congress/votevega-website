@@ -6,7 +6,7 @@
         <div class="hero-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-end" style="background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);">
             <div class="container pb-5">
                 <h1 class="display-3 fw-bold text-white mb-2">{{ .Title }}</h1>
-                <p class="lead text-white">Bronx warrior, US patriot, and world citizen</p>
+                <p class="lead text-white">{{ i18n "meet_jose_tagline" }}</p>
             </div>
         </div>
     </div>
@@ -25,7 +25,7 @@
     <!-- Endorsements Section -->
     <div class="endorsements-section bg-light py-5">
         <div class="container">
-            <h2 class="text-center mb-5 display-4 text-uppercase">Endorsements</h2>
+            <h2 class="text-center mb-5 display-4 text-uppercase">{{ i18n "meet_jose_endorsements" }}</h2>
             <div class="row g-4 justify-content-center">
                 <!-- AZAPAC -->
                 <div class="col-md-6 col-lg-4">
@@ -96,7 +96,7 @@
     <!-- Photo Gallery Section -->
     <div class="photo-gallery bg-light py-5">
         <div class="container">
-            <h2 class="text-center mb-5 display-4 text-uppercase">Jose In Action</h2>
+            <h2 class="text-center mb-5 display-4 text-uppercase">{{ i18n "meet_jose_in_action" }}</h2>
             <div class="row g-4">
                 <!-- Photo 1 -->
                 <div class="col-md-6 col-lg-4">
@@ -108,7 +108,7 @@
                              onmouseover="this.style.transform='scale(1.05)'"
                              onmouseout="this.style.transform='scale(1)'">
                         <div class="photo-caption position-absolute bottom-0 start-0 w-100 p-3 text-white" style="background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);">
-                            <p class="mb-0 fw-bold">Building the Movement</p>
+                            <p class="mb-0 fw-bold">{{ i18n "meet_jose_gallery_movement" }}</p>
                         </div>
                     </div>
                 </div>
@@ -123,7 +123,7 @@
                              onmouseover="this.style.transform='scale(1.05)'"
                              onmouseout="this.style.transform='scale(1)'">
                         <div class="photo-caption position-absolute bottom-0 start-0 w-100 p-3 text-white" style="background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);">
-                            <p class="mb-0 fw-bold">Listening to the People</p>
+                            <p class="mb-0 fw-bold">{{ i18n "meet_jose_gallery_listening" }}</p>
                         </div>
                     </div>
                 </div>
@@ -138,7 +138,7 @@
                              onmouseover="this.style.transform='scale(1.05)'"
                              onmouseout="this.style.transform='scale(1)'">
                         <div class="photo-caption position-absolute bottom-0 start-0 w-100 p-3 text-white" style="background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);">
-                            <p class="mb-0 fw-bold">Fighting for Change</p>
+                            <p class="mb-0 fw-bold">{{ i18n "meet_jose_gallery_fighting" }}</p>
                         </div>
                     </div>
                 </div>
@@ -153,7 +153,7 @@
                              onmouseover="this.style.transform='scale(1.05)'"
                              onmouseout="this.style.transform='scale(1)'">
                         <div class="photo-caption position-absolute bottom-0 start-0 w-100 p-3 text-white" style="background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);">
-                            <p class="mb-0 fw-bold">Keeping It Real</p>
+                            <p class="mb-0 fw-bold">{{ i18n "meet_jose_gallery_real" }}</p>
                         </div>
                     </div>
                 </div>
@@ -168,7 +168,7 @@
                              onmouseover="this.style.transform='scale(1.05)'"
                              onmouseout="this.style.transform='scale(1)'">
                         <div class="photo-caption position-absolute bottom-0 start-0 w-100 p-3 text-white" style="background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);">
-                            <p class="mb-0 fw-bold">Our Grassroots Team</p>
+                            <p class="mb-0 fw-bold">{{ i18n "meet_jose_gallery_team" }}</p>
                         </div>
                     </div>
                 </div>
@@ -183,7 +183,7 @@
                              onmouseover="this.style.transform='scale(1.05)'"
                              onmouseout="this.style.transform='scale(1)'">
                         <div class="photo-caption position-absolute bottom-0 start-0 w-100 p-3 text-white" style="background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);">
-                            <p class="mb-0 fw-bold">Ready to Lead</p>
+                            <p class="mb-0 fw-bold">{{ i18n "meet_jose_gallery_lead" }}</p>
                         </div>
                     </div>
                 </div>
@@ -194,8 +194,8 @@
     <!-- Twitter Highlights Section -->
     <div class="twitter-highlights py-5">
         <div class="container">
-            <h2 class="text-center mb-3 display-4 text-uppercase">Jose's Most Viral Moments</h2>
-            <p class="text-center lead mb-5">You definitely have seen Jose in action. Check out his most viral moments from the past few years of holding elected officials accountable!</p>
+            <h2 class="text-center mb-3 display-4 text-uppercase">{{ i18n "meet_jose_viral_moments" }}</h2>
+            <p class="text-center lead mb-5">{{ i18n "meet_jose_viral_description" }}</p>
             
             <div class="row g-4">
                 <!-- Tweet 1 -->
