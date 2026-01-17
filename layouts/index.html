@@ -14,6 +14,7 @@
         <h2 class="alt-hero-text">{{ i18n "hero_title" }}</h2>
         <a href="{{ .Site.Params.donateUrl }}" class="btn btn-lg btn-primary alt-btn">{{ i18n "hero_donate" }}</a>
         <a href="#volunteer" class="btn btn-lg btn-gold alt-btn">{{ i18n "hero_volunteer" }}</a>
+        <a href="{{ "/pledge/" | relLangURL }}" class="btn btn-lg btn-secondary alt-btn">{{ i18n "hero_pledge" }}</a>
     </div>
 </div>
 
@@ -33,6 +34,7 @@
         <div class="mobile-button-stack">
             <a href="{{ .Site.Params.donateUrl }}" class="btn btn-lg btn-primary mobile-btn">{{ i18n "hero_donate" }}</a>
             <a href="#volunteer" class="btn btn-lg btn-gold mobile-btn">{{ i18n "hero_volunteer" }}</a>
+            <a href="{{ "/pledge/" | relLangURL }}" class="btn btn-lg btn-secondary mobile-btn">{{ i18n "hero_pledge" }}</a>
         </div>
     </div>
 </div>
@@ -119,6 +121,13 @@
                                         <input type="tel" class="form-control border-0 shadow-sm" id="phone" name="phone" placeholder="{{ i18n "volunteer_phone_placeholder" }}" required
                                                style="border-radius: 0 10px 10px 0; padding: 1rem; font-size: 1.1rem; height: 3.5rem; color: #212529; font-weight: 500; background: #ffffff;">
                                     </div>
+                                </div>
+                            </div>
+                            
+                            <!-- reCAPTCHA -->
+                            <div class="row mt-3">
+                                <div class="col-12 d-flex justify-content-center">
+                                    <div class="g-recaptcha" data-sitekey="6LdB9k0sAAAAADT180PSrIEaH4PEdDGI_MQyT7W5"></div>
                                 </div>
                             </div>
                             
