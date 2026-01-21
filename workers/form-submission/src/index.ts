@@ -10,6 +10,7 @@ interface Env {
   BASEROW_DB_ID: string;
   BASEROW_API_URL: string;
   ALLOWED_ORIGINS: string;
+  RESEND_API_KEY: string;
 }
 
 interface FormData {
@@ -22,15 +23,15 @@ interface FormData {
 }
 
 interface BaserowRow {
-  Name: string;
-  Email: string;
-  Phone: string;
-  Zip: string;
-  Source: string;
-  'User Agent': string;
-  'IP Address': string;
-  'Submitted At': string;
-  'Turnstile Verified': boolean;
+  field_6918650: string;  // Name
+  field_6918649: string;  // Submitted At (datetime - ISO 8601 format)
+  field_6918651: string;  // Zip
+  field_6918652: string;  // Email
+  field_6918653: string;  // Phone
+  field_6943174: string;  // Source
+  field_6943175: string;  // User Agent
+  field_6943176: string;  // IP Address
+  field_6943177: boolean; // Turnstile Verified
 }
 
 // Rate limiting cache
@@ -93,23 +94,36 @@ export default {
         return jsonResponse({ error: 'Bot verification failed' }, 403, origin);
       }
 
-      // Submit to Baserow
+      // Submit to Baserow using field IDs
       const userAgent = request.headers.get('User-Agent') || 'Unknown';
       const submission: BaserowRow = {
-        Name: formData.name!,
-        Email: formData.email!,
-        Phone: formData.phone!,
-        Zip: formData.zip!,
-        Source: formData.source || 'homepage',
-        'User Agent': userAgent.substring(0, 200), // Limit length
-        'IP Address': hashIP(clientIP), // Hash for privacy
-        'Submitted At': new Date().toISOString(),
-        'Turnstile Verified': true,
+        field_6918650: formData.name!,                    // Name
+        field_6918649: new Date().toISOString(),          // Submitted At (datetime)
+        field_6918651: formData.zip!,                     // Zip
+        field_6918652: formData.email!,                   // Email
+        field_6918653: formData.phone!,                   // Phone
+        field_6943174: formData.source || 'homepage',     // Source
+        field_6943175: userAgent.substring(0, 200),       // User Agent
+        field_6943176: await hashIP(clientIP),            // IP Address
+        field_6943177: true,                              // Turnstile Verified (boolean)
       };
 
       const baserowSuccess = await submitToBaserow(submission, env);
       if (!baserowSuccess) {
         return jsonResponse({ error: 'Failed to save submission. Please try again.' }, 500, origin);
+      }
+
+      // Send confirmation email
+      const emailSent = await sendConfirmationEmail(
+        formData.name!,
+        formData.email!,
+        formData.source || 'homepage',
+        env
+      );
+      
+      if (!emailSent) {
+        console.error('Failed to send confirmation email, but continuing');
+        // Don't fail the request if email fails - data is already saved
       }
 
       // Record successful submission for rate limiting
@@ -319,6 +333,69 @@ function handleCORS(request: Request, env: Env): Response {
       'Access-Control-Max-Age': '86400',
     },
   });
+}
+
+/**
+ * Send confirmation email via Resend
+ */
+async function sendConfirmationEmail(
+  name: string,
+  email: string,
+  source: string,
+  env: Env
+): Promise<boolean> {
+  try {
+    const firstName = name.split(' ')[0];
+    
+    // Template logic based on source
+    let subject = 'Welcome to Vega for Congress';
+    let html = `
+      <h2>Hi ${firstName}, welcome to our movement</h2>
+      <p>Thank you for signing up to support Jose Vega's campaign for Congress in New York's 15th District.</p>
+      <p>Stay tuned for further updates from the Vega for Congress team about:</p>
+      <ul>
+        <li>Upcoming events and town halls</li>
+        <li>Volunteer opportunities</li>
+        <li>Campaign news and policy updates</li>
+      </ul>
+      <p>Visit our website: <a href="https://votevega.nyc">votevega.nyc</a></p>
+      <p style="color: #666; font-size: 12px; margin-top: 30px;">Paid for by Vega for Congress<br>Bronx, NY 10459</p>
+    `;
+    
+    // Event-specific templates
+    if (source === 'nov-2-town-hall') {
+      subject = 'Confirming your RSVP for November 2nd Town Hall';
+      html = `<h2>Hi ${firstName}, thanks for registering for our upcoming town hall.</h2><p>The town hall will take place at 3pm in the Longwood neighborhood of the Bronx. We will be in touch with the exact location closer to the event.</p><p>If you can't make it in person, you can catch the event livestream here: <a href="https://us02web.zoom.us/j/8041129932?omn=86781836212">https://us02web.zoom.us/j/8041129932?omn=86781836212</a></p>`;
+    }
+    // Add more source-specific templates here as needed
+    
+    const payload = {
+      from: 'Vega for Congress <info@votevega.nyc>',
+      to: [email],
+      subject: subject,
+      html: html,
+    };
+    
+    const response = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${env.RESEND_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+    
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('Resend API error:', response.status, errorText);
+      return false;
+    }
+    
+    return true;
+  } catch (error) {
+    console.error('Email sending error:', error);
+    return false;
+  }
 }
 
 /**

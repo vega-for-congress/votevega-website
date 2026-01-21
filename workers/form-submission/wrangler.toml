@@ -7,6 +7,11 @@ compatibility_date = "2024-01-01"
 # Run: wrangler secret put BASEROW_API_TOKEN
 
 [vars]
-BASEROW_DB_ID = "355848"
+BASEROW_DB_ID = "808052"
 BASEROW_API_URL = "https://api.baserow.io/api/database/rows/table"
-ALLOWED_ORIGINS = "https://votevega.nyc,https://www.votevega.nyc,http://localhost:8080,http://localhost:3000,https://deploy-preview-37--votevega.netlify.app"
+ALLOWED_ORIGINS = "https://votevega.nyc,https://www.votevega.nyc,http://localhost:8080,http://localhost:3000"
+
+[observability]
+[observability.logs]
+enabled = true
+invocation_logs = true
