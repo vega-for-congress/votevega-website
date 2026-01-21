@@ -45,4 +45,9 @@ resources/
 .env.test.local
 .env.production.local
 
+# Cloudflare Workers
+workers/**/node_modules/
+workers/**/.wrangler/
+workers/**/.dev.vars
+
 node_modules

@@ -13,6 +13,7 @@
         // Initialize various components
         initSmoothScrolling();
         initEmailForm();
+        initVolunteerForms();
         initNavbarBehavior();
         initAnimations();
         initEmailParameterHandling();
@@ -285,6 +286,139 @@
             });
         }
     });
+
+    // Volunteer and RSVP form submission with Turnstile
+    function initVolunteerForms() {
+        // Configuration
+        const WORKER_URL = 'https://votevega-form-submission.vega-signup.workers.dev';
+        const TURNSTILE_SITE_KEY = '0x4AAAAAACN4JzJOU76zayw9';
+        
+        // Wait for Turnstile to load
+        function setupForms() {
+            if (!window.turnstile) {
+                setTimeout(setupForms, 100);
+                return;
+            }
+            
+            // Find all volunteer/RSVP forms
+            const forms = document.querySelectorAll('.volunteer-form, .event-rsvp-form');
+            
+            forms.forEach(function(form) {
+                // Prevent duplicate initialization
+                if (form.dataset.turnstileInit) return;
+                form.dataset.turnstileInit = 'true';
+                
+                // Add Turnstile widget container
+                const submitButton = form.querySelector('button[type="submit"]');
+                if (submitButton && submitButton.parentElement) {
+                    const turnstileContainer = document.createElement('div');
+                    turnstileContainer.className = 'cf-turnstile-container mb-3 d-flex justify-content-center';
+                    submitButton.parentElement.parentElement.insertBefore(turnstileContainer, submitButton.parentElement);
+                    
+                    // Render Turnstile widget
+                    window.turnstile.render(turnstileContainer, {
+                        sitekey: TURNSTILE_SITE_KEY,
+                        theme: 'light',
+                        size: 'normal'
+                    });
+                }
+            
+            // Handle form submission
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const originalButtonText = submitButton.innerHTML;
+                submitButton.disabled = true;
+                submitButton.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Submitting...';
+                
+                // Clear existing messages
+                clearFormMessage(form);
+                
+                try {
+                    const formData = new FormData(form);
+                    const data = {
+                        name: formData.get('name'),
+                        email: formData.get('email'),
+                        phone: formData.get('phone'),
+                        zip: formData.get('zip') || '',
+                        source: formData.get('whichform') || formData.get('event') || 'homepage',
+                        'cf-turnstile-response': formData.get('cf-turnstile-response')
+                    };
+                    
+                    console.log('Turnstile token:', data['cf-turnstile-response']);
+                    
+                    const response = await fetch(WORKER_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (response.ok && result.success) {
+                        showVolunteerFormMessage(form, result.message || 'Thank you for signing up!', 'success');
+                        form.reset();
+                        
+                        // Reset Turnstile
+                        const turnstileContainer = form.querySelector('.cf-turnstile-container');
+                        if (turnstileContainer && window.turnstile) {
+                            window.turnstile.reset(turnstileContainer);
+                        }
+                    } else {
+                        showVolunteerFormMessage(form, result.error || 'An error occurred. Please try again.', 'error');
+                        
+                        // Reset Turnstile on error
+                        const turnstileContainer = form.querySelector('.cf-turnstile-container');
+                        if (turnstileContainer && window.turnstile) {
+                            window.turnstile.reset(turnstileContainer);
+                        }
+                    }
+                } catch (error) {
+                    console.error('Form submission error:', error);
+                    showVolunteerFormMessage(form, 'Network error. Please check your connection and try again.', 'error');
+                } finally {
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = originalButtonText;
+                }
+                });
+            });
+        }
+        
+        // Start setup
+        setupForms();
+    }
+    
+    // Show message for volunteer forms
+    function showVolunteerFormMessage(form, message, type) {
+        clearFormMessage(form);
+        
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `form-message alert ${type === 'success' ? 'alert-success' : 'alert-danger'} mt-3`;
+        messageDiv.style.borderRadius = '8px';
+        messageDiv.innerHTML = `
+            <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'} me-2"></i>
+            ${message}
+        `;
+        
+        form.parentElement.appendChild(messageDiv);
+        messageDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        
+        if (type === 'success') {
+            setTimeout(function() {
+                if (messageDiv.parentElement) {
+                    messageDiv.remove();
+                }
+            }, 5000);
+        }
+    }
+    
+    // Clear form message
+    function clearFormMessage(form) {
+        const existingMessage = form.parentElement.querySelector('.form-message');
+        if (existingMessage) {
+            existingMessage.remove();
+        }
+    }
 
     // Handle email parameter from footer signup on other pages
     function initEmailParameterHandling() {
