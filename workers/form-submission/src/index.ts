@@ -5,6 +5,7 @@
 
 interface Env {
   TURNSTILE_SECRET_KEY: string;
+  TURNSTILE_TEST_SECRET_KEY?: string;
   BASEROW_API_TOKEN: string;
   BASEROW_DB_ID: string;
   BASEROW_API_URL: string;
@@ -86,7 +87,8 @@ export default {
         return jsonResponse({ error: 'Bot verification required' }, 400, origin);
       }
 
-      const turnstileValid = await verifyTurnstile(turnstileToken, clientIP, env);
+      const originHost = origin ? new URL(origin).hostname : null;
+      const turnstileValid = await verifyTurnstile(turnstileToken, clientIP, env, originHost);
       if (!turnstileValid) {
         return jsonResponse({ error: 'Bot verification failed' }, 403, origin);
       }
@@ -132,13 +134,24 @@ export default {
 /**
  * Verify Turnstile token with Cloudflare
  */
-async function verifyTurnstile(token: string, ip: string, env: Env): Promise<boolean> {
+async function verifyTurnstile(
+  token: string,
+  ip: string,
+  env: Env,
+  originHost: string | null
+): Promise<boolean> {
   try {
+    // Use test secret for Netlify previews, real secret for production
+    const isPreview = originHost && originHost.endsWith('.netlify.app');
+    const secret = isPreview && env.TURNSTILE_TEST_SECRET_KEY
+      ? env.TURNSTILE_TEST_SECRET_KEY
+      : env.TURNSTILE_SECRET_KEY;
+
     const response = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        secret: env.TURNSTILE_SECRET_KEY,
+        secret,
         response: token,
         remoteip: ip,
       }),
