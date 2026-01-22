@@ -1,0 +1,46 @@
+{{ define "main" }}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="text-center mb-4">
+        <h1 class="fw-bold text-uppercase">{{ .Title }}</h1>
+        {{ with .Params.subtitle }}<p class="lead text-muted">{{.}}</p>{{ end }}
+      </div>
+
+      <div class="card border-0 shadow-sm">
+        <div class="card-body p-4 p-md-5">
+          <p class="mb-4" style="font-size: 1.1rem;">Pledge to sign Jose Vega's ballot access petition. Official petitioning begins in late February. We'll contact you with the nearest location and time to sign.</p>
+
+          <form class="volunteer-form" id="pledge-form">
+            <input type="hidden" name="whichform" value="petition-pledge" />
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <input class="form-control form-control-lg" name="name" placeholder="Full name" required />
+              </div>
+              <div class="col-md-6">
+                <input class="form-control form-control-lg" name="email" type="email" placeholder="Email" required />
+              </div>
+              <div class="col-md-6">
+                <input class="form-control form-control-lg" name="phone" type="tel" placeholder="Phone" required />
+              </div>
+              <div class="col-md-6">
+                <input class="form-control form-control-lg" name="zip" placeholder="ZIP code" required />
+              </div>
+              <div class="col-12">
+                <textarea class="form-control" name="address" rows="3" placeholder="Street address (to confirm district and schedule a convenient signing location)" required></textarea>
+              </div>
+            </div>
+
+            <div class="text-center mt-4">
+              <button type="submit" class="btn btn-lg btn-primary px-5">
+                <i class="fas fa-pen-nib me-2"></i>I Pledge to Sign
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}

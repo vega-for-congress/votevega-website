@@ -14,6 +14,7 @@
         <h2 class="alt-hero-text">{{ i18n "hero_title" }}</h2>
         <a href="{{ .Site.Params.donateUrl }}" class="btn btn-lg btn-primary alt-btn">{{ i18n "hero_donate" }}</a>
         <a href="#volunteer" class="btn btn-lg btn-gold alt-btn">{{ i18n "hero_volunteer" }}</a>
+        <a href="{{ "/pledge/" | relURL }}" class="btn btn-lg btn-secondary alt-btn">{{ i18n "hero_pledge" }}</a>
     </div>
 </div>
 
@@ -33,6 +34,7 @@
         <div class="mobile-button-stack">
             <a href="{{ .Site.Params.donateUrl }}" class="btn btn-lg btn-primary mobile-btn">{{ i18n "hero_donate" }}</a>
             <a href="#volunteer" class="btn btn-lg btn-gold mobile-btn">{{ i18n "hero_volunteer" }}</a>
+            <a href="{{ "/pledge/" | relURL }}" class="btn btn-lg btn-secondary mobile-btn">{{ i18n "hero_pledge" }}</a>
         </div>
     </div>
 </div>

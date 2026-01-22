@@ -18,20 +18,22 @@ interface FormData {
   email: string;
   phone: string;
   zip: string;
+  address?: string;
   source: string;
   'cf-turnstile-response': string;
 }
 
 interface BaserowRow {
-  field_2817: string;  // Name
-  field_2818: string;  // Submitted At (date with time)
-  field_2819: string;  // Zip
-  field_2820: string;  // Email
-  field_2821: string;  // Phone
-  field_2826: string;  // Source
-  field_2827: string;  // User Agent
-  field_2828: string;  // IP Address
-  field_2829: boolean; // Turnstile Verified
+  field_2817: string;   // Name
+  field_2818: string;   // Submitted At (date with time)
+  field_2819: string;   // Zip
+  field_2820: string;   // Email
+  field_2821: string;   // Phone
+  field_2826: string;   // Source
+  field_2827: string;   // User Agent
+  field_2828: string;   // IP Address
+  field_2829: boolean;  // Turnstile Verified
+  field_2833?: string;  // Address (optional)
 }
 
 // Rate limiting cache
@@ -107,6 +109,11 @@ export default {
         field_2828: await hashIP(clientIP),            // IP Address
         field_2829: true,                              // Turnstile Verified (boolean)
       };
+      
+      // Add address if provided (for petition pledges)
+      if (formData.address) {
+        submission.field_2833 = formData.address;
+      }
 
       const baserowSuccess = await submitToBaserow(submission, env);
       if (!baserowSuccess) {
@@ -301,6 +308,7 @@ function parseFormData(body: string): Partial<FormData> {
     email: params.get('email') || '',
     phone: params.get('phone') || '',
     zip: params.get('zip') || '',
+    address: params.get('address') || undefined,
     source: params.get('whichform') || params.get('source') || '',
     'cf-turnstile-response': params.get('cf-turnstile-response') || '',
   };
@@ -362,8 +370,25 @@ async function sendConfirmationEmail(
       <p style="color: #666; font-size: 12px; margin-top: 30px;">Paid for by Vega for Congress<br>Bronx, NY 10459</p>
     `;
     
+    // Petition pledge template
+    if (source === 'petition-pledge') {
+      subject = 'Thank you for pledging to sign our petition';
+      html = `
+        <h2>Hi ${firstName}, thank you for pledging to sign!</h2>
+        <p>You've taken an important step in helping Jose Vega get on the ballot for Congress in New York's 15th District.</p>
+        <p><strong>What happens next:</strong></p>
+        <ul>
+          <li>Official ballot petitioning begins in late February</li>
+          <li>We'll contact you with the nearest signing location and time</li>
+          <li>The entire process takes less than 5 minutes</li>
+        </ul>
+        <p>Your pledge helps us plan our ballot access drive and ensures we have the signatures needed to get Jose on the ballot.</p>
+        <p>Visit our website: <a href="https://votevega.nyc">votevega.nyc</a></p>
+        <p style="color: #666; font-size: 12px; margin-top: 30px;">Paid for by Vega for Congress<br>Bronx, NY 10459</p>
+      `;
+    }
     // Event-specific templates
-    if (source === 'nov-2-town-hall') {
+    else if (source === 'nov-2-town-hall') {
       subject = 'Confirming your RSVP for November 2nd Town Hall';
       html = `<h2>Hi ${firstName}, thanks for registering for our upcoming town hall.</h2><p>The town hall will take place at 3pm in the Longwood neighborhood of the Bronx. We will be in touch with the exact location closer to the event.</p><p>If you can't make it in person, you can catch the event livestream here: <a href="https://us02web.zoom.us/j/8041129932?omn=86781836212">https://us02web.zoom.us/j/8041129932?omn=86781836212</a></p>`;
     }

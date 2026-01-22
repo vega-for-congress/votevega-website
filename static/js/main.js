@@ -348,6 +348,11 @@
                         'cf-turnstile-response': formData.get('cf-turnstile-response')
                     };
                     
+                    // Add address if present (for petition pledges)
+                    if (formData.get('address')) {
+                        data.address = formData.get('address');
+                    }
+                    
                     console.log('Turnstile token:', data['cf-turnstile-response']);
                     
                     const response = await fetch(WORKER_URL, {
