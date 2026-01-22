@@ -294,7 +294,7 @@
         // Use test key for Netlify previews, real key for production
         const TURNSTILE_SITE_KEY = location.hostname.endsWith('.netlify.app')
             ? '1x00000000000000000000AA' // Test key - works on any domain
-            : '0x4AAAAAACN4JzJOU76zayw9'; // Real key
+            : '0x4AAAAAACOMujdiKI0wJfCI'; // Real key
         
         // Wait for Turnstile to load
         function setupForms() {
