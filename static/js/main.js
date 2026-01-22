@@ -359,14 +359,31 @@
                     const result = await response.json();
                     
                     if (response.ok && result.success) {
-                        showVolunteerFormMessage(form, result.message || 'Thank you for signing up!', 'success');
-                        form.reset();
-                        
-                        // Reset Turnstile
-                        const turnstileContainer = form.querySelector('.cf-turnstile-container');
-                        if (turnstileContainer && window.turnstile) {
-                            window.turnstile.reset(turnstileContainer);
-                        }
+                        // Replace entire form with success message and donate buttons
+                        const formContainer = form.parentElement;
+                        formContainer.innerHTML = `
+                            <div class="text-center py-5">
+                                <div class="mb-4">
+                                    <i class="fas fa-check-circle" style="font-size: 4rem; color: #28a745;"></i>
+                                </div>
+                                <h3 class="fw-bold mb-3">Thank you for signing up!</h3>
+                                <p class="mb-4" style="font-size: 1.1rem; color: #495057;">
+                                    ${result.message || 'We will be in touch soon with updates about the campaign.'}
+                                </p>
+                                <div class="d-flex flex-column flex-md-row gap-3 justify-content-center align-items-center mt-4">
+                                    <a href="https://secure.votevega.nyc/donate?amount=10" class="btn btn-primary btn-lg px-4" style="min-width: 200px;">
+                                        <i class="fas fa-heart me-2"></i>Donate $10
+                                    </a>
+                                    <a href="https://secure.votevega.nyc/donate?amount=50" class="btn btn-primary btn-lg px-4" style="min-width: 200px;">
+                                        <i class="fas fa-heart me-2"></i>Donate $50
+                                    </a>
+                                    <a href="https://secure.votevega.nyc/donate" class="btn btn-outline-primary btn-lg px-4" style="min-width: 200px;">
+                                        <i class="fas fa-donate me-2"></i>Other Amount
+                                    </a>
+                                </div>
+                            </div>
+                        `;
+                        formContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     } else {
                         showVolunteerFormMessage(form, result.error || 'An error occurred. Please try again.', 'error');
                         

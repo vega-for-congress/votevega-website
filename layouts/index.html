@@ -83,41 +83,41 @@
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <div class="input-group mb-3">
-                                        <span class="input-group-text border-0 shadow-sm" style="background: #ffffff; border-radius: 10px 0 0 10px; padding: 1rem;">
+                                        <span class="input-group-text border-0 shadow-sm d-none d-md-flex" style="background: #ffffff; border-radius: 10px 0 0 10px; padding: 1rem;">
                                             <i class="fas fa-user" style="color: #dc3545;"></i>
                                         </span>
                                         <input type="text" class="form-control border-0 shadow-sm" id="name" name="name" placeholder="{{ i18n "volunteer_name_placeholder" }}" required
-                                               style="border-radius: 0 10px 10px 0; padding: 1rem; font-size: 1.1rem; height: 3.5rem; color: #212529; font-weight: 500; background: #ffffff;">
+                                               style="padding: 1rem; font-size: 1.1rem; height: 3.5rem; color: #212529; font-weight: 500; background: #ffffff;">
                                     </div>
                                 </div>
                                 
                                 <div class="col-md-6">
                                     <div class="input-group mb-3">
-                                        <span class="input-group-text border-0 shadow-sm" style="background: #ffffff; border-radius: 10px 0 0 10px; padding: 1rem;">
+                                        <span class="input-group-text border-0 shadow-sm d-none d-md-flex" style="background: #ffffff; border-radius: 10px 0 0 10px; padding: 1rem;">
                                             <i class="fas fa-map-marker-alt" style="color: #dc3545;"></i>
                                         </span>
                                         <input type="text" class="form-control border-0 shadow-sm" id="zip" name="zip" placeholder="{{ i18n "volunteer_zip_placeholder" }}" required
-                                               style="border-radius: 0 10px 10px 0; padding: 1rem; font-size: 1.1rem; height: 3.5rem; color: #212529; font-weight: 500; background: #ffffff;">
+                                               style="padding: 1rem; font-size: 1.1rem; height: 3.5rem; color: #212529; font-weight: 500; background: #ffffff;">
                                     </div>
                                 </div>
                                 
                                 <div class="col-md-6">
                                     <div class="input-group mb-3">
-                                        <span class="input-group-text border-0 shadow-sm" style="background: #ffffff; border-radius: 10px 0 0 10px; padding: 1rem;">
+                                        <span class="input-group-text border-0 shadow-sm d-none d-md-flex" style="background: #ffffff; border-radius: 10px 0 0 10px; padding: 1rem;">
                                             <i class="fas fa-envelope" style="color: #dc3545;"></i>
                                         </span>
                                         <input type="email" class="form-control border-0 shadow-sm" id="email" name="email" placeholder="{{ i18n "volunteer_email_placeholder" }}" required
-                                               style="border-radius: 0 10px 10px 0; padding: 1rem; font-size: 1.1rem; height: 3.5rem; color: #212529; font-weight: 500; background: #ffffff;">
+                                               style="padding: 1rem; font-size: 1.1rem; height: 3.5rem; color: #212529; font-weight: 500; background: #ffffff;">
                                     </div>
                                 </div>
                                 
                                 <div class="col-md-6">
                                     <div class="input-group mb-3">
-                                        <span class="input-group-text border-0 shadow-sm" style="background: #ffffff; border-radius: 10px 0 0 10px; padding: 1rem;">
+                                        <span class="input-group-text border-0 shadow-sm d-none d-md-flex" style="background: #ffffff; border-radius: 10px 0 0 10px; padding: 1rem;">
                                             <i class="fas fa-phone" style="color: #dc3545;"></i>
                                         </span>
                                         <input type="tel" class="form-control border-0 shadow-sm" id="phone" name="phone" placeholder="{{ i18n "volunteer_phone_placeholder" }}" required
-                                               style="border-radius: 0 10px 10px 0; padding: 1rem; font-size: 1.1rem; height: 3.5rem; color: #212529; font-weight: 500; background: #ffffff;">
+                                               style="padding: 1rem; font-size: 1.1rem; height: 3.5rem; color: #212529; font-weight: 500; background: #ffffff;">
                                     </div>
                                 </div>
                             </div>
@@ -156,6 +156,15 @@
         </div>
     </div>
 </div>
+
+<style>
+    /* Make inputs full-width with rounded corners on mobile */
+    @media (max-width: 767px) {
+        #volunteer .input-group .form-control {
+            border-radius: 10px !important;
+        }
+    }
+</style>
 
 <!-- Issues Section -->
 <div class="issues p-5 text-center" style="background-color: #f8f9fa;">
