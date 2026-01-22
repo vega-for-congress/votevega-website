@@ -23,15 +23,15 @@ interface FormData {
 }
 
 interface BaserowRow {
-  field_6918650: string;  // Name
-  field_6918649: string;  // Submitted At (datetime - ISO 8601 format)
-  field_6918651: string;  // Zip
-  field_6918652: string;  // Email
-  field_6918653: string;  // Phone
-  field_6943174: string;  // Source
-  field_6943175: string;  // User Agent
-  field_6943176: string;  // IP Address
-  field_6943177: boolean; // Turnstile Verified
+  field_2817: string;  // Name
+  field_2818: string;  // Submitted At (date with time)
+  field_2819: string;  // Zip
+  field_2820: string;  // Email
+  field_2821: string;  // Phone
+  field_2826: string;  // Source
+  field_2827: string;  // User Agent
+  field_2828: string;  // IP Address
+  field_2829: boolean; // Turnstile Verified
 }
 
 // Rate limiting cache
@@ -97,15 +97,15 @@ export default {
       // Submit to Baserow using field IDs
       const userAgent = request.headers.get('User-Agent') || 'Unknown';
       const submission: BaserowRow = {
-        field_6918650: formData.name!,                    // Name
-        field_6918649: new Date().toISOString(),          // Submitted At (datetime)
-        field_6918651: formData.zip!,                     // Zip
-        field_6918652: formData.email!,                   // Email
-        field_6918653: formData.phone!,                   // Phone
-        field_6943174: formData.source || 'homepage',     // Source
-        field_6943175: userAgent.substring(0, 200),       // User Agent
-        field_6943176: await hashIP(clientIP),            // IP Address
-        field_6943177: true,                              // Turnstile Verified (boolean)
+        field_2817: formData.name!,                    // Name
+        field_2818: new Date().toISOString(),          // Submitted At (date with time)
+        field_2819: formData.zip!,                     // Zip
+        field_2820: formData.email!,                   // Email
+        field_2821: formData.phone!,                   // Phone
+        field_2826: formData.source || 'homepage',     // Source
+        field_2827: userAgent.substring(0, 200),       // User Agent
+        field_2828: await hashIP(clientIP),            // IP Address
+        field_2829: true,                              // Turnstile Verified (boolean)
       };
 
       const baserowSuccess = await submitToBaserow(submission, env);
