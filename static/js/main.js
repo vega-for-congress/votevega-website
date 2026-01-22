@@ -13,6 +13,7 @@
         // Initialize various components
         initSmoothScrolling();
         initEmailForm();
+        initVolunteerForms();
         initNavbarBehavior();
         initAnimations();
         initEmailParameterHandling();
@@ -285,6 +286,164 @@
             });
         }
     });
+
+    // Volunteer and RSVP form submission with Turnstile
+    function initVolunteerForms() {
+        // Configuration
+        const WORKER_URL = 'https://votevega-form-submission.vega-signup.workers.dev';
+        // Use test key for Netlify previews, real key for production
+        const TURNSTILE_SITE_KEY = location.hostname.endsWith('.netlify.app')
+            ? '1x00000000000000000000AA' // Test key - works on any domain
+            : '0x4AAAAAACN4JzJOU76zayw9'; // Real key
+        
+        // Wait for Turnstile to load
+        function setupForms() {
+            if (!window.turnstile) {
+                setTimeout(setupForms, 100);
+                return;
+            }
+            
+            // Find all volunteer/RSVP forms
+            const forms = document.querySelectorAll('.volunteer-form, .event-rsvp-form');
+            
+            forms.forEach(function(form) {
+                // Prevent duplicate initialization
+                if (form.dataset.turnstileInit) return;
+                form.dataset.turnstileInit = 'true';
+                
+                // Add Turnstile widget container
+                const submitButton = form.querySelector('button[type="submit"]');
+                if (submitButton && submitButton.parentElement) {
+                    const turnstileContainer = document.createElement('div');
+                    turnstileContainer.className = 'cf-turnstile-container mb-3 d-flex justify-content-center';
+                    submitButton.parentElement.parentElement.insertBefore(turnstileContainer, submitButton.parentElement);
+                    
+                    // Render Turnstile widget
+                    window.turnstile.render(turnstileContainer, {
+                        sitekey: TURNSTILE_SITE_KEY,
+                        theme: 'light',
+                        size: 'normal'
+                    });
+                }
+            
+            // Handle form submission
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const originalButtonText = submitButton.innerHTML;
+                submitButton.disabled = true;
+                submitButton.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Submitting...';
+                
+                // Clear existing messages
+                clearFormMessage(form);
+                
+                try {
+                    const formData = new FormData(form);
+                    const data = {
+                        name: formData.get('name'),
+                        email: formData.get('email'),
+                        phone: formData.get('phone'),
+                        zip: formData.get('zip') || '',
+                        source: formData.get('whichform') || formData.get('event') || 'homepage',
+                        'cf-turnstile-response': formData.get('cf-turnstile-response')
+                    };
+                    
+                    // Add address if present (for petition pledges)
+                    if (formData.get('address')) {
+                        data.address = formData.get('address');
+                    }
+                    
+                    console.log('Turnstile token:', data['cf-turnstile-response']);
+                    
+                    const response = await fetch(WORKER_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (response.ok && result.success) {
+                        // Replace entire form with success message and donate buttons
+                        const formContainer = form.parentElement;
+                        formContainer.innerHTML = `
+                            <div class="text-center py-5">
+                                <div class="mb-4">
+                                    <i class="fas fa-check-circle" style="font-size: 4rem; color: #28a745;"></i>
+                                </div>
+                                <h3 class="fw-bold mb-3">Thank you for signing up!</h3>
+                                <p class="mb-4" style="font-size: 1.1rem; color: #495057;">
+                                    ${result.message || 'We will be in touch soon with updates about the campaign.'}
+                                </p>
+                                <div class="d-grid gap-3 d-md-flex justify-content-md-center mt-4">
+                                    <a href="https://secure.votevega.nyc/donate?amount=2500" class="btn btn-primary btn-lg">
+                                        <i class="fas fa-heart me-2"></i>Donate $25
+                                    </a>
+                                    <a href="https://secure.votevega.nyc/donate?amount=5000" class="btn btn-primary btn-lg">
+                                        <i class="fas fa-heart me-2"></i>Donate $50
+                                    </a>
+                                    <a href="https://secure.votevega.nyc/donate" class="btn btn-outline-primary btn-lg">
+                                        <i class="fas fa-donate me-2"></i>Other Amount
+                                    </a>
+                                </div>
+                            </div>
+                        `;
+                        formContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    } else {
+                        showVolunteerFormMessage(form, result.error || 'An error occurred. Please try again.', 'error');
+                        
+                        // Reset Turnstile on error
+                        const turnstileContainer = form.querySelector('.cf-turnstile-container');
+                        if (turnstileContainer && window.turnstile) {
+                            window.turnstile.reset(turnstileContainer);
+                        }
+                    }
+                } catch (error) {
+                    console.error('Form submission error:', error);
+                    showVolunteerFormMessage(form, 'Network error. Please check your connection and try again.', 'error');
+                } finally {
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = originalButtonText;
+                }
+                });
+            });
+        }
+        
+        // Start setup
+        setupForms();
+    }
+    
+    // Show message for volunteer forms
+    function showVolunteerFormMessage(form, message, type) {
+        clearFormMessage(form);
+        
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `form-message alert ${type === 'success' ? 'alert-success' : 'alert-danger'} mt-3`;
+        messageDiv.style.borderRadius = '8px';
+        messageDiv.innerHTML = `
+            <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'} me-2"></i>
+            ${message}
+        `;
+        
+        form.parentElement.appendChild(messageDiv);
+        messageDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        
+        if (type === 'success') {
+            setTimeout(function() {
+                if (messageDiv.parentElement) {
+                    messageDiv.remove();
+                }
+            }, 5000);
+        }
+    }
+    
+    // Clear form message
+    function clearFormMessage(form) {
+        const existingMessage = form.parentElement.querySelector('.form-message');
+        if (existingMessage) {
+            existingMessage.remove();
+        }
+    }
 
     // Handle email parameter from footer signup on other pages
     function initEmailParameterHandling() {

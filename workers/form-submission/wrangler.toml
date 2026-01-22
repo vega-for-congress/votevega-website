@@ -1,0 +1,17 @@
+name = "votevega-form-submission"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+# Environment variables and secrets
+# Run: wrangler secret put TURNSTILE_SECRET_KEY
+# Run: wrangler secret put BASEROW_API_TOKEN
+
+[vars]
+BASEROW_DB_ID = "291"
+BASEROW_API_URL = "https://votevega-baserow.up.railway.app/api/database/rows/table"
+ALLOWED_ORIGINS = "https://votevega.nyc,https://www.votevega.nyc,http://localhost:8080,http://localhost:3000,https://deploy-preview-37--votevega.netlify.app"
+
+[observability]
+[observability.logs]
+enabled = true
+invocation_logs = true
