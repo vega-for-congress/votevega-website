@@ -4,11 +4,14 @@ compatibility_date = "2024-01-01"
 
 # Environment variables and secrets
 # Run: wrangler secret put TURNSTILE_SECRET_KEY
-# Run: wrangler secret put BASEROW_API_TOKEN
+# Run: wrangler secret put TURNSTILE_TEST_SECRET_KEY
+# Run: wrangler secret put NOCODB_API_TOKEN
+# Run: wrangler secret put RESEND_API_KEY
 
 [vars]
-BASEROW_DB_ID = "291"
-BASEROW_API_URL = "https://votevega-baserow.up.railway.app/api/database/rows/table"
+NOCODB_TABLE_ID = "mpiotrslk803s0v"
+NOCODB_BASE_ID = "p4fly43c6kif8gw"
+NOCODB_API_URL = "https://app.nocodb.com"
 ALLOWED_ORIGINS = "https://votevega.nyc,https://www.votevega.nyc,http://localhost:8080,http://localhost:3000,https://deploy-preview-37--votevega.netlify.app"
 
 [observability]

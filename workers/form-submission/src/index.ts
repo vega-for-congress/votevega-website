@@ -1,14 +1,15 @@
 /**
  * Cloudflare Worker for VoteVega.nyc Form Submissions
- * Handles volunteer signups with Turnstile bot protection and Baserow storage
+ * Handles volunteer signups with Turnstile bot protection and NocoDB storage
  */
 
 interface Env {
   TURNSTILE_SECRET_KEY: string;
   TURNSTILE_TEST_SECRET_KEY?: string;
-  BASEROW_API_TOKEN: string;
-  BASEROW_DB_ID: string;
-  BASEROW_API_URL: string;
+  NOCODB_API_TOKEN: string;
+  NOCODB_TABLE_ID: string;
+  NOCODB_BASE_ID: string;
+  NOCODB_API_URL: string;
   ALLOWED_ORIGINS: string;
   RESEND_API_KEY: string;
 }
@@ -23,17 +24,17 @@ interface FormData {
   'cf-turnstile-response': string;
 }
 
-interface BaserowRow {
-  field_2817: string;   // Name
-  field_2818: string;   // Submitted At (date with time)
-  field_2819: string;   // Zip
-  field_2820: string;   // Email
-  field_2821: string;   // Phone
-  field_2826: string;   // Source
-  field_2827: string;   // User Agent
-  field_2828: string;   // IP Address
-  field_2829: boolean;  // Turnstile Verified
-  field_2833?: string;  // Address (optional)
+interface NocoDBRow {
+  Name: string;
+  Email: string;
+  Phone: string;
+  Zip: string;
+  Source: string;
+  User_Agent: string;
+  IP_Address: string;
+  Turnstile_Verified: boolean;
+  Submitted_At: string;
+  Address?: string;
 }
 
 // Rate limiting cache
@@ -96,27 +97,27 @@ export default {
         return jsonResponse({ error: 'Bot verification failed' }, 403, origin);
       }
 
-      // Submit to Baserow using field IDs
+      // Submit to NocoDB
       const userAgent = request.headers.get('User-Agent') || 'Unknown';
-      const submission: BaserowRow = {
-        field_2817: formData.name!,                    // Name
-        field_2818: new Date().toISOString(),          // Submitted At (date with time)
-        field_2819: formData.zip!,                     // Zip
-        field_2820: formData.email!,                   // Email
-        field_2821: formData.phone!,                   // Phone
-        field_2826: formData.source || 'homepage',     // Source
-        field_2827: userAgent.substring(0, 200),       // User Agent
-        field_2828: await hashIP(clientIP),            // IP Address
-        field_2829: true,                              // Turnstile Verified (boolean)
+      const submission: NocoDBRow = {
+        Name: formData.name!,
+        Email: formData.email!,
+        Phone: formData.phone!,
+        Zip: formData.zip!,
+        Source: formData.source || 'homepage',
+        User_Agent: userAgent.substring(0, 200),
+        IP_Address: await hashIP(clientIP),
+        Turnstile_Verified: true,
+        Submitted_At: new Date().toISOString(),
       };
       
       // Add address if provided (for petition pledges)
       if (formData.address) {
-        submission.field_2833 = formData.address;
+        submission.Address = formData.address;
       }
 
-      const baserowSuccess = await submitToBaserow(submission, env);
-      if (!baserowSuccess) {
+      const nocodbSuccess = await submitToNocoDB(submission, env);
+      if (!nocodbSuccess) {
         return jsonResponse({ error: 'Failed to save submission. Please try again.' }, 500, origin);
       }
 
@@ -187,15 +188,15 @@ async function verifyTurnstile(
 }
 
 /**
- * Submit data to Baserow
+ * Submit data to NocoDB
  */
-async function submitToBaserow(data: BaserowRow, env: Env): Promise<boolean> {
+async function submitToNocoDB(data: NocoDBRow, env: Env): Promise<boolean> {
   try {
-    const url = `${env.BASEROW_API_URL}/${env.BASEROW_DB_ID}/`;
+    const url = `${env.NOCODB_API_URL}/api/v2/tables/${env.NOCODB_TABLE_ID}/records`;
     const response = await fetch(url, {
       method: 'POST',
       headers: {
-        Authorization: `Token ${env.BASEROW_API_TOKEN}`,
+        'xc-token': env.NOCODB_API_TOKEN,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
@@ -203,13 +204,13 @@ async function submitToBaserow(data: BaserowRow, env: Env): Promise<boolean> {
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('Baserow API error:', response.status, errorText);
+      console.error('NocoDB API error:', response.status, errorText);
       return false;
     }
 
     return true;
   } catch (error) {
-    console.error('Baserow submission error:', error);
+    console.error('NocoDB submission error:', error);
     return false;
   }
 }
