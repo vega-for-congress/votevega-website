@@ -85,16 +85,19 @@ export default {
         return jsonResponse({ error: 'Too many submissions. Please try again later.' }, 429, origin);
       }
 
-      // Verify Turnstile token
+      // Verify Turnstile token (optional - allow submissions without it)
       const turnstileToken = formData['cf-turnstile-response'];
-      if (!turnstileToken) {
-        return jsonResponse({ error: 'Bot verification required' }, 400, origin);
-      }
-
-      const originHost = origin ? new URL(origin).hostname : null;
-      const turnstileValid = await verifyTurnstile(turnstileToken, clientIP, env, originHost);
-      if (!turnstileValid) {
-        return jsonResponse({ error: 'Bot verification failed' }, 403, origin);
+      let turnstileVerified = false;
+      
+      if (turnstileToken) {
+        const originHost = origin ? new URL(origin).hostname : null;
+        turnstileVerified = await verifyTurnstile(turnstileToken, clientIP, env, originHost);
+        
+        if (!turnstileVerified) {
+          console.warn('Turnstile verification failed but allowing submission');
+        }
+      } else {
+        console.warn('No Turnstile token provided - likely blocked by browser extension');
       }
 
       // Submit to NocoDB
@@ -107,7 +110,7 @@ export default {
         Source: formData.source || 'homepage',
         User_Agent: userAgent.substring(0, 200),
         IP_Address: await hashIP(clientIP),
-        Turnstile_Verified: true,
+        Turnstile_Verified: turnstileVerified,
         Submitted_At: new Date().toISOString(),
       };
       

@@ -296,10 +296,19 @@
             ? '1x00000000000000000000AA' // Test key - works on any domain
             : '0x4AAAAAACOMujdiKI0wJfCI'; // Real key
         
-        // Wait for Turnstile to load
-        function setupForms() {
+        let turnstileAttempts = 0;
+        const MAX_TURNSTILE_ATTEMPTS = 20; // Try for 2 seconds (20 * 100ms)
+        
+        // Try to load Turnstile (but don't block forms if it fails)
+        function setupTurnstile() {
+            if (!window.turnstile && turnstileAttempts < MAX_TURNSTILE_ATTEMPTS) {
+                turnstileAttempts++;
+                setTimeout(setupTurnstile, 100);
+                return;
+            }
+            
             if (!window.turnstile) {
-                setTimeout(setupForms, 100);
+                console.warn('Turnstile failed to load - forms will work without verification');
                 return;
             }
             
@@ -318,13 +327,33 @@
                     turnstileContainer.className = 'cf-turnstile-container mb-3 d-flex justify-content-center';
                     submitButton.parentElement.parentElement.insertBefore(turnstileContainer, submitButton.parentElement);
                     
-                    // Render Turnstile widget
-                    window.turnstile.render(turnstileContainer, {
-                        sitekey: TURNSTILE_SITE_KEY,
-                        theme: 'light',
-                        size: 'normal'
-                    });
+                    // Render Turnstile widget with error callback
+                    try {
+                        window.turnstile.render(turnstileContainer, {
+                            sitekey: TURNSTILE_SITE_KEY,
+                            theme: 'light',
+                            size: 'normal',
+                            'error-callback': function() {
+                                console.error('Turnstile error callback triggered');
+                                turnstileContainer.innerHTML = '<div class="alert alert-warning small mb-2">Security verification temporarily unavailable. Your submission will be manually reviewed.</div>';
+                            }
+                        });
+                    } catch (error) {
+                        console.error('Failed to render Turnstile:', error);
+                    }
                 }
+            });
+        }
+        
+        // Always attach form submission handlers (don't wait for Turnstile)
+        const forms = document.querySelectorAll('.volunteer-form, .event-rsvp-form');
+        forms.forEach(function(form) {
+            // Prevent duplicate initialization
+            if (form.dataset.formInit) return;
+            form.dataset.formInit = 'true';
+            
+            const submitButton = form.querySelector('button[type="submit"]');
+            if (!submitButton) return;
             
             // Handle form submission
             form.addEventListener('submit', async function(e) {
@@ -339,13 +368,15 @@
                 
                 try {
                     const formData = new FormData(form);
+                    const turnstileToken = formData.get('cf-turnstile-response') || '';
+                    
                     const data = {
                         name: formData.get('name'),
                         email: formData.get('email'),
                         phone: formData.get('phone'),
                         zip: formData.get('zip') || '',
                         source: formData.get('whichform') || formData.get('event') || 'homepage',
-                        'cf-turnstile-response': formData.get('cf-turnstile-response')
+                        'cf-turnstile-response': turnstileToken
                     };
                     
                     // Add address if present (for petition pledges)
@@ -353,7 +384,12 @@
                         data.address = formData.get('address');
                     }
                     
-                    console.log('Turnstile token:', data['cf-turnstile-response']);
+                    // Log whether Turnstile was available
+                    if (turnstileToken) {
+                        console.log('Submitting with Turnstile token');
+                    } else {
+                        console.warn('Submitting WITHOUT Turnstile token (verification unavailable or blocked)');
+                    }
                     
                     const response = await fetch(WORKER_URL, {
                         method: 'POST',
@@ -405,12 +441,11 @@
                     submitButton.disabled = false;
                     submitButton.innerHTML = originalButtonText;
                 }
-                });
             });
-        }
+        });
         
-        // Start setup
-        setupForms();
+        // Try to load Turnstile widget (but forms work without it)
+        setupTurnstile();
     }
     
     // Show message for volunteer forms
