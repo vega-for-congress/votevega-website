@@ -319,12 +319,25 @@ function parseFormData(body: string): Partial<FormData> {
 }
 
 /**
- * Check if origin is allowed
+ * Check if origin is allowed (supports wildcards)
  */
 function isAllowedOrigin(origin: string | null, env: Env): boolean {
   if (!origin) return false;
   const allowed = env.ALLOWED_ORIGINS.split(',').map(o => o.trim());
-  return allowed.includes(origin);
+  
+  // Check exact matches first
+  if (allowed.includes(origin)) return true;
+  
+  // Check wildcard matches
+  return allowed.some(pattern => {
+    if (!pattern.includes('*')) return false;
+    // Convert wildcard pattern to regex: escape special chars except *
+    const regexPattern = pattern
+      .replace(/[.+?^${}()|[\]\\]/g, '\\$&')
+      .replace(/\*/g, '.*');
+    const regex = new RegExp('^' + regexPattern + '$');
+    return regex.test(origin);
+  });
 }
 
 /**
