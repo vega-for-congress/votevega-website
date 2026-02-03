@@ -346,18 +346,24 @@
         }
         
         // Always attach form submission handlers (don't wait for Turnstile)
-        const forms = document.querySelectorAll('.volunteer-form, .event-rsvp-form');
-        forms.forEach(function(form) {
-            // Prevent duplicate initialization
-            if (form.dataset.formInit) return;
-            form.dataset.formInit = 'true';
+        try {
+            const forms = document.querySelectorAll('.volunteer-form, .event-rsvp-form');
+            console.log('Found ' + forms.length + ' forms to attach handlers');
             
-            const submitButton = form.querySelector('button[type="submit"]');
-            if (!submitButton) return;
-            
-            // Handle form submission
-            form.addEventListener('submit', async function(e) {
-                e.preventDefault();
+            forms.forEach(function(form) {
+                // Prevent duplicate initialization
+                if (form.dataset.formInit) return;
+                form.dataset.formInit = 'true';
+                
+                const submitButton = form.querySelector('button[type="submit"]');
+                if (!submitButton) return;
+                
+                console.log('Attaching submit handler');
+                
+                // Handle form submission
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    console.log('Form submit handler called');
                 
                 const originalButtonText = submitButton.innerHTML;
                 submitButton.disabled = true;
@@ -391,15 +397,16 @@
                         console.warn('Submitting WITHOUT Turnstile token (verification unavailable or blocked)');
                     }
                     
-                    const response = await fetch(WORKER_URL, {
+                    fetch(WORKER_URL, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(data)
-                    });
-                    
-                    const result = await response.json();
-                    
-                    if (response.ok && result.success) {
+                    })
+                    .then(function(response) {
+                        return response.json();
+                    })
+                    .then(function(result) {
+                        if (result.success) {
                         // Replace entire form with success message and donate buttons
                         const formContainer = form.parentElement;
                         formContainer.innerHTML = `
@@ -424,25 +431,35 @@
                                 </div>
                             </div>
                         `;
-                        formContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    } else {
-                        showVolunteerFormMessage(form, result.error || 'An error occurred. Please try again.', 'error');
-                        
-                        // Reset Turnstile on error
-                        const turnstileContainer = form.querySelector('.cf-turnstile-container');
-                        if (turnstileContainer && window.turnstile) {
-                            window.turnstile.reset(turnstileContainer);
+                            formContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        } else {
+                            showVolunteerFormMessage(form, result.error || 'An error occurred. Please try again.', 'error');
+                            
+                            // Reset Turnstile on error
+                            const turnstileContainer = form.querySelector('.cf-turnstile-container');
+                            if (turnstileContainer && window.turnstile) {
+                                window.turnstile.reset(turnstileContainer);
+                            }
                         }
-                    }
+                    })
+                    .catch(function(error) {
+                        console.error('Form submission error:', error);
+                        showVolunteerFormMessage(form, 'Network error. Please check your connection and try again.', 'error');
+                    })
+                    .finally(function() {
+                        submitButton.disabled = false;
+                        submitButton.innerHTML = originalButtonText;
+                    });
                 } catch (error) {
-                    console.error('Form submission error:', error);
-                    showVolunteerFormMessage(form, 'Network error. Please check your connection and try again.', 'error');
-                } finally {
-                    submitButton.disabled = false;
-                    submitButton.innerHTML = originalButtonText;
+                    console.error('Form handler error:', error);
+                    alert('Form error: ' + error.message + '. Please screenshot this and contact support.');
                 }
+                });
             });
-        });
+        } catch (error) {
+            console.error('Form initialization error:', error);
+            alert('Failed to initialize forms: ' + error.message);
+        }
         
         // Try to load Turnstile widget (but forms work without it)
         setupTurnstile();
