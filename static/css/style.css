@@ -503,6 +503,18 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Professional Button Variants */
+.btn-blue {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    color: white;
+}
+
+.btn-blue:hover {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+    color: white;
+}
+
 .btn-gold {
     background: linear-gradient(135deg, #000000, #1a1a1a);
     border-color: #000000;
