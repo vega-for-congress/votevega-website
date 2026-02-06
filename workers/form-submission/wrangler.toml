@@ -12,7 +12,7 @@ compatibility_date = "2024-01-01"
 NOCODB_TABLE_ID = "mpiotrslk803s0v"
 NOCODB_BASE_ID = "p4fly43c6kif8gw"
 NOCODB_API_URL = "https://app.nocodb.com"
-ALLOWED_ORIGINS = "https://votevega.nyc,https://www.votevega.nyc,http://localhost:8080,http://localhost:3000,https://*--votevega.netlify.app"
+ALLOWED_ORIGINS = "https://votevega.nyc,https://www.votevega.nyc,https://secure.votevega.nyc,https://donation-widget-dev.up.railway.app,http://localhost:8080,http://localhost:3000,https://*--votevega.netlify.app"
 
 [observability]
 [observability.logs]
