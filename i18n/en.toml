@@ -124,3 +124,13 @@ meet_jose_gallery_fighting = "Fighting for Change"
 meet_jose_gallery_real = "Keeping It Real"
 meet_jose_gallery_team = "Our Grassroots Team"
 meet_jose_gallery_lead = "Ready to Lead"
+
+# Pledge Page
+pledge_title = "Take the Pledge"
+pledge_description = "Join the movement to transform the Bronx. Sign the pledge and commit to building a better future for our community."
+pledge_name_placeholder = "Enter your full name"
+pledge_phone_placeholder = "Enter your phone number"
+pledge_address_placeholder = "Enter your address"
+pledge_email_placeholder = "Enter your email address"
+pledge_submit = "Sign the Pledge"
+pledge_disclaimer = "By signing the pledge, you agree to receive campaign updates and opportunities to get involved."

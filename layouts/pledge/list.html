@@ -1,0 +1,104 @@
+{{ define "main" }}
+<!-- Pledge Page -->
+<div id="pledge" class="container-fluid py-5" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-top: 4px solid #dc3545; min-height: 80vh;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <div class="mb-5">
+                    <img width="50" src={{ "images/favicon.png" | relURL }} />
+                    <h1 class="display-5 fw-bold text-uppercase my-3" style="color: #212529; letter-spacing: 1px;">{{ i18n "pledge_title" }}</h1>
+                    <p class="mb-4" style="font-size: 1.2rem; color: #495057; line-height: 1.6;">
+                        {{ i18n "pledge_description" }}
+                    </p>
+                </div>
+                
+                <div class="card border-0 shadow-lg" style="border-radius: 15px; overflow: hidden;">
+                    <div class="card-body p-5">
+                        <form target="_blank" action="https://script.google.com/macros/s/AKfycbx3mfa_ovaIFjaB8fos7fzEErpmGV7jsuCnuDtDmXjGwKQs-fGp93kDndKiOQ3vVKUk/exec" method="POST" class="pledge-form">
+                            <!-- Hidden field to track form source -->
+                            <input type="hidden" name="whichform" value="pledge">
+                            
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text border-0 shadow-sm" style="background: #ffffff; border-radius: 10px 0 0 10px; padding: 1rem;">
+                                            <i class="fas fa-user" style="color: #dc3545;"></i>
+                                        </span>
+                                        <input type="text" class="form-control border-0 shadow-sm" id="name" name="name" placeholder="{{ i18n "pledge_name_placeholder" }}" required
+                                               style="border-radius: 0 10px 10px 0; padding: 1rem; font-size: 1.1rem; height: 3.5rem; color: #212529; font-weight: 500; background: #ffffff;">
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text border-0 shadow-sm" style="background: #ffffff; border-radius: 10px 0 0 10px; padding: 1rem;">
+                                            <i class="fas fa-phone" style="color: #dc3545;"></i>
+                                        </span>
+                                        <input type="tel" class="form-control border-0 shadow-sm" id="phone" name="phone" placeholder="{{ i18n "pledge_phone_placeholder" }}" required
+                                               style="border-radius: 0 10px 10px 0; padding: 1rem; font-size: 1.1rem; height: 3.5rem; color: #212529; font-weight: 500; background: #ffffff;">
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text border-0 shadow-sm" style="background: #ffffff; border-radius: 10px 0 0 10px; padding: 1rem;">
+                                            <i class="fas fa-envelope" style="color: #dc3545;"></i>
+                                        </span>
+                                        <input type="email" class="form-control border-0 shadow-sm" id="email" name="email" placeholder="{{ i18n "pledge_email_placeholder" }}" required
+                                               style="border-radius: 0 10px 10px 0; padding: 1rem; font-size: 1.1rem; height: 3.5rem; color: #212529; font-weight: 500; background: #ffffff;">
+                                    </div>
+                                </div>
+                                
+                                <div class="col-12">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text border-0 shadow-sm" style="background: #ffffff; border-radius: 10px 0 0 10px; padding: 1rem;">
+                                            <i class="fas fa-map-marker-alt" style="color: #dc3545;"></i>
+                                        </span>
+                                        <input type="text" class="form-control border-0 shadow-sm" id="address" name="address" placeholder="{{ i18n "pledge_address_placeholder" }}" required
+                                               style="border-radius: 0 10px 10px 0; padding: 1rem; font-size: 1.1rem; height: 3.5rem; color: #212529; font-weight: 500; background: #ffffff;">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- reCAPTCHA -->
+                            <div class="row mt-3">
+                                <div class="col-12 d-flex justify-content-center">
+                                    <div class="g-recaptcha" data-sitekey="6LdB9k0sAAAAADT180PSrIEaH4PEdDGI_MQyT7W5"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="row mt-4">
+                                <div class="col-12 text-center">
+                                    <button type="submit" class="btn btn-lg fw-bold text-uppercase px-5 py-3" 
+                                            style="background: linear-gradient(135deg, #dc3545, #c82333); 
+                                                   color: white; 
+                                                   border: none; 
+                                                   border-radius: 50px; 
+                                                   font-size: 1.1rem; 
+                                                   letter-spacing: 0.5px;
+                                                   box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+                                                   transition: all 0.3s ease;" 
+                                            onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(220, 53, 69, 0.4)';" 
+                                            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(220, 53, 69, 0.3)';"
+                                            onmousedown="this.style.transform='translateY(1px)';" 
+                                            onmouseup="this.style.transform='translateY(-2px)';">
+                                        <i class="fas fa-pen-fancy me-2"></i>{{ i18n "pledge_submit" }}
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="row mt-3">
+                                <div class="col-12 text-center">
+                                    <small class="text-muted" style="font-size: 0.9rem;">
+                                        {{ i18n "pledge_disclaimer" }}
+                                    </small>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{ end }}
