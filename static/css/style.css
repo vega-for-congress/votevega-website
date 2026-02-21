@@ -1860,3 +1860,54 @@ blockquote p:last-child {
     color: white;
     transform: translateX(5px);
 }
+
+/* Emergency townhall banner */
+.townhall-banner {
+    background: #0b5ed7;
+    border-top: 4px solid #ffffff;
+    border-bottom: 4px solid #ffffff;
+}
+
+.townhall-banner__link {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem 1rem;
+    text-align: center;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 800;
+    letter-spacing: 0.4px;
+    padding: 1.5rem 0.75rem;
+    text-transform: uppercase;
+}
+
+.townhall-banner__label {
+    font-size: 1.35rem;
+}
+
+.townhall-banner__cta {
+    background: #ffc107;
+    color: #212529;
+    padding: 0.5rem 1.1rem;
+    border-radius: 999px;
+    font-size: 1.25rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+}
+
+.townhall-banner__link:hover,
+.townhall-banner__link:focus {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+@media (max-width: 768px) {
+    .townhall-banner__label {
+        font-size: 1.05rem;
+    }
+
+    .townhall-banner__cta {
+        font-size: 1.1rem;
+    }
+}
