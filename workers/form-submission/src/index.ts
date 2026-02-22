@@ -22,6 +22,8 @@ interface FormData {
   address?: string;
   source: string;
   'cf-turnstile-response': string;
+  emailOptIn?: boolean;
+  comment?: string;
 }
 
 interface NocoDBRow {
@@ -35,6 +37,8 @@ interface NocoDBRow {
   Turnstile_Verified: boolean;
   Submitted_At: string;
   Address?: string;
+  Email_Opt_In?: boolean;
+  Comment?: string;
 }
 
 // Rate limiting cache
@@ -117,6 +121,14 @@ export default {
       // Add address if provided (for petition pledges)
       if (formData.address) {
         submission.Address = formData.address;
+      }
+      
+      // Add email opt-in status (only true if explicitly opted in)
+      submission.Email_Opt_In = formData.emailOptIn === true;
+      
+      // Add comment if provided
+      if (formData.comment) {
+        submission.Comment = formData.comment.substring(0, 500); // Limit to 500 chars
       }
 
       const nocodbSuccess = await submitToNocoDB(submission, env);
@@ -307,6 +319,7 @@ async function hashIP(ip: string): Promise<string> {
  */
 function parseFormData(body: string): Partial<FormData> {
   const params = new URLSearchParams(body);
+  const emailOptInParam = params.get('emailOptIn');
   return {
     name: params.get('name') || '',
     email: params.get('email') || '',
@@ -315,6 +328,8 @@ function parseFormData(body: string): Partial<FormData> {
     address: params.get('address') || undefined,
     source: params.get('whichform') || params.get('source') || '',
     'cf-turnstile-response': params.get('cf-turnstile-response') || '',
+    emailOptIn: emailOptInParam === null ? undefined : emailOptInParam === 'true',
+    comment: params.get('comment') || undefined,
   };
 }
 
@@ -362,6 +377,7 @@ function handleCORS(request: Request, env: Env): Response {
 
 /**
  * Send confirmation email via Resend
+ * Uses Resend templates for main signup sources, falls back to inline HTML for events
  */
 async function sendConfirmationEmail(
   name: string,
@@ -372,51 +388,59 @@ async function sendConfirmationEmail(
   try {
     const firstName = name.split(' ')[0];
     
-    // Template logic based on source
-    let subject = 'Welcome to Vega for Congress';
-    let html = `
-      <h2>Hi ${firstName}, welcome to our movement</h2>
-      <p>Thank you for signing up to support Jose Vega's campaign for Congress in New York's 15th District.</p>
-      <p>Stay tuned for further updates from the Vega for Congress team about:</p>
-      <ul>
-        <li>Upcoming events and town halls</li>
-        <li>Volunteer opportunities</li>
-        <li>Campaign news and policy updates</li>
-      </ul>
-      <p>Visit our website: <a href="https://votevega.nyc">votevega.nyc</a></p>
-      <p style="color: #666; font-size: 12px; margin-top: 30px;">Paid for by Vega for Congress<br>Bronx, NY 10459</p>
-    `;
+    // Map sources to Resend template IDs
+    const templateIds: Record<string, string> = {
+      'homepage': '529625f0-8372-409f-b100-889555d4d8b4',
+      'petition-pledge': '26b241dc-8000-403f-a1f8-9afb840d265f',
+      'stripe': '5346d0a4-9407-462f-9b61-c69c5f2e2087',
+    };
     
-    // Petition pledge template
-    if (source === 'petition-pledge') {
-      subject = 'Thank you for pledging to sign our petition';
-      html = `
-        <h2>Hi ${firstName}, thank you for pledging to sign!</h2>
-        <p>You've taken an important step in helping Jose Vega get on the ballot for Congress in New York's 15th District.</p>
-        <p><strong>What happens next:</strong></p>
+    const templateId = templateIds[source];
+    
+    let payload: Record<string, any>;
+    
+    if (templateId) {
+      // Use Resend template
+      payload = {
+        from: 'Vega for Congress <info@votevega.nyc>',
+        to: [email],
+        template: {
+          id: templateId,
+          variables: {
+            FIRST_NAME_VAR: firstName,
+          },
+        },
+      };
+    } else {
+      // Fallback to inline HTML for event-specific or unknown sources
+      let subject = 'Welcome to Vega for Congress';
+      let html = `
+        <h2>Hi ${firstName}, welcome to our movement</h2>
+        <p>Thank you for signing up to support Jose Vega's campaign for Congress in New York's 15th District.</p>
+        <p>Stay tuned for further updates from the Vega for Congress team about:</p>
         <ul>
-          <li>Official ballot petitioning begins in late February</li>
-          <li>We'll contact you with the nearest signing location and time</li>
-          <li>The entire process takes less than 5 minutes</li>
+          <li>Upcoming events and town halls</li>
+          <li>Volunteer opportunities</li>
+          <li>Campaign news and policy updates</li>
         </ul>
-        <p>Your pledge helps us plan our ballot access drive and ensures we have the signatures needed to get Jose on the ballot.</p>
         <p>Visit our website: <a href="https://votevega.nyc">votevega.nyc</a></p>
         <p style="color: #666; font-size: 12px; margin-top: 30px;">Paid for by Vega for Congress<br>Bronx, NY 10459</p>
       `;
+      
+      // Event-specific templates
+      if (source === 'nov-2-town-hall') {
+        subject = 'Confirming your RSVP for November 2nd Town Hall';
+        html = `<h2>Hi ${firstName}, thanks for registering for our upcoming town hall.</h2><p>The town hall will take place at 3pm in the Longwood neighborhood of the Bronx. We will be in touch with the exact location closer to the event.</p><p>If you can't make it in person, you can catch the event livestream here: <a href="https://us02web.zoom.us/j/8041129932?omn=86781836212">https://us02web.zoom.us/j/8041129932?omn=86781836212</a></p>`;
+      }
+      // Add more event-specific templates here as needed
+      
+      payload = {
+        from: 'Vega for Congress <info@votevega.nyc>',
+        to: [email],
+        subject: subject,
+        html: html,
+      };
     }
-    // Event-specific templates
-    else if (source === 'nov-2-town-hall') {
-      subject = 'Confirming your RSVP for November 2nd Town Hall';
-      html = `<h2>Hi ${firstName}, thanks for registering for our upcoming town hall.</h2><p>The town hall will take place at 3pm in the Longwood neighborhood of the Bronx. We will be in touch with the exact location closer to the event.</p><p>If you can't make it in person, you can catch the event livestream here: <a href="https://us02web.zoom.us/j/8041129932?omn=86781836212">https://us02web.zoom.us/j/8041129932?omn=86781836212</a></p>`;
-    }
-    // Add more source-specific templates here as needed
-    
-    const payload = {
-      from: 'Vega for Congress <info@votevega.nyc>',
-      to: [email],
-      subject: subject,
-      html: html,
-    };
     
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
