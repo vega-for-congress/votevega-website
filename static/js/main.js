@@ -407,30 +407,47 @@
                     })
                     .then(function(result) {
                         if (result.success) {
-                        // Replace entire form with success message and donate buttons
                         const formContainer = form.parentElement;
-                        formContainer.innerHTML = `
-                            <div class="text-center py-5">
-                                <div class="mb-4">
-                                    <i class="fas fa-check-circle" style="font-size: 4rem; color: #28a745;"></i>
+                        const isEventForm = form.classList.contains('event-rsvp-form');
+                        
+                        if (isEventForm) {
+                            // Event pages should show a clean confirmation state only.
+                            formContainer.innerHTML = `
+                                <div class="text-center py-5">
+                                    <div class="mb-4">
+                                        <i class="fas fa-check-circle" style="font-size: 4rem; color: #28a745;"></i>
+                                    </div>
+                                    <h3 class="fw-bold mb-3">Thanks for signing up.</h3>
+                                    <p class="mb-0" style="font-size: 1.1rem; color: #495057;">
+                                        Your registration is confirmed. Please check your email for event details.
+                                    </p>
                                 </div>
-                                <h3 class="fw-bold mb-3">Thank you for signing up!</h3>
-                                <p class="mb-4" style="font-size: 1.1rem; color: #495057;">
-                                    ${result.message || 'We will be in touch soon with updates about the campaign.'}
-                                </p>
-                                <div class="d-grid gap-3 d-md-flex justify-content-md-center mt-4">
-                                    <a href="https://secure.votevega.nyc/donate?amount=2500" class="btn btn-primary btn-lg">
-                                        <i class="fas fa-heart me-2"></i>Donate $25
-                                    </a>
-                                    <a href="https://secure.votevega.nyc/donate?amount=5000" class="btn btn-primary btn-lg">
-                                        <i class="fas fa-heart me-2"></i>Donate $50
-                                    </a>
-                                    <a href="https://secure.votevega.nyc/donate" class="btn btn-outline-primary btn-lg">
-                                        <i class="fas fa-donate me-2"></i>Other Amount
-                                    </a>
+                            `;
+                        } else {
+                            // Keep donation CTAs for non-event forms.
+                            formContainer.innerHTML = `
+                                <div class="text-center py-5">
+                                    <div class="mb-4">
+                                        <i class="fas fa-check-circle" style="font-size: 4rem; color: #28a745;"></i>
+                                    </div>
+                                    <h3 class="fw-bold mb-3">Thank you for signing up!</h3>
+                                    <p class="mb-4" style="font-size: 1.1rem; color: #495057;">
+                                        ${result.message || 'We will be in touch soon with updates about the campaign.'}
+                                    </p>
+                                    <div class="d-grid gap-3 d-md-flex justify-content-md-center mt-4">
+                                        <a href="https://secure.votevega.nyc/donate?amount=2500" class="btn btn-primary btn-lg">
+                                            <i class="fas fa-heart me-2"></i>Donate $25
+                                        </a>
+                                        <a href="https://secure.votevega.nyc/donate?amount=5000" class="btn btn-primary btn-lg">
+                                            <i class="fas fa-heart me-2"></i>Donate $50
+                                        </a>
+                                        <a href="https://secure.votevega.nyc/donate" class="btn btn-outline-primary btn-lg">
+                                            <i class="fas fa-donate me-2"></i>Other Amount
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
-                        `;
+                            `;
+                        }
                             formContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
                         } else {
                             showVolunteerFormMessage(form, result.error || 'An error occurred. Please try again.', 'error');

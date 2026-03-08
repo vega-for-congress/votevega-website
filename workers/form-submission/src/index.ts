@@ -432,6 +432,18 @@ async function sendConfirmationEmail(
         subject = 'Confirming your RSVP for November 2nd Town Hall';
         html = `<h2>Hi ${firstName}, thanks for registering for our upcoming town hall.</h2><p>The town hall will take place at 3pm in the Longwood neighborhood of the Bronx. We will be in touch with the exact location closer to the event.</p><p>If you can't make it in person, you can catch the event livestream here: <a href="https://us02web.zoom.us/j/8041129932?omn=86781836212">https://us02web.zoom.us/j/8041129932?omn=86781836212</a></p>`;
       }
+      if (source === 'monday-night-emergency-townhall') {
+        subject = 'You are confirmed: Monday Night Emergency Townhall';
+        html = `
+          <h2>Hi ${firstName}, thanks for signing up.</h2>
+          <p>Your registration is confirmed for the Monday Night Emergency Townhall.</p>
+          <p><strong>Date:</strong> Monday, March 9, 2026<br>
+          <strong>Time:</strong> 7:00 PM - 9:00 PM ET<br>
+          <strong>Format:</strong> Online</p>
+          <p>Event access details will be sent in a follow-up email.</p>
+          <p style="color: #666; font-size: 12px; margin-top: 30px;">Paid for by Vega for Congress<br>Bronx, NY 10459</p>
+        `;
+      }
       // Add more event-specific templates here as needed
       
       payload = {
