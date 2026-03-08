@@ -438,7 +438,7 @@ async function sendConfirmationEmail(
           <h2>Hi ${firstName}, thanks for signing up.</h2>
           <p>Your registration is confirmed for the Monday Night Emergency Townhall.</p>
           <p><strong>Date:</strong> Monday, March 9, 2026<br>
-          <strong>Time:</strong> 7:00 PM - 9:00 PM ET<br>
+          <strong>Time:</strong> 8:00 PM - 9:00 PM ET<br>
           <strong>Format:</strong> Online</p>
           <p>Event access details will be sent in a follow-up email.</p>
           <p style="color: #666; font-size: 12px; margin-top: 30px;">Paid for by Vega for Congress<br>Bronx, NY 10459</p>
