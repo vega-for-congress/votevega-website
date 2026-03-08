@@ -1723,18 +1723,30 @@ blockquote p:last-child {
 
 /* Event Detail Cards */
 .event-detail-card {
-    background: linear-gradient(135deg, #ffffff, #f8f9fa);
-    border: 1px solid rgba(13, 110, 253, 0.2) !important;
-    transition: all 0.3s ease;
+    position: relative;
+    background: linear-gradient(165deg, #ffffff 0%, #f7fbff 100%);
+    border: 1px solid rgba(13, 110, 253, 0.18) !important;
+    border-radius: 0.9rem;
+    box-shadow: 0 8px 22px rgba(9, 30, 66, 0.08);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
 .event-detail-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(13, 110, 253, 0.15);
+    transform: translateY(-3px);
+    border-color: rgba(13, 110, 253, 0.35) !important;
+    box-shadow: 0 14px 30px rgba(13, 110, 253, 0.16);
 }
 
 .event-detail-card i {
-    font-size: 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.3rem;
+    height: 2.3rem;
+    font-size: 1rem;
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(13, 110, 253, 0.14), rgba(13, 110, 253, 0.22));
+    color: #0b5ed7;
 }
 
 /* Event Single Page Styling */
@@ -1769,21 +1781,48 @@ blockquote p:last-child {
 
 /* Event Sidebar */
 .event-sidebar .card {
-    border: none;
-    border-radius: 0.8rem;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 0.95rem;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+    background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+    box-shadow: 0 10px 24px rgba(2, 12, 27, 0.08);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
 .event-sidebar .card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px);
+    border-color: rgba(13, 110, 253, 0.25);
+    box-shadow: 0 16px 32px rgba(2, 12, 27, 0.14);
 }
 
 .event-sidebar .card-header {
-    font-weight: 600;
+    font-weight: 700;
+    letter-spacing: 0.2px;
     border: none;
+    padding: 0.85rem 1rem;
+}
+
+.event-sidebar .card-body {
+    padding: 1rem 1.1rem;
+}
+
+.event-sidebar .card-body strong {
+    color: #1f2937;
+}
+
+.event-sidebar .card-body .text-primary {
+    color: #0b5ed7 !important;
+}
+
+.event-sidebar .btn {
+    border-radius: 0.65rem;
+    font-weight: 600;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.event-sidebar .btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 14px rgba(13, 110, 253, 0.2);
 }
 
 /* Past Events */

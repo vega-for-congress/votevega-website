@@ -2,30 +2,24 @@
 title: "Monday Night Emergency Townhall"
 subtitle: "Get campaign updates and next steps for petitioning."
 description: "A campaign briefing with urgent updates, petitioning strategy, and Q&A."
-eventDate: "2026-03-09T20:00:00-05:00"
-endDate: "2026-03-09T21:00:00-05:00"
+eventDate: "2026-03-09T20:00:00-04:00"
+endDate: "2026-03-09T21:00:00-04:00"
 location: "Online Townhall"
 address: "Private access details sent after RSVP"
 eventType: "Emergency Townhall"
 ticketPrice: "Free"
 ---
 
-Join Jose Vega and the campaign team for a focused campaign briefing.
+On Monday night at 8 PM EDT, Jose Vega and I will be joined by former UN weapons inspector Scott Ritter, podcaster Keaton Weiss, and DC area talk show host Garland Nixon. I urge you to join us and share this page with your friends and family.
 
-### What we will cover
+One week ago, the United States and Israel launched an ill-conceived and illegal war of aggression against the nation of Iran. This war is not merely directed at Iran but is directed, as Pete Hegseth recently admitted, against what he calls the "global south," which actually is the Global Majority.
 
-- Urgent campaign developments
-- Petitioning priorities and deployment plan
-- Clear volunteer next steps for this week
-- Live Q&A with the campaign
+Operation Epic Fury is already unleashing many unforeseen consequences. That is unforeseen if you are operating from the standpoint of a messianic, delusional, pseudo-religious outlook, but not unforeseen if you view the world as Lyndon LaRouche did, from the standpoint of multiply connected dynamic processes within a lawfully ordered universe.
 
-### Event details
+Congress has abdicated responsibility when both houses voted against enforcing the war powers resolution, which reflects the constitutional mandate in Article I, Section 8 of the U.S. Constitution: Congress, not the president, must determine whether to declare war. Therefore, the responsibility to change the course of history of the United States by ending this insanity falls to the American people.
 
-- Date: Monday, March 9, 2026
-- Time: 8:00 PM to 9:00 PM ET
-- Format: Online
-- Cost: Free
+The situation is rapidly spiraling out of control. Many physical economic disruptions are already occurring, including the price of gas, shortages of LNG that cannot be automatically turned back on, and major fertilizer inflation, for which 45% of the urea comes from the Middle East.
 
-### Confirmation
+The entire Congress needs to be purged, with perhaps the exception of a handful of representatives like Thomas Massie and Ro Khanna, who have stood up both on the Epstein criminal class and against the Iran war.
 
-Thanks for signing up. Once you RSVP through this page, your registration is confirmed and event access details are sent by email.
+Join us Monday night at 8 PM EDT.
