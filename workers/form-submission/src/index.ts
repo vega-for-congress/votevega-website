@@ -1,6 +1,12 @@
 /**
  * Cloudflare Worker for VoteVega.nyc Form Submissions
- * Handles volunteer signups with Turnstile bot protection and NocoDB storage
+ * Handles volunteer signups with Turnstile bot protection and NocoDB storage.
+ *
+ * EMAIL TEMPLATES: Front-end developers can create new signup form -> custom email
+ * flows without modifying this worker. Place an HTML file in static/emails/{source}.html
+ * on the Hugo site (where {source} matches the form's source field). The worker will
+ * fetch it automatically, replace {{FIRST_NAME}}, and extract the subject line from
+ * <meta name="email-subject" content="...">. See fetchStaticEmailTemplate() below.
  */
 
 interface Env {
@@ -136,17 +142,22 @@ export default {
         return jsonResponse({ error: 'Failed to save submission. Please try again.' }, 500, origin);
       }
 
-      // Send confirmation email
-      const emailSent = await sendConfirmationEmail(
-        formData.name!,
-        formData.email!,
-        formData.source || 'homepage',
-        env
-      );
+      // Add to Resend audience and send confirmation email (non-blocking)
+      const [audienceAdded, emailSent] = await Promise.all([
+        addToResendContacts(formData.name!, formData.email!, env),
+        sendConfirmationEmail(
+          formData.name!,
+          formData.email!,
+          formData.source || 'homepage',
+          env
+        ),
+      ]);
       
+      if (!audienceAdded) {
+        console.error('Failed to add contact to Resend, but continuing');
+      }
       if (!emailSent) {
         console.error('Failed to send confirmation email, but continuing');
-        // Don't fail the request if email fails - data is already saved
       }
 
       // Record successful submission for rate limiting
@@ -198,6 +209,49 @@ async function verifyTurnstile(
     return data.success === true;
   } catch (error) {
     console.error('Turnstile verification error:', error);
+    return false;
+  }
+}
+
+/**
+ * Add contact to Resend for broadcast emails
+ */
+async function addToResendContacts(
+  name: string,
+  email: string,
+  env: Env
+): Promise<boolean> {
+  try {
+    const nameParts = name.trim().split(/\s+/);
+    const firstName = nameParts[0];
+    const lastName = nameParts.slice(1).join(' ') || undefined;
+
+    const response = await fetch(
+      'https://api.resend.com/contacts',
+      {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${env.RESEND_API_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          first_name: firstName,
+          ...(lastName && { last_name: lastName }),
+          unsubscribed: false,
+        }),
+      }
+    );
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('Resend contacts API error:', response.status, errorText);
+      return false;
+    }
+
+    return true;
+  } catch (error) {
+    console.error('Resend contacts error:', error);
     return false;
   }
 }
@@ -376,8 +430,46 @@ function handleCORS(request: Request, env: Env): Response {
 }
 
 /**
+ * Fetch an email template from the static site.
+ * Templates live at https://votevega.nyc/emails/{source}.html and may contain:
+ *   - <meta name="email-subject" content="..."> for the subject line
+ *   - {{FIRST_NAME}} for variable replacement
+ * Returns null if no template exists for this source.
+ */
+async function fetchStaticEmailTemplate(
+  source: string,
+  firstName: string
+): Promise<{ subject: string; html: string } | null> {
+  // Sanitize source to prevent path traversal
+  const sanitized = source.replace(/[^a-z0-9-]/g, '');
+  if (!sanitized || sanitized !== source) {
+    return null;
+  }
+
+  const url = `https://votevega.nyc/emails/${sanitized}.html`;
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      return null;
+    }
+
+    let html = await response.text();
+    html = html.replace(/\{\{FIRST_NAME\}\}/g, firstName);
+
+    // Extract subject from <meta name="email-subject" content="..."> if present
+    const subjectMatch = html.match(/<meta\s+name=["']email-subject["']\s+content=["']([^"']+)["']\s*\/?>/i);
+    const subject = subjectMatch ? subjectMatch[1] : 'Vega for Congress';
+
+    return { subject, html };
+  } catch (error) {
+    console.error(`Failed to fetch email template from ${url}:`, error);
+    return null;
+  }
+}
+
+/**
  * Send confirmation email via Resend
- * Uses Resend templates for main signup sources, falls back to inline HTML for events
+ * Priority: Resend template IDs > hardcoded event HTML > static site template > generic fallback
  */
 async function sendConfirmationEmail(
   name: string,
@@ -427,7 +519,7 @@ async function sendConfirmationEmail(
         <p style="color: #666; font-size: 12px; margin-top: 30px;">Paid for by Vega for Congress<br>Bronx, NY 10459</p>
       `;
       
-      // Event-specific templates
+      // Event-specific hardcoded templates (legacy — new events should use static templates)
       if (source === 'nov-2-town-hall') {
         subject = 'Confirming your RSVP for November 2nd Town Hall';
         html = `<h2>Hi ${firstName}, thanks for registering for our upcoming town hall.</h2><p>The town hall will take place at 3pm in the Longwood neighborhood of the Bronx. We will be in touch with the exact location closer to the event.</p><p>If you can't make it in person, you can catch the event livestream here: <a href="https://us02web.zoom.us/j/8041129932?omn=86781836212">https://us02web.zoom.us/j/8041129932?omn=86781836212</a></p>`;
@@ -444,7 +536,15 @@ async function sendConfirmationEmail(
           <p style="color: #666; font-size: 12px; margin-top: 30px;">Paid for by Vega for Congress<br>Bronx, NY 10459</p>
         `;
       }
-      // Add more event-specific templates here as needed
+
+      // If source didn't match any hardcoded event, try fetching a static template
+      if (subject === 'Welcome to Vega for Congress') {
+        const staticTemplate = await fetchStaticEmailTemplate(source, firstName);
+        if (staticTemplate) {
+          subject = staticTemplate.subject;
+          html = staticTemplate.html;
+        }
+      }
       
       payload = {
         from: 'Vega for Congress <info@votevega.nyc>',
