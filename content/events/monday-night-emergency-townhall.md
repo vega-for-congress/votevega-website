@@ -1,16 +1,16 @@
 ---
-title: "Monday Night Emergency Townhall"
-subtitle: "Get campaign updates and next steps for petitioning."
-description: "A campaign briefing with urgent updates, petitioning strategy, and Q&A."
-eventDate: "2026-03-09T20:00:00-04:00"
-endDate: "2026-03-09T21:00:00-04:00"
+title: "Win the Revolution Against the Epstein Class!"
+subtitle: "Shut down the Hellfire club"
+description: "Sign up for Win the Revolution Against the Epstein Class! and join the fight to shut down the Hellfire club."
+eventDate: "2026-03-16T20:00:00-04:00"
+endDate: "2026-03-16T21:00:00-04:00"
 location: "Online Townhall"
 address: "Private access details sent after RSVP"
 eventType: "Emergency Townhall"
 ticketPrice: "Free"
 ---
 
-On Monday night at 8 PM EDT, Jose Vega and I will be joined by former UN weapons inspector Scott Ritter, podcaster Keaton Weiss, and DC area talk show host Garland Nixon. I urge you to join us and share this page with your friends and family.
+Join Jose Vega and featured guests for Win the Revolution Against the Epstein Class! Share this page widely and help bring others into the fight to shut down the Hellfire club.
 
 One week ago, the United States and Israel launched an ill-conceived and illegal war of aggression against the nation of Iran. This war is not merely directed at Iran but is directed, as Pete Hegseth recently admitted, against what he calls the "global south," which actually is the Global Majority.
 
@@ -22,4 +22,4 @@ The situation is rapidly spiraling out of control. Many physical economic disrup
 
 The entire Congress needs to be purged, with perhaps the exception of a handful of representatives like Thomas Massie and Ro Khanna, who have stood up both on the Epstein criminal class and against the Iran war.
 
-Join us Monday night at 8 PM EDT.
+Sign up now and join the event.

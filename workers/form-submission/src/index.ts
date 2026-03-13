@@ -525,12 +525,13 @@ async function sendConfirmationEmail(
         html = `<h2>Hi ${firstName}, thanks for registering for our upcoming town hall.</h2><p>The town hall will take place at 3pm in the Longwood neighborhood of the Bronx. We will be in touch with the exact location closer to the event.</p><p>If you can't make it in person, you can catch the event livestream here: <a href="https://us02web.zoom.us/j/8041129932?omn=86781836212">https://us02web.zoom.us/j/8041129932?omn=86781836212</a></p>`;
       }
       if (source === 'monday-night-emergency-townhall') {
-        subject = 'You are confirmed: Monday Night Emergency Townhall';
+        subject = 'You are confirmed: Win the Revolution Against the Epstein Class!';
         html = `
           <h2>Hi ${firstName}, thanks for signing up.</h2>
-          <p>Your registration is confirmed for the Monday Night Emergency Townhall.</p>
-          <p><strong>Date:</strong> Monday, March 9, 2026<br>
-          <strong>Time:</strong> 8:00 PM - 9:00 PM ET<br>
+          <p>Your registration is confirmed for <strong>Win the Revolution Against the Epstein Class!</strong></p>
+          <p><em>Shut down the Hellfire club</em></p>
+          <p><strong>Date:</strong> Monday, March 16, 2026<br>
+          <strong>Time:</strong> 8:00 PM - 9:00 PM EDT<br>
           <strong>Format:</strong> Online</p>
           <p>Event access details will be sent in a follow-up email.</p>
           <p style="color: #666; font-size: 12px; margin-top: 30px;">Paid for by Vega for Congress<br>Bronx, NY 10459</p>

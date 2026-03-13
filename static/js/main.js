@@ -409,6 +409,7 @@
                         if (result.success) {
                         const formContainer = form.parentElement;
                         const isEventForm = form.classList.contains('event-rsvp-form');
+                        const eventName = formData.get('event') || 'this event';
                         
                         if (isEventForm) {
                             // Event pages should show a clean confirmation state only.
@@ -417,9 +418,9 @@
                                     <div class="mb-4">
                                         <i class="fas fa-check-circle" style="font-size: 4rem; color: #28a745;"></i>
                                     </div>
-                                    <h3 class="fw-bold mb-3">Thanks for signing up.</h3>
+                                    <h3 class="fw-bold mb-3">You are signed up.</h3>
                                     <p class="mb-0" style="font-size: 1.1rem; color: #495057;">
-                                        Your registration is confirmed. Please check your email for event details.
+                                        Your registration is confirmed for ${eventName}. Please check your email for event details.
                                     </p>
                                 </div>
                             `;
