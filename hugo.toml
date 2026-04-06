@@ -65,13 +65,13 @@ enableEmoji = true
 
   # Twitter settings
   [params.twitter]
-    site = "@josBtrigga"
-    creator = "@josBtrigga"
+    site = "@votevega26"
+    creator = "@votevega26"
 
   # Social media links
   [[params.social]]
     name = "Twitter/X"
-    url = "https://twitter.com/JosBtrigga"
+    url = "https://twitter.com/votevega26"
     icon = "fa-brands fa-x-twitter"
 
   [[params.social]]
