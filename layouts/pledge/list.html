@@ -24,7 +24,7 @@
                                         <span class="input-group-text border-0 shadow-sm" style="background: #ffffff; border-radius: 10px 0 0 10px; padding: 1rem;">
                                             <i class="fas fa-user" style="color: #dc3545;"></i>
                                         </span>
-                                        <input type="text" class="form-control border-0 shadow-sm" id="name" name="name" placeholder="{{ i18n "pledge_name_placeholder" }}" required
+                                        <input type="text" class="form-control border-0 shadow-sm" id="name" name="name" autocomplete="name" placeholder="{{ i18n "pledge_name_placeholder" }}" required
                                                style="border-radius: 0 10px 10px 0; padding: 1rem; font-size: 1.1rem; height: 3.5rem; color: #212529; font-weight: 500; background: #ffffff;">
                                     </div>
                                 </div>
@@ -34,7 +34,7 @@
                                         <span class="input-group-text border-0 shadow-sm" style="background: #ffffff; border-radius: 10px 0 0 10px; padding: 1rem;">
                                             <i class="fas fa-phone" style="color: #dc3545;"></i>
                                         </span>
-                                        <input type="tel" class="form-control border-0 shadow-sm" id="phone" name="phone" placeholder="{{ i18n "pledge_phone_placeholder" }}" required
+                                        <input type="tel" class="form-control border-0 shadow-sm" id="phone" name="phone" autocomplete="tel" placeholder="{{ i18n "pledge_phone_placeholder" }}" required
                                                style="border-radius: 0 10px 10px 0; padding: 1rem; font-size: 1.1rem; height: 3.5rem; color: #212529; font-weight: 500; background: #ffffff;">
                                     </div>
                                 </div>
@@ -44,7 +44,7 @@
                                         <span class="input-group-text border-0 shadow-sm" style="background: #ffffff; border-radius: 10px 0 0 10px; padding: 1rem;">
                                             <i class="fas fa-envelope" style="color: #dc3545;"></i>
                                         </span>
-                                        <input type="email" class="form-control border-0 shadow-sm" id="email" name="email" placeholder="{{ i18n "pledge_email_placeholder" }}" required
+                                        <input type="email" class="form-control border-0 shadow-sm" id="email" name="email" autocomplete="email" placeholder="{{ i18n "pledge_email_placeholder" }}" required
                                                style="border-radius: 0 10px 10px 0; padding: 1rem; font-size: 1.1rem; height: 3.5rem; color: #212529; font-weight: 500; background: #ffffff;">
                                     </div>
                                 </div>
@@ -54,16 +54,9 @@
                                         <span class="input-group-text border-0 shadow-sm" style="background: #ffffff; border-radius: 10px 0 0 10px; padding: 1rem;">
                                             <i class="fas fa-map-marker-alt" style="color: #dc3545;"></i>
                                         </span>
-                                        <input type="text" class="form-control border-0 shadow-sm" id="address" name="address" placeholder="{{ i18n "pledge_address_placeholder" }}" required
+                                        <input type="text" class="form-control border-0 shadow-sm" id="address" name="address" autocomplete="street-address" placeholder="{{ i18n "pledge_address_placeholder" }}" required
                                                style="border-radius: 0 10px 10px 0; padding: 1rem; font-size: 1.1rem; height: 3.5rem; color: #212529; font-weight: 500; background: #ffffff;">
                                     </div>
-                                </div>
-                            </div>
-                            
-                            <!-- reCAPTCHA -->
-                            <div class="row mt-3">
-                                <div class="col-12 d-flex justify-content-center">
-                                    <div class="g-recaptcha" data-sitekey="6LdB9k0sAAAAADT180PSrIEaH4PEdDGI_MQyT7W5"></div>
                                 </div>
                             </div>
                             
