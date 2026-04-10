@@ -49,7 +49,6 @@
 
             <form class="volunteer-form petition-drive-form">
               <input type="hidden" name="whichform" value="independent-ballot-petitioning">
-              <input type="hidden" name="zip" value="">
 
               <div class="row g-3">
                 <div class="col-md-6">
@@ -63,6 +62,10 @@
                 <div class="col-md-6">
                   <label class="form-label" for="petition-phone">Phone number</label>
                   <input class="form-control form-control-lg" id="petition-phone" name="phone" type="tel" autocomplete="tel" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="petition-zip">ZIP code</label>
+                  <input class="form-control form-control-lg" id="petition-zip" name="zip" inputmode="numeric" autocomplete="postal-code" placeholder="5-digit ZIP code" required>
                 </div>
                 <div class="col-md-6">
                   <label class="form-label" for="petition-voter-status">Are you a registered voter in New York State?</label>
