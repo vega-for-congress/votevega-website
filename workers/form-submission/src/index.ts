@@ -334,7 +334,7 @@ function validateFormData(data: Partial<FormData>): { valid: boolean; error?: st
     }
 
     if (!data.availability || data.availability.trim().length < 10) {
-      return { valid: false, error: 'Please share your availability from April 14 to May 7' };
+      return { valid: false, error: 'Please share your availability from April 14 to May 7 (minimum 10 characters)' };
     }
   }
 
