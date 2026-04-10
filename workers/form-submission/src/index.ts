@@ -47,6 +47,8 @@ interface NocoDBRow {
   Address?: string;
   Email_Opt_In?: boolean;
   Comment?: string;
+  NY_Registered?: string;
+  Availability?: string;
 }
 
 // Rate limiting cache
@@ -140,12 +142,14 @@ export default {
         commentParts.push(formData.comment.trim());
       }
 
+      // Store registered voter status in its own field
       if (formData.registeredVoter) {
-        commentParts.push(`Registered voter in New York State: ${formData.registeredVoter.trim()}`);
+        submission.NY_Registered = formData.registeredVoter.trim();
       }
 
+      // Store availability in its own field
       if (formData.availability) {
-        commentParts.push(`Availability from April 14 to May 7: ${formData.availability.trim()}`);
+        submission.Availability = formData.availability.trim();
       }
 
       if (commentParts.length > 0) {
