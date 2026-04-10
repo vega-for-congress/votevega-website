@@ -68,6 +68,12 @@
         return emailRegex.test(email);
     }
 
+    function extractZipFromText(text) {
+        if (!text) return '';
+        const match = text.match(/\b(\d{5})(?:-\d{4})?\b/);
+        return match ? match[1] : '';
+    }
+
     // Show form messages
     function showFormMessage(message, type) {
         // Remove existing message
@@ -377,12 +383,25 @@
                 try {
                     const formData = new FormData(form);
                     const turnstileToken = formData.get('cf-turnstile-response') || '';
+                    let zip = formData.get('zip') || '';
+                    const address = formData.get('address') || '';
+
+                    if (!zip && address) {
+                        zip = extractZipFromText(String(address));
+
+                        if (zip) {
+                            const zipInput = form.querySelector('input[name="zip"]');
+                            if (zipInput) {
+                                zipInput.value = zip;
+                            }
+                        }
+                    }
                     
                     const data = {
                         name: formData.get('name'),
                         email: formData.get('email'),
                         phone: formData.get('phone'),
-                        zip: formData.get('zip') || '',
+                        zip: zip,
                         source: formData.get('whichform') || formData.get('event') || 'homepage',
                         'cf-turnstile-response': turnstileToken
                     };
