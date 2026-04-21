@@ -1,0 +1,93 @@
+{{ define "main" }}
+<section class="petition-drive-page saturday-signature-page">
+  <div class="petition-drive-hero">
+    <div class="container">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+          <span class="petition-drive-eyebrow">Saturday Rally</span>
+          <h1 class="petition-drive-title">{{ .Title }}</h1>
+          {{ with .Params.subtitle }}<p class="petition-drive-subtitle">{{ . }}</p>{{ end }}
+          <p class="petition-drive-copy">
+            We are hosting a Saturday signature drive rally on <strong>Saturday, April 25, 2026 at 10:00 AM</strong>.
+            Sign up below so the campaign can confirm your spot and call you with the exact meet-up details, assignment, and what to bring.
+          </p>
+          <div class="petition-drive-actions">
+            <a class="btn btn-primary btn-lg" href="#saturday-signup">Sign Up for Saturday</a>
+            <a class="btn btn-outline-dark btn-lg" href="{{ "/" | relURL }}">Back to Homepage</a>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="petition-drive-card">
+            <img src="{{ "images/group_photo_petitioners.jpg" | relURL }}" alt="Jose Vega campaign petitioners" class="petition-drive-image">
+            <div class="petition-drive-card-body">
+              <h2>Event Details</h2>
+              <ul class="petition-drive-checklist">
+                <li><strong>Date:</strong> Saturday, April 25, 2026</li>
+                <li><strong>Time:</strong> 10:00 AM</li>
+                <li><strong>Purpose:</strong> Rally and signature drive for ballot access</li>
+                <li><strong>Next step:</strong> After you sign up, someone from the campaign will call you for more details.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="petition-drive-form-wrap" id="saturday-signup">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-xl-9">
+          <div class="petition-drive-form-card">
+            <div class="petition-drive-form-intro">
+              <span class="petition-drive-step">Signup Form</span>
+              <h2>Reserve your place for Saturday</h2>
+              <p>
+                Fill this out and we will send you a confirmation email. A campaign organizer will call you to confirm details.
+              </p>
+            </div>
+
+            <form class="volunteer-form event-rsvp-form petition-drive-form">
+              <input type="hidden" name="whichform" value="saturday-signature-drive">
+              <input type="hidden" name="event" value="Saturday Signature Drive">
+
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label" for="saturday-name">Full name</label>
+                  <input class="form-control form-control-lg" id="saturday-name" name="name" autocomplete="name" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="saturday-email">Email</label>
+                  <input class="form-control form-control-lg" id="saturday-email" name="email" type="email" autocomplete="email" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="saturday-phone">Phone number</label>
+                  <input class="form-control form-control-lg" id="saturday-phone" name="phone" type="tel" autocomplete="tel" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="saturday-zip">ZIP code</label>
+                  <input class="form-control form-control-lg" id="saturday-zip" name="zip" inputmode="numeric" autocomplete="postal-code" placeholder="5-digit ZIP code" required>
+                </div>
+                <div class="col-12">
+                  <label class="form-label" for="saturday-comment">Anything we should know before we call?</label>
+                  <textarea class="form-control" id="saturday-comment" name="comment" rows="4" placeholder="Optional: availability, how many people you are bringing, questions, or accessibility needs."></textarea>
+                </div>
+              </div>
+
+              <div class="petition-drive-note">
+                <strong>After you submit:</strong> You will receive a confirmation email, and someone from the campaign will call you to get more details before Saturday.
+              </div>
+
+              <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary btn-lg petition-drive-submit">
+                  <i class="fas fa-clipboard-list me-2"></i>Sign Up for the Rally
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}
