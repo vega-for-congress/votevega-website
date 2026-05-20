@@ -45,7 +45,7 @@
 # Donation redirect to secure platform
 [[redirects]]
   from = "/donate"
-  to = "https://secure.votevega.nyc/donate"
+  to = "https://donation-widget-4bms.onrender.com/donate"
   status = 301
 
 # Form handling for campaign contact forms (if needed)
