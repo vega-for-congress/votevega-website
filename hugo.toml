@@ -32,7 +32,7 @@ enableEmoji = true
   email = "press@votevega.nyc"
   address = "Bronx, NY 10459"
   phone = "(800) 498-8561"
-  donateUrl = "https://donation-widget-4bms.onrender.com/donate"
+  donateUrl = "https://secure.votevega.nyc/donate"
   ogImage = "wp-content/uploads/2024/02/vega-twitter.png"
   
   # Featured Policy (customizable - set which policy to highlight on homepage)

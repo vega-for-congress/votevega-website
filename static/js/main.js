@@ -481,13 +481,13 @@
                                         ${result.message || 'We will be in touch soon with updates about the campaign.'}
                                     </p>
                                     <div class="d-grid gap-3 d-md-flex justify-content-md-center mt-4">
-                                        <a href="https://donation-widget-4bms.onrender.com/donate?amount=2500" class="btn btn-primary btn-lg">
+                                        <a href="https://secure.votevega.nyc/donate?amount=2500" class="btn btn-primary btn-lg">
                                             <i class="fas fa-heart me-2"></i>Donate $25
                                         </a>
-                                        <a href="https://donation-widget-4bms.onrender.com/donate?amount=5000" class="btn btn-primary btn-lg">
+                                        <a href="https://secure.votevega.nyc/donate?amount=5000" class="btn btn-primary btn-lg">
                                             <i class="fas fa-heart me-2"></i>Donate $50
                                         </a>
-                                        <a href="https://donation-widget-4bms.onrender.com/donate" class="btn btn-outline-primary btn-lg">
+                                        <a href="https://secure.votevega.nyc/donate" class="btn btn-outline-primary btn-lg">
                                             <i class="fas fa-donate me-2"></i>Other Amount
                                         </a>
                                     </div>
