@@ -469,6 +469,18 @@
                                     </p>
                                 </div>
                             `;
+                        } else if (data.source === 'phonebanking') {
+                            formContainer.innerHTML = `
+                                <div class="text-center py-5">
+                                    <div class="mb-4">
+                                        <i class="fas fa-check-circle" style="font-size: 4rem; color: #28a745;"></i>
+                                    </div>
+                                    <h3 class="fw-bold mb-3">You are signed up to phonebank.</h3>
+                                    <p class="mb-0" style="font-size: 1.1rem; color: #495057;">
+                                        Thank you for stepping up. Our team will contact you soon with phonebanking shifts, training, and next steps.
+                                    </p>
+                                </div>
+                            `;
                         } else {
                             // Keep donation CTAs for non-event forms.
                             formContainer.innerHTML = `

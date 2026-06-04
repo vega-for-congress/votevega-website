@@ -24,7 +24,7 @@ interface FormData {
   name: string;
   email: string;
   phone: string;
-  zip: string;
+  zip?: string;
   address?: string;
   source: string;
   'cf-turnstile-response': string;
@@ -120,7 +120,7 @@ export default {
         Name: formData.name!,
         Email: formData.email!,
         Phone: formData.phone!,
-        Zip: formData.zip!,
+        Zip: formData.zip?.trim() || '',
         Source: formData.source || 'homepage',
         User_Agent: userAgent.substring(0, 200),
         IP_Address: await hashIP(clientIP),
@@ -319,7 +319,8 @@ function validateFormData(data: Partial<FormData>): { valid: boolean; error?: st
     return { valid: false, error: 'Valid phone number is required' };
   }
 
-  const requiresZip = data.source !== 'independent-ballot-petitioning';
+  const noZipSources = new Set(['independent-ballot-petitioning', 'phonebanking']);
+  const requiresZip = !noZipSources.has(data.source || '');
   if (requiresZip && (!data.zip || data.zip.trim().length < 5)) {
     return { valid: false, error: 'Valid ZIP code is required' };
   }
@@ -336,6 +337,10 @@ function validateFormData(data: Partial<FormData>): { valid: boolean; error?: st
     if (!data.availability || data.availability.trim().length < 10) {
       return { valid: false, error: 'Please share your availability from April 14 to May 7 (minimum 10 characters)' };
     }
+  }
+
+  if (data.source === 'phonebanking' && (!data.availability || data.availability.trim().length < 5)) {
+    return { valid: false, error: 'Please tell us when you are available to phonebank' };
   }
 
   return { valid: true };
