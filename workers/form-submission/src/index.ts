@@ -32,6 +32,9 @@ interface FormData {
   comment?: string;
   registeredVoter?: string;
   availability?: string;
+  school?: string;
+  grade?: string;
+  goals?: string;
 }
 
 interface NocoDBRow {
@@ -140,6 +143,18 @@ export default {
 
       if (formData.comment) {
         commentParts.push(formData.comment.trim());
+      }
+
+      if (formData.school) {
+        commentParts.push(`School: ${formData.school.trim()}`);
+      }
+
+      if (formData.grade) {
+        commentParts.push(`Grade/Year: ${formData.grade.trim()}`);
+      }
+
+      if (formData.goals) {
+        commentParts.push(`What they want out of it: ${formData.goals.trim()}`);
       }
 
       // Store registered voter status in its own field
@@ -343,6 +358,24 @@ function validateFormData(data: Partial<FormData>): { valid: boolean; error?: st
     return { valid: false, error: 'Please tell us when you are available to phonebank' };
   }
 
+  if (data.source === 'summer-internship') {
+    if (!data.school || data.school.trim().length < 2) {
+      return { valid: false, error: 'School is required' };
+    }
+
+    if (!data.grade || data.grade.trim().length < 2) {
+      return { valid: false, error: 'Grade or year is required' };
+    }
+
+    if (!data.availability || data.availability.trim().length < 20) {
+      return { valid: false, error: 'Please confirm your availability for the internship schedule' };
+    }
+
+    if (!data.goals || data.goals.trim().length < 10) {
+      return { valid: false, error: 'Please tell us what you want out of the internship' };
+    }
+  }
+
   return { valid: true };
 }
 
@@ -425,6 +458,9 @@ function parseFormData(body: string): Partial<FormData> {
     comment: params.get('comment') || undefined,
     registeredVoter: params.get('registeredVoter') || undefined,
     availability: params.get('availability') || undefined,
+    school: params.get('school') || undefined,
+    grade: params.get('grade') || undefined,
+    goals: params.get('goals') || undefined,
   };
 }
 

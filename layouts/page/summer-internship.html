@@ -1,0 +1,129 @@
+{{ define "main" }}
+<section class="petition-drive-page internship-page">
+  <div class="petition-drive-hero">
+    <div class="container">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+          <span class="petition-drive-eyebrow">Summer Internship</span>
+          <h1 class="petition-drive-title">{{ .Title }}</h1>
+          {{ with .Params.subtitle }}<p class="petition-drive-subtitle">{{ . }}</p>{{ end }}
+          <p class="petition-drive-copy">
+            We are looking for high school and college students who want real campaign experience on an independent run for Congress. This is not a casual volunteer role. It is a working internship with responsibility, structure, and direct involvement in the campaign.
+          </p>
+          <div class="petition-drive-actions">
+            <a class="btn btn-primary btn-lg" href="#summer-internship-form">Apply Now</a>
+            <a class="btn btn-outline-dark btn-lg" href="/events/">See Campaign Events</a>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="petition-drive-card">
+            <img src="{{ "images/volunteers_3_8_2026.jpg" | relURL }}" alt="Jose Vega campaign volunteers together outdoors" class="petition-drive-image">
+            <div class="petition-drive-card-body">
+              <h2>Internship Snapshot</h2>
+              <ul class="petition-drive-checklist">
+                <li>Commitment of 4 to 5 days a week working on the campaign.</li>
+                <li>Core hours are 10 AM to 5 PM, Monday through Thursday.</li>
+                <li>Saturdays are for special campaign events and field activity.</li>
+                <li>Stipend provided for transportation plus a little extra to cover costs.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="petition-drive-form-wrap">
+    <div class="container">
+      <div class="row g-4 align-items-start">
+        <div class="col-lg-5">
+          <div class="internship-details-card">
+            <h2>What You Get</h2>
+            <div class="internship-detail-block">
+              <h3>Real Campaign Experience</h3>
+              <p>Work inside an independent campaign and see how political organizing, outreach, events, and field operations actually function day to day.</p>
+            </div>
+            <div class="internship-detail-block">
+              <h3>Professional Support</h3>
+              <p>Strong interns can earn letters of recommendation, referrals, and practical experience that helps with future jobs, school applications, and organizing work.</p>
+            </div>
+            <div class="internship-detail-block">
+              <h3>Expectations</h3>
+              <p>We need applicants who can show up consistently, communicate clearly, and treat this as a real summer commitment.</p>
+            </div>
+            <div class="internship-hours">
+              <span class="internship-hours-label">Weekly Schedule</span>
+              <p>10:00 AM to 5:00 PM Monday through Thursday, with Saturdays reserved for campaign events and special actions.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-7" id="summer-internship-form">
+          <div class="petition-drive-form-card">
+            <div class="petition-drive-form-intro">
+              <span class="petition-drive-step">Application Form</span>
+              <h2>Apply for the internship</h2>
+              <p>
+                Tell us who you are, where you are in school, your availability, and what you want to get out of the experience.
+              </p>
+            </div>
+
+            <form class="volunteer-form petition-drive-form">
+              <input type="hidden" name="whichform" value="summer-internship">
+
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label" for="intern-name">Full name</label>
+                  <input class="form-control form-control-lg" id="intern-name" name="name" autocomplete="name" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="intern-email">Email</label>
+                  <input class="form-control form-control-lg" id="intern-email" name="email" type="email" autocomplete="email" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="intern-phone">Phone number</label>
+                  <input class="form-control form-control-lg" id="intern-phone" name="phone" type="tel" autocomplete="tel" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="intern-school">School</label>
+                  <input class="form-control form-control-lg" id="intern-school" name="school" autocomplete="organization" placeholder="High school or college" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="intern-grade">Grade / year</label>
+                  <input class="form-control form-control-lg" id="intern-grade" name="grade" placeholder="Example: 11th grade, sophomore, junior" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="intern-zip">ZIP code</label>
+                  <input class="form-control form-control-lg" id="intern-zip" name="zip" inputmode="numeric" autocomplete="postal-code" placeholder="5-digit ZIP code" required>
+                </div>
+                <div class="col-12">
+                  <label class="form-label" for="intern-availability">Can you commit to the internship schedule?</label>
+                  <textarea class="form-control petition-drive-schedule" id="intern-availability" name="availability" rows="5" placeholder="Tell us if you can work 4 to 5 days a week, Monday through Thursday from 10 AM to 5 PM, and whether you can make Saturdays for special campaign events." required></textarea>
+                </div>
+                <div class="col-12">
+                  <label class="form-label" for="intern-goals">What do you want out of this internship?</label>
+                  <textarea class="form-control" id="intern-goals" name="goals" rows="4" placeholder="Tell us what you want to learn, the experience you are looking for, and what kind of contribution you want to make." required></textarea>
+                </div>
+                <div class="col-12">
+                  <label class="form-label" for="intern-comment">Anything else we should know?</label>
+                  <textarea class="form-control" id="intern-comment" name="comment" rows="4" placeholder="Optional: transportation situation, special skills, language ability, references, or anything else you want the campaign to know."></textarea>
+                </div>
+              </div>
+
+              <div class="petition-drive-note">
+                <strong>Please note:</strong> This internship is intended for students who can make a real weekly commitment. We will use your information only to review your application and contact you about the internship.
+              </div>
+
+              <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary btn-lg petition-drive-submit">
+                  <i class="fas fa-bullhorn me-2"></i>Apply for the Summer Internship
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}

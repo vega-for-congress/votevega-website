@@ -422,6 +422,18 @@
                     if (formData.get('comment')) {
                         data.comment = formData.get('comment');
                     }
+
+                    if (formData.get('school')) {
+                        data.school = formData.get('school');
+                    }
+
+                    if (formData.get('grade')) {
+                        data.grade = formData.get('grade');
+                    }
+
+                    if (formData.get('goals')) {
+                        data.goals = formData.get('goals');
+                    }
                     
                     // Log whether Turnstile was available
                     if (turnstileToken) {
@@ -478,6 +490,18 @@
                                     <h3 class="fw-bold mb-3">You are signed up to phonebank.</h3>
                                     <p class="mb-0" style="font-size: 1.1rem; color: #495057;">
                                         Thank you for stepping up. Our team will contact you soon with phonebanking shifts, training, and next steps.
+                                    </p>
+                                </div>
+                            `;
+                        } else if (data.source === 'summer-internship') {
+                            formContainer.innerHTML = `
+                                <div class="text-center py-5">
+                                    <div class="mb-4">
+                                        <i class="fas fa-check-circle" style="font-size: 4rem; color: #28a745;"></i>
+                                    </div>
+                                    <h3 class="fw-bold mb-3">Your application is in.</h3>
+                                    <p class="mb-0" style="font-size: 1.1rem; color: #495057;">
+                                        Thank you for applying for the summer internship. Our team will review your application and follow up soon.
                                     </p>
                                 </div>
                             `;
