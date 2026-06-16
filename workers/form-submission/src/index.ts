@@ -18,6 +18,7 @@ interface Env {
   NOCODB_API_URL: string;
   ALLOWED_ORIGINS: string;
   RESEND_API_KEY: string;
+  SIGNUP_NOTIFICATION_EMAILS?: string;
 }
 
 interface FormData {
@@ -186,12 +187,33 @@ export default {
           env
         ),
       ]);
+
+      const notificationSent = await sendSignupNotification(
+        {
+          name: formData.name!,
+          email: formData.email!,
+          phone: formData.phone!,
+          zip: formData.zip?.trim() || '',
+          address: formData.address?.trim() || '',
+          source: formData.source || 'homepage',
+          comment: submission.Comment || '',
+          registeredVoter: submission.NY_Registered || '',
+          availability: submission.Availability || '',
+          emailOptIn: submission.Email_Opt_In === true,
+          turnstileVerified,
+          submittedAt: submission.Submitted_At,
+        },
+        env
+      );
       
       if (!audienceAdded) {
         console.error('Failed to add contact to Resend, but continuing');
       }
       if (!emailSent) {
         console.error('Failed to send confirmation email, but continuing');
+      }
+      if (!notificationSent) {
+        console.error('Failed to send internal signup notification, but continuing');
       }
 
       // Record successful submission for rate limiting
@@ -652,6 +674,107 @@ async function sendConfirmationEmail(
     return true;
   } catch (error) {
     console.error('Email sending error:', error);
+    return false;
+  }
+}
+
+function parseNotificationRecipients(env: Env): string[] {
+  return String(env.SIGNUP_NOTIFICATION_EMAILS || '')
+    .split(',')
+    .map((value) => value.trim())
+    .filter(Boolean);
+}
+
+function escapeHtml(value: string): string {
+  return value
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;');
+}
+
+async function sendSignupNotification(
+  submission: {
+    name: string;
+    email: string;
+    phone: string;
+    zip: string;
+    address: string;
+    source: string;
+    comment: string;
+    registeredVoter: string;
+    availability: string;
+    emailOptIn: boolean;
+    turnstileVerified: boolean;
+    submittedAt: string;
+  },
+  env: Env
+): Promise<boolean> {
+  const recipients = parseNotificationRecipients(env);
+  if (recipients.length === 0) {
+    return true;
+  }
+
+  try {
+    const subject = `New VoteVega signup: ${submission.name} (${submission.source})`;
+    const rows = [
+      ['Name', submission.name],
+      ['Email', submission.email],
+      ['Phone', submission.phone],
+      ['ZIP', submission.zip || 'Not provided'],
+      ['Address', submission.address || 'Not provided'],
+      ['Source', submission.source],
+      ['Email opt-in', submission.emailOptIn ? 'Yes' : 'No'],
+      ['Turnstile verified', submission.turnstileVerified ? 'Yes' : 'No'],
+      ['Registered NY voter', submission.registeredVoter || 'Not provided'],
+      ['Availability', submission.availability || 'Not provided'],
+      ['Comment', submission.comment || 'Not provided'],
+      ['Submitted at', submission.submittedAt],
+    ];
+
+    const html = `
+      <h2>New volunteer signup received</h2>
+      <p>A new signup was submitted through votevega.nyc.</p>
+      <table cellpadding="8" cellspacing="0" border="1" style="border-collapse: collapse; border-color: #d1d5db;">
+        <tbody>
+          ${rows
+            .map(
+              ([label, value]) =>
+                `<tr><th align="left" style="background:#f8fafc;">${escapeHtml(label)}</th><td>${escapeHtml(value)}</td></tr>`
+            )
+            .join('')}
+        </tbody>
+      </table>
+    `;
+
+    const text = rows.map(([label, value]) => `${label}: ${value}`).join('\n');
+
+    const response = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${env.RESEND_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: 'Vega for Congress <info@votevega.nyc>',
+        to: recipients,
+        reply_to: submission.email,
+        subject,
+        html,
+        text,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('Signup notification email error:', response.status, errorText);
+      return false;
+    }
+
+    return true;
+  } catch (error) {
+    console.error('Signup notification send error:', error);
     return false;
   }
 }
