@@ -19,6 +19,8 @@ interface Env {
   ALLOWED_ORIGINS: string;
   RESEND_API_KEY: string;
   SIGNUP_NOTIFICATION_EMAILS?: string;
+  VEGAVAN_API_URL: string;
+  VEGAVAN_API_KEY: string;
 }
 
 interface FormData {
@@ -55,11 +57,74 @@ interface NocoDBRow {
   Availability?: string;
 }
 
+async function submitToVegavan(
+  name: string,
+  email: string,
+  phone: string,
+  zip: string,
+  source: string,
+  turnstileVerified: boolean,
+  comment: string | undefined,
+  emailOptIn: boolean | undefined,
+  env: Env
+): Promise<boolean> {
+  try {
+    const nameParts = name.trim().split(/\s+/);
+    const firstName = nameParts[0];
+    const lastName = nameParts.slice(1).join(' ') || '';
+
+    const payload = {
+      contacts: [{
+        email,
+        phone,
+        first_name: firstName,
+        last_name: lastName,
+        source,
+        city: '',
+        state: '',
+        volunteer_interest: true,
+        comment: comment || '',
+        email_opt_in: emailOptIn === true,
+        turnstile_verified: turnstileVerified,
+        form_submitted_at: new Date().toISOString()
+      }]
+    };
+
+    console.log(`Submitting to VegaVan for ${email} (source: ${source})`);
+
+    const response = await fetch(`${env.VEGAVAN_API_URL}/api/contacts/ingest`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${env.VEGAVAN_API_KEY}`
+      },
+      body: JSON.stringify(payload)
+    });
+
+    console.log(`VegaVan API response for ${email}: ${response.status} ${response.statusText}`);
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error(`Vegavan API error ${response.status}:`, errorText);
+      return false;
+    }
+
+    // Optional: log success body only in dev/staging if you want
+    // const successBody = await response.text();
+    // console.log('VegaVan success:', successBody);
+
+    return true;
+  } catch (error) {
+    console.error('VegaVan submission error:', error);
+    return false;
+  }
+}
+
 // Rate limiting cache
 const submissionCache = new Map<string, number[]>();
 
 export default {
-  async fetch(request: Request, env: Env): Promise<Response> {
+  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     // Handle CORS preflight
     if (request.method === 'OPTIONS') {
       return handleCORS(request, env);
@@ -106,11 +171,11 @@ export default {
       // Verify Turnstile token (optional - allow submissions without it)
       const turnstileToken = formData['cf-turnstile-response'];
       let turnstileVerified = false;
-      
+
       if (turnstileToken) {
         const originHost = origin ? new URL(origin).hostname : null;
         turnstileVerified = await verifyTurnstile(turnstileToken, clientIP, env, originHost);
-        
+
         if (!turnstileVerified) {
           console.warn('Turnstile verification failed but allowing submission');
         }
@@ -131,15 +196,15 @@ export default {
         Turnstile_Verified: turnstileVerified,
         Submitted_At: new Date().toISOString(),
       };
-      
+
       // Add address if provided (for petition pledges)
       if (formData.address) {
         submission.Address = formData.address;
       }
-      
+
       // Add email opt-in status (only true if explicitly opted in)
       submission.Email_Opt_In = formData.emailOptIn === true;
-      
+
       const commentParts: string[] = [];
 
       if (formData.comment) {
@@ -218,6 +283,23 @@ export default {
 
       // Record successful submission for rate limiting
       recordSubmission(clientIP);
+
+      // Submit to VegaVan in background (proper way)
+      ctx.waitUntil(
+        submitToVegavan(
+          formData.name!,
+          formData.email!,
+          formData.phone!,
+          formData.zip!,
+          formData.source || 'homepage',
+          turnstileVerified,
+          formData.comment,
+          formData.emailOptIn,
+          env
+        ).catch(error => {
+          console.error('VegaVan submission failed:', error);
+        })
+      );
 
       return jsonResponse(
         {
@@ -492,10 +574,10 @@ function parseFormData(body: string): Partial<FormData> {
 function isAllowedOrigin(origin: string | null, env: Env): boolean {
   if (!origin) return false;
   const allowed = env.ALLOWED_ORIGINS.split(',').map(o => o.trim());
-  
+
   // Check exact matches first
   if (allowed.includes(origin)) return true;
-  
+
   // Check wildcard matches
   return allowed.some(pattern => {
     if (!pattern.includes('*')) return false;
@@ -578,18 +660,18 @@ async function sendConfirmationEmail(
 ): Promise<boolean> {
   try {
     const firstName = name.split(' ')[0];
-    
+
     // Map sources to Resend template IDs
     const templateIds: Record<string, string> = {
       'homepage': '529625f0-8372-409f-b100-889555d4d8b4',
       'petition-pledge': '26b241dc-8000-403f-a1f8-9afb840d265f',
       'stripe': '5346d0a4-9407-462f-9b61-c69c5f2e2087',
     };
-    
+
     const templateId = templateIds[source];
-    
+
     let payload: Record<string, any>;
-    
+
     if (templateId) {
       // Use Resend template
       payload = {
@@ -617,7 +699,7 @@ async function sendConfirmationEmail(
         <p>Visit our website: <a href="https://votevega.nyc">votevega.nyc</a></p>
         <p style="color: #666; font-size: 12px; margin-top: 30px;">Paid for by Vega for Congress<br>Bronx, NY 10459</p>
       `;
-      
+
       // Event-specific hardcoded templates (legacy — new events should use static templates)
       if (source === 'nov-2-town-hall') {
         subject = 'Confirming your RSVP for November 2nd Town Hall';
@@ -647,7 +729,7 @@ async function sendConfirmationEmail(
           html = staticTemplate.html;
         }
       }
-      
+
       payload = {
         from: 'Vega for Congress <info@votevega.nyc>',
         to: [email],
@@ -655,7 +737,7 @@ async function sendConfirmationEmail(
         html: html,
       };
     }
-    
+
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
@@ -664,13 +746,13 @@ async function sendConfirmationEmail(
       },
       body: JSON.stringify(payload),
     });
-    
+
     if (!response.ok) {
       const errorText = await response.text();
       console.error('Resend API error:', response.status, errorText);
       return false;
     }
-    
+
     return true;
   } catch (error) {
     console.error('Email sending error:', error);
