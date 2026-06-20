@@ -793,6 +793,11 @@ async function sendSignupNotification(
   },
   env: Env
 ): Promise<boolean> {
+  if (submission.source === 'stripe') {
+    // Don't send internal notifications for stripe
+    return true;
+  }
+
   const recipients = parseNotificationRecipients(env);
   if (recipients.length === 0) {
     return true;

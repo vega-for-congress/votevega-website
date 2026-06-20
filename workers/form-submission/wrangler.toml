@@ -15,6 +15,7 @@ NOCODB_BASE_ID = "p4fly43c6kif8gw"
 NOCODB_API_URL = "https://app.nocodb.com"
 ALLOWED_ORIGINS = "https://votevega.nyc,https://www.votevega.nyc,https://secure.votevega.nyc,https://donation-widget-dev.up.railway.app,http://localhost:8080,http://localhost:3000,https://*--votevega.netlify.app"
 VEGAVAN_API_URL = "https://van.votevega.nyc"
+SIGNUP_NOTIFICATION_EMAILS = "jose@votevega.nyc,adrian@votevega.nyc"
 
 [observability]
 enabled = true
