@@ -4,6 +4,9 @@
 (function() {
     'use strict';
 
+    const CANVASS_STORAGE_KEY = 'votevega_canvass_signup';
+    const CANVASS_INTEREST_VALUE = 'Canvassing / knocking doors';
+
     // DOM Content Loaded Event
     document.addEventListener('DOMContentLoaded', function() {
         initializeWebsite();
@@ -14,9 +17,120 @@
         initSmoothScrolling();
         initEmailForm();
         initVolunteerForms();
+        initVolunteerCalendar();
         initNavbarBehavior();
         initAnimations();
         initEmailParameterHandling();
+    }
+
+    function initVolunteerCalendar() {
+        const toggleButton = document.getElementById('volunteer-calendar-toggle');
+        const hiddenMonths = document.querySelectorAll('.volunteer-calendar-month-hidden');
+        const shiftButtons = document.querySelectorAll('.volunteer-calendar-day-button');
+        const hiddenInputsContainer = document.getElementById('volunteer-selected-shifts-inputs');
+        const shiftCard = document.getElementById('volunteer-selected-shift-card');
+        const shiftLabel = document.getElementById('volunteer-selected-shift-label');
+        const shiftCopy = document.getElementById('volunteer-selected-shift-copy');
+        const shiftList = document.getElementById('volunteer-selected-shift-list');
+        const clearButton = document.getElementById('volunteer-selected-shift-clear');
+        const volunteerForm = hiddenInputsContainer ? hiddenInputsContainer.closest('form') : null;
+        const canvassName = document.getElementById('canvass-name');
+        const canvassEmail = document.getElementById('canvass-email');
+        const canvassPhone = document.getElementById('canvass-phone');
+        const selectedShifts = new Set();
+
+        if (toggleButton && hiddenMonths.length > 0) {
+            toggleButton.addEventListener('click', function() {
+                const expanded = toggleButton.getAttribute('aria-expanded') === 'true';
+                hiddenMonths.forEach(function(month) {
+                    month.hidden = expanded;
+                });
+                toggleButton.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+                toggleButton.textContent = expanded ? 'Show More Dates' : 'Show Fewer Dates';
+            });
+        }
+
+        if (canvassName && canvassEmail && canvassPhone) {
+            try {
+                const stored = window.localStorage.getItem(CANVASS_STORAGE_KEY);
+                if (stored) {
+                    const parsed = JSON.parse(stored);
+                    if (parsed.name) canvassName.value = parsed.name;
+                    if (parsed.email) canvassEmail.value = parsed.email;
+                    if (parsed.phone) canvassPhone.value = parsed.phone;
+                }
+            } catch (error) {
+                console.warn('Unable to read stored canvass signup data', error);
+            }
+        }
+
+        if (!hiddenInputsContainer || !shiftCard || !shiftLabel || !shiftCopy || !shiftList || !volunteerForm) {
+            return;
+        }
+
+        function syncSelectedShiftInputs() {
+            hiddenInputsContainer.innerHTML = '';
+            Array.from(selectedShifts).forEach(function(shift) {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'selectedShifts';
+                input.value = shift;
+                hiddenInputsContainer.appendChild(input);
+            });
+        }
+
+        function renderSelectedShifts() {
+            syncSelectedShiftInputs();
+
+            if (selectedShifts.size === 0) {
+                shiftCard.hidden = true;
+                shiftLabel.textContent = 'No dates selected yet';
+                shiftCopy.textContent = 'Pick one or more canvass weekends below, then confirm your contact information.';
+                shiftList.innerHTML = '';
+                return;
+            }
+
+            shiftCard.hidden = false;
+            shiftLabel.textContent = selectedShifts.size === 1
+                ? '1 canvass date selected'
+                : selectedShifts.size + ' canvass dates selected';
+            shiftCopy.textContent = 'You are signing up for these canvass weekends. Submit the form and an organizer will follow up with the details.';
+            shiftList.innerHTML = Array.from(selectedShifts).map(function(shift) {
+                return '<li>' + shift + '</li>';
+            }).join('');
+        }
+
+        function clearSelectedShift() {
+            selectedShifts.clear();
+            shiftButtons.forEach(function(button) {
+                button.classList.remove('is-selected');
+            });
+            renderSelectedShifts();
+        }
+
+        shiftButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                const shift = button.getAttribute('data-shift');
+                if (!shift) return;
+
+                if (selectedShifts.has(shift)) {
+                    selectedShifts.delete(shift);
+                    button.classList.remove('is-selected');
+                } else {
+                    selectedShifts.add(shift);
+                    button.classList.add('is-selected');
+                }
+
+                renderSelectedShifts();
+                volunteerForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        if (clearButton) {
+            clearButton.addEventListener('click', clearSelectedShift);
+        }
+
+        renderSelectedShifts();
     }
 
     // Smooth scrolling for anchor links
@@ -423,6 +537,13 @@
                         data.comment = formData.get('comment');
                     }
 
+                    const selectedShiftInputs = form.querySelectorAll('input[name="selectedShifts"]');
+                    if (selectedShiftInputs.length > 0) {
+                        data.selectedShifts = Array.from(selectedShiftInputs).map(function(input) {
+                            return input.value;
+                        }).filter(Boolean);
+                    }
+
                     if (formData.get('school')) {
                         data.school = formData.get('school');
                     }
@@ -434,6 +555,22 @@
                     if (formData.get('goals')) {
                         data.goals = formData.get('goals');
                     }
+
+                    if (formData.get('emailOptIn')) {
+                        data.emailOptIn = formData.get('emailOptIn') === 'true';
+                    }
+
+                    const selectedInterests = Array.from(
+                        form.querySelectorAll('input[name="interests"]:checked')
+                    ).map(function(input) {
+                        return input.value;
+                    });
+
+                    if (selectedInterests.length > 0) {
+                        data.interests = selectedInterests;
+                    }
+
+                    const wantsCanvass = selectedInterests.includes(CANVASS_INTEREST_VALUE);
                     
                     // Log whether Turnstile was available
                     if (turnstileToken) {
@@ -490,6 +627,61 @@
                                     <h3 class="fw-bold mb-3">You are signed up to phonebank.</h3>
                                     <p class="mb-0" style="font-size: 1.1rem; color: #495057;">
                                         Thank you for stepping up. Our team will contact you soon with phonebanking shifts, training, and next steps.
+                                    </p>
+                                </div>
+                            `;
+                        } else if (data.source === 'volunteer-signup' && wantsCanvass) {
+                            try {
+                                window.localStorage.setItem(CANVASS_STORAGE_KEY, JSON.stringify({
+                                    name: String(data.name || ''),
+                                    email: String(data.email || ''),
+                                    phone: String(data.phone || '')
+                                }));
+                            } catch (error) {
+                                console.warn('Unable to save canvass handoff data', error);
+                            }
+
+                            formContainer.innerHTML = `
+                                <div class="text-center py-5">
+                                    <div class="mb-4">
+                                        <i class="fas fa-check-circle" style="font-size: 4rem; color: #28a745;"></i>
+                                    </div>
+                                    <h3 class="fw-bold mb-3">Volunteer signup received.</h3>
+                                    <p class="mb-4" style="font-size: 1.1rem; color: #495057;">
+                                        Your next step is to choose the canvass weekends you can make.
+                                    </p>
+                                    <a href="/volunteer-canvass/" class="btn btn-primary btn-lg">
+                                        <i class="fas fa-calendar-check me-2"></i>Choose Canvass Dates
+                                    </a>
+                                </div>
+                            `;
+                        } else if (data.source === 'volunteer-signup') {
+                            formContainer.innerHTML = `
+                                <div class="text-center py-5">
+                                    <div class="mb-4">
+                                        <i class="fas fa-check-circle" style="font-size: 4rem; color: #28a745;"></i>
+                                    </div>
+                                    <h3 class="fw-bold mb-3">You are on the volunteer team.</h3>
+                                    <p class="mb-0" style="font-size: 1.1rem; color: #495057;">
+                                        Thank you for signing up. A campaign organizer will follow up soon about the ways you want to help Jose Vega win.
+                                    </p>
+                                </div>
+                            `;
+                        } else if (data.source === 'volunteer-canvass') {
+                            try {
+                                window.localStorage.removeItem(CANVASS_STORAGE_KEY);
+                            } catch (error) {
+                                console.warn('Unable to clear canvass handoff data', error);
+                            }
+
+                            formContainer.innerHTML = `
+                                <div class="text-center py-5">
+                                    <div class="mb-4">
+                                        <i class="fas fa-check-circle" style="font-size: 4rem; color: #28a745;"></i>
+                                    </div>
+                                    <h3 class="fw-bold mb-3">Your canvass dates are in.</h3>
+                                    <p class="mb-0" style="font-size: 1.1rem; color: #495057;">
+                                        Thank you. A campaign organizer will follow up with shift details for the weekends you selected.
                                     </p>
                                 </div>
                             `;

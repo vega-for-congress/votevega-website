@@ -2219,6 +2219,307 @@ blockquote p:last-child {
     padding: 0.9rem 1.4rem;
 }
 
+.volunteer-signup-page {
+    background:
+        radial-gradient(circle at top left, rgba(195, 57, 43, 0.12), transparent 35%),
+        radial-gradient(circle at 88% 10%, rgba(243, 179, 64, 0.24), transparent 28%),
+        linear-gradient(180deg, #f4efe7 0%, #fff8f1 40%, #f5f5f2 100%);
+}
+
+.volunteer-signup-card {
+    transform: rotate(1deg);
+}
+
+.volunteer-signup-form-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.volunteer-signup-form-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 100%;
+    height: 0.45rem;
+    background: linear-gradient(90deg, #c3392b 0%, #f3b340 100%);
+}
+
+.volunteer-interest-block {
+    margin-top: 1.75rem;
+    padding: 1.4rem;
+    border: 1px solid rgba(17, 17, 17, 0.08);
+    border-radius: 1.25rem;
+    background: rgba(246, 240, 232, 0.7);
+}
+
+.volunteer-interest-block legend {
+    float: none;
+    width: auto;
+}
+
+.volunteer-interest-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.9rem;
+    height: 100%;
+    padding: 1rem 1.05rem;
+    border: 1px solid rgba(17, 17, 17, 0.08);
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.95);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.volunteer-interest-option:hover {
+    transform: translateY(-2px);
+    border-color: rgba(195, 57, 43, 0.35);
+    box-shadow: 0 14px 22px rgba(71, 46, 30, 0.08);
+}
+
+.volunteer-interest-option input {
+    margin-top: 0.2rem;
+    flex: 0 0 auto;
+}
+
+.volunteer-interest-option span {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.volunteer-interest-option strong {
+    font-family: var(--font-headings);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: #161616;
+}
+
+.volunteer-interest-option small {
+    color: #5b5247;
+    font-size: 0.92rem;
+    line-height: 1.45;
+}
+
+.volunteer-signup-availability {
+    min-height: 10rem;
+}
+
+.volunteer-signup-followup {
+    margin-top: 2rem;
+}
+
+.volunteer-selected-shift {
+    margin-bottom: 1.5rem;
+    padding: 1.15rem 1.2rem;
+    border: 1px solid rgba(195, 57, 43, 0.2);
+    border-radius: 1.2rem;
+    background: linear-gradient(135deg, rgba(243, 179, 64, 0.16), rgba(255, 255, 255, 0.96));
+}
+
+.volunteer-selected-shift-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.volunteer-selected-shift strong {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    color: #171717;
+}
+
+.volunteer-selected-shift p {
+    margin: 0;
+    color: #4a3426;
+}
+
+.volunteer-selected-shift-list {
+    margin: 1rem 0 0;
+    padding-left: 1.25rem;
+    color: #4a3426;
+}
+
+.volunteer-selected-shift-list li + li {
+    margin-top: 0.35rem;
+}
+
+.volunteer-selected-shift-clear {
+    border: 0;
+    background: transparent;
+    color: #8f2d24;
+    font-family: var(--font-headings);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.volunteer-calendar-section {
+    margin-top: 2.5rem;
+    padding: 1.75rem;
+    border: 1px solid rgba(17, 17, 17, 0.08);
+    border-radius: 1.5rem;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 16px 28px rgba(71, 46, 30, 0.08);
+}
+
+.volunteer-calendar-section-tight {
+    margin-top: 1.75rem;
+}
+
+.volunteer-calendar-header {
+    margin-bottom: 1.5rem;
+}
+
+.volunteer-calendar-header h2 {
+    margin-bottom: 0.6rem;
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    text-transform: uppercase;
+    color: #171717;
+}
+
+.volunteer-calendar-header p {
+    max-width: 52rem;
+    margin-bottom: 0;
+    color: #3f3a34;
+}
+
+.volunteer-calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.2rem;
+}
+
+.volunteer-calendar-month {
+    border: 1px solid rgba(17, 17, 17, 0.08);
+    border-radius: 1.2rem;
+    background: linear-gradient(180deg, rgba(246, 240, 232, 0.72), rgba(255, 255, 255, 0.96));
+    overflow: hidden;
+}
+
+.volunteer-calendar-month-head {
+    padding: 1rem 1.1rem;
+    background: rgba(17, 17, 17, 0.96);
+    color: #f6f0e8;
+}
+
+.volunteer-calendar-month-head h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+}
+
+.volunteer-calendar-month-head p {
+    margin: 0.25rem 0 0;
+    color: #f3b340;
+    font-size: 0.92rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.volunteer-calendar-days {
+    display: grid;
+    gap: 0.75rem;
+    padding: 1rem;
+}
+
+.volunteer-calendar-day {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.9rem 1rem;
+    border-radius: 0.95rem;
+    border: 1px solid rgba(17, 17, 17, 0.08);
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.volunteer-calendar-day-button {
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.volunteer-calendar-day-button:hover,
+.volunteer-calendar-day-button:focus {
+    transform: translateY(-2px);
+    border-color: rgba(195, 57, 43, 0.35);
+    box-shadow: 0 12px 20px rgba(71, 46, 30, 0.08);
+    outline: none;
+}
+
+.volunteer-calendar-day-button.is-selected {
+    border-color: rgba(195, 57, 43, 0.45);
+    box-shadow: 0 0 0 0.2rem rgba(195, 57, 43, 0.12);
+    background: linear-gradient(90deg, rgba(243, 179, 64, 0.22), rgba(255, 255, 255, 0.98));
+}
+
+.volunteer-calendar-day-active {
+    border-color: rgba(195, 57, 43, 0.15);
+    box-shadow: inset 0 0 0 1px rgba(195, 57, 43, 0.08);
+}
+
+.volunteer-calendar-day-callout {
+    border-color: rgba(17, 17, 17, 0.14);
+    background: linear-gradient(90deg, rgba(243, 179, 64, 0.22), rgba(255, 255, 255, 0.96));
+}
+
+.volunteer-calendar-date {
+    font-family: var(--font-headings);
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: #171717;
+}
+
+.volunteer-calendar-day strong {
+    color: #8f2d24;
+    text-transform: uppercase;
+    font-size: 0.92rem;
+    letter-spacing: 0.04em;
+}
+
+.volunteer-calendar-actions {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+.volunteer-signup-panel {
+    height: 100%;
+    padding: 1.5rem;
+    border: 1px solid rgba(17, 17, 17, 0.08);
+    border-radius: 1.25rem;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 16px 28px rgba(71, 46, 30, 0.08);
+}
+
+.volunteer-signup-panel-label {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    color: #8f2d24;
+    font-family: var(--font-headings);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.volunteer-signup-panel h3 {
+    margin-bottom: 0.75rem;
+    font-size: 1.45rem;
+    text-transform: uppercase;
+    color: #171717;
+}
+
+.volunteer-signup-panel p {
+    margin-bottom: 1rem;
+    color: #3f3a34;
+}
+
 .internship-page .petition-drive-copy {
     max-width: 45rem;
 }
@@ -2293,6 +2594,14 @@ blockquote p:last-child {
 
     .internship-details-card {
         padding: 1.5rem;
+    }
+
+    .volunteer-interest-block {
+        padding: 1.1rem;
+    }
+
+    .volunteer-calendar-grid {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -2420,6 +2729,46 @@ blockquote p:last-child {
         min-width: 0;
         padding: 0.95rem 1rem;
         font-size: 1rem;
+    }
+
+    .volunteer-signup-card {
+        transform: none;
+    }
+
+    .volunteer-interest-option {
+        padding: 0.9rem;
+    }
+
+    .volunteer-signup-panel {
+        padding: 1.2rem;
+    }
+
+    .volunteer-calendar-section {
+        margin-top: 1.75rem;
+        padding: 1.15rem;
+        border-radius: 1.1rem;
+    }
+
+    .volunteer-selected-shift-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .volunteer-calendar-month {
+        border-radius: 1rem;
+    }
+
+    .volunteer-calendar-month-head,
+    .volunteer-calendar-days {
+        padding-left: 0.9rem;
+        padding-right: 0.9rem;
+    }
+
+    .volunteer-calendar-day {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.35rem;
+        padding: 0.8rem 0.9rem;
     }
 
     .internship-details-card {

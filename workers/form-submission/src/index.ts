@@ -1,6 +1,6 @@
 /**
  * Cloudflare Worker for VoteVega.nyc Form Submissions
- * Handles volunteer signups with Turnstile bot protection and NocoDB storage.
+ * Handles volunteer signups with Turnstile bot protection and VegaVan sync.
  *
  * EMAIL TEMPLATES: Front-end developers can create new signup form -> custom email
  * flows without modifying this worker. Place an HTML file in static/emails/{source}.html
@@ -12,10 +12,6 @@
 interface Env {
   TURNSTILE_SECRET_KEY: string;
   TURNSTILE_TEST_SECRET_KEY?: string;
-  NOCODB_API_TOKEN: string;
-  NOCODB_TABLE_ID: string;
-  NOCODB_BASE_ID: string;
-  NOCODB_API_URL: string;
   ALLOWED_ORIGINS: string;
   RESEND_API_KEY: string;
   SIGNUP_NOTIFICATION_EMAILS?: string;
@@ -35,83 +31,211 @@ interface FormData {
   comment?: string;
   registeredVoter?: string;
   availability?: string;
+  interests?: string[];
+  selectedShift?: string;
+  selectedShifts?: string[];
   school?: string;
   grade?: string;
   goals?: string;
 }
 
-interface NocoDBRow {
-  Name: string;
-  Email: string;
-  Phone: string;
-  Zip: string;
-  Source: string;
-  User_Agent: string;
-  IP_Address: string;
-  Turnstile_Verified: boolean;
-  Submitted_At: string;
+interface SubmissionRecord {
+  name: string;
+  email: string;
+  phone: string;
+  zip: string;
+  source: string;
+  userAgent: string;
+  ipHash: string;
+  turnstileVerified: boolean;
+  submittedAt: string;
   Address?: string;
-  Email_Opt_In?: boolean;
-  Comment?: string;
-  NY_Registered?: string;
-  Availability?: string;
+  emailOptIn: boolean;
+  comment: string;
+  registeredVoter: string;
+  availability: string;
+  interests: string[];
+  selectedShift: string;
+  selectedShifts: string[];
+  school: string;
+  grade: string;
+  goals: string;
 }
 
-async function submitToVegavan(
-  name: string,
-  email: string,
-  phone: string,
-  zip: string,
-  source: string,
+function buildSubmissionComment(formData: Partial<FormData>): string {
+  const commentParts: string[] = [];
+
+  if (formData.comment) {
+    commentParts.push(formData.comment.trim());
+  }
+
+  if (formData.school) {
+    commentParts.push(`School: ${formData.school.trim()}`);
+  }
+
+  if (formData.grade) {
+    commentParts.push(`Grade/Year: ${formData.grade.trim()}`);
+  }
+
+  if (formData.goals) {
+    commentParts.push(`What they want out of it: ${formData.goals.trim()}`);
+  }
+
+  if (formData.interests && formData.interests.length > 0) {
+    commentParts.push(`Volunteer interests: ${formData.interests.map((value) => value.trim()).filter(Boolean).join(', ')}`);
+  }
+
+  if (formData.selectedShift) {
+    commentParts.push(`Selected canvass shift: ${formData.selectedShift.trim()}`);
+  }
+
+  if (formData.selectedShifts && formData.selectedShifts.length > 0) {
+    commentParts.push(`Selected canvass dates: ${formData.selectedShifts.map((value) => value.trim()).filter(Boolean).join(', ')}`);
+  }
+
+  return commentParts.join('\n\n').substring(0, 2000);
+}
+
+function buildSubmissionRecord(
+  formData: Partial<FormData>,
+  userAgent: string,
+  ipHash: string,
   turnstileVerified: boolean,
-  comment: string | undefined,
-  emailOptIn: boolean | undefined,
-  env: Env
-): Promise<boolean> {
+  submittedAt: string
+): SubmissionRecord {
+  return {
+    name: formData.name!,
+    email: formData.email!,
+    phone: formData.phone!,
+    zip: formData.zip?.trim() || '',
+    source: formData.source || 'homepage',
+    userAgent: userAgent.substring(0, 200),
+    ipHash,
+    turnstileVerified,
+    submittedAt,
+    Address: formData.address?.trim() || '',
+    emailOptIn: formData.emailOptIn === true,
+    comment: buildSubmissionComment(formData),
+    registeredVoter: formData.registeredVoter?.trim() || '',
+    availability: formData.availability?.trim() || '',
+    interests: (formData.interests || []).map((value) => value.trim()).filter(Boolean),
+    selectedShift: formData.selectedShift?.trim() || '',
+    selectedShifts: (formData.selectedShifts || []).map((value) => value.trim()).filter(Boolean),
+    school: formData.school?.trim() || '',
+    grade: formData.grade?.trim() || '',
+    goals: formData.goals?.trim() || '',
+  };
+}
+
+async function postToVegavan(path: string, payload: unknown, env: Env): Promise<Response> {
+  return fetch(`${env.VEGAVAN_API_URL}${path}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${env.VEGAVAN_API_KEY}`
+    },
+    body: JSON.stringify(payload)
+  });
+}
+
+function shouldFallbackToIngest(status: number): boolean {
+  if ([401, 403].includes(status)) {
+    return false;
+  }
+
+  return [400, 404, 405, 409, 422, 501].includes(status);
+}
+
+async function submitToVegavan(submission: SubmissionRecord, env: Env): Promise<boolean> {
+  const nameParts = submission.name.trim().split(/\s+/);
+  const firstName = nameParts[0];
+  const lastName = nameParts.slice(1).join(' ') || '';
+
+  const upsertPayload = {
+    contact: {
+      email: submission.email,
+      phone: submission.phone,
+      first_name: firstName,
+      last_name: lastName,
+      zip: submission.zip || undefined,
+      address: submission.Address || undefined,
+    },
+    volunteer: {
+      source: submission.source,
+      volunteer_interest: true,
+      volunteer_interests: submission.interests,
+      canvass_step_completed: submission.source === 'volunteer-canvass',
+      selected_canvass_dates: submission.selectedShifts,
+      selected_canvass_shift: submission.selectedShift || undefined,
+      registered_voter: submission.registeredVoter || undefined,
+      availability: submission.availability || undefined,
+      school: submission.school || undefined,
+      grade: submission.grade || undefined,
+      goals: submission.goals || undefined,
+      email_opt_in: submission.emailOptIn,
+      turnstile_verified: submission.turnstileVerified,
+      submitted_at: submission.submittedAt,
+      user_agent: submission.userAgent,
+      ip_hash: submission.ipHash,
+    },
+    append_note: submission.comment || undefined,
+  };
+
+  const fallbackPayload = {
+    contacts: [{
+      email: submission.email,
+      phone: submission.phone,
+      first_name: firstName,
+      last_name: lastName,
+      zip: submission.zip || undefined,
+      address: submission.Address || undefined,
+      source: submission.source,
+      city: '',
+      state: '',
+      volunteer_interest: true,
+      volunteer_interests: submission.interests,
+      canvass_step_completed: submission.source === 'volunteer-canvass',
+      selected_canvass_dates: submission.selectedShifts,
+      selected_canvass_shift: submission.selectedShift || undefined,
+      registered_voter: submission.registeredVoter || undefined,
+      availability: submission.availability || undefined,
+      school: submission.school || undefined,
+      grade: submission.grade || undefined,
+      goals: submission.goals || undefined,
+      comment: submission.comment || '',
+      email_opt_in: submission.emailOptIn,
+      turnstile_verified: submission.turnstileVerified,
+      form_submitted_at: submission.submittedAt,
+      user_agent: submission.userAgent,
+      ip_hash: submission.ipHash,
+    }]
+  };
+
   try {
-    const nameParts = name.trim().split(/\s+/);
-    const firstName = nameParts[0];
-    const lastName = nameParts.slice(1).join(' ') || '';
+    console.log(`Submitting to VegaVan for ${submission.email} (source: ${submission.source})`);
 
-    const payload = {
-      contacts: [{
-        email,
-        phone,
-        first_name: firstName,
-        last_name: lastName,
-        source,
-        city: '',
-        state: '',
-        volunteer_interest: true,
-        comment: comment || '',
-        email_opt_in: emailOptIn === true,
-        turnstile_verified: turnstileVerified,
-        form_submitted_at: new Date().toISOString()
-      }]
-    };
+    const upsertResponse = await postToVegavan('/api/contacts/upsert', upsertPayload, env);
+    console.log(`VegaVan upsert response for ${submission.email}: ${upsertResponse.status} ${upsertResponse.statusText}`);
 
-    console.log(`Submitting to VegaVan for ${email} (source: ${source})`);
+    if (upsertResponse.ok) {
+      return true;
+    }
 
-    const response = await fetch(`${env.VEGAVAN_API_URL}/api/contacts/ingest`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${env.VEGAVAN_API_KEY}`
-      },
-      body: JSON.stringify(payload)
-    });
+    const upsertErrorText = await upsertResponse.text();
+    console.error(`VegaVan upsert error ${upsertResponse.status}:`, upsertErrorText);
 
-    console.log(`VegaVan API response for ${email}: ${response.status} ${response.statusText}`);
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error(`Vegavan API error ${response.status}:`, errorText);
+    if (!shouldFallbackToIngest(upsertResponse.status)) {
       return false;
     }
 
-    // Optional: log success body only in dev/staging if you want
-    // const successBody = await response.text();
-    // console.log('VegaVan success:', successBody);
+    const ingestResponse = await postToVegavan('/api/contacts/ingest', fallbackPayload, env);
+    console.log(`VegaVan ingest fallback response for ${submission.email}: ${ingestResponse.status} ${ingestResponse.statusText}`);
+
+    if (!ingestResponse.ok) {
+      const ingestErrorText = await ingestResponse.text();
+      console.error(`VegaVan ingest fallback error ${ingestResponse.status}:`, ingestErrorText);
+      return false;
+    }
 
     return true;
   } catch (error) {
@@ -183,122 +307,58 @@ export default {
         console.warn('No Turnstile token provided - likely blocked by browser extension');
       }
 
-      // Submit to NocoDB
       const userAgent = request.headers.get('User-Agent') || 'Unknown';
-      const submission: NocoDBRow = {
-        Name: formData.name!,
-        Email: formData.email!,
-        Phone: formData.phone!,
-        Zip: formData.zip?.trim() || '',
-        Source: formData.source || 'homepage',
-        User_Agent: userAgent.substring(0, 200),
-        IP_Address: await hashIP(clientIP),
-        Turnstile_Verified: turnstileVerified,
-        Submitted_At: new Date().toISOString(),
-      };
+      const submission = buildSubmissionRecord(
+        formData,
+        userAgent,
+        await hashIP(clientIP),
+        turnstileVerified,
+        new Date().toISOString()
+      );
 
-      // Add address if provided (for petition pledges)
-      if (formData.address) {
-        submission.Address = formData.address;
-      }
-
-      // Add email opt-in status (only true if explicitly opted in)
-      submission.Email_Opt_In = formData.emailOptIn === true;
-
-      const commentParts: string[] = [];
-
-      if (formData.comment) {
-        commentParts.push(formData.comment.trim());
-      }
-
-      if (formData.school) {
-        commentParts.push(`School: ${formData.school.trim()}`);
-      }
-
-      if (formData.grade) {
-        commentParts.push(`Grade/Year: ${formData.grade.trim()}`);
-      }
-
-      if (formData.goals) {
-        commentParts.push(`What they want out of it: ${formData.goals.trim()}`);
-      }
-
-      // Store registered voter status in its own field
-      if (formData.registeredVoter) {
-        submission.NY_Registered = formData.registeredVoter.trim();
-      }
-
-      // Store availability in its own field
-      if (formData.availability) {
-        submission.Availability = formData.availability.trim();
-      }
-
-      if (commentParts.length > 0) {
-        submission.Comment = commentParts.join('\n\n').substring(0, 2000);
-      }
-
-      const nocodbSuccess = await submitToNocoDB(submission, env);
-      if (!nocodbSuccess) {
+      const vegavanSuccess = await submitToVegavan(submission, env);
+      if (!vegavanSuccess) {
         return jsonResponse({ error: 'Failed to save submission. Please try again.' }, 500, origin);
       }
 
-      // Add to Resend audience and send confirmation email (non-blocking)
-      const [audienceAdded, emailSent] = await Promise.all([
-        addToResendContacts(formData.name!, formData.email!, env),
-        sendConfirmationEmail(
-          formData.name!,
-          formData.email!,
-          formData.source || 'homepage',
-          env
-        ),
-      ]);
-
-      const notificationSent = await sendSignupNotification(
-        {
-          name: formData.name!,
-          email: formData.email!,
-          phone: formData.phone!,
-          zip: formData.zip?.trim() || '',
-          address: formData.address?.trim() || '',
-          source: formData.source || 'homepage',
-          comment: submission.Comment || '',
-          registeredVoter: submission.NY_Registered || '',
-          availability: submission.Availability || '',
-          emailOptIn: submission.Email_Opt_In === true,
-          turnstileVerified,
-          submittedAt: submission.Submitted_At,
-        },
-        env
-      );
-      
-      if (!audienceAdded) {
-        console.error('Failed to add contact to Resend, but continuing');
-      }
-      if (!emailSent) {
-        console.error('Failed to send confirmation email, but continuing');
-      }
-      if (!notificationSent) {
-        console.error('Failed to send internal signup notification, but continuing');
-      }
-
-      // Record successful submission for rate limiting
       recordSubmission(clientIP);
 
-      // Submit to VegaVan in background (proper way)
       ctx.waitUntil(
-        submitToVegavan(
-          formData.name!,
-          formData.email!,
-          formData.phone!,
-          formData.zip!,
-          formData.source || 'homepage',
-          turnstileVerified,
-          formData.comment,
-          formData.emailOptIn,
-          env
-        ).catch(error => {
-          console.error('VegaVan submission failed:', error);
-        })
+        (async () => {
+          const [audienceAdded, emailSent, notificationSent] = await Promise.all([
+            addToResendContacts(submission.name, submission.email, env),
+            sendConfirmationEmail(submission.name, submission.email, submission.source, env),
+            sendSignupNotification(
+              {
+                name: submission.name,
+                email: submission.email,
+                phone: submission.phone,
+                zip: submission.zip,
+                address: submission.Address || '',
+                source: submission.source,
+                comment: submission.comment,
+                registeredVoter: submission.registeredVoter,
+                availability: submission.availability,
+                interests: submission.interests,
+                selectedShifts: submission.selectedShifts,
+                emailOptIn: submission.emailOptIn,
+                turnstileVerified: submission.turnstileVerified,
+                submittedAt: submission.submittedAt,
+              },
+              env
+            ),
+          ]);
+
+          if (!audienceAdded) {
+            console.error('Failed to add contact to Resend, but continuing');
+          }
+          if (!emailSent) {
+            console.error('Failed to send confirmation email, but continuing');
+          }
+          if (!notificationSent) {
+            console.error('Failed to send internal signup notification, but continuing');
+          }
+        })()
       );
 
       return jsonResponse(
@@ -395,34 +455,6 @@ async function addToResendContacts(
 }
 
 /**
- * Submit data to NocoDB
- */
-async function submitToNocoDB(data: NocoDBRow, env: Env): Promise<boolean> {
-  try {
-    const url = `${env.NOCODB_API_URL}/api/v2/tables/${env.NOCODB_TABLE_ID}/records`;
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'xc-token': env.NOCODB_API_TOKEN,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error('NocoDB API error:', response.status, errorText);
-      return false;
-    }
-
-    return true;
-  } catch (error) {
-    console.error('NocoDB submission error:', error);
-    return false;
-  }
-}
-
-/**
  * Validate form data
  */
 function validateFormData(data: Partial<FormData>): { valid: boolean; error?: string } {
@@ -438,7 +470,7 @@ function validateFormData(data: Partial<FormData>): { valid: boolean; error?: st
     return { valid: false, error: 'Valid phone number is required' };
   }
 
-  const noZipSources = new Set(['independent-ballot-petitioning', 'phonebanking']);
+  const noZipSources = new Set(['independent-ballot-petitioning', 'phonebanking', 'volunteer-canvass']);
   const requiresZip = !noZipSources.has(data.source || '');
   if (requiresZip && (!data.zip || data.zip.trim().length < 5)) {
     return { valid: false, error: 'Valid ZIP code is required' };
@@ -460,6 +492,18 @@ function validateFormData(data: Partial<FormData>): { valid: boolean; error?: st
 
   if (data.source === 'phonebanking' && (!data.availability || data.availability.trim().length < 5)) {
     return { valid: false, error: 'Please tell us when you are available to phonebank' };
+  }
+
+  if (data.source === 'volunteer-signup') {
+    if (!Array.isArray(data.interests) || data.interests.length === 0) {
+      return { valid: false, error: 'Please choose at least one way you want to help' };
+    }
+  }
+
+  if (data.source === 'volunteer-canvass') {
+    if (!Array.isArray(data.selectedShifts) || data.selectedShifts.length === 0) {
+      return { valid: false, error: 'Please choose at least one canvass date' };
+    }
   }
 
   if (data.source === 'summer-internship') {
@@ -562,6 +606,9 @@ function parseFormData(body: string): Partial<FormData> {
     comment: params.get('comment') || undefined,
     registeredVoter: params.get('registeredVoter') || undefined,
     availability: params.get('availability') || undefined,
+    interests: params.getAll('interests'),
+    selectedShift: params.get('selectedShift') || undefined,
+    selectedShifts: params.getAll('selectedShifts'),
     school: params.get('school') || undefined,
     grade: params.get('grade') || undefined,
     goals: params.get('goals') || undefined,
@@ -787,6 +834,8 @@ async function sendSignupNotification(
     comment: string;
     registeredVoter: string;
     availability: string;
+    interests: string[];
+    selectedShifts: string[];
     emailOptIn: boolean;
     turnstileVerified: boolean;
     submittedAt: string;
@@ -816,6 +865,8 @@ async function sendSignupNotification(
       ['Turnstile verified', submission.turnstileVerified ? 'Yes' : 'No'],
       ['Registered NY voter', submission.registeredVoter || 'Not provided'],
       ['Availability', submission.availability || 'Not provided'],
+      ['Volunteer interests', submission.interests.length > 0 ? submission.interests.join(', ') : 'Not provided'],
+      ['Selected canvass dates', submission.selectedShifts.length > 0 ? submission.selectedShifts.join(', ') : 'Not provided'],
       ['Comment', submission.comment || 'Not provided'],
       ['Submitted at', submission.submittedAt],
     ];

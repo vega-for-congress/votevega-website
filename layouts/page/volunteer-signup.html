@@ -1,0 +1,171 @@
+{{ define "main" }}
+<section class="petition-drive-page volunteer-signup-page">
+  <div class="petition-drive-hero">
+    <div class="container">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+          <span class="petition-drive-eyebrow">Get Involved</span>
+          <h1 class="petition-drive-title">{{ .Title }}</h1>
+          {{ with .Params.subtitle }}<p class="petition-drive-subtitle">{{ . }}</p>{{ end }}
+          <p class="petition-drive-copy">
+            This campaign grows person to person. If you want to organize your neighbors, make calls, come to events, or help build something bigger than politics as usual, sign up below and our team will reach out.
+          </p>
+          <div class="petition-drive-actions">
+            <a class="btn btn-primary btn-lg" href="#volunteer-signup-form">Join the Team</a>
+            <a class="btn btn-outline-dark btn-lg" href="/events/">See Upcoming Events</a>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="petition-drive-card volunteer-signup-card">
+            <img src="{{ "images/volunteers_3_8_2026.jpg" | relURL }}" alt="Jose Vega campaign volunteers together outdoors" class="petition-drive-image">
+            <div class="petition-drive-card-body">
+              <h2>Ways To Help</h2>
+              <ul class="petition-drive-checklist">
+                <li>Knock doors and talk directly with voters.</li>
+                <li>Phonebank or text supporters from home.</li>
+                <li>Volunteer at events, rallies, and petition drives.</li>
+                <li>Bring your own skills in media, logistics, outreach, or organizing.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="petition-drive-form-wrap" id="volunteer-signup-form">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-xl-10">
+          <div class="petition-drive-form-card volunteer-signup-form-card">
+            <div class="petition-drive-form-intro">
+              <span class="petition-drive-step">Volunteer Form</span>
+              <h2>Tell us how you want to plug in</h2>
+              <p>
+                Choose the areas that fit you best. A campaign organizer will follow up to get you connected to the right next step.
+              </p>
+            </div>
+
+            <form class="volunteer-form petition-drive-form">
+              <input type="hidden" name="whichform" value="volunteer-signup">
+
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label" for="volunteer-name">Full name</label>
+                  <input class="form-control form-control-lg" id="volunteer-name" name="name" autocomplete="name" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="volunteer-email">Email</label>
+                  <input class="form-control form-control-lg" id="volunteer-email" name="email" type="email" autocomplete="email" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="volunteer-phone">Phone number</label>
+                  <input class="form-control form-control-lg" id="volunteer-phone" name="phone" type="tel" autocomplete="tel" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="volunteer-zip">ZIP code</label>
+                  <input class="form-control form-control-lg" id="volunteer-zip" name="zip" inputmode="numeric" autocomplete="postal-code" placeholder="5-digit ZIP code" required>
+                </div>
+              </div>
+
+              <fieldset class="volunteer-interest-block">
+                <legend class="form-label mb-3">How do you want to help?</legend>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label class="volunteer-interest-option">
+                      <input type="checkbox" name="interests" value="Canvassing / knocking doors">
+                      <span>
+                        <strong>Canvassing / knocking doors</strong>
+                        <small>Talk to voters in the neighborhood. You will pick canvass dates after signup.</small>
+                      </span>
+                    </label>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="volunteer-interest-option">
+                      <input type="checkbox" name="interests" value="Phonebanking">
+                      <span>
+                        <strong>Phonebanking</strong>
+                        <small>Call supporters and undecided voters.</small>
+                      </span>
+                    </label>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="volunteer-interest-option">
+                      <input type="checkbox" name="interests" value="Textbanking">
+                      <span>
+                        <strong>Textbanking</strong>
+                        <small>Help us reach people quickly by text.</small>
+                      </span>
+                    </label>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="volunteer-interest-option">
+                      <input type="checkbox" name="interests" value="Events and rallies">
+                      <span>
+                        <strong>Events and rallies</strong>
+                        <small>Help staff public events and campaign actions.</small>
+                      </span>
+                    </label>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="volunteer-interest-option">
+                      <input type="checkbox" name="interests" value="Petitioning and street outreach">
+                      <span>
+                        <strong>Petitioning and street outreach</strong>
+                        <small>Bring the campaign directly to the public.</small>
+                      </span>
+                    </label>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="volunteer-interest-option">
+                      <input type="checkbox" name="interests" value="Media, design, or special skills">
+                      <span>
+                        <strong>Media, design, or special skills</strong>
+                        <small>Share professional or creative skills with the team.</small>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+              </fieldset>
+
+              <div class="petition-drive-note">
+                <strong>By submitting:</strong> You are asking the campaign to contact you about volunteer opportunities related to Jose Vega for Congress.
+              </div>
+
+              <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary btn-lg petition-drive-submit">
+                  <i class="fas fa-people-group me-2"></i>Join the Volunteer Team
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div class="volunteer-signup-followup">
+            <div class="row g-4">
+              <div class="col-md-6">
+                <div class="volunteer-signup-panel">
+                  <span class="volunteer-signup-panel-label">What happens next</span>
+                  <h3>We will match you with real campaign work</h3>
+                  <p>
+                    After you sign up, a volunteer coordinator will follow up with the best next step based on your interests, location, and availability.
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="volunteer-signup-panel">
+                  <span class="volunteer-signup-panel-label">Stay in Motion</span>
+                  <h3>See where the campaign is going next</h3>
+                  <p>
+                    Want to jump in right away? Check the events calendar and show up at the next public action.
+                  </p>
+                  <a class="btn btn-outline-dark" href="/events/">Browse Events</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}

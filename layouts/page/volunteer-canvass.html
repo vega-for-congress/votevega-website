@@ -1,0 +1,210 @@
+{{ define "main" }}
+<section class="petition-drive-page volunteer-signup-page volunteer-canvass-page">
+  <div class="petition-drive-hero">
+    <div class="container">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+          <span class="petition-drive-eyebrow">Canvass Step</span>
+          <h1 class="petition-drive-title">{{ .Title }}</h1>
+          {{ with .Params.subtitle }}<p class="petition-drive-subtitle">{{ . }}</p>{{ end }}
+          <p class="petition-drive-copy">
+            If you are ready to canvass, use this page to choose the dates you already know you can make. Our team will use this to place you into real weekend shifts.
+          </p>
+          <div class="petition-drive-actions">
+            <a class="btn btn-primary btn-lg" href="#canvass-date-form">Choose Dates</a>
+            <a class="btn btn-outline-dark btn-lg" href="/volunteer-signup/">Back to Volunteer Signup</a>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="petition-drive-card volunteer-signup-card">
+            <img src="{{ "images/campaign-volunteers-compressed.jpg" | relURL }}" alt="Campaign volunteers preparing to canvass" class="petition-drive-image">
+            <div class="petition-drive-card-body">
+              <h2>How This Works</h2>
+              <ul class="petition-drive-checklist">
+                <li>Pick every date you think you can make.</li>
+                <li>Confirm your contact info so an organizer can follow up.</li>
+                <li>We will send location, timing, and next steps after matching you.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="petition-drive-form-wrap" id="canvass-date-form">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-xl-10">
+          <div class="petition-drive-form-card volunteer-signup-form-card">
+            <div class="petition-drive-form-intro">
+              <span class="petition-drive-step">Canvass Dates</span>
+              <h2>Choose the weekends you can canvass</h2>
+              <p>
+                Select as many dates as you can commit to. We saved your last signup locally on this device if you already filled out the volunteer form.
+              </p>
+            </div>
+
+            <form class="volunteer-form petition-drive-form volunteer-canvass-form">
+              <input type="hidden" name="whichform" value="volunteer-canvass">
+              <div id="volunteer-selected-shifts-inputs"></div>
+
+              <div class="volunteer-selected-shift" id="volunteer-selected-shift-card" hidden>
+                <span class="volunteer-signup-panel-label">Selected Canvass Dates</span>
+                <div class="volunteer-selected-shift-row">
+                  <div>
+                    <strong id="volunteer-selected-shift-label">No dates selected yet</strong>
+                    <p id="volunteer-selected-shift-copy">Pick one or more canvass weekends below, then confirm your contact information.</p>
+                  </div>
+                  <button type="button" class="volunteer-selected-shift-clear" id="volunteer-selected-shift-clear">Clear Dates</button>
+                </div>
+                <ul class="volunteer-selected-shift-list" id="volunteer-selected-shift-list"></ul>
+              </div>
+
+              <div class="row g-3">
+                <div class="col-md-4">
+                  <label class="form-label" for="canvass-name">Full name</label>
+                  <input class="form-control form-control-lg" id="canvass-name" name="name" autocomplete="name" required>
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label" for="canvass-email">Email</label>
+                  <input class="form-control form-control-lg" id="canvass-email" name="email" type="email" autocomplete="email" required>
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label" for="canvass-phone">Phone number</label>
+                  <input class="form-control form-control-lg" id="canvass-phone" name="phone" type="tel" autocomplete="tel" required>
+                </div>
+              </div>
+
+              <div class="volunteer-calendar-section volunteer-calendar-section-tight">
+                <div class="volunteer-calendar-header">
+                  <span class="volunteer-signup-panel-label">Weekend Calendar</span>
+                  <h2>Pick every date that works</h2>
+                  <p>
+                    We are canvassing every Saturday and Sunday from June 21, 2026 through November 3, 2026. Start with June and July, then reveal the rest if needed.
+                  </p>
+                </div>
+
+                <div class="volunteer-calendar-grid">
+                  <section class="volunteer-calendar-month" aria-labelledby="calendar-june-2026">
+                    <div class="volunteer-calendar-month-head">
+                      <h3 id="calendar-june-2026">June 2026</h3>
+                      <p>Weekend launch</p>
+                    </div>
+                    <div class="volunteer-calendar-days" role="list">
+                      <button type="button" class="volunteer-calendar-day volunteer-calendar-day-active volunteer-calendar-day-button" data-shift="Sunday, June 21, 2026 canvass"><span class="volunteer-calendar-date">Sun, Jun 21</span><strong>Canvass</strong></button>
+                      <button type="button" class="volunteer-calendar-day volunteer-calendar-day-active volunteer-calendar-day-button" data-shift="Saturday, June 27, 2026 canvass"><span class="volunteer-calendar-date">Sat, Jun 27</span><strong>Canvass</strong></button>
+                      <button type="button" class="volunteer-calendar-day volunteer-calendar-day-active volunteer-calendar-day-button" data-shift="Sunday, June 28, 2026 canvass"><span class="volunteer-calendar-date">Sun, Jun 28</span><strong>Canvass</strong></button>
+                    </div>
+                  </section>
+
+                  <section class="volunteer-calendar-month" aria-labelledby="calendar-july-2026">
+                    <div class="volunteer-calendar-month-head">
+                      <h3 id="calendar-july-2026">July 2026</h3>
+                      <p>Every weekend</p>
+                    </div>
+                    <div class="volunteer-calendar-days" role="list">
+                      <button type="button" class="volunteer-calendar-day volunteer-calendar-day-active volunteer-calendar-day-button" data-shift="Saturday, July 4, 2026 canvass"><span class="volunteer-calendar-date">Sat, Jul 4</span><strong>Canvass</strong></button>
+                      <button type="button" class="volunteer-calendar-day volunteer-calendar-day-active volunteer-calendar-day-button" data-shift="Sunday, July 5, 2026 canvass"><span class="volunteer-calendar-date">Sun, Jul 5</span><strong>Canvass</strong></button>
+                      <button type="button" class="volunteer-calendar-day volunteer-calendar-day-active volunteer-calendar-day-button" data-shift="Saturday, July 11, 2026 canvass"><span class="volunteer-calendar-date">Sat, Jul 11</span><strong>Canvass</strong></button>
+                      <button type="button" class="volunteer-calendar-day volunteer-calendar-day-active volunteer-calendar-day-button" data-shift="Sunday, July 12, 2026 canvass"><span class="volunteer-calendar-date">Sun, Jul 12</span><strong>Canvass</strong></button>
+                      <button type="button" class="volunteer-calendar-day volunteer-calendar-day-active volunteer-calendar-day-button" data-shift="Saturday, July 18, 2026 canvass"><span class="volunteer-calendar-date">Sat, Jul 18</span><strong>Canvass</strong></button>
+                      <button type="button" class="volunteer-calendar-day volunteer-calendar-day-active volunteer-calendar-day-button" data-shift="Sunday, July 19, 2026 canvass"><span class="volunteer-calendar-date">Sun, Jul 19</span><strong>Canvass</strong></button>
+                      <button type="button" class="volunteer-calendar-day volunteer-calendar-day-active volunteer-calendar-day-button" data-shift="Saturday, July 25, 2026 canvass"><span class="volunteer-calendar-date">Sat, Jul 25</span><strong>Canvass</strong></button>
+                      <button type="button" class="volunteer-calendar-day volunteer-calendar-day-active volunteer-calendar-day-button" data-shift="Sunday, July 26, 2026 canvass"><span class="volunteer-calendar-date">Sun, Jul 26</span><strong>Canvass</strong></button>
+                    </div>
+                  </section>
+
+                  <section class="volunteer-calendar-month volunteer-calendar-month-hidden" aria-labelledby="calendar-august-2026" hidden>
+                    <div class="volunteer-calendar-month-head">
+                      <h3 id="calendar-august-2026">August 2026</h3>
+                      <p>Every weekend</p>
+                    </div>
+                    <div class="volunteer-calendar-days" role="list">
+                      <button type="button" class="volunteer-calendar-day volunteer-calendar-day-active volunteer-calendar-day-button" data-shift="Saturday, August 1, 2026 canvass"><span class="volunteer-calendar-date">Sat, Aug 1</span><strong>Canvass</strong></button>
+                      <button type="button" class="volunteer-calendar-day volunteer-calendar-day-active volunteer-calendar-day-button" data-shift="Sunday, August 2, 2026 canvass"><span class="volunteer-calendar-date">Sun, Aug 2</span><strong>Canvass</strong></button>
+                      <button type="button" class="volunteer-calendar-day volunteer-calendar-day-active volunteer-calendar-day-button" data-shift="Saturday, August 8, 2026 canvass"><span class="volunteer-calendar-date">Sat, Aug 8</span><strong>Canvass</strong></button>
+                      <button type="button" class="volunteer-calendar-day volunteer-calendar-day-active volunteer-calendar-day-button" data-shift="Sunday, August 9, 2026 canvass"><span class="volunteer-calendar-date">Sun, Aug 9</span><strong>Canvass</strong></button>
+                      <button type="button" class="volunteer-calendar-day volunteer-calendar-day-active volunteer-calendar-day-button" data-shift="Saturday, August 15, 2026 canvass"><span class="volunteer-calendar-date">Sat, Aug 15</span><strong>Canvass</strong></button>
+                      <button type="button" class="volunteer-calendar-day volunteer-calendar-day-active volunteer-calendar-day-button" data-shift="Sunday, August 16, 2026 canvass"><span class="volunteer-calendar-date">Sun, Aug 16</span><strong>Canvass</strong></button>
+                      <button type="button" class="volunteer-calendar-day volunteer-calendar-day-active volunteer-calendar-day-button" data-shift="Saturday, August 22, 2026 canvass"><span class="volunteer-calendar-date">Sat, Aug 22</span><strong>Canvass</strong></button>
+                      <button type="button" class="volunteer-calendar-day volunteer-calendar-day-active volunteer-calendar-day-button" data-shift="Sunday, August 23, 2026 canvass"><span class="volunteer-calendar-date">Sun, Aug 23</span><strong>Canvass</strong></button>
+                      <button type="button" class="volunteer-calendar-day volunteer-calendar-day-active volunteer-calendar-day-button" data-shift="Saturday, August 29, 2026 canvass"><span class="volunteer-calendar-date">Sat, Aug 29</span><strong>Canvass</strong></button>
+                      <button type="button" class="volunteer-calendar-day volunteer-calendar-day-active volunteer-calendar-day-button" data-shift="Sunday, August 30, 2026 canvass"><span class="volunteer-calendar-date">Sun, Aug 30</span><strong>Canvass</strong></button>
+                    </div>
+                  </section>
+
+                  <section class="volunteer-calendar-month volunteer-calendar-month-hidden" aria-labelledby="calendar-september-2026" hidden>
+                    <div class="volunteer-calendar-month-head">
+                      <h3 id="calendar-september-2026">September 2026</h3>
+                      <p>Every weekend</p>
+                    </div>
+                    <div class="volunteer-calendar-days" role="list">
+                      <button type="button" class="volunteer-calendar-day volunteer-calendar-day-active volunteer-calendar-day-button" data-shift="Saturday, September 5, 2026 canvass"><span class="volunteer-calendar-date">Sat, Sep 5</span><strong>Canvass</strong></button>
+                      <button type="button" class="volunteer-calendar-day volunteer-calendar-day-active volunteer-calendar-day-button" data-shift="Sunday, September 6, 2026 canvass"><span class="volunteer-calendar-date">Sun, Sep 6</span><strong>Canvass</strong></button>
+                      <button type="button" class="volunteer-calendar-day volunteer-calendar-day-active volunteer-calendar-day-button" data-shift="Saturday, September 12, 2026 canvass"><span class="volunteer-calendar-date">Sat, Sep 12</span><strong>Canvass</strong></button>
+                      <button type="button" class="volunteer-calendar-day volunteer-calendar-day-active volunteer-calendar-day-button" data-shift="Sunday, September 13, 2026 canvass"><span class="volunteer-calendar-date">Sun, Sep 13</span><strong>Canvass</strong></button>
+                      <button type="button" class="volunteer-calendar-day volunteer-calendar-day-active volunteer-calendar-day-button" data-shift="Saturday, September 19, 2026 canvass"><span class="volunteer-calendar-date">Sat, Sep 19</span><strong>Canvass</strong></button>
+                      <button type="button" class="volunteer-calendar-day volunteer-calendar-day-active volunteer-calendar-day-button" data-shift="Sunday, September 20, 2026 canvass"><span class="volunteer-calendar-date">Sun, Sep 20</span><strong>Canvass</strong></button>
+                      <button type="button" class="volunteer-calendar-day volunteer-calendar-day-active volunteer-calendar-day-button" data-shift="Saturday, September 26, 2026 canvass"><span class="volunteer-calendar-date">Sat, Sep 26</span><strong>Canvass</strong></button>
+                      <button type="button" class="volunteer-calendar-day volunteer-calendar-day-active volunteer-calendar-day-button" data-shift="Sunday, September 27, 2026 canvass"><span class="volunteer-calendar-date">Sun, Sep 27</span><strong>Canvass</strong></button>
+                    </div>
+                  </section>
+
+                  <section class="volunteer-calendar-month volunteer-calendar-month-hidden" aria-labelledby="calendar-october-2026" hidden>
+                    <div class="volunteer-calendar-month-head">
+                      <h3 id="calendar-october-2026">October 2026</h3>
+                      <p>Every weekend</p>
+                    </div>
+                    <div class="volunteer-calendar-days" role="list">
+                      <button type="button" class="volunteer-calendar-day volunteer-calendar-day-active volunteer-calendar-day-button" data-shift="Saturday, October 3, 2026 canvass"><span class="volunteer-calendar-date">Sat, Oct 3</span><strong>Canvass</strong></button>
+                      <button type="button" class="volunteer-calendar-day volunteer-calendar-day-active volunteer-calendar-day-button" data-shift="Sunday, October 4, 2026 canvass"><span class="volunteer-calendar-date">Sun, Oct 4</span><strong>Canvass</strong></button>
+                      <button type="button" class="volunteer-calendar-day volunteer-calendar-day-active volunteer-calendar-day-button" data-shift="Saturday, October 10, 2026 canvass"><span class="volunteer-calendar-date">Sat, Oct 10</span><strong>Canvass</strong></button>
+                      <button type="button" class="volunteer-calendar-day volunteer-calendar-day-active volunteer-calendar-day-button" data-shift="Sunday, October 11, 2026 canvass"><span class="volunteer-calendar-date">Sun, Oct 11</span><strong>Canvass</strong></button>
+                      <button type="button" class="volunteer-calendar-day volunteer-calendar-day-active volunteer-calendar-day-button" data-shift="Saturday, October 17, 2026 canvass"><span class="volunteer-calendar-date">Sat, Oct 17</span><strong>Canvass</strong></button>
+                      <button type="button" class="volunteer-calendar-day volunteer-calendar-day-active volunteer-calendar-day-button" data-shift="Sunday, October 18, 2026 canvass"><span class="volunteer-calendar-date">Sun, Oct 18</span><strong>Canvass</strong></button>
+                      <button type="button" class="volunteer-calendar-day volunteer-calendar-day-active volunteer-calendar-day-button" data-shift="Saturday, October 24, 2026 canvass"><span class="volunteer-calendar-date">Sat, Oct 24</span><strong>Canvass</strong></button>
+                      <button type="button" class="volunteer-calendar-day volunteer-calendar-day-active volunteer-calendar-day-button" data-shift="Sunday, October 25, 2026 canvass"><span class="volunteer-calendar-date">Sun, Oct 25</span><strong>Canvass</strong></button>
+                      <button type="button" class="volunteer-calendar-day volunteer-calendar-day-active volunteer-calendar-day-button" data-shift="Saturday, October 31, 2026 canvass"><span class="volunteer-calendar-date">Sat, Oct 31</span><strong>Canvass</strong></button>
+                    </div>
+                  </section>
+
+                  <section class="volunteer-calendar-month volunteer-calendar-month-hidden" aria-labelledby="calendar-november-2026" hidden>
+                    <div class="volunteer-calendar-month-head">
+                      <h3 id="calendar-november-2026">November 2026</h3>
+                      <p>Final push</p>
+                    </div>
+                    <div class="volunteer-calendar-days" role="list">
+                      <button type="button" class="volunteer-calendar-day volunteer-calendar-day-active volunteer-calendar-day-button" data-shift="Sunday, November 1, 2026 canvass"><span class="volunteer-calendar-date">Sun, Nov 1</span><strong>Canvass</strong></button>
+                      <article class="volunteer-calendar-day volunteer-calendar-day-callout" role="listitem">
+                        <span class="volunteer-calendar-date">Tue, Nov 3</span>
+                        <strong>Election Day</strong>
+                      </article>
+                    </div>
+                  </section>
+                </div>
+
+                <div class="volunteer-calendar-actions">
+                  <button type="button" class="btn btn-outline-dark" id="volunteer-calendar-toggle" aria-expanded="false">
+                    Show More Dates
+                  </button>
+                </div>
+              </div>
+
+              <div class="petition-drive-note">
+                <strong>After you submit:</strong> An organizer will follow up about the dates you selected with location, timing, and what to expect.
+              </div>
+
+              <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary btn-lg petition-drive-submit">
+                  <i class="fas fa-map-signs me-2"></i>Submit Canvass Dates
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}

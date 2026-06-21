@@ -1,6 +1,6 @@
 # Form Submission Worker
 
-Cloudflare Worker with Turnstile bot protection → Baserow database
+Cloudflare Worker with Turnstile bot protection and VegaVan contact sync.
 
 ## Quick Setup
 
@@ -9,23 +9,38 @@ cd workers/form-submission
 bun install
 
 # Set secrets
-wrangler secret put TURNSTILE_SECRET_KEY  # Get from dash.cloudflare.com/turnstile
-wrangler secret put BASEROW_API_TOKEN     # Already in wrangler.toml comment
+wrangler secret put TURNSTILE_SECRET_KEY
+wrangler secret put TURNSTILE_TEST_SECRET_KEY
+wrangler secret put RESEND_API_KEY
+wrangler secret put VEGAVAN_API_KEY
 
 # Deploy
 bun run deploy
 ```
 
-## Baserow Columns (must match exactly)
-- Name, Email, Phone, Zip, Source, User Agent, IP Address, Submitted At, Turnstile Verified
+## VegaVan Contract
+
+The worker now treats VegaVan as the primary system of record.
+
+- Preferred endpoint: `POST /api/contacts/upsert`
+- Fallback endpoint: `POST /api/contacts/ingest`
+
+The worker sends:
+- contact identity fields
+- volunteer interests
+- canvass date selections
+- source, verification, and opt-in metadata
+- a human-readable organizer note
 
 ## After Deployment
 
-Update `static/js/main.js` lines 295 & 297:
-- Worker URL from deploy output
-- Turnstile Site Key from dashboard
+Verify:
+- `VEGAVAN_API_URL` points at the correct VegaVan instance
+- `VEGAVAN_API_KEY` has access to the contact upsert or ingest endpoint
+- the frontend worker URL in `static/js/main.js` still matches this worker deployment
 
 ## Commands
-- `bun run dev` - Local testing (localhost:8787)
-- `bun run deploy` - Deploy to production  
+
+- `bun run dev` - Local testing on `localhost:8787`
+- `bun run deploy` - Deploy to production
 - `bun run tail` - View live logs
