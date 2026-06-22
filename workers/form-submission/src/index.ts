@@ -1,6 +1,6 @@
 /**
  * Cloudflare Worker for VoteVega.nyc Form Submissions
- * Handles volunteer signups with Turnstile bot protection and NocoDB storage.
+ * Handles volunteer signups with Turnstile bot protection and VegaVan storage.
  *
  * EMAIL TEMPLATES: Front-end developers can create new signup form -> custom email
  * flows without modifying this worker. Place an HTML file in static/emails/{source}.html
@@ -12,10 +12,6 @@
 interface Env {
   TURNSTILE_SECRET_KEY: string;
   TURNSTILE_TEST_SECRET_KEY?: string;
-  NOCODB_API_TOKEN: string;
-  NOCODB_TABLE_ID: string;
-  NOCODB_BASE_ID: string;
-  NOCODB_API_URL: string;
   ALLOWED_ORIGINS: string;
   RESEND_API_KEY: string;
   SIGNUP_NOTIFICATION_EMAILS?: string;
@@ -38,23 +34,6 @@ interface FormData {
   school?: string;
   grade?: string;
   goals?: string;
-}
-
-interface NocoDBRow {
-  Name: string;
-  Email: string;
-  Phone: string;
-  Zip: string;
-  Source: string;
-  User_Agent: string;
-  IP_Address: string;
-  Turnstile_Verified: boolean;
-  Submitted_At: string;
-  Address?: string;
-  Email_Opt_In?: boolean;
-  Comment?: string;
-  NY_Registered?: string;
-  Availability?: string;
 }
 
 async function submitToVegavan(
@@ -125,7 +104,6 @@ const submissionCache = new Map<string, number[]>();
 
 export default {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
-    // Handle CORS preflight
     if (request.method === 'OPTIONS') {
       return handleCORS(request, env);
     }
@@ -183,28 +161,6 @@ export default {
         console.warn('No Turnstile token provided - likely blocked by browser extension');
       }
 
-      // Submit to NocoDB
-      const userAgent = request.headers.get('User-Agent') || 'Unknown';
-      const submission: NocoDBRow = {
-        Name: formData.name!,
-        Email: formData.email!,
-        Phone: formData.phone!,
-        Zip: formData.zip?.trim() || '',
-        Source: formData.source || 'homepage',
-        User_Agent: userAgent.substring(0, 200),
-        IP_Address: await hashIP(clientIP),
-        Turnstile_Verified: turnstileVerified,
-        Submitted_At: new Date().toISOString(),
-      };
-
-      // Add address if provided (for petition pledges)
-      if (formData.address) {
-        submission.Address = formData.address;
-      }
-
-      // Add email opt-in status (only true if explicitly opted in)
-      submission.Email_Opt_In = formData.emailOptIn === true;
-
       const commentParts: string[] = [];
 
       if (formData.comment) {
@@ -223,24 +179,7 @@ export default {
         commentParts.push(`What they want out of it: ${formData.goals.trim()}`);
       }
 
-      // Store registered voter status in its own field
-      if (formData.registeredVoter) {
-        submission.NY_Registered = formData.registeredVoter.trim();
-      }
-
-      // Store availability in its own field
-      if (formData.availability) {
-        submission.Availability = formData.availability.trim();
-      }
-
-      if (commentParts.length > 0) {
-        submission.Comment = commentParts.join('\n\n').substring(0, 2000);
-      }
-
-      const nocodbSuccess = await submitToNocoDB(submission, env);
-      if (!nocodbSuccess) {
-        return jsonResponse({ error: 'Failed to save submission. Please try again.' }, 500, origin);
-      }
+      const commentText = commentParts.join('\n\n').substring(0, 2000);
 
       // Add to Resend audience and send confirmation email (non-blocking)
       const [audienceAdded, emailSent] = await Promise.all([
@@ -261,12 +200,12 @@ export default {
           zip: formData.zip?.trim() || '',
           address: formData.address?.trim() || '',
           source: formData.source || 'homepage',
-          comment: submission.Comment || '',
-          registeredVoter: submission.NY_Registered || '',
-          availability: submission.Availability || '',
-          emailOptIn: submission.Email_Opt_In === true,
+          comment: commentText || '',
+          registeredVoter: formData.registeredVoter || '',
+          availability: formData.availability || '',
+          emailOptIn: formData.emailOptIn === true,
           turnstileVerified,
-          submittedAt: submission.Submitted_At,
+          submittedAt: new Date().toISOString(),
         },
         env
       );
@@ -395,34 +334,6 @@ async function addToResendContacts(
 }
 
 /**
- * Submit data to NocoDB
- */
-async function submitToNocoDB(data: NocoDBRow, env: Env): Promise<boolean> {
-  try {
-    const url = `${env.NOCODB_API_URL}/api/v2/tables/${env.NOCODB_TABLE_ID}/records`;
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'xc-token': env.NOCODB_API_TOKEN,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error('NocoDB API error:', response.status, errorText);
-      return false;
-    }
-
-    return true;
-  } catch (error) {
-    console.error('NocoDB submission error:', error);
-    return false;
-  }
-}
-
-/**
  * Validate form data
  */
 function validateFormData(data: Partial<FormData>): { valid: boolean; error?: string } {
@@ -531,17 +442,6 @@ function recordSubmission(ip: string): void {
       }
     });
   }
-}
-
-/**
- * Hash IP address for privacy
- */
-async function hashIP(ip: string): Promise<string> {
-  const encoder = new TextEncoder();
-  const data = encoder.encode(ip + 'votevega-salt');
-  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('').substring(0, 16);
 }
 
 /**

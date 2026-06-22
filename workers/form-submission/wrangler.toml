@@ -5,14 +5,9 @@ compatibility_date = "2024-01-01"
 # Environment variables and secrets
 # Run: wrangler secret put TURNSTILE_SECRET_KEY
 # Run: wrangler secret put TURNSTILE_TEST_SECRET_KEY
-# Run: wrangler secret put NOCODB_API_TOKEN
 # Run: wrangler secret put RESEND_API_KEY
-# Optional: wrangler secret put SIGNUP_NOTIFICATION_EMAILS
 
 [vars]
-NOCODB_TABLE_ID = "mpiotrslk803s0v"
-NOCODB_BASE_ID = "p4fly43c6kif8gw"
-NOCODB_API_URL = "https://app.nocodb.com"
 ALLOWED_ORIGINS = "https://votevega.nyc,https://www.votevega.nyc,https://secure.votevega.nyc,https://donation-widget-dev.up.railway.app,http://localhost:8080,http://localhost:3000,https://*--votevega.netlify.app"
 VEGAVAN_API_URL = "https://van.votevega.nyc"
 SIGNUP_NOTIFICATION_EMAILS = "jose@votevega.nyc,adrian@votevega.nyc,press@votevega.nyc"
