@@ -452,6 +452,11 @@
                     })
                     .then(function(result) {
                         if (result.success) {
+                          if (result.redirectUrl) {
+                            window.location.href = result.redirectUrl;
+                            return;
+                          }
+
                         const formContainer = form.parentElement;
                         const isEventForm = form.classList.contains('event-rsvp-form');
                         const eventName = formData.get('event') || 'this event';
