@@ -46,7 +46,7 @@ async function submitToVegavan(
   comment: string | undefined,
   emailOptIn: boolean | undefined,
   env: Env
-): Promise<boolean> {
+): Promise<{ success: boolean; redirectUrl?: string }> {
   try {
     const nameParts = name.trim().split(/\s+/);
     const firstName = nameParts[0];
@@ -85,17 +85,16 @@ async function submitToVegavan(
     if (!response.ok) {
       const errorText = await response.text();
       console.error(`Vegavan API error ${response.status}:`, errorText);
-      return false;
+      return { success: false };
     }
 
-    // Optional: log success body only in dev/staging if you want
-    // const successBody = await response.text();
-    // console.log('VegaVan success:', successBody);
+    const successBody: {ingested: number, failures: number, redirectUrl?: string} = await response.json();
+    const redirectUrl = successBody.redirectUrl;
 
-    return true;
+    return { success: true, redirectUrl };
   } catch (error) {
     console.error('VegaVan submission error:', error);
-    return false;
+    return { success: false };
   }
 }
 
@@ -223,27 +222,24 @@ export default {
       // Record successful submission for rate limiting
       recordSubmission(clientIP);
 
-      // Submit to VegaVan in background (proper way)
-      ctx.waitUntil(
-        submitToVegavan(
-          formData.name!,
-          formData.email!,
-          formData.phone!,
-          formData.zip!,
-          formData.source || 'homepage',
-          turnstileVerified,
-          formData.comment,
-          formData.emailOptIn,
-          env
-        ).catch(error => {
-          console.error('VegaVan submission failed:', error);
-        })
+      // Submit to VegaVan and get redirect URL
+      const vegavanResult = await submitToVegavan(
+        formData.name!,
+        formData.email!,
+        formData.phone!,
+        formData.zip!,
+        formData.source || 'homepage',
+        turnstileVerified,
+        formData.comment,
+        formData.emailOptIn,
+        env
       );
 
       return jsonResponse(
         {
           success: true,
           message: 'Thank you for signing up! We will be in touch soon.',
+          redirectUrl: vegavanResult.redirectUrl
         },
         200,
         origin
