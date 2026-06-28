@@ -32,7 +32,7 @@ Our use of information collected through SMS is described in our [Privacy Policy
 
 ## Donations
 
-Donation transactions may be processed by third-party payment processors or fundraising platforms. Those services may have their own terms, privacy policies, and compliance requirements. Vega for Congress may be required by federal election law to collect and report certain donor information.
+Donation transactions are handled through our donation flow using Stripe's API for payment processing. Stripe and related payment services may have their own terms, privacy policies, and compliance requirements. Vega for Congress may be required by federal election law to collect and report certain donor information.
 
 ## Website Content
 
