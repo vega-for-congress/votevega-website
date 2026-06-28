@@ -45,7 +45,7 @@ When you access or use our Site, we automatically collect information about you,
 
 We and our service providers may also obtain information from other sources and combine that with information we collect through our Site. For example, we may collect information about you from third parties, including but not limited to mailing list providers and publicly available sources.
 
-If you make a donation through ActBlue for our benefit (such as via donation links on the Site), we will obtain certain information about you from ActBlue, including your name, address, occupation, employer, and any additional contact information that you use when donating, but not your credit card information.
+If you make a donation through a payment processor or fundraising platform for our benefit, we may obtain certain information about you from that service, including your name, address, occupation, employer, donation amount, and any additional contact information that you use when donating, but not your full credit card information.
 
 ## Use of Information
 
