@@ -102,6 +102,7 @@ event_back_to_events = "Volver a Todos los Eventos"
 
 # Footer
 footer_privacy = "Política de Privacidad"
+footer_terms = "Términos y Condiciones"
 footer_paid_for = "Pagado por Vega para el Congreso"
 
 # Footer Signup Section

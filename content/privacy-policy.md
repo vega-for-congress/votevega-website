@@ -1,10 +1,10 @@
 ---
 title: "Privacy Policy"
-date: 2025-09-06
+date: 2026-06-28
 type: "page"
 ---
 
-**Last Updated: September 6, 2025**
+**Last Updated: June 28, 2026**
 
 This Privacy Policy explains how information about you is collected, used, and disclosed by Vega for Congress ("we," "us," or "our"). This Privacy Policy applies to information we collect when you use our website located at votevega.nyc and any other Vega for Congress websites and online services that link to this Privacy Policy (collectively, the "Site").
 
@@ -26,6 +26,8 @@ We collect information you provide directly to us. For example, we collect infor
 - Otherwise communicate with us
 
 The types of information we collect may include your name, address, phone number, email address, mobile number, credit card information, and other contact or identifying information you choose to provide.
+
+If you opt in to receive text messages from us, we collect your mobile phone number, the date and source of your opt-in, your message preferences, message delivery information, and any text message replies you send to us, including opt-out requests.
 
 In addition, the Federal Election Commission (FEC) may require us to collect certain personal information from donors. For example, the FEC requires us to collect (and disclose) the name, mailing address, occupation, and employer of all individuals whose donations exceed $200 per election cycle.
 
@@ -54,6 +56,7 @@ We may use information about you for various purposes, including to:
 - Send you technical notices, updates, security alerts and support and administrative messages
 - Respond to your emails, comments, questions and requests and provide customer service
 - Send you newsletters and otherwise provide you with news and information you request or that we think will be of interest to you
+- Send you text messages, including campaign updates, volunteer opportunities, event reminders, voter information, donation appeals, and other campaign-related communications, if you have opted in to receive them
 - Help connect you with other supporters, and to solicit volunteers, donations and support for Jose Vega and for candidates, issues and organizations that we support
 - Comply with our legal and financial obligations, including Federal election laws
 - Remind you to vote and register to vote and assist you in finding your registration information and polling locations
@@ -76,6 +79,8 @@ We may share information about you as follows or as otherwise described in this 
 
 Information about our donors and website visitors is one of our most important assets and therefore we keep it confidential. We will not rent, sell, or share personal information about you with other people or nonaffiliated companies except as described in this Privacy Policy.
 
+We do not sell, rent, or share mobile phone numbers, SMS opt-in records, or text messaging consent information with third parties for their own marketing or promotional purposes. Mobile opt-in data and consent are used only to support Vega for Congress communications and related campaign operations.
+
 ## Data Security
 
 We take reasonable measures to help protect personal information from loss, theft, misuse and unauthorized access, disclosure, alteration and destruction. However, no Internet or e-mail transmission is ever fully secure or error free.
@@ -85,6 +90,8 @@ We take reasonable measures to help protect personal information from loss, thef
 **Account Information:** You may update or correct information about yourself at any time by contacting us at info@votevega.nyc.
 
 **Communications:** You may opt out of receiving promotional emails from us by following the instructions in those emails or by contacting us at info@votevega.nyc. If you opt out, we may still send you non-promotional communications, such as donation receipts or other information about your relationship with us.
+
+**Text Messages:** You may opt out of text messages from Vega for Congress at any time by replying STOP to any text message we send. You may reply HELP for assistance. Message and data rates may apply, and message frequency varies. Opting out of text messages will not automatically unsubscribe you from email or other non-SMS communications.
 
 **Cookies:** Most web browsers are set to accept cookies by default. If you prefer, you can usually choose to set your browser to remove or reject browser cookies. Please note that if you choose to remove or reject cookies, this could affect the availability and functionality of our Site.
 

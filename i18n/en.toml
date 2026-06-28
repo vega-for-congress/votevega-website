@@ -102,6 +102,7 @@ event_back_to_events = "Back to All Events"
 
 # Footer
 footer_privacy = "Privacy Policy"
+footer_terms = "Terms and Conditions"
 footer_paid_for = "Paid for by Vega for Congress"
 
 # Footer Signup Section

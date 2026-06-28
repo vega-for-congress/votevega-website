@@ -15,7 +15,9 @@
                 <p class="mb-1"><strong>{{ .Site.Params.address }}</strong></p>
                 <p class="mb-1">{{ .Site.Params.phone }}</p>
                 <p class="mb-3" style="font-size: 13px;">
-                    <a href="{{ "/privacy-policy/" | relURL }}">{{ i18n "footer_privacy" }}</a> | {{ i18n "footer_paid_for" }}
+                    <a href="{{ "/privacy-policy/" | relURL }}">{{ i18n "footer_privacy" }}</a> |
+                    <a href="{{ "/terms-and-conditions/" | relURL }}">{{ i18n "footer_terms" }}</a> |
+                    {{ i18n "footer_paid_for" }}
                 </p>
                 <div class="social-icons">
                     {{ range .Site.Params.social }}
