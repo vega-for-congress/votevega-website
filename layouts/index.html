@@ -142,6 +142,28 @@
                             </div>
                             
                             <div class="row mt-4">
+                                <div class="col-12 d-flex justify-content-center">
+                                    <div class="form-check text-start" style="max-width: 780px;">
+                                        <input class="form-check-input mt-1" type="checkbox" value="yes" id="volunteer-consent" name="sms_consent" required>
+                                        <label class="form-check-label text-muted" for="volunteer-consent" style="font-size: 0.95rem;">
+                                            {{ i18n "volunteer_checkbox_label" }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row mt-3">
+                                <div class="col-12 text-center">
+                                    <small class="text-muted" style="font-size: 0.8rem;">
+                                        {{ i18n "volunteer_disclaimer" }}
+                                        <a href="{{ "terms-and-conditions" | relLangURL }}">{{ i18n "volunteer_disclaimer_terms" }}</a>
+                                        |
+                                        <a href="{{ "privacy-policy" | relLangURL }}">{{ i18n "volunteer_disclaimer_privacy" }}</a>
+                                    </small>
+                                </div>
+                            </div>
+
+                            <div class="row mt-4">
                                 <div class="col-12 text-center">
                                     <button type="submit" class="btn btn-lg fw-bold text-uppercase px-5 py-3" 
                                             style="background: linear-gradient(135deg, #dc3545, #c82333); 
@@ -160,14 +182,6 @@
                                             onmouseup="this.style.transform='translateY(-2px)';">
                                         <i class="fas fa-handshake me-2"></i>{{ i18n "volunteer_submit" }}
                                     </button>
-                                </div>
-                            </div>
-                            
-                            <div class="row mt-3">
-                                <div class="col-12 text-center">
-                                    <small class="text-muted" style="font-size: 0.9rem;">
-                                        {{ i18n "volunteer_disclaimer" }}
-                                    </small>
                                 </div>
                             </div>
                         </form>
