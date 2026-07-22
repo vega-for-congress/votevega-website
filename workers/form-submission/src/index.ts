@@ -28,6 +28,7 @@ interface FormData {
   source: string;
   'cf-turnstile-response': string;
   emailOptIn?: boolean;
+  smsConsent?: boolean;
   comment?: string;
   registeredVoter?: string;
   availability?: string;
@@ -45,6 +46,7 @@ async function submitToVegavan(
   turnstileVerified: boolean,
   comment: string | undefined,
   emailOptIn: boolean | undefined,
+  smsConsent: boolean | undefined,
   env: Env
 ): Promise<{ success: boolean; redirectUrl?: string }> {
   try {
@@ -64,6 +66,8 @@ async function submitToVegavan(
         volunteer_interest: true,
         comment: comment || '',
         email_opt_in: emailOptIn === true,
+        sms_opt_in: smsConsent === true,
+        sms_consent_disclosure: 'Vega for Congress website SMS opt-in: campaign updates, volunteer opportunities, and donation solicitations; message frequency varies; message and data rates may apply; STOP/HELP instructions provided.',
         turnstile_verified: turnstileVerified,
         form_submitted_at: new Date().toISOString()
       }]
@@ -203,6 +207,7 @@ export default {
           registeredVoter: formData.registeredVoter || '',
           availability: formData.availability || '',
           emailOptIn: formData.emailOptIn === true,
+          smsConsent: formData.smsConsent === true,
           turnstileVerified,
           submittedAt: new Date().toISOString(),
         },
@@ -232,6 +237,7 @@ export default {
         turnstileVerified,
         formData.comment,
         formData.emailOptIn,
+        formData.smsConsent,
         env
       );
 
@@ -446,6 +452,7 @@ function recordSubmission(ip: string): void {
 function parseFormData(body: string): Partial<FormData> {
   const params = new URLSearchParams(body);
   const emailOptInParam = params.get('emailOptIn');
+  const smsConsentParam = params.get('sms_consent');
   return {
     name: params.get('name') || '',
     email: params.get('email') || '',
@@ -455,6 +462,7 @@ function parseFormData(body: string): Partial<FormData> {
     source: params.get('whichform') || params.get('source') || '',
     'cf-turnstile-response': params.get('cf-turnstile-response') || '',
     emailOptIn: emailOptInParam === null ? undefined : emailOptInParam === 'true',
+    smsConsent: smsConsentParam === null ? undefined : ['yes', 'true', 'on', '1'].includes(smsConsentParam.toLowerCase()),
     comment: params.get('comment') || undefined,
     registeredVoter: params.get('registeredVoter') || undefined,
     availability: params.get('availability') || undefined,
