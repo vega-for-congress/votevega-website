@@ -1547,6 +1547,30 @@ a:focus-visible > .issue-link small {
 
 /* ====== STATEMENT CONTENT STYLES ====== */
 
+.statement-donation-callout {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    text-align: center;
+    background: #eef5ff;
+    border: 2px solid var(--primary-blue);
+    border-radius: 0.75rem;
+    box-shadow: 0 6px 18px rgba(13, 110, 253, 0.12);
+}
+
+.statement-donation-callout p {
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+    font-size: 1.15rem;
+    line-height: 1.6;
+}
+
+.statement-donation-callout .btn {
+    min-width: 150px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
 /* Image constraints for statement content */
 .statement-article img {
     max-width: 100%;

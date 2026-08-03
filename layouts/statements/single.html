@@ -24,6 +24,12 @@
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div class="statement-article">
+                    {{ with .Params.donation_appeal }}
+                    <aside class="statement-donation-callout" aria-label="Support Jose Vega">
+                        <p><em>{{ . }}</em></p>
+                        <a href="{{ $.Site.Params.donateUrl }}" class="btn btn-primary btn-lg">Donate</a>
+                    </aside>
+                    {{ end }}
                     {{ .Content }}
                 </div>
                 

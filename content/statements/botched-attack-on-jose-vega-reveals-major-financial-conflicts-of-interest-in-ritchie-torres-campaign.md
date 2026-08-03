@@ -2,6 +2,10 @@
 title: "Botched Attack on Jose Vega Reveals Major Financial Conflicts of Interest in Ritchie Torres Campaign"
 date: 2026-07-31
 description: "Jose Vega responds to an attack on his campaign and raises questions about major financial conflicts of interest involving Ritchie Torres's campaign network."
+url: "/politico/"
+aliases:
+  - "/statements/botched-attack-on-jose-vega-reveals-major-financial-conflicts-of-interest-in-ritchie-torres-campaign/"
+donation_appeal: "Jose is under attack by the mainstream media while his opponent uses AIPAC money to make his friends rich. Help jose fight back by donating"
 ---
 
 Jose Vega, LaRouche Independent candidate for Congress in New York’s 15th Congressional District, in the Bronx, issued the following statement on July 31:
