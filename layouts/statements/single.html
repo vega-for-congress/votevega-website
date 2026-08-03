@@ -27,7 +27,9 @@
                     {{ with .Params.donation_appeal }}
                     <aside class="statement-donation-callout" aria-label="Support Jose Vega">
                         <p><em>{{ . }}</em></p>
-                        <a href="{{ $.Site.Params.donateUrl }}" class="btn btn-primary btn-lg">Donate</a>
+                        <a href="{{ $.Site.Params.donateUrl }}" class="btn btn-primary statement-donation-button">
+                            Donate Now <span aria-hidden="true">&rarr;</span>
+                        </a>
                     </aside>
                     {{ end }}
                     {{ .Content }}

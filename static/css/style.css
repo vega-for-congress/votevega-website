@@ -1549,26 +1549,71 @@ a:focus-visible > .issue-link small {
 
 .statement-donation-callout {
     margin-bottom: 2rem;
-    padding: 1.5rem;
-    text-align: center;
-    background: #eef5ff;
-    border: 2px solid var(--primary-blue);
-    border-radius: 0.75rem;
-    box-shadow: 0 6px 18px rgba(13, 110, 253, 0.12);
+    padding: 1.75rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    text-align: left;
+    background: linear-gradient(135deg, #f4f8ff 0%, #e8f1ff 100%);
+    border: 0;
+    border-left: 6px solid var(--primary-blue);
+    border-radius: 0.875rem;
+    box-shadow: 0 10px 28px rgba(13, 110, 253, 0.14);
 }
 
 .statement-donation-callout p {
-    margin-bottom: 1rem;
+    margin: 0;
+    flex: 1 1 auto;
     color: var(--text-dark);
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     line-height: 1.6;
 }
 
-.statement-donation-callout .btn {
-    min-width: 150px;
-    font-weight: 700;
+.statement-donation-button {
+    flex: 0 0 auto;
+    min-width: 190px;
+    padding: 0.9rem 1.75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    border: 0;
+    border-radius: 999px;
+    font-size: 1rem;
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.8px;
+    box-shadow: 0 8px 20px rgba(220, 38, 38, 0.3);
+}
+
+.statement-donation-button span {
+    font-size: 1.25rem;
+    line-height: 1;
+    transition: transform 0.2s ease;
+}
+
+.statement-donation-button:hover span,
+.statement-donation-button:focus span {
+    transform: translateX(3px);
+}
+
+@media (max-width: 768px) {
+    .statement-donation-callout {
+        padding: 1.5rem;
+        flex-direction: column;
+        gap: 1.25rem;
+        text-align: center;
+    }
+
+    .statement-donation-callout p {
+        font-size: 1.1rem;
+    }
+
+    .statement-donation-button {
+        width: 100%;
+        max-width: 260px;
+    }
 }
 
 /* Image constraints for statement content */

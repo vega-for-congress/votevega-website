@@ -44,7 +44,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+    <link rel="stylesheet" href="{{ "css/style.css" | relURL }}?v={{ now.Unix }}">
 </head>
 
 <body class="{{ if .IsHome }}home wp-singular page-template-default page page-id-6 wp-theme-vega_2024 no-sidebar{{ else if eq .Section "policy" }}policy-page wp-singular page-template-default page no-sidebar{{ else }}{{ .Section }}-page wp-singular page-template-default page no-sidebar{{ end }}">
