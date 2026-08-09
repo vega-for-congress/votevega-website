@@ -65,7 +65,7 @@ async function submitToVegavan(
         state: '',
         volunteer_interest: true,
         comment: comment || '',
-        email_opt_in: emailOptIn === true,
+        ...(emailOptIn === true ? { email_opt_in: true } : {}),
         sms_opt_in: smsConsent === true,
         sms_consent_disclosure: 'Vega for Congress website SMS opt-in: campaign updates, volunteer opportunities, and donation solicitations; message frequency varies; message and data rates may apply; STOP/HELP instructions provided.',
         turnstile_verified: turnstileVerified,
@@ -184,9 +184,36 @@ export default {
 
       const commentText = commentParts.join('\n\n').substring(0, 2000);
 
-      // Add to Resend audience and send confirmation email (non-blocking)
+      // Save the signup and obtain the VegaVan volunteer-flow link before
+      // reporting success or sending any confirmation messages.
+      const vegavanResult = await submitToVegavan(
+        formData.name!,
+        formData.email!,
+        formData.phone!,
+        formData.zip!,
+        formData.source || 'homepage',
+        turnstileVerified,
+        formData.comment,
+        formData.emailOptIn,
+        formData.smsConsent,
+        env
+      );
+
+      if (!vegavanResult.success || !vegavanResult.redirectUrl) {
+        console.error(`VegaVan did not return a redirect URL for ${formData.email}`);
+        return jsonResponse(
+          { success: false, error: 'We could not open the volunteer selection page. Please try again.' },
+          502,
+          origin
+        );
+      }
+
+      // A signup confirmation is transactional. Only explicit email opt-ins
+      // are added to the campaign's ongoing Resend audience.
       const [audienceAdded, emailSent] = await Promise.all([
-        addToResendContacts(formData.name!, formData.email!, env),
+        formData.emailOptIn === true
+          ? addToResendContacts(formData.name!, formData.email!, env)
+          : Promise.resolve(true),
         sendConfirmationEmail(
           formData.name!,
           formData.email!,
@@ -213,7 +240,7 @@ export default {
         },
         env
       );
-      
+
       if (!audienceAdded) {
         console.error('Failed to add contact to Resend, but continuing');
       }
@@ -224,22 +251,8 @@ export default {
         console.error('Failed to send internal signup notification, but continuing');
       }
 
-      // Record successful submission for rate limiting
+      // Record only a fully accepted submission for rate limiting.
       recordSubmission(clientIP);
-
-      // Submit to VegaVan and get redirect URL
-      const vegavanResult = await submitToVegavan(
-        formData.name!,
-        formData.email!,
-        formData.phone!,
-        formData.zip!,
-        formData.source || 'homepage',
-        turnstileVerified,
-        formData.comment,
-        formData.emailOptIn,
-        formData.smsConsent,
-        env
-      );
 
       return jsonResponse(
         {
@@ -451,7 +464,7 @@ function recordSubmission(ip: string): void {
  */
 function parseFormData(body: string): Partial<FormData> {
   const params = new URLSearchParams(body);
-  const emailOptInParam = params.get('emailOptIn');
+  const emailOptInParam = params.get('email_opt_in') ?? params.get('emailOptIn');
   const smsConsentParam = params.get('sms_consent');
   return {
     name: params.get('name') || '',
@@ -692,6 +705,7 @@ async function sendSignupNotification(
     registeredVoter: string;
     availability: string;
     emailOptIn: boolean;
+    smsConsent: boolean;
     turnstileVerified: boolean;
     submittedAt: string;
   },
@@ -717,6 +731,7 @@ async function sendSignupNotification(
       ['Address', submission.address || 'Not provided'],
       ['Source', submission.source],
       ['Email opt-in', submission.emailOptIn ? 'Yes' : 'No'],
+      ['SMS opt-in', submission.smsConsent ? 'Yes' : 'No'],
       ['Turnstile verified', submission.turnstileVerified ? 'Yes' : 'No'],
       ['Registered NY voter', submission.registeredVoter || 'Not provided'],
       ['Availability', submission.availability || 'Not provided'],
