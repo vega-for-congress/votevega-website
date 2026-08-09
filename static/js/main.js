@@ -403,8 +403,6 @@
                         phone: formData.get('phone'),
                         zip: zip,
                         source: formData.get('whichform') || formData.get('event') || 'homepage',
-                        emailOptIn: formData.get('email_opt_in') !== null,
-                        smsConsent: formData.get('sms_consent') !== null,
                         'cf-turnstile-response': turnstileToken
                     };
                     

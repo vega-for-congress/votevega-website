@@ -184,12 +184,9 @@ export default {
 
       const commentText = commentParts.join('\n\n').substring(0, 2000);
 
-      // Add only explicit email opt-ins to the Resend audience. The signup
-      // confirmation remains transactional and is sent regardless.
+      // Add to Resend audience and send confirmation email (non-blocking)
       const [audienceAdded, emailSent] = await Promise.all([
-        formData.emailOptIn === true
-          ? addToResendContacts(formData.name!, formData.email!, env)
-          : Promise.resolve(true),
+        addToResendContacts(formData.name!, formData.email!, env),
         sendConfirmationEmail(
           formData.name!,
           formData.email!,
@@ -454,7 +451,7 @@ function recordSubmission(ip: string): void {
  */
 function parseFormData(body: string): Partial<FormData> {
   const params = new URLSearchParams(body);
-  const emailOptInParam = params.get('email_opt_in') ?? params.get('emailOptIn');
+  const emailOptInParam = params.get('emailOptIn');
   const smsConsentParam = params.get('sms_consent');
   return {
     name: params.get('name') || '',
@@ -695,7 +692,6 @@ async function sendSignupNotification(
     registeredVoter: string;
     availability: string;
     emailOptIn: boolean;
-    smsConsent: boolean;
     turnstileVerified: boolean;
     submittedAt: string;
   },
@@ -721,7 +717,6 @@ async function sendSignupNotification(
       ['Address', submission.address || 'Not provided'],
       ['Source', submission.source],
       ['Email opt-in', submission.emailOptIn ? 'Yes' : 'No'],
-      ['SMS opt-in', submission.smsConsent ? 'Yes' : 'No'],
       ['Turnstile verified', submission.turnstileVerified ? 'Yes' : 'No'],
       ['Registered NY voter', submission.registeredVoter || 'Not provided'],
       ['Availability', submission.availability || 'Not provided'],
