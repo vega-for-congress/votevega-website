@@ -19,6 +19,8 @@ interface Env {
   VEGAVAN_API_KEY: string;
 }
 
+const FORM_WORKER_VERSION = "optional-consent-v2";
+
 interface FormData {
   name: string;
   email: string;
@@ -781,6 +783,7 @@ async function sendSignupNotification(
 function jsonResponse(data: any, status: number = 200, origin?: string | null): Response {
   const headers: HeadersInit = {
     'Content-Type': 'application/json',
+    'X-Vega-Form-Version': FORM_WORKER_VERSION,
   };
 
   if (origin) {
